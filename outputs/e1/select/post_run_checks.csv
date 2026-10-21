@@ -1,0 +1,6 @@
+check,expected,actual,pass
+package code unchanged during the run,a794601804910216546c497dc1653b2b7ebdc31f1a7ca00356b3df6f1edb5599,a794601804910216546c497dc1653b2b7ebdc31f1a7ca00356b3df6f1edb5599,True
+F0 rows used,13616,13616,True
+V rows used,12045,12045,True
+"linear candidates run (C0, C1, C2, 3 alphas)",6,6,True
+HGB candidates run (8),8,8,True

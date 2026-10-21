@@ -1,0 +1,3 @@
+status,orders,with_carrier_date,with_delivery_date
+canceled,625,75,6
+unavailable,609,0,0

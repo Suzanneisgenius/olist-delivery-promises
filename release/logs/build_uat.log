@@ -1,0 +1,15 @@
+    id   automated result                                                                           actual
+UAT-01               PASS                                          raw files unchanged since stage 1: True
+UAT-02               PASS                           rows, uniqueness, item lines, price, freight, payments
+UAT-03               PASS                         SQL outcome buckets: week x bucket cells matching: 373.0
+UAT-04               PASS             window weeks used == approved selection: 2017-02-27..2018-07-23 (74)
+UAT-05               PASS                                  weekly page: whole-window on-time shown: 92.92%
+UAT-06               PASS decomposition identity holds for every comparable pair (max |gap| < 1e-12): True
+UAT-07               PASS                                            test_stage_anomaly_keeps_order_in_otd
+UAT-08               PASS                                                      4 label-availability checks
+UAT-09               PASS                        logistic AP 0.12346; 9 quantities x 3 models + identities
+UAT-10               PASS                                      embedded data and displayed values compared
+UAT-11               PASS                                                             18 page/width checks
+UAT-12               PASS                                    25 gate tests, all must pass (skipped ≠ pass)
+UAT-13 n/a — owner review                                                                 0 of 20 reviewed
+UAT-14 n/a — owner review                                                                          pending

@@ -1,0 +1,397 @@
+{
+ "package": "olist-e1-agent-review-r6",
+ "claims": [
+  {
+   "id": "C01",
+   "statement": "E has 19,950 orders in 17 purchase weeks",
+   "values": [
+    19950,
+    17
+   ],
+   "tol": 0,
+   "evidence": "outputs/e1/score/results.json",
+   "check": "auto",
+   "stated_in": "professor version \u00a71, \u00a74"
+  },
+  {
+   "id": "C02",
+   "statement": "Calibration n on C is 17,056",
+   "values": [
+    17056
+   ],
+   "tol": 0,
+   "evidence": "outputs/e1/freeze/FREEZE.json",
+   "check": "auto",
+   "stated_in": "\u00a73"
+  },
+  {
+   "id": "C03",
+   "statement": "Selection on V: C* = C0 (no linear change), D* = D3 = HGB depth 2, 400 iterations",
+   "values": [
+    true,
+    true,
+    2,
+    400
+   ],
+   "tol": 0,
+   "evidence": "outputs/e1/select/selection.json",
+   "check": "auto",
+   "stated_in": "supplement S1"
+  },
+  {
+   "id": "C04",
+   "statement": "V losses: C0 1.28856; C3 alpha 0.0001 1.28713 (0.111% lower, < 1% bar); D3 1.26266 (2.01% below C0)",
+   "values": [
+    1.28856,
+    1.28713,
+    0.00111,
+    1.26266,
+    0.0201
+   ],
+   "tol": 0.0001,
+   "evidence": "outputs/e1/select/*.csv",
+   "check": "auto",
+   "stated_in": "supplement S1"
+  },
+  {
+   "id": "C05",
+   "statement": "H1: day gap R0 +2.57, R3 -1.54, change -4.11 days; coverage gap R0 +2.50 pts, R3 -0.31 pts; verdict changed",
+   "values": [
+    2.57,
+    -1.54,
+    -4.11,
+    2.5,
+    -0.31,
+    true
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/score/h1_steps.csv, results.json",
+   "check": "auto",
+   "stated_in": "\u00a73 chart, \u00a74"
+  },
+  {
+   "id": "C06",
+   "statement": "H2: g = 0 by construction; no linear change selected",
+   "values": [
+    0.0,
+    true
+   ],
+   "tol": 1e-12,
+   "evidence": "outputs/e1/score/results.json",
+   "check": "auto",
+   "stated_in": "\u00a74"
+  },
+  {
+   "id": "C07",
+   "statement": "H3: D* vs B1c -0.32 days (iid interval -0.55 to -0.17), coverage +0.61 pts; practical rule fails; monthly reliability holds; not supported",
+   "values": [
+    -0.32,
+    -0.55,
+    -0.17,
+    0.61,
+    false,
+    true,
+    true
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/score/comparisons.json",
+   "check": "auto",
+   "stated_in": "\u00a74"
+  },
+  {
+   "id": "C08",
+   "statement": "Replacement vs retained B0: C* +2.15 days, D* +3.37 days; both fail the rule",
+   "values": [
+    2.15,
+    3.37,
+    false,
+    false
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/score/comparisons.json",
+   "check": "auto",
+   "stated_in": "\u00a74"
+  },
+  {
+   "id": "C09",
+   "statement": "Olist check (q = 0.9126): C* -1.02 days, +0.88 pts, passes the pre-set rule; post-hoc day-diff interval -3.25 to +0.69",
+   "values": [
+    -1.02,
+    0.88,
+    true,
+    -3.25,
+    0.69
+   ],
+   "tol": 0.006,
+   "evidence": "results.json, posthoc/e_olist_interval.json",
+   "check": "auto",
+   "stated_in": "\u00a74"
+  },
+  {
+   "id": "C10",
+   "statement": "Policies sharing the C calibration step cover 96-97%; every month >= 90%",
+   "values": [
+    0.9618,
+    0.971,
+    true
+   ],
+   "tol": 6e-05,
+   "evidence": "outputs/e1/score/policy_table.csv, monthly.csv",
+   "check": "auto",
+   "stated_in": "\u00a71, \u00a75"
+  },
+  {
+   "id": "C11",
+   "statement": "HGB minus linear: +0.900 prediction, +0.311 shift, +0.006 rounding, +1.217 days total",
+   "values": [
+    0.9,
+    0.311,
+    0.006,
+    1.217
+   ],
+   "tol": 0.0006,
+   "evidence": "outputs/e1/score/e_promises_per_order.csv.gz + FREEZE.json",
+   "check": "auto",
+   "stated_in": "research note (zh); not restated in the v4 professor version"
+  },
+  {
+   "id": "C12",
+   "statement": "Uncalibrated coverage 88.33% (linear) / 91.08% (HGB); uncalibrated pinball 1.417 / 1.324 (6.5% lower for HGB)",
+   "values": [
+    88.33,
+    91.08,
+    1.417,
+    1.324,
+    0.065
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/score/e_promises_per_order.csv.gz",
+   "check": "auto",
+   "stated_in": "\u00a71, \u00a75"
+  },
+  {
+   "id": "C13",
+   "statement": "B2 shift on C equals the stage-7 calibration-A shift 6.01804",
+   "values": [
+    6.018039891
+   ],
+   "tol": 1e-06,
+   "evidence": "FREEZE.json vs outputs/stage7/conformal_shifts.csv",
+   "check": "auto",
+   "stated_in": "supplement A"
+  },
+  {
+   "id": "C14",
+   "statement": "V check: the 9:1 loss is minimised at d = 20 = empirical 90% quantile; promising the mean covers 65.5%",
+   "values": [
+    20,
+    20,
+    65.53
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/posthoc/posthoc_v.json",
+   "check": "auto",
+   "stated_in": "\u00a72"
+  },
+  {
+   "id": "C15",
+   "statement": "Post-hoc V intervals: C3 pick -0.002% to 0.245%; D3 1.11% to 2.85%",
+   "values": [
+    -2e-05,
+    0.00245,
+    0.0111,
+    0.0285
+   ],
+   "tol": 6e-05,
+   "evidence": "outputs/e1/posthoc/",
+   "check": "auto",
+   "stated_in": "supplement S1"
+  },
+  {
+   "id": "C16",
+   "statement": "Paired simulation, coverage change vs S1: selective labels -1.68, size-matched random subset +0.02, slower -5.77, faster +4.26 pts",
+   "values": [
+    -1.68,
+    0.02,
+    -5.77,
+    4.26
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/sim_paired/paired_differences_vs_S1.csv",
+   "check": "auto",
+   "stated_in": "supplement S2"
+  },
+  {
+   "id": "C17",
+   "statement": "362 automated tests pass (317 registered pipeline + 45 post-hoc rounding rules; synthetic data only)",
+   "values": [
+    362
+   ],
+   "tol": 0,
+   "evidence": "AGENT_REVIEW/verify_output/06_pytest.log",
+   "check": "verify_all step 06",
+   "stated_in": ""
+  },
+  {
+   "id": "C18",
+   "statement": "E had already been examined in Stage 7; E1 is pre-registered exploratory, not a blind test",
+   "values": [],
+   "tol": 1e-06,
+   "evidence": "docs/E1_DECISIONS.md, plan",
+   "check": "qualitative",
+   "stated_in": ""
+  },
+  {
+   "id": "C19",
+   "statement": "No parameter changed after the E1 scoring run; FREEZE.json unchanged since written",
+   "values": [],
+   "tol": 1e-06,
+   "evidence": "docs/E1_DECISIONS.md, outputs/e1/freeze/FREEZE.sha256",
+   "check": "qualitative (hashes and logs cannot prove the absence of unrecorded runs)",
+   "stated_in": ""
+  },
+  {
+   "id": "C20",
+   "statement": "Post hoc, E oracle sweep: days at first shift step reaching coverage 90% / 96.18% \u2014 HGB 16.60 / 21.71, linear 17.20 / 22.44",
+   "values": [
+    16.6,
+    21.71,
+    17.2,
+    22.44
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/score/e_promises_per_order.csv.gz",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a71, \u00a74; supplement S3a"
+  },
+  {
+   "id": "C21",
+   "statement": "Registered shifts on C: coverage D* 91.14%, C* 91.19%, B1c 90.30%; mean days D* 24.54, C* 24.68",
+   "values": [
+    91.14,
+    91.19,
+    90.3,
+    24.54,
+    24.68
+   ],
+   "tol": 0.006,
+   "evidence": "outputs/e1/final/c_predictions_per_order.csv.gz, FREEZE.json",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a74; supplement S3a"
+  },
+  {
+   "id": "C22",
+   "statement": "Round-down rule max(1, floor(yhat + registered shift)): E days C* 21.45, D* 22.67; D*-B1c -1.32 days / +0.18 pts; C coverage of D* 90.01% (>= k/n = 90.009%)",
+   "values": [
+    21.45,
+    22.67,
+    -1.32,
+    0.18,
+    90.01,
+    true
+   ],
+   "tol": 0.006,
+   "evidence": "c_predictions_per_order.csv.gz, e_promises_per_order.csv.gz, FREEZE.json",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a75; supplement S3b (replaces the v3 'integer-aware shift')"
+  },
+  {
+   "id": "C23",
+   "statement": "E window: July n = 1,085, Olist promise max 26 days (April 63); April-May coverage B1c 95.53%, C* 95.13%, D* 96.39%",
+   "values": [
+    1085,
+    26,
+    63,
+    95.53,
+    95.13,
+    96.39
+   ],
+   "tol": 0.006,
+   "evidence": "e_promises_per_order.csv.gz",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a75; supplement S3c"
+  },
+  {
+   "id": "C24",
+   "statement": "C late rate vs Olist in November 2017 is 12.49%, and November holds 42% of C",
+   "values": [
+    12.49,
+    42
+   ],
+   "tol": 0.6,
+   "evidence": "outputs/e1/prep/monthly_counts.csv",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a75; supplement S3d"
+  },
+  {
+   "id": "C25",
+   "statement": "Subtract-one max(1, ceil(U-1)) is not coverage-preserving: on C B1c 89.08%, D* 90.00% (< k/n); Y=10, yhat=0.5 covers 0%; but the one-day minimum can rescue it (Y=1, yhat=0.5: U=1, covers 100%)",
+   "values": [
+    89.08,
+    90.0,
+    true,
+    0.0,
+    100.0
+   ],
+   "tol": 0.006,
+   "evidence": "c_predictions_per_order.csv.gz, FREEZE.json; synthetic",
+   "check": "auto",
+   "stated_in": "supplement S3b; docs/E1_POSTHOC_METHODS_REVIEW.md \u00a73"
+  },
+  {
+   "id": "C26",
+   "statement": "Matched-coverage diagnostic reports achieved coverage: at the 90% target HGB 90.02% / 16.60 days, state rule 90.75% / 17.99 days",
+   "values": [
+    90.02,
+    16.6,
+    90.75,
+    17.99
+   ],
+   "tol": 0.006,
+   "evidence": "e_promises_per_order.csv.gz",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a74; supplement S3a"
+  },
+  {
+   "id": "C27",
+   "statement": "E sample flow: 32,803 purchases from 2018-04-01 -> 20,650 (estimated week <= 2018-07-23) -> 20,296 delivered -> 19,950 single seller; July 6,292 -> 1,085; per-month E counts equal the scored file",
+   "values": [
+    32803,
+    20650,
+    20296,
+    19950,
+    6292,
+    1085,
+    true
+   ],
+   "tol": 0,
+   "evidence": "outputs/e1/posthoc_m4/e_sample_flow.csv (built from the order mart, not shipped) + e_promises_per_order.csv.gz",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a73; supplement S3c"
+  },
+  {
+   "id": "C28",
+   "statement": "Leave one purchase week out: no registered difference changes sign; C*@0.9126 - Olist days ranges -1.41 to -0.35",
+   "values": [
+    true,
+    -1.41,
+    -0.35
+   ],
+   "tol": 0.006,
+   "evidence": "e_promises_per_order.csv.gz",
+   "check": "auto",
+   "stated_in": "main report v6 \u00a74; supplement S3e"
+  },
+  {
+   "id": "C29",
+   "statement": "No calibrated bound U = yhat + shift is below 12.5 days on C or E for the five shifted q = 0.90 policies, so the one-day minimum never binds in the reported tables",
+   "values": [
+    true
+   ],
+   "tol": 0,
+   "evidence": "c_predictions_per_order.csv.gz, e_promises_per_order.csv.gz, FREEZE.json",
+   "check": "auto",
+   "stated_in": "supplement v6 S3b"
+  }
+ ]
+}

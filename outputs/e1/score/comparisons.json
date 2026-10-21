@@ -1,0 +1,130 @@
+[
+  {
+    "policy": "Dstar@0.90 (shifted)",
+    "reference": "fair: B1c@0.90",
+    "days_policy": 23.670977443609022,
+    "days_ref": 23.992781954887217,
+    "coverage_policy": 0.9709774436090226,
+    "coverage_ref": 0.9648621553884712,
+    "day_diff": -0.3218045112781951,
+    "coverage_diff_pts": 0.6115288220551407,
+    "practical_rule": false,
+    "monthly_reliable": true,
+    "day_diff_ci95": {
+      "iid": [
+        -0.5458607804060034,
+        -0.16770117896530212
+      ],
+      "moving2": [
+        -0.6068236808502901,
+        -0.12373393670262348
+      ]
+    },
+    "coverage_diff_pts_ci95": {
+      "iid": [
+        0.34290353999844736,
+        0.8593445207923032
+      ],
+      "moving2": [
+        0.31028441847376304,
+        0.8710824660713659
+      ]
+    }
+  },
+  {
+    "policy": "Dstar@0.90 (shifted)",
+    "reference": "replacement: stage-7 B0",
+    "days_policy": 23.670977443609022,
+    "days_ref": 20.30516290726817,
+    "coverage_policy": 0.9709774436090226,
+    "coverage_ref": 0.9394987468671679,
+    "day_diff": 3.365814536340853,
+    "coverage_diff_pts": 3.147869674185466,
+    "practical_rule": false,
+    "monthly_reliable": true,
+    "day_diff_ci95": {
+      "iid": [
+        3.2316136946831038,
+        3.465469760327049
+      ],
+      "moving2": [
+        3.1967039673981374,
+        3.489462462458722
+      ]
+    },
+    "coverage_diff_pts_ci95": {
+      "iid": [
+        1.9296376941714926,
+        4.561020560346892
+      ],
+      "moving2": [
+        1.7624569039972264,
+        4.734751158706723
+      ]
+    }
+  },
+  {
+    "policy": "Cstar@0.90 (shifted)",
+    "reference": "fair: B1c@0.90",
+    "days_policy": 22.453483709273183,
+    "days_ref": 23.992781954887217,
+    "coverage_policy": 0.9617543859649123,
+    "coverage_ref": 0.9648621553884712,
+    "day_diff": -1.5392982456140345,
+    "coverage_diff_pts": -0.3107769423558948,
+    "practical_rule": true,
+    "monthly_reliable": true,
+    "day_diff_ci95": {
+      "iid": [
+        -1.7835723232144203,
+        -1.3004485001173052
+      ],
+      "moving2": [
+        -1.8392179245932923,
+        -1.2572889233716245
+      ]
+    },
+    "coverage_diff_pts_ci95": {
+      "iid": [
+        -0.6265003261693355,
+        -0.008069440936837197
+      ],
+      "moving2": [
+        -0.6764161557255364,
+        0.027441555826383975
+      ]
+    }
+  },
+  {
+    "policy": "Cstar@0.90 (shifted)",
+    "reference": "replacement: stage-7 B0",
+    "days_policy": 22.453483709273183,
+    "days_ref": 20.30516290726817,
+    "coverage_policy": 0.9617543859649123,
+    "coverage_ref": 0.9394987468671679,
+    "day_diff": 2.1483208020050135,
+    "coverage_diff_pts": 2.2255639097744306,
+    "practical_rule": false,
+    "monthly_reliable": true,
+    "day_diff_ci95": {
+      "iid": [
+        1.9364306045942399,
+        2.357460068404732
+      ],
+      "moving2": [
+        1.8984427971355222,
+        2.3998837933414583
+      ]
+    },
+    "coverage_diff_pts_ci95": {
+      "iid": [
+        1.2975328274947617,
+        3.35322056988731
+      ],
+      "moving2": [
+        1.2488370078777815,
+        3.420478777937211
+      ]
+    }
+  }
+]

@@ -1,0 +1,17 @@
+> SUPERSEDED — historical copy, not the current release.
+
+id,acceptance criterion,evidence,automated result,actual,owner sign-off
+UAT-01,Raw files are the fingerprinted ones,stage4_checks.csv,PASS,raw files unchanged since stage 1: True,
+UAT-02,"One row per order; item lines, price, freight and payments conserved",reconciliation_checks.csv,PASS,"rows, uniqueness, item lines, price, freight, payments",
+UAT-03,Outcome buckets are exclusive and match an independent SQL count,reconciliation_checks.csv,PASS,SQL outcome buckets: week x bucket cells matching: 373.0,
+UAT-04,Weekly comparison uses exactly the approved 74-week window,stage2_checks.csv,PASS,window weeks used == approved selection: 2017-02-27..2018-07-23 (74),
+UAT-05,"Weekly page shows the KPI A/(A+L) with U, coverage and X; value equals stage-1 selection",ui_checks.csv,PASS,weekly page: whole-window on-time shown: 92.92%,
+UAT-06,State decomposition adds up to the overall change for every weekly pair,stage2_checks.csv,PASS,decomposition identity holds for every comparable pair (max |gap| < 1e-12): True,
+UAT-07,Stage-time anomalies do not remove orders from OTD,pytest,PASS,test_stage_anomaly_keeps_order_in_otd,
+UAT-08,"Model fit, model selection and seller history use only labels known at each cut-off",stage3_checks.csv,PASS,4 label-availability checks,
+UAT-09,Test metrics re-derived without project code match the report,independent_verification.json,PASS,logistic AP 0.12346,
+UAT-10,Numbers on the pages equal the exported files,stage4_checks.csv + ui_checks.csv,PASS,embedded data and displayed values compared,
+UAT-11,Pages load without errors in light/dark and at phone width (390 px),ui_checks.csv,PASS,18 page/width checks,
+UAT-12,Any failed check blocks publication and removes the old report,pytest,PASS,11 gate tests,
+UAT-13,A person checks the 20-order sample against the raw files,qa/manual_check_sample.csv,n/a — owner review,0 of 20 reviewed,
+UAT-14,"Owner accepts conclusions and stated limits (window censoring, estimate assumption, calibration)",pages + reports,n/a — owner review,pending,

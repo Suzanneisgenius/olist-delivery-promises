@@ -1,0 +1,8 @@
+# e1_pipeline under test: src/olist_analytics/e1_pipeline.py sha256 fff69732f0b3ffb8170a3771fefa2830bf94a43592ba522beca9d41e11d0fb35 (AFTER the binding fix)
+PASSED tests/test_e1_final.py::test_addendum_bound_to_this_freeze_is_accepted
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[wrong binding (all zeros)-kw0]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[missing binding-kw1]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: not JSON-kw2]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: a list-kw3]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: no input identity-kw4]
+6 passed, 14 deselected in 8.50s

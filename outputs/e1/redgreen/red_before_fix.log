@@ -1,0 +1,37 @@
+# code under test: /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/redcopy/src/olist_analytics/e1_freeze.py /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/redcopy/src/olist_analytics/e1_models.py
+# e1_freeze.py sha256 83e624c37e3d36301452d546d38215910b5d8c3db8834a2c0ecf57ff6bbce2b4
+# e1_models.py sha256 812021f061e8e5fae52812e5c3a9945c58c285e0768110838332f139bc580e55
+FAILED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[sample list (partition id hash) changed]
+FAILED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[calibration shift changed to 1000 days]
+FAILED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[threshold changed (H2 2% -> 1%)]
+FAILED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[thresholds emptied]
+FAILED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[model file list emptied]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-label-NaN]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-label-+inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-label--inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-label-NaN]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-label-+inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-label--inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-prediction-NaN]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-prediction-+inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-prediction--inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-label-NaN]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-label-+inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-label--inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-prediction-NaN]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-prediction-+inf]
+FAILED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-prediction--inf]
+FAILED tests/test_e1_red_green.py::test_unequal_lengths_raise[pinball-1] - Fa...
+FAILED tests/test_e1_red_green.py::test_unequal_lengths_raise[policy_score-1]
+PASSED tests/test_e1_red_green.py::test_untampered_record_is_accepted
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-prediction-NaN]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-prediction-+inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-prediction--inf]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[shift-1]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[shift-99]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[shift-101]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[pinball-99]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[pinball-101]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[policy_score-99]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[policy_score-101]
+22 failed, 11 passed in 1.24s

@@ -1,0 +1,8 @@
+check,expected,actual,pass
+window weeks used == approved selection,2017-02-27..2018-07-23 (74),2017-02-27..2018-07-23 (74),True
+window A / L / U / X == stage-1 selection,78176/5953/1563/1037,78176/5953/1563/1037,True
+state eligible totals == weekly eligible (every week),74,74,True
+decomposition identity holds for every comparable pair (max |gap| < 1e-12),True,True,True
+SQL state x week A/L cells matching,1817,1817,True
+SQL weekly median cycle hours (max |diff| < 1e-6 h),True,True,True
+"SQL stage timing n, median, P90 and mean (all outcome-stage cells)",8,8,True

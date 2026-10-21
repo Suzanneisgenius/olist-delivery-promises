@@ -1,0 +1,57 @@
+segment purchases_from purchases_to label_cutoff  eligible  used  share_used  late_rate_used  late_rate_eligible      first_purchase       last_purchase
+     F0            NaN   2017-07-01   2017-12-01     13617 13616    0.999927        0.038851            0.038922 2017-01-07 13:29:22 2017-06-30 23:20:08
+      V     2017-07-01   2017-10-01   2017-12-01     12049 12045    0.999668        0.033790            0.034111 2017-07-01 00:04:15 2017-09-30 23:59:15
+      F            NaN   2017-10-01   2018-04-01     25666 25666    1.000000        0.036663            0.036663 2017-01-07 13:29:22 2017-09-30 23:59:15
+      C     2017-10-01   2018-01-01   2018-04-01     17063 17056    0.999590        0.087359            0.087734 2017-10-01 00:03:33 2017-12-31 23:29:31
+      E     2018-04-01          NaN          NaN     19950 19950    1.000000        0.042607            0.042607 2018-04-01 00:11:32 2018-07-19 20:57:35
+segment  eligible  labels_known_before_cutoff  used  excluded                            excluded_reason        purchase_min        purchase_max        latest_label label_cutoff                                                        id_sha256
+     F0     13617                       13616 13616         1 delivered on/after label cutoff 2017-12-01 2017-01-07 13:29:22 2017-06-30 23:20:08 2017-11-16 10:56:45   2017-12-01 878110e04927bdc46330685571fb7495071847de443b85fb1370ffad25f08e02
+      V     12049                       12045 12045         4 delivered on/after label cutoff 2017-12-01 2017-07-01 00:04:15 2017-09-30 23:59:15 2017-11-24 11:45:32   2017-12-01 3874b514719a25c56e33e2703494c3d6cef6a516e45d8f323675113e80921f66
+      F     25666                       25666 25666         0 delivered on/after label cutoff 2018-04-01 2017-01-07 13:29:22 2017-09-30 23:59:15 2018-02-05 21:25:43   2018-04-01 1342d043d3cccfde9133cccbde395795ab77feacdaf50ec423409a6db164d1be
+      C     17063                       17056 17056         7 delivered on/after label cutoff 2018-04-01 2017-10-01 00:03:33 2017-12-31 23:29:31 2018-03-27 01:57:14   2018-04-01 33b8c5e770da60bb319e1220d47096544ccd7f02ac75370dddc4fc2d8ade468d
+      E     19950                       19950 19950         0                  none (scored, not fitted) 2018-04-01 00:11:32 2018-07-19 20:57:35 2018-10-17 13:22:46          NaN 702ce5bdf7e111fd029e408548dfadb4a8e204e151624ade0393a8c38ceeec3c
+segment rule  rows  snapshots   earliest_snapshot     latest_snapshot  every_label_before_its_snapshot  every_snapshot_at_or_before_purchase
+     F0    U 13616          6 2017-01-01 00:00:00 2017-06-01 00:00:00                             True                                  True
+      V    U 12045          3 2017-07-01 00:00:00 2017-09-01 00:00:00                             True                                  True
+      F    U 25666          9 2017-01-01 00:00:00 2017-09-01 00:00:00                             True                                  True
+      C    U 17056          3 2017-10-01 00:00:00 2017-12-01 00:00:00                             True                                  True
+      E    U 19950          4 2018-04-01 00:00:00 2018-07-01 00:00:00                             True                                  True
+      F    O 25666          9 2017-01-01 00:00:00 2017-09-01 00:00:00                             True                                  True
+      C    O 17056          1 2017-10-01 00:00:00 2017-10-01 00:00:00                             True                                  True
+      E    O 19950          1 2018-04-01 00:00:00 2018-04-01 00:00:00                             True                                  True
+{
+ "max_abs_diff_unrounded_E_prediction_days": 7.105427357601002e-15,
+ "C_shift_refit": 6.018039891200836,
+ "C_shift_stored": 6.018039891200836,
+ "integer_promises_identical": true
+}
+                                                                 check  pass
+                              E1 config matches its registered SHA-256  True
+                                              stage-7 config unchanged  True
+                                               F0 and V share no order  True
+                                                F and C share no order  True
+                                                F and E share no order  True
+                                                C and E share no order  True
+               F0 and V used rows are contained in F (F may hold more)  True
+                                            F0: no duplicate order ids  True
+                      F0: every used label delivered before 2017-12-01  True
+                                             V: no duplicate order ids  True
+                       V: every used label delivered before 2017-12-01  True
+                                             F: no duplicate order ids  True
+                       F: every used label delivered before 2018-04-01  True
+                                             C: no duplicate order ids  True
+                       C: every used label delivered before 2018-04-01  True
+                                             E: no duplicate order ids  True
+                           every feature build: labels before snapshot  True
+                   every feature build: snapshot at or before purchase  True
+                                    F used == stage-7 fit set (25,666)  True
+     calibration n (C rows actually used) == 17,056 of 17,063 eligible  True
+                      every manifest line: eligible == used + excluded  True
+                   every feature build returned one row per used order  True
+                              C used == stage-7 calibration A (17,056)  True
+                                 E used == stage-7 evaluation (19,950)  True
+                           E order ids == stored stage-7 per-order ids  True
+          B2 reproduces stage-7 Q1 predictions (max |diff| < 1e-6 day)  True
+             B2 reproduces stage-7 calibration-A shift (|diff| < 1e-6)  True
+                              B2 integer promises identical to stage 7  True
+historical pinball reproduces 1.4827 / 1.3892 / 1.5761 / 1.5613 (4 dp)  True

@@ -1,0 +1,9 @@
+check,expected,actual,pass
+config matches the registered SHA-256,9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747,9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747,True
+stage 3 report is current,True,True,True
+fit and calibration labels delivered before the freeze,True,True,True
+"fit, calibration and evaluation windows do not overlap",0,0,True
+Olist's own estimate is not a model input,False,False,True
+every seller snapshot holds only labels delivered before its time,True,True,True
+Olist promise coverage on evaluation == 1 - stage-3 late rate,True,True,True
+required_days > olist_promise_days exactly for late orders,True,True,True

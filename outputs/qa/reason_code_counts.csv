@@ -1,0 +1,17 @@
+reason_code,orders,affects
+no_review_after_delivery,5299,review
+carrier_before_approved,1359,stage
+multi_seller,1278,model
+no_items,775,model
+dispersed_geo_prefix,634,distance (flag only)
+missing_customer_geo,279,distance
+payment_mismatch,250,info
+missing_seller_geo,216,distance
+carrier_before_purchase,166,stage
+delivered_before_carrier,23,stage
+missing_product_weight,16,weight (flag only)
+missing_approved_at,14,stage
+delivered_missing_date,8,"otd,stage"
+canceled_with_delivery_date,6,otd
+missing_carrier_date,2,stage
+no_payment,1,info

@@ -1,0 +1,41 @@
+{
+  "B1c@0.9126": {
+    "day_diff_vs_olist": 1.4127819548872154,
+    "coverage_diff_pts_vs_olist": 1.463659147869678,
+    "day_diff_ci95_iid": [
+      -0.8349295116445009,
+      3.169558065591635
+    ],
+    "coverage_diff_pts_ci95_iid": [
+      0.3922809517412601,
+      2.873421992833111
+    ],
+    "note": "post hoc (not in the registered output); same saved week draws; does not change the registered verdict"
+  },
+  "Cstar@0.9126": {
+    "day_diff_vs_olist": -1.024210526315791,
+    "coverage_diff_pts_vs_olist": 0.8771929824561431,
+    "day_diff_ci95_iid": [
+      -3.254102743254011,
+      0.6884777386273769
+    ],
+    "coverage_diff_pts_ci95_iid": [
+      0.03897762204445148,
+      2.0039164344630342
+    ],
+    "note": "post hoc (not in the registered output); same saved week draws; does not change the registered verdict"
+  },
+  "Dstar@0.9126": {
+    "day_diff_vs_olist": 0.31062656641604036,
+    "coverage_diff_pts_vs_olist": 1.7493734335839672,
+    "day_diff_ci95_iid": [
+      -1.949836394518807,
+      2.006873112466385
+    ],
+    "coverage_diff_pts_ci95_iid": [
+      0.608760152797575,
+      3.1077882208275103
+    ],
+    "note": "post hoc (not in the registered output); same saved week draws; does not change the registered verdict"
+  }
+}

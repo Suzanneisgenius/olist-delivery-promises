@@ -1,0 +1,11 @@
+design,scenario,rule,change_week,mean_coverage,mean_coverage_after_change,false_alarms_per_year,detected_share,missed_detection_share,median_delay_weeks,median_delay_days_to_final
+order bootstrap (registered),none,single_week_llr (CUSUM at h=0),,0.9395557777777778,,0.0,,,,
+order bootstrap (registered),none,threshold,,0.9395557777777778,,0.0,,,,
+order bootstrap (registered),sudden,single_week_llr (CUSUM at h=0),9.0,0.9011627777777779,0.8871449242424243,0.0,0.926,0.07399999999999995,5.0,77.0
+order bootstrap (registered),sudden,threshold,9.0,0.9011627777777779,0.8871449242424243,0.0,0.0,1.0,,
+order bootstrap (registered),gradual,single_week_llr (CUSUM at h=0),5.0,0.8741612222222223,0.8641178846153847,0.0,1.0,0.0,10.0,112.0
+order bootstrap (registered),gradual,threshold,5.0,0.8741612222222223,0.8641178846153847,0.0,1.0,0.0,17.0,161.0
+order bootstrap (registered),transient,single_week_llr (CUSUM at h=0),9.0,0.9338734444444444,0.9317680303030303,0.0,1.0,0.0,0.0,42.0
+order bootstrap (registered),transient,threshold,9.0,0.9338734444444444,0.9317680303030303,0.0,0.098,0.902,1.0,49.0
+week-resampled (exploratory),none,single_week_llr (CUSUM at h=0),,0.9432187777777777,,3.6295999999999995,,,,
+week-resampled (exploratory),none,threshold,,0.9432187777777777,,0.024266666666666666,,,,

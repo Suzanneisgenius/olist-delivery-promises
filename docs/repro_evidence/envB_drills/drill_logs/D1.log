@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/B/src/olist_analytics/run_all.py", line 51, in <module>
+    main()
+    ~~~~^^
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/B/src/olist_analytics/run_all.py", line 43, in main
+    fn()
+    ~~^^
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/B/src/olist_analytics/run_stage1.py", line 124, in main
+    return _run()
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/B/src/olist_analytics/run_stage1.py", line 137, in _run
+    manifest = source_manifest()
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/B/src/olist_analytics/io.py", line 58, in source_manifest
+    df = pd.read_csv(p, dtype=str)                    # record count, not line count:
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/venvB/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 872, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/venvB/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/venvB/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1643, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/venvB/lib/python3.13/site-packages/pandas/io/parsers/readers.py", line 1907, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/venvB/lib/python3.13/site-packages/pandas/io/common.py", line 930, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/B/data/raw/olist_sellers_dataset.csv'

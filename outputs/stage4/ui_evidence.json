@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-10-15T14:54:27.549002+00:00",
+  "pages_sha256": {
+    "weekly_review.html": "626bdf1c0e9ffa341ff9a63e3203519e40291aca5f0edf7c57bbc148acca68c8",
+    "data_quality.html": "d603c45db7925d71463805e052b442e61ed90c7ffc817b38af2b4e77f6343c50",
+    "model_report.html": "de3013aa333e7e104703129e01139fe2e5602d5aaa19aa5c854285f549d4108b"
+  },
+  "stage4_lineage_sha256": "81a28f834ae866ca1f6c50ada2b28cdcd6edf1bf37e5a0765ca588fdfd662b52",
+  "ui_checks_sha256": "1591b94d48b4bb8fd2cf1c6e7292fd263b130a170eefef28db440830632eb1c3",
+  "checks": 33,
+  "checks_pass": true,
+  "browser": "chromium 141.0.7390.37"
+}

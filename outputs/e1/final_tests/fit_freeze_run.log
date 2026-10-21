@@ -1,0 +1,81 @@
+{
+ "freeze_sha256": "3b62af1ac385c2b8c9299e2e757a7e57e9ab2079526c9152878a1f5bfe8328dd",
+ "runs": {
+  "B1@0.90": {
+   "status": "frozen"
+  },
+  "B1c@0.90": {
+   "status": "frozen"
+  },
+  "B2@0.90": {
+   "status": "frozen"
+  },
+  "B3@0.90": {
+   "status": "frozen"
+  },
+  "Cstar@0.90": {
+   "status": "frozen"
+  },
+  "Dstar@0.90": {
+   "status": "frozen"
+  },
+  "B1c@0.9126": {
+   "status": "frozen"
+  },
+  "Cstar@0.9126": {
+   "status": "frozen"
+  },
+  "Dstar@0.9126": {
+   "status": "frozen"
+  }
+ },
+ "shifts": {
+  "B1c@0.90": {
+   "n": 17056,
+   "k": 15352,
+   "shift_days": 6.0
+  },
+  "B2@0.90": {
+   "n": 17056,
+   "k": 15352,
+   "shift_days": 6.018039891200836
+  },
+  "B3@0.90": {
+   "n": 17056,
+   "k": 15352,
+   "shift_days": 6.147869316295726
+  },
+  "Cstar@0.90": {
+   "n": 17056,
+   "k": 15352,
+   "shift_days": 6.147869316295726
+  },
+  "Dstar@0.90": {
+   "n": 17056,
+   "k": 15352,
+   "shift_days": 6.459147803541677
+  },
+  "B1c@0.9126": {
+   "n": 17056,
+   "k": 15567,
+   "shift_days": 7.0
+  },
+  "Cstar@0.9126": {
+   "n": 17056,
+   "k": 15567,
+   "shift_days": 6.560815389064963
+  },
+  "Dstar@0.9126": {
+   "n": 17056,
+   "k": 15567,
+   "shift_days": 6.99190671129406
+  }
+ },
+ "registration_sha256": "de0a2fd4201020bd279e8a857e2127460e244ced1216ea117e2c23e9be2fa396",
+ "e_touched": false,
+ "cstar_equals_b3_on_C": true
+}
+
+real	3m33.144s
+user	3m32.839s
+sys	0m0.683s

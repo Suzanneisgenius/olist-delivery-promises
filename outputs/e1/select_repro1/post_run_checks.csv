@@ -1,0 +1,13 @@
+check,expected,actual,pass
+package code unchanged during the run,3fe21443f0bfdf16e515b99a845a32f96621b5eedb3ef728f2f24484edb96db2,3fe21443f0bfdf16e515b99a845a32f96621b5eedb3ef728f2f24484edb96db2,True
+F0 rows used,13616,13616,True
+V rows used,12045,12045,True
+"linear candidates run (C0, C1, C2, 3 alphas)",6,6,True
+HGB candidates run (8),8,8,True
+per-order file: one row per V order per successful candidate,168630,168630,True
+losses recomputed from the per-order file == logged (|diff| < 1e-12),True,True,True
+same candidates as select,"['C0', 'C1', 'C2', 'C3 alpha=0.0001', 'C3 alpha=0.001', 'C3 alpha=0.01', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8']","['C0', 'C1', 'C2', 'C3 alpha=0.0001', 'C3 alpha=0.001', 'C3 alpha=0.01', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8']",True
+V losses equal to select (max |diff| < 1e-9),True,True,True
+adopt / select flags equal to select,True,True,True
+selected linear setting equal to select,"{'dow_categorical': False, 'target': 'log1p', 'alpha': 0.0}","{'dow_categorical': False, 'target': 'log1p', 'alpha': 0.0}",True
+selected HGB setting equal to select,"{'max_depth': 2, 'max_iter': 400}","{'max_depth': 2, 'max_iter': 400}",True

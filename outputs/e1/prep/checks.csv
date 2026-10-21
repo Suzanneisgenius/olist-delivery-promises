@@ -1,0 +1,30 @@
+check,expected,actual,pass
+E1 config matches its registered SHA-256,ae6a4a4664c82124399d9da38354376955e6e783fd720eece608ac801eb20152,ae6a4a4664c82124399d9da38354376955e6e783fd720eece608ac801eb20152,True
+stage-7 config unchanged,9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747,9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747,True
+F0 and V share no order,0,0,True
+F and C share no order,0,0,True
+F and E share no order,0,0,True
+C and E share no order,0,0,True
+F0 and V used rows are contained in F (F may hold more),True,True,True
+F0: no duplicate order ids,0,0,True
+F0: every used label delivered before 2017-12-01,True,True,True
+V: no duplicate order ids,0,0,True
+V: every used label delivered before 2017-12-01,True,True,True
+F: no duplicate order ids,0,0,True
+F: every used label delivered before 2018-04-01,True,True,True
+C: no duplicate order ids,0,0,True
+C: every used label delivered before 2018-04-01,True,True,True
+E: no duplicate order ids,0,0,True
+every feature build: labels before snapshot,True,True,True
+every feature build: snapshot at or before purchase,True,True,True
+"F used == stage-7 fit set (25,666)",25666,25666,True
+"calibration n (C rows actually used) == 17,056 of 17,063 eligible",17056/17063,17056/17063,True
+every manifest line: eligible == used + excluded,True,True,True
+every feature build returned one row per used order,True,True,True
+"C used == stage-7 calibration A (17,056)",17056,17056,True
+"E used == stage-7 evaluation (19,950)",19950,19950,True
+E order ids == stored stage-7 per-order ids,True,True,True
+B2 reproduces stage-7 Q1 predictions (max |diff| < 1e-6 day),True,True,True
+B2 reproduces stage-7 calibration-A shift (|diff| < 1e-6),True,True,True
+B2 integer promises identical to stage 7,True,True,True
+historical pinball reproduces 1.4827 / 1.3892 / 1.5761 / 1.5613 (4 dp),"[1.4827, 1.3892, 1.5761, 1.5613]","[1.4827, 1.3892, 1.5761, 1.5613]",True

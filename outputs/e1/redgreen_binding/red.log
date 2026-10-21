@@ -1,0 +1,12 @@
+# e1_pipeline under test: src/olist_analytics/e1_pipeline.py sha256 34d2568d938dd2557fdffc36daba717e6aa0db4d082e94c245d5fe9967a8a773 (BEFORE the binding fix)
+FAILED tests/test_e1_final.py::test_bad_addendum_stops_before_e[wrong binding (all zeros)-kw0]
+FAILED tests/test_e1_final.py::test_bad_addendum_stops_before_e[missing binding-kw1]
+FAILED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: not JSON-kw2]
+FAILED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: a list-kw3]
+FAILED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: no input identity-kw4]
+PASSED tests/test_e1_final.py::test_addendum_bound_to_this_freeze_is_accepted
+5 failed, 1 passed, 14 deselected in 12.10s
+      1 E           KeyError: 'input_identity'
+      1 E           TypeError: list indices must be integers or slices, not str
+      1 E           json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+      2 E       Failed: DID NOT RAISE FreezeError

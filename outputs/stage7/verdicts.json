@@ -1,0 +1,129 @@
+{
+  "targets": {
+    "0.90": 0.9,
+    "0.95": 0.95,
+    "olist_matched": 0.9126
+  },
+  "olist_coverage_on_calibration_A": 0.912640712945591,
+  "splits": {
+    "fit": {
+      "orders": 25666,
+      "late_rate": 0.03666328995558326,
+      "first_purchase": "2017-01-07 13:29:22",
+      "last_purchase": "2017-09-30 23:59:15"
+    },
+    "cal_A": {
+      "orders": 17056,
+      "late_rate": 0.087359287054409,
+      "first_purchase": "2017-10-01 00:03:33",
+      "last_purchase": "2017-12-31 23:29:31"
+    },
+    "cal_B": {
+      "orders": 16577,
+      "late_rate": 0.0697351752428063,
+      "first_purchase": "2018-01-01 02:48:41",
+      "last_purchase": "2018-03-29 01:12:21"
+    },
+    "eval": {
+      "orders": 19950,
+      "late_rate": 0.042606516290726815,
+      "first_purchase": "2018-04-01 00:11:32",
+      "last_purchase": "2018-07-19 20:57:35"
+    }
+  },
+  "verdicts": {
+    "0.90": {
+      "level": 0.9,
+      "Q2A_vs_B0": {
+        "days_shorter": -2.5691729323308294,
+        "coverage_drop_pts": -2.496240601503752,
+        "keep_complex": false
+      },
+      "Q1_vs_B0": {
+        "days_shorter": 3.448721804511276,
+        "coverage_drop_pts": 4.401002506265672,
+        "keep_complex": false
+      },
+      "months_unreliable": {
+        "B0_state_quantile": [],
+        "Q1_quantile_regression": [
+          "2018-05"
+        ],
+        "Q2_qr_conformal_A": [],
+        "Q2_qr_conformal_B": []
+      },
+      "calibration_mean_abs_monthly_gap_pts": {
+        "A": 6.887703860584179,
+        "B": 6.762402164794498
+      },
+      "calibration_A_better": false
+    },
+    "0.95": {
+      "level": 0.95,
+      "Q2A_vs_B0": {
+        "days_shorter": -2.940200501253134,
+        "coverage_drop_pts": -1.0125313283207982,
+        "keep_complex": false
+      },
+      "Q1_vs_B0": {
+        "days_shorter": 5.414987468671679,
+        "coverage_drop_pts": 3.4335839598997553,
+        "keep_complex": false
+      },
+      "months_unreliable": {
+        "B0_state_quantile": [],
+        "Q1_quantile_regression": [
+          "2018-05"
+        ],
+        "Q2_qr_conformal_A": [],
+        "Q2_qr_conformal_B": []
+      },
+      "calibration_mean_abs_monthly_gap_pts": {
+        "A": 3.4783553802884892,
+        "B": 3.2755644839587594
+      },
+      "calibration_A_better": false
+    },
+    "olist_matched": {
+      "level": 0.9126,
+      "Q2A_vs_B0": {
+        "days_shorter": -2.5151879699248134,
+        "coverage_drop_pts": -2.0250626566416075,
+        "keep_complex": false
+      },
+      "Q1_vs_B0": {
+        "days_shorter": 3.9571428571428555,
+        "coverage_drop_pts": 4.3308270676691745,
+        "keep_complex": false
+      },
+      "months_unreliable": {
+        "B0_state_quantile": [],
+        "Q1_quantile_regression": [
+          "2018-05"
+        ],
+        "Q2_qr_conformal_A": [],
+        "Q2_qr_conformal_B": []
+      },
+      "calibration_mean_abs_monthly_gap_pts": {
+        "A": 6.030935548887106,
+        "B": 5.930912366469218
+      },
+      "calibration_A_better": false,
+      "B0_state_quantile_vs_Olist": {
+        "days_shorter": 3.0425563909774453,
+        "coverage_drop_pts": 0.8421052631578885,
+        "shorter_with_coverage_loss_within_tolerance": true
+      },
+      "Q1_quantile_regression_vs_Olist": {
+        "days_shorter": 6.999699248120301,
+        "coverage_drop_pts": 5.172932330827063,
+        "shorter_with_coverage_loss_within_tolerance": false
+      },
+      "Q2_qr_conformal_A_vs_Olist": {
+        "days_shorter": 0.5273684210526319,
+        "coverage_drop_pts": -1.182957393483719,
+        "shorter_with_coverage_loss_within_tolerance": false
+      }
+    }
+  }
+}

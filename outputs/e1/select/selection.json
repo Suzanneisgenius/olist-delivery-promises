@@ -1,0 +1,40 @@
+{
+  "linear": {
+    "name": "C0",
+    "setting": {
+      "dow_categorical": false,
+      "target": "log1p",
+      "alpha": 0.0
+    },
+    "v_pinball_int": 1.2885595682855955
+  },
+  "hgb": {
+    "name": "D3",
+    "setting": {
+      "max_depth": 2,
+      "max_iter": 400
+    },
+    "v_pinball_int": 1.2626567040265668
+  },
+  "q": 0.9,
+  "metric": "V pinball on unshifted integer promise max(1, ceil(yhat))",
+  "rows": {
+    "F0": 13616,
+    "V": 12045
+  },
+  "runtime_seconds": 89.39473,
+  "residual_flags": [
+    {
+      "grouping": "predicted-duration quartile",
+      "group": "Q4 longest",
+      "orders": 3011,
+      "coverage": 0.8990368648289605,
+      "gap_pts_vs_overall": -3.1722786478636023,
+      "flag": true,
+      "model": "HGB D3",
+      "overall_v_coverage": 0.9307596513075965
+    }
+  ],
+  "registration_sha256": "69545d58ceb6bf37984153d7dfe1bee3218df81054d46ddff5e4f2f237d9bee2",
+  "e_or_c_touched": false
+}

@@ -1,0 +1,230 @@
+stage 1: ok (42s)
+stage 2: ok (14s)
+stage 3: ok (158s)
+independent verification: all match (3 models x 9 quantities + identities)
+independent verification: ok (2s)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/site.py:130: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for i, (m, d) in enumerate(cal.groupby("model", sort=False)):
+stage 4: ok (2s)
+stage 5 (backtest): ok (36s)
+Pages: outputs/weekly_review.html · outputs/data_quality.html · outputs/model_report.html
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:55: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  return b + pd.Timedelta(days=1) if convention == "day_inclusive" else b
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:112: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  past_promise = (obs_end - (m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1))).dt.total_seconds() / 86400
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_promised_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:112: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  past_promise = (obs_end - (m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1))).dt.total_seconds() / 86400
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_promised_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:112: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  past_promise = (obs_end - (m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1))).dt.total_seconds() / 86400
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:190: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  past = (obs - (u.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1))).dt.total_seconds() / 86400
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_promised_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_promised_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_promised_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_promised_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+  end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+# Stage 6a feasibility tables (generated)
+
+Boundary date 2018-09-03 (inferred, not a confirmed extraction time). Exclusive observation end: primary 2018-09-04 00:00:00, sensitivity 2018-09-03 00:00:00.
+
+## Final-file categories, primary observation end, by stale threshold (days past promise)
+
+| category | 31 (stage-1 horizon, p95 of days late) | 60 (stage-1 stale-U rule) | 72 (p99 of days late) |
+|---|---|---|---|
+| EVENT | 96470 | 96470 | 96470 |
+| RECENT_U_CANDIDATE | 123 | 177 | 193 |
+| U_STALE_MISSING_OUTCOME | 1606 | 1552 | 1536 |
+| DELIVERED_TIME_MISSING | 8 | 8 | 8 |
+| CANCELED_OR_UNAVAILABLE | 1234 | 1234 | 1234 |
+| PURCHASED_AT_OR_AFTER_OBSERVATION_END | 0 | 0 | 0 |
+| NO_VALID_ESTIMATE | 0 | 0 | 0 |
+| UNCLASSIFIED | 0 | 0 | 0 |
+
+## Same, midnight observation end
+
+| category | 31 (stage-1 horizon, p95 of days late) | 60 (stage-1 stale-U rule) | 72 (p99 of days late) |
+|---|---|---|---|
+| EVENT | 96470 | 96470 | 96470 |
+| RECENT_U_CANDIDATE | 127 | 178 | 193 |
+| U_STALE_MISSING_OUTCOME | 1601 | 1550 | 1535 |
+| DELIVERED_TIME_MISSING | 8 | 8 | 8 |
+| CANCELED_OR_UNAVAILABLE | 1234 | 1234 | 1234 |
+| PURCHASED_AT_OR_AFTER_OBSERVATION_END | 1 | 1 | 1 |
+| NO_VALID_ESTIMATE | 0 | 0 | 0 |
+| UNCLASSIFIED | 0 | 0 | 0 |
+
+## A/L deliveries recorded at/after each observation end
+
+| index | A_L_delivered_at_or_after_end | in_window | purchased_at_or_after_end |
+|---|---|---|---|
+| day_inclusive (primary) | 37 | 6 | 16 |
+| midnight (sensitivity) | 53 | 6 | 20 |
+
+## Final-file category vs as-of state at the observation end (31-day threshold)
+
+| observation_end | scope | final_category | as_of_state | orders |
+|---|---|---|---|---|
+| day_inclusive (primary) | all orders | CANCELED_OR_UNAVAILABLE | NOT_IN_RISK_SET | 16 |
+| day_inclusive (primary) | all orders | CANCELED_OR_UNAVAILABLE | RECORD_STATUS_CONFLICT | 6 |
+| day_inclusive (primary) | all orders | CANCELED_OR_UNAVAILABLE | UNRESOLVED_AT_CUT | 1212 |
+| day_inclusive (primary) | all orders | DELIVERED_TIME_MISSING | UNRESOLVED_AT_CUT | 8 |
+| day_inclusive (primary) | all orders | EVENT | EVENT_RECORDED | 96433 |
+| day_inclusive (primary) | all orders | EVENT | UNRESOLVED_AT_CUT | 37 |
+| day_inclusive (primary) | all orders | RECENT_U_CANDIDATE | UNRESOLVED_AT_CUT | 123 |
+| day_inclusive (primary) | all orders | U_STALE_MISSING_OUTCOME | UNRESOLVED_AT_CUT | 1606 |
+| day_inclusive (primary) | approved window | CANCELED_OR_UNAVAILABLE | RECORD_STATUS_CONFLICT | 1 |
+| day_inclusive (primary) | approved window | CANCELED_OR_UNAVAILABLE | UNRESOLVED_AT_CUT | 1036 |
+| day_inclusive (primary) | approved window | DELIVERED_TIME_MISSING | UNRESOLVED_AT_CUT | 6 |
+| day_inclusive (primary) | approved window | EVENT | EVENT_RECORDED | 84123 |
+| day_inclusive (primary) | approved window | EVENT | UNRESOLVED_AT_CUT | 6 |
+| day_inclusive (primary) | approved window | U_STALE_MISSING_OUTCOME | UNRESOLVED_AT_CUT | 1557 |
+| midnight (sensitivity) | all orders | CANCELED_OR_UNAVAILABLE | NOT_IN_RISK_SET | 19 |
+| midnight (sensitivity) | all orders | CANCELED_OR_UNAVAILABLE | RECORD_STATUS_CONFLICT | 6 |
+| midnight (sensitivity) | all orders | CANCELED_OR_UNAVAILABLE | UNRESOLVED_AT_CUT | 1209 |
+| midnight (sensitivity) | all orders | DELIVERED_TIME_MISSING | UNRESOLVED_AT_CUT | 8 |
+| midnight (sensitivity) | all orders | EVENT | EVENT_RECORDED | 96417 |
+| midnight (sensitivity) | all orders | EVENT | UNRESOLVED_AT_CUT | 53 |
+| midnight (sensitivity) | all orders | PURCHASED_AT_OR_AFTER_OBSERVATION_END | NOT_IN_RISK_SET | 1 |
+| midnight (sensitivity) | all orders | RECENT_U_CANDIDATE | UNRESOLVED_AT_CUT | 127 |
+| midnight (sensitivity) | all orders | U_STALE_MISSING_OUTCOME | UNRESOLVED_AT_CUT | 1601 |
+| midnight (sensitivity) | approved window | CANCELED_OR_UNAVAILABLE | RECORD_STATUS_CONFLICT | 1 |
+| midnight (sensitivity) | approved window | CANCELED_OR_UNAVAILABLE | UNRESOLVED_AT_CUT | 1036 |
+| midnight (sensitivity) | approved window | DELIVERED_TIME_MISSING | UNRESOLVED_AT_CUT | 6 |
+| midnight (sensitivity) | approved window | EVENT | EVENT_RECORDED | 84123 |
+| midnight (sensitivity) | approved window | EVENT | UNRESOLVED_AT_CUT | 6 |
+| midnight (sensitivity) | approved window | U_STALE_MISSING_OUTCOME | UNRESOLVED_AT_CUT | 1557 |
+
+## U orders: days past the promised date at the primary observation end, by last status
+
+| status | count | 10% | 50% | 90% |
+|---|---|---|---|---|
+| approved | 2.0 | 477.2 | 510.0 | 542.8 |
+| created | 5.0 | 202.0 | 238.0 | 271.6 |
+| delivered | 8.0 | 35.0 | 47.5 | 312.4 |
+| invoiced | 314.0 | 28.9 | 271.5 | 531.7 |
+| processing | 301.0 | 193.0 | 322.0 | 528.0 |
+| shipped | 1107.0 | 40.6 | 210.0 | 479.0 |
+
+## X orders
+
+| status | orders | with_carrier_date | with_delivery_date |
+|---|---|---|---|
+| canceled | 625 | 75 | 6 |
+| unavailable | 609 | 0 | 0 |
+
+Record–status conflicts (canceled with a delivery date):
+
+| order_id | order_status | order_purchase_timestamp | order_delivered_customer_date |
+|---|---|---|---|
+| 1950d777989f6a877539f53795b4c3c3 | canceled | 2018-02-19 19:48:52 | 2018-03-21 22:03:51 |
+| dabf2b0e35b423f94618bf965fcb7514 | canceled | 2016-10-09 00:56:52 | 2016-10-16 14:36:59 |
+| 770d331c84e5b214bd9dc70a10b829d0 | canceled | 2016-10-07 14:52:30 | 2016-10-14 15:07:11 |
+| 8beb59392e21af5eb9547ae1a9938d06 | canceled | 2016-10-08 20:17:50 | 2016-10-19 18:47:43 |
+| 65d1e226dfaeb8cdc42f665422522d14 | canceled | 2016-10-03 21:01:41 | 2016-11-08 10:58:34 |
+| 2c45c33d2f9cb8ff8b1c86cc28c11c30 | canceled | 2016-10-09 15:39:56 | 2016-11-09 14:53:50 |
+
+## Unresolved at fold cut-offs (window, single seller; record-date rule)
+
+| cutoff | in_risk_set | event_recorded_before_T | record_status_conflict | unresolved_at_T | deadline_passed_at_T | later_final_A | later_final_L | later_final_U | later_final_X | later_final_U_or_X_share |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 2018-01-01 | 43875 | 40250 | 0 | 3625 | 1390 | 1791 | 688 | 943 | 203 | 0.316 |
+| 2018-04-01 | 64734 | 59299 | 1 | 5434 | 2121 | 2311 | 1503 | 1295 | 325 | 0.298 |
+| 2018-05-01 | 71538 | 67022 | 1 | 4515 | 1898 | 2289 | 472 | 1414 | 340 | 0.388 |
+| 2018-06-01 | 78272 | 74023 | 1 | 4248 | 1974 | 1897 | 493 | 1498 | 360 | 0.437 |
+
+## Distribution and follow-up (descriptive)
+
+```json
+{
+  "events_final_file": 96470,
+  "duration_days_quantiles": {
+    "0.5": 10.217476851851853,
+    "0.9": 23.09637731481482,
+    "0.99": 46.05026180555554,
+    "0.999": 83.14106533565268
+  },
+  "log_duration_skew": -0.20474650528529328,
+  "log_duration_excess_kurtosis": 0.32446631672189863,
+  "log_duration_normal_probplot_r": 0.9975698806768942,
+  "deadline_days_quantiles_universe": {
+    "0.5": 24.535711805555557,
+    "0.9": 35.324869212962966,
+    "0.99": 49.39345706018522,
+    "0.999": 67.55681834490827
+  },
+  "universe_orders": 85002,
+  "universe_min_followup_minus_deadline_days_at_primary_end": 37.99999999999999
+}
+```
+
+                                                                  case           expected           observed  pass
+    pages under test == pages of the current stage-4 release (SHA-256)                 []                 []  True
+            weekly_review.html light 1280px: no console or page errors                 []                 []  True
+weekly_review.html light 1280px: no page-wide horizontal overflow (px)                  0                  0  True
+             weekly_review.html dark 1280px: no console or page errors                 []                 []  True
+ weekly_review.html dark 1280px: no page-wide horizontal overflow (px)                  0                  0  True
+             weekly_review.html light 390px: no console or page errors                 []                 []  True
+ weekly_review.html light 390px: no page-wide horizontal overflow (px)                  0                  0  True
+             data_quality.html light 1280px: no console or page errors                 []                 []  True
+ data_quality.html light 1280px: no page-wide horizontal overflow (px)                  0                  0  True
+              data_quality.html dark 1280px: no console or page errors                 []                 []  True
+  data_quality.html dark 1280px: no page-wide horizontal overflow (px)                  0                  0  True
+              data_quality.html light 390px: no console or page errors                 []                 []  True
+  data_quality.html light 390px: no page-wide horizontal overflow (px)                  0                  0  True
+             model_report.html light 1280px: no console or page errors                 []                 []  True
+ model_report.html light 1280px: no page-wide horizontal overflow (px)                  0                  0  True
+              model_report.html dark 1280px: no console or page errors                 []                 []  True
+  model_report.html dark 1280px: no page-wide horizontal overflow (px)                  0                  0  True
+              model_report.html light 390px: no console or page errors                 []                 []  True
+  model_report.html light 390px: no page-wide horizontal overflow (px)                  0                  0  True
+                     model page: headline AP shown == test_metrics.csv              0.123              0.123  True
+                         model page: ROC AUC shown == test_metrics.csv              0.761              0.761  True
+                                   model page: top-10% precision shown              13.0%              13.0%  True
+                                      model page: top-10% recall shown              30.5%              30.5%  True
+                          model page: independent check says all match               True               True  True
+                                             nav: model → data quality  data_quality.html  data_quality.html  True
+                                       data-quality page: orders shown             99,441             99,441  True
+    data-quality page: human-reviewed count == manual_check_sample.csv               True               True  True
+                                     nav: data quality → weekly review weekly_review.html weekly_review.html  True
+                               weekly page: whole-window on-time shown             92.92%             92.92%  True
+                 weekly page: 'Largest decline' selects the worst pair              -9.58              -9.58  True
+         weekly page: downloaded pair CSV has every state of that pair                 27                 27  True
+ weekly page: every link target exists on disk (stage-2 links rebased)                 []                 []  True
+                      pages unchanged during the browser run (SHA-256)                 []                 []  True
+    id   automated result                                                                           actual
+UAT-01               PASS                                          raw files unchanged since stage 1: True
+UAT-02               PASS                           rows, uniqueness, item lines, price, freight, payments
+UAT-03               PASS                         SQL outcome buckets: week x bucket cells matching: 373.0
+UAT-04               PASS             window weeks used == approved selection: 2017-02-27..2018-07-23 (74)
+UAT-05               PASS                                  weekly page: whole-window on-time shown: 92.92%
+UAT-06               PASS decomposition identity holds for every comparable pair (max |gap| < 1e-12): True
+UAT-07               PASS                                            test_stage_anomaly_keeps_order_in_otd
+UAT-08               PASS                                                      4 label-availability checks
+UAT-09               PASS                        logistic AP 0.12346; 9 quantities x 3 models + identities
+UAT-10               PASS                                      embedded data and displayed values compared
+UAT-11               PASS                                                             18 page/width checks
+UAT-12               PASS                                    21 gate tests, all must pass (skipped ≠ pass)
+UAT-13 n/a — owner review                                                                 0 of 20 reviewed
+UAT-14 n/a — owner review                                                                          pending
+final_ok

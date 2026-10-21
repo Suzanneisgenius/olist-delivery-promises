@@ -1,0 +1,4 @@
+cutoff,purchased_in_month,estimated_week_in_window,final_A_or_L,single_seller,outside_window,U_or_X_inside_window,median_estimated_days_all_purchases,median_estimated_days_modelled,eval_rows
+2018-04-01,6939,6939,6798,6670,0,141,24.0,24.0,6670
+2018-05-01,6873,6862,6738,6630,11,124,22.0,22.0,6630
+2018-06-01,6167,5732,5665,5565,435,67,28.0,27.0,5565

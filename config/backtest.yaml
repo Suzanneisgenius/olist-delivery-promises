@@ -1,0 +1,15 @@
+# Stage 5: monthly rolling-origin backtest. Owner decisions, not facts about Olist.
+purpose: >
+  Retrospective stability study. Every evaluation month lies inside the stage-3 test period, which was
+  already inspected (v0.3.0 and v0.3.1). It is NOT a new or confirmatory test.
+cutoffs: ["2018-04-01", "2018-05-01", "2018-06-01"]   # T: fit with labels delivered before T; evaluate purchases in [T, T + 1 month)
+block_months: 1
+models:
+  families: [logistic, gbm]                          # reused from stage 3
+  hyperparameters: "frozen stage-3 choice (selected with labels known before 2018-04-01); no per-fold tuning"
+seller_history:
+  fit_rows_snapshot: "start of the row's purchase month"
+  evaluation_rows_snapshot: "fold cut-off T, frozen for the whole month"
+evaluation:
+  top_share: 0.10                                    # per purchase week inside the block (weeks crossing a month edge are split)
+  reproduce_stage3: "fold 2018-04-01 must reproduce stage-3 test predictions for April purchases (same data, same model)"

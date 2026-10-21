@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-10-15T14:54:19.757257+00:00",
+  "mart_sha256": "3dc5ec78507b23f9990e2ad30c80085d06c233c709f553365d4f368e7e452273",
+  "boundary_date": "2018-09-03",
+  "observation_end_exclusive": {
+    "day_inclusive (primary)": "2018-09-04 00:00:00",
+    "midnight (sensitivity)": "2018-09-03 00:00:00"
+  },
+  "boundary_is_confirmed_extraction_time": false,
+  "last_timestamp_in_file": "2018-10-17 17:30:18",
+  "after_observation_end": {
+    "day_inclusive (primary)": {
+      "A_L_delivered_at_or_after_end": 37,
+      "in_window": 6,
+      "purchased_at_or_after_end": 16
+    },
+    "midnight (sensitivity)": {
+      "A_L_delivered_at_or_after_end": 53,
+      "in_window": 6,
+      "purchased_at_or_after_end": 20
+    }
+  },
+  "stale_thresholds_days": {
+    "31 (stage-1 horizon, p95 of days late)": 31.0,
+    "60 (stage-1 stale-U rule)": 60.0,
+    "72 (p99 of days late)": 72.0
+  },
+  "cancellation_timestamp_in_data": false,
+  "last_tracking_timestamp_in_data": false,
+  "u_orders": 1737,
+  "u_median_days_past_promise": 251.0,
+  "record_status_conflicts": 6,
+  "distribution": {
+    "events_final_file": 96470,
+    "duration_days_quantiles": {
+      "0.5": 10.217476851851853,
+      "0.9": 23.09637731481482,
+      "0.99": 46.05026180555554,
+      "0.999": 83.14106533564886
+    },
+    "log_duration_skew": -0.20474650528529328,
+    "log_duration_excess_kurtosis": 0.32446631672189863,
+    "log_duration_normal_probplot_r": 0.9975698806768942,
+    "deadline_days_quantiles_universe": {
+      "0.5": 24.535711805555557,
+      "0.9": 35.324869212962966,
+      "0.99": 49.39345706018522,
+      "0.999": 67.5568183449071
+    },
+    "universe_orders": 85002,
+    "universe_min_followup_minus_deadline_days_at_primary_end": 37.99999999999999
+  }
+}

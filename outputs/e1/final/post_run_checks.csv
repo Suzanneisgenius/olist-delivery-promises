@@ -1,0 +1,6 @@
+check,expected,actual,pass
+every registered run is frozen or failed with a reason,"['B1@0.90', 'B1c@0.90', 'B1c@0.9126', 'B2@0.90', 'B3@0.90', 'Cstar@0.90', 'Cstar@0.9126', 'Dstar@0.90', 'Dstar@0.9126']","['B1@0.90', 'B1c@0.90', 'B1c@0.9126', 'B2@0.90', 'B3@0.90', 'Cstar@0.90', 'Cstar@0.9126', 'Dstar@0.90', 'Dstar@0.9126']",True
+calibration n == C rows used,17056,17056,True
+package code unchanged during the run,6eac633d5e0838f59fe1ec665007ef6bab321ab52fc049cedfab8b4e51dcaf40,6eac633d5e0838f59fe1ec665007ef6bab321ab52fc049cedfab8b4e51dcaf40,True
+C* = C0: C* and B3 predictions identical on C (|diff| < 1e-9),True,True,True
+B2 shift on C == stage-7 calibration-A shift (|diff| < 1e-6),True,True,True

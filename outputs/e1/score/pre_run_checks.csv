@@ -1,0 +1,12 @@
+check,expected,actual,pass
+entry module e1_data imported from this working copy,True,True,True
+entry module e1_models imported from this working copy,True,True,True
+entry module e1_freeze imported from this working copy,True,True,True
+entry module e1_pipeline imported from this working copy,True,True,True
+entry module features imported from this working copy,True,True,True
+entry module date_policy imported from this working copy,True,True,True
+entry module io imported from this working copy,True,True,True
+runtime: policy_score refuses a NaN label,True,True,True
+runtime: shift refuses a NaN label,True,True,True
+runtime: pinball refuses unequal lengths,True,True,True
+runtime: freeze validation refuses a record with an empty model list,True,True,True

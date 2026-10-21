@@ -1,0 +1,81 @@
+{
+ "evaluation_orders": 19950,
+ "weeks": 17,
+ "not_evaluable_runs": [],
+ "freeze_sha256": "3b62af1ac385c2b8c9299e2e757a7e57e9ab2079526c9152878a1f5bfe8328dd",
+ "shifts_recomputed_on_C": [
+  "B1c@0.90",
+  "B1c@0.9126",
+  "B2@0.90",
+  "B3@0.90",
+  "Cstar@0.90",
+  "Cstar@0.9126",
+  "Dstar@0.90",
+  "Dstar@0.9126"
+ ],
+ "consistency": {
+  "B2 shifted promises == stored stage-7 Q2A per order": true,
+  "C* and B3 predictions identical on E": true
+ },
+ "H1": {
+  "status": "meets H1 standard",
+  "change_day_gap": -4.108471177944864,
+  "change_cov_gap_pts": -2.8070175438596467,
+  "verdict_changed": true
+ },
+ "H2": {
+  "status": "below this project's practical standard",
+  "g": 0.0,
+  "delta": 0.0,
+  "no_change_selected": true,
+  "L_B3": 1.4167218045112782,
+  "L_Cstar": 1.4167218045112782,
+  "delta_ci95": {
+   "iid": [
+    0.0,
+    0.0
+   ],
+   "moving2": [
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "H3": {
+  "status": "not supported",
+  "practical_rule_vs_B1c": false,
+  "monthly_reliable": true,
+  "replace_existing": false
+ },
+ "M_vs_olist": [
+  {
+   "policy": "B1c@0.9126",
+   "coverage": 0.9720300751879699,
+   "mean_promised_days": 25.8531328320802,
+   "olist_coverage": 0.9573934837092731,
+   "olist_mean_days": 24.440350877192984,
+   "tighter_at_similar_reliability": false
+  },
+  {
+   "policy": "Cstar@0.9126",
+   "coverage": 0.9661654135338346,
+   "mean_promised_days": 23.416140350877193,
+   "olist_coverage": 0.9573934837092731,
+   "olist_mean_days": 24.440350877192984,
+   "tighter_at_similar_reliability": true
+  },
+  {
+   "policy": "Dstar@0.9126",
+   "coverage": 0.9748872180451128,
+   "mean_promised_days": 24.750977443609024,
+   "olist_coverage": 0.9573934837092731,
+   "olist_mean_days": 24.440350877192984,
+   "tighter_at_similar_reliability": false
+  }
+ ],
+ "registration_sha256": "128384336d95f0211801b4cd245d2a6d509f686f8e91eb081e0b35d08fd95b06"
+}
+
+real	0m9.615s
+user	0m9.883s
+sys	0m0.452s

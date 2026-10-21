@@ -1,0 +1,9 @@
+segment,rule,rows,snapshots,earliest_snapshot,latest_snapshot,every_label_before_its_snapshot,every_snapshot_at_or_before_purchase
+F0,U,13616,6,2017-01-01 00:00:00,2017-06-01 00:00:00,True,True
+V,U,12045,3,2017-07-01 00:00:00,2017-09-01 00:00:00,True,True
+F,U,25666,9,2017-01-01 00:00:00,2017-09-01 00:00:00,True,True
+C,U,17056,3,2017-10-01 00:00:00,2017-12-01 00:00:00,True,True
+E,U,19950,4,2018-04-01 00:00:00,2018-07-01 00:00:00,True,True
+F,O,25666,9,2017-01-01 00:00:00,2017-09-01 00:00:00,True,True
+C,O,17056,1,2017-10-01 00:00:00,2017-10-01 00:00:00,True,True
+E,O,19950,1,2018-04-01 00:00:00,2018-04-01 00:00:00,True,True

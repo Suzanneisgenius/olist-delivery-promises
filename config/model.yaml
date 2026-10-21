@@ -1,0 +1,52 @@
+# Stage 3 model design. Every item is a decision for owner review, not a fact about Olist.
+prediction_time: order_purchase_timestamp       # offline simulation of "score at checkout"
+
+population:
+  window_from_stage1: true                        # estimated weeks inside the approved window (labels mature)
+  outcome_buckets: [A, L]                         # U and X have no final label; counted, not modelled
+  single_seller_only: true                        # multi-seller orders excluded in v1 (counted)
+
+label:
+  target: is_late                                 # 1 = delivered after the estimated day (L), 0 = A
+  known_at_T: "delivered_customer_date < T"       # a label exists at time T only if the delivery happened before T
+  model_selection_known_at: "dev delivery before test.from; exclude pending labels when choosing parameters"
+
+splits:                                           # by purchase time; boundaries are also label cut-offs
+  train: {from: null, to: "2018-01-01"}           # fit (tuning phase) uses labels known before 2018-01-01
+  dev:   {from: "2018-01-01", to: "2018-04-01"}   # model choice; refit on train+dev uses labels known before 2018-04-01
+  test:  {from: "2018-04-01", to: null}           # frozen model, frozen feature snapshot at 2018-04-01
+
+seller_history:
+  source: "single-seller orders with outcome A/L whose delivery happened before the snapshot time"
+  training_rows_snapshot: "start of the row's purchase month"   # labels delivered before that day
+  evaluation_rows_snapshot: "start of the evaluation block"     # frozen; no labels from inside the block
+  smoothing_k: 20                                 # late rate shrunk toward the global rate known at the snapshot
+
+features:
+  numeric: [estimated_days, distance_km, items_price_sum, items_freight_sum, freight_ratio, weight_g_sum,
+            n_item_lines, n_distinct_products, same_state, purchase_hour, purchase_dow,
+            seller_hist_n_delivered, seller_hist_late_rate, seller_hist_n_placed,
+            seller_hist_handling_median_h, seller_age_days]
+  categorical: [customer_state_reported, seller_state, top_price_category]
+  assumption_flags:
+    estimated_days: "assumes the estimate shown at checkout equals the stored estimate (no version history); sensitivity run without it"
+  forbidden: [order_approved_at, order_delivered_carrier_date, order_delivered_customer_date, order_status,
+              days_late, outcome_bucket, approval_hours, handling_hours, transit_hours, total_hours,
+              review_score_primary, review_score_latest, n_reviews, is_review_eligible, shipping_limit_min,
+              payment_value_sum, n_payments]
+
+models:
+  seed: 20261012
+  logistic_C: [0.1, 1.0]
+  gbm_grid:
+    learning_rate: [0.05, 0.1]
+    max_leaf_nodes: [15, 31]
+    max_iter: [250]
+    l2_regularization: [1.0]
+
+evaluation:
+  primary: average_precision                      # AP, not "PR-AUC" by trapezoid
+  top_share: 0.10                                 # per purchase week, select floor(10% x n) highest-risk orders
+  calibration_bins: 10
+  bootstrap: {unit: purchase_week, reps: 1000}
+  permutation_repeats: 5

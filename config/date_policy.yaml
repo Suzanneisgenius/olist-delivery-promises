@@ -1,0 +1,65 @@
+# Stage 7 — delivery-date policy study. PRE-REGISTERED: written and hashed before any policy result was computed.
+# Any later change is logged in docs/DATE_POLICY_DECISIONS.md with the reason; the run records this file's SHA-256.
+status: exploratory extension on data already inspected in stages 1-6 (not a confirmatory test)
+
+population: stage-3 model population (approved window, final outcome A/L, single seller)
+target:
+  required_days: "delivered calendar day - purchase calendar day (integer)"
+  covered: "required_days <= promised_days  (identical to the project's on-time rule)"
+  olist_promise_days: "estimated calendar day - purchase calendar day (reference only, never a model input)"
+
+freeze_at: "2018-04-01"            # policy fitted, calibrated and frozen with information known at this time
+windows:
+  fit:            {from: null,         to: "2017-10-01"}   # purchases before; labels delivered before freeze_at
+  calibration_A:  {from: "2017-10-01", to: "2018-01-01"}   # PRIMARY: older but outcome-complete at freeze_at (99.96% delivered)
+  calibration_B:  {from: "2018-01-01", to: "2018-04-01"}   # COMPARISON: recent but selected (81% delivered by freeze_at)
+  evaluation:     {from: "2018-04-01", to: null}           # purchases; reported by purchase month (July is partial)
+seller_snapshot:
+  fit_rows: "start of purchase month"
+  calibration_rows: "start of the calibration window (frozen)"
+  evaluation_rows: "freeze_at (frozen)"
+
+targets:                            # nominal coverage levels
+  fixed: [0.90, 0.95]
+  olist_matched: "Olist promise coverage on calibration_A orders (known at freeze_at)"
+
+policies:
+  B0_state_quantile: "empirical target-quantile of required_days per customer state on fit + calibration_A orders; states with < 300 orders use the overall quantile"
+  Q1_quantile_regression: "linear quantile regression of log1p(required_days) at the target level on fit orders; promise = ceil(expm1(prediction))"
+  Q2_qr_conformal_A: "Q1 + one-sided split-conformal shift from calibration_A: score = required - predicted days; shift = ceil((n+1)*target)-th smallest score"
+  Q2_qr_conformal_B: "same with calibration_B (comparison for the calibration-window question)"
+  minimum_promise_days: 1
+features:                           # checkout-time only; Olist's own estimate is excluded
+  numeric: [distance_km, same_state, weight_g_sum, items_price_sum, items_freight_sum, freight_ratio, n_item_lines,
+            purchase_dow, seller_hist_late_rate, seller_hist_handling_median_h, seller_hist_n_delivered]
+  log_transform: [distance_km, weight_g_sum, items_price_sum, items_freight_sum, seller_hist_handling_median_h, seller_hist_n_delivered]
+  categorical: [customer_state_reported, seller_state]
+  categorical_min_count: 300
+
+decision_rules:                     # fixed before results (owner's practical-significance rule)
+  complex_over_baseline: "keep Q2_qr_conformal_A over B0 only if, on all evaluation orders at the same target, mean promised days <= B0 - 1.0 AND coverage >= B0 coverage - 1.0 pt"
+  versus_olist: "at the olist_matched target, call a policy 'tighter at similar reliability' only if coverage >= Olist coverage - 1.0 pt AND mean promised days <= Olist - 1.0"
+  monthly_reliability: "a month with >= 1,000 orders whose coverage is below target - 3.0 pts means 'time reliability not established'"
+  calibration_window: "calibration_A is judged better than B if its mean absolute monthly coverage gap to target is smaller"
+segments:
+  report_state_if_evaluation_orders_at_least: 300
+
+monitoring:                          # part 3 (run after parts 1-2; rules fixed now)
+  signals: [olist_promise_coverage, policy_coverage, median_required_days]
+  cohort: "purchase week; a week's coverage is final at week end + max promised days in that week + 1 day (a miss is known once the promise passes)"
+  threshold_rule: "alarm when weekly coverage < target - 5 pts for 2 consecutive weeks with >= 200 orders each"
+  cusum: "Bernoulli CUSUM on misses: p0 = 1 - target, p1 = p0 + 0.05; per-order log-likelihood-ratio increments summed by week; h set by simulation for an in-control average run length of about 52 weeks"
+  alarms_trigger: "human review only; no automatic recalibration"
+  simulation:
+    base: "bootstrap evaluation-period orders under the frozen policy"
+    scenarios: {none: "no change", sudden: "required_days x 1.2 from week 9", gradual: "required_days x (1 + 0.02 per week) from week 5", transient: "required_days x 1.3 in weeks 9-10 only"}
+    weeks: 30
+    orders_per_week: 1200
+    replications: 500
+    metrics: [false_alarms_per_year_in_control, detection_delay_weeks, missed_detection_share]
+seed: 20261014
+
+descriptive_curves:                  # added 2026-10-14 before any policy result (see docs/DATE_POLICY_DECISIONS.md); NOT used for decisions
+  q2_shift_sweep: "Q2 (target 0.90 model) with the conformal shift replaced by c = -5..+10 days"
+  b0_level_sweep: "B0 at levels 0.80..0.98"
+  olist_uniform_shift: "Olist promise + c days, c = -14..+2 (what if every existing promise were shortened by the same amount?)"

@@ -1,0 +1,13 @@
+# e1_pipeline under test: /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/redcopy3/src/olist_analytics/e1_pipeline.py sha256 0c21349c31dc5809b066ce3fe01d6eeb4a71a790cad3bb3a22c4f8b07fc98377
+>           raise ReleaseBlocked(f"Release blocked: {len(bad)} check(s) failed. See {blocked}.")
+E           olist_analytics.gate.ReleaseBlocked: Release blocked: 1 check(s) failed. See /tmp/pytest-of-root/pytest-105/test_same_ids_changed_e_featur0/e1/score/qa/RELEASE_BLOCKED.json.
+FAILED tests/test_e1_final.py::test_same_ids_changed_e_labels_stop_before_e
+FAILED tests/test_e1_final.py::test_same_ids_changed_e_feature_stops_before_e
+FAILED tests/test_e1_final.py::test_changed_b0_reference_stops_before_e - Fai...
+3 failed, 11 deselected in 18.43s
+_________________ test_same_ids_changed_e_labels_stop_before_e _________________
+E       Failed: DID NOT RAISE FreezeError
+________________ test_same_ids_changed_e_feature_stops_before_e ________________
+E           olist_analytics.gate.ReleaseBlocked: Release blocked: 1 check(s) failed. See /tmp/pytest-of-root/pytest-107/test_same_ids_changed_e_featur0/e1/score/qa/RELEASE_BLOCKED.
+___________________ test_changed_b0_reference_stops_before_e ___________________
+E       Failed: DID NOT RAISE FreezeError

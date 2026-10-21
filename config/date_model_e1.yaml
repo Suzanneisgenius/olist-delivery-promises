@@ -1,0 +1,167 @@
+# E1 — promised-date model improvement experiment. PRE-REGISTERED before any new model was fitted.
+# Plan: "E1 预计交付日期模型改进实验方案" (checkpoint 1, revised after the 2026-10-15 review "修改后通过";
+# v2 2026-10-16: execution rules from the second review; v3 2026-10-16: H1/H2 rule units, global-minimum ties,
+# 'not evaluable' status (third review). No model fitted before any version).
+# This file is hashed into outputs/e1/PREREGISTRATION_SHA256.txt; later changes go to docs/E1_DECISIONS.md.
+# Exploratory: the evaluation orders were already analysed in stage 7 and re-run many times (not a blind test).
+
+base:
+  project_version: "0.6.3"
+  base_zip_sha256: "11ba652c9b77f12bb6b7f296edf03badeb8cf541c0d94897bba12421c826a41c"
+  stage7_config_sha256: "9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747"   # unchanged, read only
+
+population: "stage-3 model population: estimated week in the approved window, final outcome A or L, single seller (conditional on eventual delivery; unchanged)"
+target:
+  required_days: "delivered calendar day - purchase calendar day (integer)"
+  covered: "required_days <= promised_days"
+
+# Purchases [from, to); a row is USED only if delivered before label_cutoff.
+segments:
+  F0: {from: null,         to: "2017-07-01", label_cutoff: "2017-12-01", use: "fit candidate settings"}
+  V:  {from: "2017-07-01", to: "2017-10-01", label_cutoff: "2017-12-01", use: "select settings; residual diagnostics"}
+  F:  {from: null,         to: "2017-10-01", label_cutoff: "2018-04-01", use: "refit selected settings (= stage-7 fit set)"}
+  C:  {from: "2017-10-01", to: "2018-01-01", label_cutoff: "2018-04-01", use: "one one-sided shift per final policy"}
+  E:  {from: "2018-04-01", to: null,         label_cutoff: null,         use: "scored once, after everything is frozen"}
+decision_times: {select_settings: "2017-12-01", refit_calibrate_freeze: "2018-04-01"}
+not_used: "2018 Q1 purchases (81% delivered at the freeze; delivered part biased fast)"
+
+seller_snapshot:
+  U: "every row (F0, V, F, C, E): start of its purchase month; only orders delivered before that time contribute labels"
+  O: "stage-7 scheme, for B2 only: F rows start of purchase month; C rows 2017-10-01; E rows 2018-04-01 (frozen)"
+  note: "U = frozen model parameters + monthly-refreshed history features: a NEW policy design; O is kept and reported"
+
+quantiles: {main: 0.90, olist_matched: 0.9126}   # olist_matched = target set to Olist's coverage on C; equal targets do NOT imply equal E coverage
+
+models:
+  state_rule: {min_state_orders: 300, quantile_method: inverted_cdf}
+  linear_registered:                      # = stage-7 Q1 (C0 / B2 / B3)
+    numeric: [distance_km, same_state, weight_g_sum, items_price_sum, items_freight_sum, freight_ratio, n_item_lines,
+              purchase_dow, seller_hist_late_rate, seller_hist_handling_median_h, seller_hist_n_delivered]
+    log_transform: [distance_km, weight_g_sum, items_price_sum, items_freight_sum, seller_hist_handling_median_h, seller_hist_n_delivered]
+    categorical: [customer_state_reported, seller_state]
+    categorical_min_count: 300
+    target: log1p
+    alpha: 0.0
+    solver: highs
+    fallback_solver: highs-ipm            # one retry only, logged
+  linear_ablation:                        # fit F0, score V; adopt a step only if V pinball improves >= adopt_rel
+    C1: "dow as categorical (one-hot) instead of numeric"
+    C2: "target raw days instead of log1p (applied to the winner so far)"
+    C3: "L1 alpha on the winner so far"
+    alpha_grid: {log1p: [0.0001, 0.001, 0.01], days: [0.001, 0.01, 0.1]}
+    adopt_rel: 0.01
+    tie_rel: 0.001                        # tie set: L_i <= (1 + tie_rel) * L_min (global minimum); inside it -> larger alpha
+  hgb:
+    estimator: "HistGradientBoostingRegressor(loss='quantile')"
+    target: days
+    fixed: {learning_rate: 0.05, min_samples_leaf: 100, l2_regularization: 1.0, early_stopping: false, random_state: 20261015}
+    categorical: [customer_state_reported, seller_state, purchase_dow]
+    grid: {max_depth: [2, 3], max_iter: [100, 200, 400, 800]}
+    selection: "min V integer-day pinball; tie set = every candidate with L_i <= 1.001 * L_min (global minimum, order-independent); inside it -> shallower, then fewer iterations"
+  features_added: none                    # a feature group needs owner confirmation (residual rule below)
+
+calibration:
+  formula: "s_i = y_i - yhat_i (unrounded); k = ceil((n+1) q); d(x) = max(1, ceil(yhat(x) + s_(k)))"
+  interface: "one function for every model (e1_models.shift / e1_models.promise)"
+  scale: "residuals on the day scale; log1p models are back-transformed before residuals"
+  order: "shift first, round last; integer rounding uses ceil(x - 1e-9)"
+  negative_shift: "allowed (no silent clipping at 0); a no-shortening floor would be a separate, named policy"
+  q: "passed as a parameter; 0.90 and 0.9126 get separate shifts, never reused"
+  failures: "k > n or any non-finite prediction -> error, never a zero shift"
+  set: C
+  n: "rows of C actually used (delivered before 2018-04-01)"
+  if_k_gt_n: stop
+  state_rule_prediction: "the state quantile itself"
+  M_runs: "reuse the selected structure and hyperparameters; no new search"
+
+runs:
+  A0: "historical reproduction from stored per-order files; no training"
+  B1: "state rule fitted on F, no shift (R1)"
+  B1c: "B1 + C shift (R2)"
+  B2: "linear registered, O snapshot, fitted on F, + C shift (must reproduce stage-7 Q1/Q2A per order)"
+  B3: "B2 with U snapshot, shift recomputed (R3)"
+  C0_C3: "linear ablation on F0 / V"
+  Cstar: "selected linear setting refitted on F, + C shift"
+  D1_D8: "HGB grid on F0 / V"
+  Dstar: "selected HGB refitted on F, + C shift"
+  M: "Cstar and Dstar at q = 0.9126 (+ state rule), Olist comparison only"
+execution_order:
+  - "1 reproduce history, reconcile data and sample tables (checkpoint 2; no new E output)"
+  - "2 select linear and HGB settings on F0 / V only"
+  - "3 fit all final models on F"
+  - "4 compute all shifts on C"
+  - "5 freeze model list, parameters, preprocessing, shifts and sample lists; write hashes"
+  - "6 compute all E metrics once"
+
+references:                               # two different questions, reported separately, never merged into one pass
+  fair: "B1c: state rule fitted on F + the same C shift (same data, same calibration) -> does the model add value?"
+  replacement: "stage-7 B0 kept by the project: state rule on F + C, no shift, q = 0.90 (stored per-order file) -> is it worth replacing what exists?"
+  wording_example: "better than the fair baseline but not than the retained policy: supports further study, not replacement"
+
+metrics:
+  prediction: "pinball loss at q on integer promised days (primary; state rule comparable); unrounded as secondary for models; by month; groups: customer states with >= 300 E orders; seller history n at snapshot 0 / 1-9 / >= 10"
+  policy: [coverage, mean_promised_days, median_promised_days, mean_overrun_days_when_missed, n_missed]
+  practical_rule: "mean days <= reference - 1.0 AND coverage >= reference - 1.0 pt; applied to EACH reference separately"
+  monthly_reliability: "no month with >= 1,000 orders more than 3.0 pts below target"
+
+hypotheses:
+  H1:
+    comparison: "PRIMARY: R3 vs R0 only. R1 and R2 adjacent comparisons are descriptive and cannot trigger H1"
+    supported_if: "|day gap(R3) - day gap(R0)| >= 0.5 day, or |coverage gap(R3) - coverage gap(R0)| >= 0.5 pt, or the practical-rule verdict changes (gaps = regression policy - state policy)"
+    otherwise: "in the pre-specified stepwise comparison, no change reached the practical thresholds (offsetting factors or other design effects not excluded)"
+    per_step_record: [day gap, coverage gap, change vs previous step, practical-rule verdict]
+    note: "an order-dependent sequence of comparisons, not a unique decomposition of causes"
+    R3_rule: "C and E features both rebuilt with U, and the C shift recomputed"
+  H2:
+    comparison: "Cstar vs B3 (same F, U snapshot, unshifted), integer days, q = 0.90 on E"
+    definitions: "delta = L(Cstar) - L(B3) (absolute; its paired interval is the evidence); g = (L(B3) - L(Cstar)) / L(B3) (relative improvement; the threshold)"
+    outcomes:
+      supported: "g >= 2% and the 95% interval of delta has upper end < 0 -> 'meets the pre-set improvement standard' (NOT 'confidently >= 2%')"
+      point_only: "g >= 2% but the interval upper end >= 0 -> 'point estimate meets the standard; evidence insufficient'"
+      not_supported: "g < 2% -> 'below this project's practical standard'"
+    no_change_selected: "recorded separately when Cstar == C0 (then g = 0 by construction)"
+    example: "1.500 -> 1.475 is an absolute drop of 0.025 but g = 1.67% < 2%: not met"
+    note: "17 week clusters: an interval containing 0 is not evidence of no effect"
+  H3:
+    comparison: "Dstar + C shift vs the fair reference B1c; also reported against the replacement reference"
+    supported_if: "practical_rule passes vs B1c AND monthly_reliability holds"
+    replace_existing_only_if: "practical_rule also passes vs the replacement reference"
+
+residual_diagnostics:
+  where: V
+  groups: [purchase month, predicted-duration quartile, seller history n 0 / 1-9 / >= 10]
+  propose_feature_group_if: "a group with >= 500 V orders differs from overall V coverage by >= 3 pts (proposal only; owner decides)"
+
+bootstrap:
+  unit: "purchase week (Monday start) of E; 17 weeks"
+  scheme_main: "iid weeks with replacement, 17 per replicate"
+  scheme_sensitivity: "moving blocks of 2 weeks, starts uniform on weeks 1..16 (no wrap), 9 blocks concatenated, first 17 weeks kept"
+  replicates: 2000
+  aggregation: "same week draw for every model; pool all orders of the drawn weeks (repeats keep their weight) and recompute per-order metrics (no equal-weight average of week metrics)"
+  interpretation: "uncertainty of FIXED models on this evaluation data only; excludes refitting, tuning and sample-selection uncertainty"
+  interval: "percentile 95%"
+  seed: 20261015
+
+selection_limits: "stepwise search can miss changes that only help together; a limited search, not a proof of the best model"
+
+partitions:
+  disjoint_selection: [F0, V]
+  disjoint_final: [F, C, E]
+  note: "F may contain orders outside F0 + V that became labelled after 2017-12-01; F == F0 + V is not required"
+  manifest: [eligible, labels_known_before_cutoff, used, excluded_with_reason, purchase_range, latest_label, id_sha256]
+  no_silent_drops: "every model must return a finite prediction for every row of a segment; missing features use the pipeline's imputer; otherwise error"
+
+freeze_record:                             # outputs/e1/freeze/FREEZE.json; E scoring refuses to run without it
+  required: [config_sha256, partition_id_sha256, feature_rules, preprocessing_and_selected_hyperparameters,
+             fitted_model_files_sha256, shifts_by_policy_and_q, scoring_code_sha256, thresholds]
+  rule: "no E comparison of ANY run (B series included) before the freeze; debugging may check inputs, shapes and finiteness only"
+
+not_evaluable: "if every candidate of a model family fails to fit, or a prediction, metric or interval needed for a primary comparison cannot be computed, the result is 'not evaluable' (never 'not supported'), and no unregistered substitute model is chosen"
+
+stopping:
+  - "any future-label, partition-overlap or duplicate-order check fails -> stop, no results"
+  - "E opened only after step 5 freeze; each final policy scored once; no tuning after E"
+  - "Cstar == C0 -> H2 not supported, still reported; Dstar is scored on E even if worse than linear on V"
+  - "fit failure -> recorded as a failure; one pre-registered retry with fallback_solver, labelled as such (never a silent swap)"
+  - "new feature group or more complex calibration only after owner confirmation"
+seed: 20261015

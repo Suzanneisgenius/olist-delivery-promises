@@ -1,0 +1,14 @@
+check,expected,actual,pass
+orders_mart rows == orders rows,99441.0,99441.0,True
+orders_mart order_id unique,1.0,1.0,True
+item lines carried into mart,112650.0,112650.0,True
+"price sum conserved (BRL, rounded)",13591643.7,13591643.7,True
+"freight sum conserved (BRL, rounded)",2251909.54,2251909.54,True
+"payment sum conserved (BRL, rounded)",16008872.12,16008872.12,True
+"stage identity: total = approval + handling + transit (max abs gap, h, stage-eligible)",0.0,0.0,True
+SQL item lines (raw CSV),112650.0,112650.0,True
+SQL price sum (raw CSV),13591643.7,13591643.7,True
+SQL outcome buckets: week x bucket cells matching,373.0,373.0,True
+weekly table orders + unassigned == mart rows,99441.0,99441.0,True
+OTD-eligible orders by state (incl. UNKNOWN) == all OTD-eligible,96470.0,96470.0,True
+"independent csv-module re-check of sample (bucket, days late)",20.0,20.0,True

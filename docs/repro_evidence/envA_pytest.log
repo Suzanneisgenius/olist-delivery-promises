@@ -1,0 +1,49 @@
+........................................................................ [ 65%]
+......................................                                   [100%]
+=============================== warnings summary ===============================
+src/olist_analytics/survival_audit.py:55
+tests/test_stage6a.py::test_observation_end_conventions_are_explicit
+  /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:55: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    return b + pd.Timedelta(days=1) if convention == "day_inclusive" else b
+
+tests/test_cohort.py::test_missing_week_breaks_the_run_and_flags_stay_separate
+tests/test_cohort.py::test_min_eligible_uses_a_plus_l_not_all_orders
+tests/test_cohort.py::test_no_late_orders_gives_no_horizon_and_no_window
+  /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/cohort.py:70: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    w["week_end"] = w.estimated_week + pd.Timedelta(days=6)
+
+tests/test_cohort.py::test_missing_week_breaks_the_run_and_flags_stay_separate
+tests/test_cohort.py::test_min_eligible_uses_a_plus_l_not_all_orders
+  /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/cohort.py:74: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    w["mature"] = w.week_end + pd.Timedelta(days=horizon) <= boundary
+
+tests/test_stage6a.py::test_late_iff_delivery_time_reaches_deadline_so_p_late_is_survival_at_deadline
+tests/test_stage6a.py::test_order_bought_after_a_midnight_cut_never_enters_the_risk_set
+tests/test_stage6a.py::test_order_bought_after_a_midnight_cut_never_enters_the_risk_set
+tests/test_stage6a.py::test_delivery_after_the_cut_is_unresolved_at_the_cut_not_an_event
+tests/test_stage6a.py::test_canceled_order_with_a_record_before_the_cut_is_a_conflict_not_open_and_not_an_event
+tests/test_stage6a.py::test_guards_catch_entry_after_cut_and_non_positive_times
+tests/test_stage6a.py::test_unresolved_table_keeps_conflicts_out_of_unresolved
+  /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:61: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    end_of_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+
+tests/test_stage6a.py::test_final_file_categories
+tests/test_stage6a.py::test_order_bought_after_a_midnight_cut_never_enters_the_risk_set
+tests/test_stage6a.py::test_stale_u_is_never_a_censoring_candidate
+tests/test_stage6a.py::test_stale_u_is_never_a_censoring_candidate
+tests/test_stage6a.py::test_stale_u_is_never_a_censoring_candidate
+tests/test_stage6a.py::test_delivery_after_the_cut_is_unresolved_at_the_cut_not_an_event
+  /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:112: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    past_promise = (obs_end - (m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1))).dt.total_seconds() / 86400
+
+tests/test_stage6a.py::test_order_bought_after_a_midnight_cut_never_enters_the_risk_set
+tests/test_stage6a.py::test_order_bought_after_a_midnight_cut_never_enters_the_risk_set
+tests/test_stage6a.py::test_delivery_after_the_cut_is_unresolved_at_the_cut_not_an_event
+tests/test_stage6a.py::test_canceled_order_with_a_record_before_the_cut_is_a_conflict_not_open_and_not_an_event
+tests/test_stage6a.py::test_guards_catch_entry_after_cut_and_non_positive_times
+tests/test_stage6a.py::test_unresolved_table_keeps_conflicts_out_of_unresolved
+  /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/survival_audit.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`).Please use a specific unit instead.
+    end_of_promised_day = m.order_estimated_delivery_date.dt.normalize() + pd.Timedelta(days=1)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+110 passed, 26 warnings in 2.92s

@@ -1,0 +1,10 @@
+stage 1: ok (31s)
+stage 2: ok (9s)
+stage 3: ok (50s)
+independent verification: all match (3 models x 9 quantities + identities)
+independent verification: ok (1s)
+stage 4: ok (1s)
+stage 5 (backtest): ok (11s)
+stage 7 (date policy): ok (156s)
+stage 7 part 3 (monitoring): ok (7s)
+Pages: outputs/weekly_review.html · outputs/data_quality.html · outputs/model_report.html

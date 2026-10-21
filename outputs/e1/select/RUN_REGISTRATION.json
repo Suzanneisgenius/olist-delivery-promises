@@ -1,0 +1,92 @@
+{
+  "stage": "select (execution step 2: F0 -> V)",
+  "registered_at": "2026-10-20T04:17:08.733839+00:00",
+  "config": {
+    "path": "config/date_model_e1.yaml",
+    "sha256": "ae6a4a4664c82124399d9da38354376955e6e783fd720eece608ac801eb20152",
+    "registered_v3_sha256": "ae6a4a4664c82124399d9da38354376955e6e783fd720eece608ac801eb20152",
+    "unchanged_since_registration": true
+  },
+  "code": {
+    "package_fingerprint_sha256": "a794601804910216546c497dc1653b2b7ebdc31f1a7ca00356b3df6f1edb5599",
+    "files_sha256": {
+      "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cohort.py": "e40261c3f9e8f343c09089e6e4cb502ea7e8e9ad9e12544cbb4d1901acd31143",
+      "contract.py": "2800987ca122253f12c80def205f89c5e4b75cdac205243557317635ddff4d64",
+      "dashboard.py": "d45325f11bf6ccd0ce596c52376ab6934d909d5f401ce3bf5742458eddac5f28",
+      "date_policy.py": "2f58e88a29c05be6a08559f62afaa75ca4acc1e1c7ffdd251deedd9fe4688d46",
+      "decompose.py": "78f973303cd936a6f645e77637b47951e0cb9c84bcbb7cfea682079263c18aaa",
+      "e1_data.py": "3167bc61457dceebb10d33f88c34e40b0a271ed89fda3195600c2e094fbd77bb",
+      "e1_freeze.py": "b1916172e95bdf5f27afe270693922e763ad6f474d996d3e5daf3e5b8d68aee7",
+      "e1_models.py": "0ea2895e00fb7b8ae03e3422099aec0a837936b0a36caa1bacb8fcd8ed3f8fdb",
+      "e1_pipeline.py": "77e7cc85015e1985b79e402e954c5fba74035ce673f8ad60bd2920283325709a",
+      "features.py": "96b7229c63e4dcf0f6dbb3fdb946f8e7326664c25c5de51cda943d9dafe264ca",
+      "gate.py": "fdca15d31b7c18648bde8caa668331b73cb90f5578d913c6afeb7a8e1982b666",
+      "io.py": "225a6cd8b3127202bcfaa97241f4de8b1e47f1b5f4585554729a1eaf1841a7df",
+      "mart.py": "41301fc0b595e865672e193f4957250e01fc603b1a1509569c9165aee04e3282",
+      "modeling.py": "496dfa5675ff67fed9481a1282e4db10d8a156a06e64329d0ac774cc0de53d65",
+      "monitoring.py": "63bd6799b265ffd7fce898ed78c70a05768adc2b616ce425219f349886eb57b3",
+      "report.py": "ab3781d4d87807027d9129e5a658da31b6e740bcc7d092c88745f0eaf540910c",
+      "report2.py": "9faadeb4675162599d33e70649d2d2e50e01f3e2f89dd287677598ca09454f56",
+      "report3.py": "e71fc5d890e244162de2068353e7830fc378870196b4f4fddea77d538fa9bc38",
+      "run_all.py": "cdd889c3ccf43f80bd6e78cb291ed8634cc2e3c5d4381757f030cdc93fc977ae",
+      "run_e1.py": "7026269f470ce96f99360b95a5a956f2ebea46bab782400418836dfb2965346b",
+      "run_stage1.py": "57df4e820e65c63e1ca9abd23e25a70ff65837fcced3d9786a3fd1fa42606651",
+      "run_stage2.py": "ee9b9ff4ca0034f741feff76c76d3900c60651e3a97c4ff58f5511f0e2f9c120",
+      "run_stage3.py": "0955cceb61ea7d3c2523cb6ae0dff159071497ead052adde0ad5bc395f57fbca",
+      "run_stage4.py": "7cd6a211c82418c76ee511ed07d75ad85473f3f9eb97c09e2c160cd625129792",
+      "run_stage5.py": "2ce0f33548d9c572883532114a9b0ce5f03cd01fb0525fa70056ca4073d64baa",
+      "run_stage7.py": "3e230b8774745b0a47b8d7ebe5307a4972f893758061d80e30d9d3c6d538c4b7",
+      "run_stage7_monitor.py": "4ba51b02063a9139f7d4e5a0017b3c3c8b8297a5a7f2f710ff4b1edb38ee7b6e",
+      "site.py": "1d152dd8f81b22d843c9fcee6c0c9a8029c9ac606327e71ac860016c4cd37ff7",
+      "survival_audit.py": "87217aac2e0548c6e2ab7356779e82cec7aae4a180d5494cd35f59406d90cacb",
+      "weekly.py": "37655f754f7b6ba3b3dd125be982da260890e55226737de51df27f0a7e06980a"
+    }
+  },
+  "entry_modules": {
+    "e1_data": {
+      "file": "/home/claude/olist063-e1/src/olist_analytics/e1_data.py",
+      "sha256": "3167bc61457dceebb10d33f88c34e40b0a271ed89fda3195600c2e094fbd77bb"
+    },
+    "e1_models": {
+      "file": "/home/claude/olist063-e1/src/olist_analytics/e1_models.py",
+      "sha256": "0ea2895e00fb7b8ae03e3422099aec0a837936b0a36caa1bacb8fcd8ed3f8fdb"
+    },
+    "e1_freeze": {
+      "file": "/home/claude/olist063-e1/src/olist_analytics/e1_freeze.py",
+      "sha256": "b1916172e95bdf5f27afe270693922e763ad6f474d996d3e5daf3e5b8d68aee7"
+    },
+    "e1_pipeline": {
+      "file": "/home/claude/olist063-e1/src/olist_analytics/e1_pipeline.py",
+      "sha256": "77e7cc85015e1985b79e402e954c5fba74035ce673f8ad60bd2920283325709a"
+    },
+    "features": {
+      "file": "/home/claude/olist063-e1/src/olist_analytics/features.py",
+      "sha256": "96b7229c63e4dcf0f6dbb3fdb946f8e7326664c25c5de51cda943d9dafe264ca"
+    },
+    "date_policy": {
+      "file": "/home/claude/olist063-e1/src/olist_analytics/date_policy.py",
+      "sha256": "2f58e88a29c05be6a08559f62afaa75ca4acc1e1c7ffdd251deedd9fe4688d46"
+    },
+    "io": {
+      "file": "/home/claude/olist063-e1/src/olist_analytics/io.py",
+      "sha256": "225a6cd8b3127202bcfaa97241f4de8b1e47f1b5f4585554729a1eaf1841a7df"
+    }
+  },
+  "environment": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  },
+  "data": {
+    "orders_mart_sha256": "3dc5ec78507b23f9990e2ad30c80085d06c233c709f553365d4f368e7e452273",
+    "partition_id_sha256": {
+      "F0": "878110e04927bdc46330685571fb7495071847de443b85fb1370ffad25f08e02",
+      "V": "3874b514719a25c56e33e2703494c3d6cef6a516e45d8f323675113e80921f66",
+      "F": "1342d043d3cccfde9133cccbde395795ab77feacdaf50ec423409a6db164d1be",
+      "C": "33b8c5e770da60bb319e1220d47096544ccd7f02ac75370dddc4fc2d8ade468d",
+      "E": "702ce5bdf7e111fd029e408548dfadb4a8e204e151624ade0393a8c38ceeec3c"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+# Data contract: key, expected cardinality, required fields, and parse types.
+# Zip prefixes, IDs and codes are always read as strings (keeps leading zeros).
+tables:
+  orders:
+    file: olist_orders_dataset.csv
+    key: [order_id]
+    required: [order_id, customer_id, order_status, order_purchase_timestamp, order_estimated_delivery_date]
+    datetimes: [order_purchase_timestamp, order_approved_at, order_delivered_carrier_date,
+                order_delivered_customer_date, order_estimated_delivery_date]
+    allowed: {order_status: [delivered, shipped, canceled, unavailable, invoiced, processing, created, approved]}
+    foreign_keys: {customer_id: customers.customer_id}
+  order_items:
+    file: olist_order_items_dataset.csv
+    key: [order_id, order_item_id]          # NOT order_id + product_id: one product can fill several lines
+    required: [order_id, order_item_id, product_id, seller_id, price, freight_value]
+    datetimes: [shipping_limit_date]
+    numeric: [order_item_id, price, freight_value]
+    foreign_keys: {order_id: orders.order_id, product_id: products.product_id, seller_id: sellers.seller_id}
+  order_payments:
+    file: olist_order_payments_dataset.csv
+    key: [order_id, payment_sequential]
+    required: [order_id, payment_sequential, payment_value]
+    numeric: [payment_sequential, payment_installments, payment_value]
+    foreign_keys: {order_id: orders.order_id}
+    role: "QA only (amount reconciliation); not a core analysis input"
+  order_reviews:
+    file: olist_order_reviews_dataset.csv
+    key: [review_id, order_id]              # review_id alone is NOT unique in the source
+    required: [review_id, order_id, review_score, review_answer_timestamp]
+    datetimes: [review_creation_date, review_answer_timestamp]
+    numeric: [review_score]
+    foreign_keys: {order_id: orders.order_id}
+  customers:
+    file: olist_customers_dataset.csv
+    key: [customer_id]
+    required: [customer_id, customer_unique_id, customer_zip_code_prefix, customer_state]
+    zip: [customer_zip_code_prefix]
+  sellers:
+    file: olist_sellers_dataset.csv
+    key: [seller_id]
+    required: [seller_id, seller_zip_code_prefix, seller_state]
+    zip: [seller_zip_code_prefix]
+  products:
+    file: olist_products_dataset.csv
+    key: [product_id]
+    required: [product_id]
+    numeric: [product_name_lenght, product_description_lenght, product_photos_qty,
+              product_weight_g, product_length_cm, product_height_cm, product_width_cm]
+  geolocation:
+    file: olist_geolocation_dataset.csv
+    key: []                                  # many points per zip prefix by design
+    required: [geolocation_zip_code_prefix, geolocation_lat, geolocation_lng]
+    numeric: [geolocation_lat, geolocation_lng]
+    zip: [geolocation_zip_code_prefix]
+  category_translation:
+    file: product_category_name_translation.csv
+    key: [product_category_name]
+    required: [product_category_name, product_category_name_english]

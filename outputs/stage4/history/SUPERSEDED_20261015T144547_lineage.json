@@ -1,0 +1,17 @@
+> SUPERSEDED — historical copy, not the current release.
+
+{
+  "pages": {
+    "weekly": "626bdf1c0e9ffa341ff9a63e3203519e40291aca5f0edf7c57bbc148acca68c8",
+    "dq": "d603c45db7925d71463805e052b442e61ed90c7ffc817b38af2b4e77f6343c50",
+    "model": "11e334434f23f8de0dd90a3b95fe78c3b37100c507c6ce550f2b2174770d0876"
+  },
+  "inputs": {
+    "stage2_lineage": "a76cd5f978f524a2fe903f3e819d68c584d6ec9d52b21d5a3ec77f6fa70d4eeb",
+    "stage3_lineage": "4825d227a0e5d019c25563ec57371cc6efffef97352fd45a8a3ffa732d64a928",
+    "independent_verification": "6b2dfb2cd4791ddc02bf5de9ef8ba6ed8021962c6d485da6fa2fb5343f8b1b33",
+    "stage1_facts": "1740fb72e61c9f2dccde584b2a883747d5cea927f4270b71b6425e93f2eb1fe8",
+    "mart": "3dc5ec78507b23f9990e2ad30c80085d06c233c709f553365d4f368e7e452273"
+  },
+  "checks_pass": true
+}

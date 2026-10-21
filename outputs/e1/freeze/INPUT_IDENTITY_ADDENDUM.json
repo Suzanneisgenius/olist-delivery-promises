@@ -1,0 +1,22 @@
+{
+  "written_at": "2026-10-20T19:57:09.241052+00:00",
+  "post_hoc": true,
+  "applies_to_freeze_sha256": "3b62af1ac385c2b8c9299e2e757a7e57e9ab2079526c9152878a1f5bfe8328dd",
+  "note": "written AFTER the E1 scoring; the original freeze did not hash input content; FREEZE.json unchanged",
+  "checks_before_writing": {
+    "E labels now == labels in the scored per-order file": true,
+    "stage-7 B0 now == B0 in the scored per-order file": true,
+    "stage-7 Q2A now == Q2A in the scored per-order file": true,
+    "Olist promise now == Olist promise in the scored per-order file": true,
+    "C labels now == labels in the saved C predictions": true
+  },
+  "input_identity": {
+    "rows_F0": "dd0f554bf6477b8189ece644bb24322a70c43e3e28f76467962fc9593032f3e2",
+    "rows_V": "c0889e53c6248607c4557b687dab854881618496770bf07bb0af2baf65096556",
+    "rows_F": "a8591d37c727f8616e3d87e68031573f01380a77ea450070651e360c226cbc4a",
+    "rows_C": "188c24c4e73f377c632b901d7413dbd96d4e425608d761a0e4564963f5bf927f",
+    "rows_E": "135a47868a7a3215a259fe5d507778a68869eb4fc3c830b91e5237a6d86bb551",
+    "seller_history": "bbb3ebfdd41962418244e86cde3e0241e20a5ad47f42aa7d8c4f22a8a9596b8a",
+    "stage7_reference": "fea35d86a0d082b9727df08c8f8b47d7ec64bd141881cd06fb3ff3d3374d4a22"
+  }
+}

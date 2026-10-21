@@ -1,0 +1,102 @@
+{
+  "source_manifest": [
+    {
+      "table": "orders",
+      "file": "olist_orders_dataset.csv",
+      "bytes": 17654914,
+      "records": 99441,
+      "physical_lines": 99441,
+      "columns": 8,
+      "sha256": "8df58ef3d2d7e9944010f7beecd9b75367f5588ec6e3c91cec19ae3345ef9ecf"
+    },
+    {
+      "table": "order_items",
+      "file": "olist_order_items_dataset.csv",
+      "bytes": 15438671,
+      "records": 112650,
+      "physical_lines": 112650,
+      "columns": 7,
+      "sha256": "0bc4d068c4fe38cbb01bd90e8746e3c613fe7b4baef75fab7b0e329701c3e279"
+    },
+    {
+      "table": "order_payments",
+      "file": "olist_order_payments_dataset.csv",
+      "bytes": 5777138,
+      "records": 103886,
+      "physical_lines": 103886,
+      "columns": 5,
+      "sha256": "4f713964f2815dbbaa40b9488268c55aac3627bfce5aa96cf58d1f3616de3cc0"
+    },
+    {
+      "table": "order_reviews",
+      "file": "olist_order_reviews_dataset.csv",
+      "bytes": 14451670,
+      "records": 99224,
+      "physical_lines": 104719,
+      "columns": 7,
+      "sha256": "012b61c7593e34f51fa614efdf802b9c7056ce6aae5307ddb93236e7cfc797d7"
+    },
+    {
+      "table": "customers",
+      "file": "olist_customers_dataset.csv",
+      "bytes": 9033957,
+      "records": 99441,
+      "physical_lines": 99441,
+      "columns": 5,
+      "sha256": "983a422239e1712ded753b3bf9ecf47dc73f144d306029dcfa99e70a226883d2"
+    },
+    {
+      "table": "sellers",
+      "file": "olist_sellers_dataset.csv",
+      "bytes": 174703,
+      "records": 3095,
+      "physical_lines": 3095,
+      "columns": 4,
+      "sha256": "1f643d2b950373b85735e7794b20986f528d7a000432e7c6f9bcbb44d0846a0e"
+    },
+    {
+      "table": "products",
+      "file": "olist_products_dataset.csv",
+      "bytes": 2379446,
+      "records": 32951,
+      "physical_lines": 32951,
+      "columns": 9,
+      "sha256": "3e6569628a17fbc75fd206ee357b59e20364b9afa90f5b6cd5b4d624c58aa9cc"
+    },
+    {
+      "table": "geolocation",
+      "file": "olist_geolocation_dataset.csv",
+      "bytes": 61273883,
+      "records": 1000163,
+      "physical_lines": 1000163,
+      "columns": 5,
+      "sha256": "b514f6fc991b9566aeba02aa5d67e2c3630f034b60a0e05aa0d082a3b66d88d6"
+    },
+    {
+      "table": "category_translation",
+      "file": "product_category_name_translation.csv",
+      "bytes": 2613,
+      "records": 71,
+      "physical_lines": 71,
+      "columns": 2,
+      "sha256": "a81f0d1f27b27e7293f761bc79e3ce8f348ee39c4b3ed3e49bde38f478586278"
+    }
+  ],
+  "mart_sha256": "3dc5ec78507b23f9990e2ad30c80085d06c233c709f553365d4f368e7e452273",
+  "stage1_facts_sha256": "1740fb72e61c9f2dccde584b2a883747d5cea927f4270b71b6425e93f2eb1fe8",
+  "generated_at": "2026-10-15T14:50:29.202468+00:00",
+  "comparison_window": {
+    "status": "OK",
+    "weeks": 74,
+    "first_week": "2017-02-27",
+    "last_week": "2018-07-23",
+    "A": 78176,
+    "L": 5953,
+    "U": 1563,
+    "X": 1037,
+    "otd_rate": 0.9292396201072163,
+    "outcome_coverage": 0.9817602576669934,
+    "confirmed_on_time_share": 0.9122905288708397
+  },
+  "checks_pass": true
+}

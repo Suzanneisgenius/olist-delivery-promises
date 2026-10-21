@@ -1,0 +1,44 @@
+check,expected,recomputed,pass
+V orders,12045,12045,True
+mean promise (ceil of mean) coverage 65.5%,0.6552926525529266,0.6552926525529266,True
+empirical 90% quantile (ceil(n q)-th order statistic),20.0,20.0,True
+9:1 loss at d = 20,15.606143628061437,15.606143628061437,True
+argmin of 9:1 loss over d = 1..60,20,20,True
+"promise_days == max(1, ceil(pred - 1e-9)) for all rows",0,0,True
+C3 alpha=0.0001: point relative improvement,0.0011081974395484744,0.0011081974395484742,True
+C3 alpha=0.0001: 95% interval from saved draws,"[-1.958318727771972e-05, 0.0024493322809806864]",[-1.95831873e-05  2.44933228e-03],True
+D3: point relative improvement,0.020102186112739756,0.020102186112739766,True
+D3: 95% interval from saved draws,"[0.011066079389567012, 0.028524575409499802]",[0.01106608 0.02852458],True
+sim run 1: S1  coverage mean,0.917106,0.917106,True
+sim run 1: S1  coverage p05/p95,"[np.float64(0.90579), np.float64(0.928)]","[np.float64(0.9057900000000001), np.float64(0.928)]",True
+sim run 1: S1  share below 0.90,0.01,0.01,True
+sim run 1: S2  coverage mean,0.9001562,0.9001562,True
+sim run 1: S2  coverage p05/p95,"[np.float64(0.8874), np.float64(0.913)]","[np.float64(0.8874), np.float64(0.913)]",True
+sim run 1: S2  share below 0.90,0.474,0.474,True
+sim run 1: S3a coverage mean,0.8594366,0.8594366,True
+sim run 1: S3a coverage p05/p95,"[np.float64(0.8426), np.float64(0.8752)]","[np.float64(0.8426), np.float64(0.8752)]",True
+sim run 1: S3a share below 0.90,1.0,1.0,True
+sim run 1: S3b coverage mean,0.9594014,0.9594014,True
+sim run 1: S3b coverage p05/p95,"[np.float64(0.95239), np.float64(0.9662)]","[np.float64(0.9523900000000001), np.float64(0.9662)]",True
+sim run 1: S3b share below 0.90,0.0,0.0,True
+sim run 2 paired: S1  coverage mean,0.9165478,0.9165477999999999,True
+sim run 2 paired: S1  coverage p05/p95,"[np.float64(0.905), np.float64(0.9272)]","[np.float64(0.905), np.float64(0.9272)]",True
+sim run 2 paired: S1  share below 0.90,0.004,0.004,True
+sim run 2 paired: S2  coverage mean,0.8997286,0.8997286,True
+sim run 2 paired: S2  coverage p05/p95,"[np.float64(0.8862), np.float64(0.91221)]","[np.float64(0.8862), np.float64(0.91221)]",True
+sim run 2 paired: S2  share below 0.90,0.5,0.5,True
+sim run 2 paired: S2- coverage mean,0.9167674,0.9167673999999999,True
+sim run 2 paired: S2- coverage p05/p95,"[np.float64(0.9048), np.float64(0.9278)]","[np.float64(0.9048), np.float64(0.9278)]",True
+sim run 2 paired: S2- share below 0.90,0.007,0.007,True
+sim run 2 paired: S3a coverage mean,0.8588425999999999,0.8588425999999999,True
+sim run 2 paired: S3a coverage p05/p95,"[np.float64(0.84319), np.float64(0.8738)]","[np.float64(0.84319), np.float64(0.8738)]",True
+sim run 2 paired: S3a share below 0.90,1.0,1.0,True
+sim run 2 paired: S3b coverage mean,0.95912,0.95912,True
+sim run 2 paired: S3b coverage p05/p95,"[np.float64(0.95259), np.float64(0.9658)]","[np.float64(0.95259), np.float64(0.9658)]",True
+sim run 2 paired: S3b share below 0.90,0.0,0.0,True
+sim run 2 paired: coverage == 1 - n_uncovered / n_eval,0,1.1102230246251565e-16,True
+sim run 2 paired: S3a/S3b reuse the S1 shift in every replication,0,0.0,True
+sim run 2 paired: paired diff S2 stab mean and MC SE,"[np.float64(-1.6819199999999996), np.float64(0.0153361374117054)]","[np.float64(-1.6819199999999996), np.float64(0.015336137411705428)]",True
+sim run 2 paired: paired diff S2-size mean and MC SE,"[np.float64(0.02196), np.float64(0.008625784750535)]","[np.float64(0.021960000000000014), np.float64(0.008625784750535015)]",True
+sim run 2 paired: paired diff S3a lat mean and MC SE,"[np.float64(-5.77052), np.float64(0.0135537830377586)]","[np.float64(-5.77052), np.float64(0.013553783037758668)]",True
+sim run 2 paired: paired diff S3b lat mean and MC SE,"[np.float64(4.257219999999999), np.float64(0.011993720061804)]","[np.float64(4.257219999999999), np.float64(0.011993720061804049)]",True

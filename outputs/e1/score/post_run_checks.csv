@@ -1,0 +1,5 @@
+check,expected,actual,pass
+E rows == checkpoint-2 manifest,19950,19950,True
+package code unchanged during scoring,6eac633d5e0838f59fe1ec665007ef6bab321ab52fc049cedfab8b4e51dcaf40,6eac633d5e0838f59fe1ec665007ef6bab321ab52fc049cedfab8b4e51dcaf40,True
+consistency: B2 shifted promises == stored stage-7 Q2A per order,True,True,True
+consistency: C* and B3 predictions identical on E,True,True,True

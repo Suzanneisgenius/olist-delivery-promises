@@ -1,0 +1,314 @@
+Supplement
+
+
+
+
+Supplement, appendix and contribution
+statement
+Everything here supports the main document; none of it changes a registered result. Post-
+hoc and synthetic analyses are labelled as such. Model names: B1c = per-state quantile
+rule with the calibration shift; C* = linear quantile regression; D* = shallow HGB; B0 = the
+project's retained rule (no shift).
+
+
+S1. Model selection on validation data (F0 → V)
+Metric: pinball loss at q = 0.90 on the unshifted integer promise max{1, ⌈ŷ⌉}. A linear step
+was adopted only if it lowered the loss by at least 1%. Candidates within 1.001 × the global
+minimum counted as tied; inside a tie the simpler setting won.
+
+
+  Candidate                               V loss          Change vs     Decision
+                                                        current best
+
+  C0 registered linear (log1p target,    1.28856                   —    start
+  numeric weekday, no penalty)
+
+  C1 weekday as a category               1.29170             −0.24%     rejected
+
+  C2 raw-days target                     1.28932             −0.06%     rejected
+
+  C3 L1 penalty, best of 3 alphas        1.28713              +0.11%    rejected (< 1%)
+  (0.0001)
+
+  D3 HGB, depth 2, 400 iterations        1.26266                   —    selected; tie set D3,
+  (best of 8)                                                           D4, D7
+
+
+Post-hoc intervals on V. A week-block bootstrap on V (14 weeks, 2,000 draws) gives an
+improvement over C0 of 0.11% (−0.002% to 0.245%) for the C3 pick and 2.01% (1.11% to
+2.85%) for D3. No improvement in the first interval reaches the pre-set 1% bar, so the
+original choice stands. Both candidates were picked on this same V, and the intervals
+leave out selection and refitting uncertainty, so D3's figure is optimistic and was only a
+reason to evaluate it.
+
+
+S2. A small simulation of two calibration failures (synthetic data)
+Question: does a calibration shift fail because the delivery distribution changes over time,
+or because at the freeze only the fast, already-delivered orders can be used? Delivery
+days follow log Y = 2.2 + 0.5x + 0.45ε, rounded up. The predictor is the conditional median,
+
+
+
+                                                                                          Page 1 of 6
+Supplement
+
+
+
+
+and the calibration code is the project's. Each of 1,000 replications draws 2,000 calibration
+and 5,000 evaluation orders (seed 20261021). All scenarios share the evaluation sample.
+For the time-change scenarios, the continuous delivery time is rescaled before rounding.
+
+
+  Scenario minus the stable,    Coverage change, pts    Middle 90% of         Promised days
+  complete-label scenario       (mean ± MC s.e.)        replications                change
+
+  Only delivered-by-freeze      −1.68 ± 0.015           −2.48 to −0.94                 −0.99
+  labels (90-day window)
+
+  Random subset of the same     +0.02 ± 0.009           −0.42 to +0.46                 +0.02
+  size (diagnostic)
+
+  Later deliveries 15% slower   −5.77 ± 0.014           −6.50 to −5.08                      0
+
+  Later deliveries 15% faster   +4.26 ± 0.012           +3.66 to +4.90                      0
+
+
+The two mechanisms leave different traces. Selective labels shrink the shift itself, so
+promised days and coverage fall together; a random subset of the same size does not. A
+later change in delivery times leaves the promise unchanged and moves only coverage.
+The "middle 90%" column is the spread of replications, not a confidence interval for the
+mean. A first, unpaired run (seed 20261020) gave the same picture. This explains
+mechanisms; it does not show which one, if either, acted in the Olist data.
+
+
+S3. Post-hoc sensitivity checks (added after the third review)
+All tables below reuse the saved per-order predictions from the frozen models. They
+choose no policy and change no registered verdict. Source:
+scripts/e1_posthoc_review3.py → outputs/e1/posthoc_r3/ (posthoc_r3.json, SHA-256
+5f7c2265…; checksums in MANIFEST.sha256).
+
+S3a. Days needed at equal coverage on E. Each model's shift is swept over E in steps of
+0.01 day; the table reads off the mean promised days at the first step reaching each
+coverage level. The state rule moves in whole-day steps, so it can only reach some levels
+by overshooting them.
+
+
+
+
+                                                                                       Page 2 of 6
+Supplement
+
+
+
+
+  Coverage on E               Linear C*     HGB D*           State rule       HGB − linear
+
+  90.00% (target)                  17.20       16.60             17.99              −0.60
+
+  93.95% (B0's coverage)           19.83           19.12         20.99               −0.71
+
+  96.18% (C* registered)           22.44           21.71         23.99              −0.73
+
+  97.10% (D* registered)           24.57       23.66             25.99               −0.91
+
+
+On C at the registered shifts: D* 91.14% coverage with 24.54 days, C* 91.19% with 24.68,
+B1c 90.30% with 24.49.
+
+S3b. Integer-aware calibration shift. The registered shift is the k-th smallest residual y −
+ŷ, followed by rounding up. For a continuous ŷ this leaves up to one day of slack. Taking
+instead the k-th smallest of y − 1 − ŷ lowers the shift by exactly 1 for a continuous
+predictor and leaves an integer predictor (the state rule) unchanged.
+
+
+  Policy             Shift: registered →                   Coverage on C        Days on E    Coverage on E
+                     integer-aware
+
+  B1c state rule     6.00 → 6.00                           90.30% →             23.99 →      96.49% →
+                                                           90.30%               23.99        96.49%
+
+  B2 earlier         6.02 → 5.02                           91.17% →             22.87 →      96.45% →
+  regression                                               90.00%               21.87        95.87%
+
+  C* linear          6.15 → 5.15                           91.19% →             22.45 →      96.18% →
+                                                           90.00%               21.45        95.51%
+
+  D* HGB             6.46 → 5.46                           91.14% →             23.67 →      97.10% →
+                                                           90.00%               22.67        96.66%
+
+
+With the integer-aware shift, D* would be 1.32 days shorter than B1c at +0.18 points of
+coverage, and C* 2.54 days shorter at −0.97 points. No interval was computed, and this
+formula was not registered; the registered H3 verdict stands. A fair test belongs in a new,
+separately registered study.
+
+S3c. The evaluation window. The project's population keeps orders whose Olist
+estimated delivery week is no later than 2018-07-23. Late in the window, an order enters
+only if Olist promised it a short time.
+
+
+ Purchase month (E) Orders Mean actual days Olist promise, mean Olist promise, max Late vs Olist
+
+ April 2018           6,670                11.47                      24.27                  63     4.59%
+
+ May 2018             6,630                11.36                      23.41                  60     6.67%
+
+
+
+                                                                                                        Page 3 of 6
+Supplement
+
+
+
+
+ Purchase month (E) Orders Mean actual days Olist promise, mean Olist promise, max Late vs Olist
+
+ June 2018            5,565               8.92                27.45               56      1.26%
+
+ July 2018            1,085               6.22                16.33               26      2.95%
+
+
+
+
+  Policy                      April–May          April–May            June–July        June–July
+                               coverage                days            coverage             days
+
+  B0 retained                    92.23%              20.55              97.38%             19.82
+  rule
+
+  B1c state rule                 95.53%               24.15             98.39%             23.67
+
+  C* linear                      95.13%              22.75              98.27%             21.85
+
+  D* HGB                         96.39%               24.01             98.51%             22.99
+
+
+The truncated months explain part of the over-coverage, but April–May alone is still well
+above 90% for every calibrated policy.
+
+S3d. Calibration season. Late rates against Olist's date on C, by purchase month: October
+2017 4.24% (4,414 orders), November 12.49% (7,191; 42% of C), December 7.43% (5,451).
+The C shift was therefore learned mostly in a peak period. This is a candidate cause of
+over-coverage on E and was not tested separately.
+
+
+A. Reproducibility and checks
+
+  Item                            Value
+
+  Pre-registered configuration    config/date_model_e1.yaml v3, SHA-256
+                                  ae6a4a46…20152
+
+  Freeze record                   FREEZE.json, SHA-256 3b62af1a…328dd; 9 runs.
+                                  The final E1 scoring run came after it (E had been
+                                  examined in Stage 7)
+
+  Code at scoring time            combined fingerprint 6eac633d…af40; a full copy
+                                  is kept in snapshots/src_at_e1_scoring
+
+
+
+
+                                                                                            Page 4 of 6
+Supplement
+
+
+
+
+  Item                        Value
+
+  Automated tests             317 pass, including synthetic end-to-end tests
+                              showing that scoring stops before any E output if
+                              the freeze, a model file, the sample, the calibration
+                              shifts or (after the post-hoc hardening) any input
+                              content changed, or if the post-hoc addendum is
+                              malformed or bound to a different freeze. The
+                              defect tests were also run against the earlier code
+                              to show that they failed there
+
+  Independent recomputation   every reported number recomputed from the
+                              saved per-order files with plain NumPy / pandas:
+                              43 / 43 for E results, 43 / 43 for supplementary
+                              results
+
+  Post-hoc hardening          content hashes of all inputs, added after scoring as
+                              a labelled addendum bound to the freeze record's
+                              hash; the original freeze record is unchanged
+
+  Reproduction guide          docs/REPRODUCE_E1.md, recipes A–C; erratum of
+                              2026-10-21 corrects the path used by recipe B (the
+                              historical code must sit at src/)
+
+  Process record              docs/E1_DECISIONS.md logs every change to the
+                              plan with its time, its reason and whether it came
+                              from the author or from a review
+
+  Environment                 Python 3.13.16; numpy 2.5.3, pandas 3.0.5, scikit-
+                              learn 1.9.1, scipy 1.18.1
+
+  Data                        public Olist e-commerce dataset (Kaggle); raw files
+                              and order-level marts are not redistributed
+
+  Not done                    a full rebuild from the raw CSVs by an independent
+                              reviewer; a second evaluation period; a registered
+                              test of the integer-aware shift or of recalibration
+                              that tracks changing conditions
+
+
+
+
+                                                                                      Page 5 of 6
+Supplement
+
+
+
+
+B. Contribution statement (draft — the author must check every
+line)
+
+  Part                               Who                                        Author to
+                                                                                confirm
+
+  Reframing the question from        Author, through the project and            []
+  late-order prediction to           discussions
+  promise setting
+
+  Experiment scope and               Author                                     []
+  constraints (three model
+  families, no tuning on E, staged
+  checkpoints, disclosure rule)
+
+  Pre-registration text, code for    Drafted and implemented with an AI         []
+  selection, freeze and scoring,     assistant (Claude), revised over several
+  tests, simulation, post-hoc        review rounds
+  checks
+
+  Reviews that found design and      External review rounds [author: name the   []
+  code issues (comparison            source]
+  confound, freeze gaps,
+  rounding, evaluation window,
+  wording)
+
+  Libraries                          scikit-learn (QuantileRegressor,           —
+                                     HistGradientBoostingRegressor,
+                                     mean_pinball_loss definition), NumPy,
+                                     pandas, SciPy
+
+  Results I recomputed or re-        [author: list, e.g. the integer-day        []
+  derived myself                     derivation, the V check, one E
+                                     comparison]
+
+
+The lines above should be filled from the actual records, not from memory:
+docs/E1_DECISIONS.md and the review reports and evidence packages kept with it. The
+author should be able to explain, without notes: the integer-day derivation; why the
+calibration shift uses the (n + 1)q-th residual; why rounding after the shift favours an
+integer rule; why C* and B3 are the same model; and why HGB, the sharper model, ended
+up with the longer calibrated promise.
+
+
+
+
+                                                                                           Page 6 of 6
+

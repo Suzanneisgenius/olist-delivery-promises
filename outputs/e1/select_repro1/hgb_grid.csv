@@ -1,0 +1,9 @@
+step,max_depth,max_iter,v_pinball_int,v_pinball_unrounded,status,tie_threshold,in_tie_set,selected,decision
+D1,2,100,1.2725031133250309,1.2613513467775788,ok,1.2639193607305932,False,False,outside tie set (> 1.001 x min)
+D2,2,200,1.2651307596513075,1.2553565128123243,ok,1.2639193607305932,False,False,outside tie set (> 1.001 x min)
+D3,2,400,1.2626567040265668,1.254445193097875,ok,1.2639193607305932,True,True,"selected: in tie set of 3, shallowest then fewest iterations"
+D4,2,800,1.2628061436280613,1.255920406156002,ok,1.2639193607305932,True,False,"in tie set, but deeper or more iterations"
+D5,3,100,1.266168534661685,1.2564370325110743,ok,1.2639193607305932,False,False,outside tie set (> 1.001 x min)
+D6,3,200,1.2645994188459941,1.2565821224320934,ok,1.2639193607305932,False,False,outside tie set (> 1.001 x min)
+D7,3,400,1.2633457866334579,1.2575421142357255,ok,1.2639193607305932,True,False,"in tie set, but deeper or more iterations"
+D8,3,800,1.2690743046907427,1.26428823143456,ok,1.2639193607305932,False,False,outside tie set (> 1.001 x min)

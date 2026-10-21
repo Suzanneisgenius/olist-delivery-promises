@@ -1,0 +1,307 @@
+Integer-valued delivery promises
+
+
+
+
+Integer-valued delivery promises: calibration,
+coverage and temporal shift
+  ​Oct 21, 2026        · ​@geniussuzane
+
+
+1. Summary
+A promised delivery date comes from three steps: a forecast, a calibration that sets its
+level, and a rule that turns it into whole days. In this study the calibration level and the
+rounding rule moved promised days by amounts comparable to the difference between
+forecasting models.
+
+I started this project wanting to predict which Olist orders would arrive late. Along the
+way I realised that "late" compares two things: how long delivery takes, and how generous
+the promised date is. The question became: when does a better forecast actually give a
+better promised date? The data are public Olist e-commerce orders (Brazil, 2017–2018).
+The project's population keeps single-seller orders that were eventually delivered and
+whose Olist estimated delivery week falls on or before 23 July 2018; Section 3 explains
+why that last condition matters. A promise is a whole number of days; an order is covered
+if it arrives in time; the target coverage is 90%.
+
+I compared a per-state quantile rule, a linear quantile regression and a shallow gradient-
+boosted model (HGB) under a protocol written down before any new model was fitted.
+Three findings:
+
+ 1. The comparison design changed the verdict. In the project's earlier comparison,
+    regression promised 2.57 more days than the state rule. With the same training data,
+     the same calibration procedure and the same feature timing, it promised 1.54 fewer
+     days at 0.31 points lower coverage.
+ 2. The frozen HGB and linear policies reached different coverage. On the evaluation
+    period the HGB policy covered 97.1% with 23.67 days and the linear policy 96.2% with
+     22.45 days. This compares two frozen policies at different realised coverage; it does
+     not show which model is better at equal reliability. A post-hoc diagnostic that aligns
+     coverage using the evaluation outcomes puts the HGB curve 0.6–0.9 days below the
+     linear one at the four coverage targets reported, in this sample and for this family of
+     shift policies.
+ 3. The registered policies did not meet the pre-set standard for replacing the existing
+    rule. That is a statement about these policies, not evidence that the models have no
+     decision value: the standard gives no credit for extra coverage, and the outcome
+     depends on the calibration level and on how the bound is rounded to whole days
+     (Section 5, post hoc).
+
+
+                                                                                         Page 1 of 7
+Integer-valued delivery promises
+
+
+
+
+The evaluation orders had already been examined earlier in the project, so this is a pre-
+registered exploratory study, not a blind test. Every analysis added after the scoring run is
+labelled post hoc and changes no registered verdict.
+
+
+2. Loss and decision: why a quantile, not the mean
+If a late day and a spare day cost different amounts, the best promise is a quantile of the
+delivery time, not its mean. Let Y be the delivery time in whole days and d the promise,
+with the loss
+
+L(d, Y) = c_late · (Y − d)₊ + c_slack · (d − Y)₊.
+
+Let R(d) = E[L(d, Y)] and F the distribution function of Y. Moving the promise from d to d +
+1 saves c_late on every order with Y > d and adds c_slack on every order with Y ≤ d.
+Therefore
+
+R(d + 1) − R(d) = (c_late + c_slack) · F(d) − c_late.
+
+This difference never decreases in d, so R is minimised at the smallest whole d with F(d) ≥
+q, where q = c_late / (c_late + c_slack). That is the empirical quantile rule the project uses
+(NumPy's inverted_cdf). The pinball loss at level q is this loss with c_late = q and c_slack =
+1 − q (scikit-learn); a 90% target thus corresponds to a 9 : 1 penalty ratio. The mean
+minimises squared error and the median a 1 : 1 absolute loss; both treat a late day and a
+spare day alike.
+
+A check on validation data. On the 12,045 validation orders I gave every order the same
+promise and computed the 9 : 1 loss for d = 1, …, 60. The minimum is at d = 20, the empirical
+90% quantile: F(19) = 89.6% < 90% ≤ F(20) = 91.4%. Promising the mean (11.43, rounded
+up to 12) would have covered only 65.5% of orders, at a loss of 23.76 per order against
+15.61.
+
+What 9 : 1 does not mean. It follows from choosing q = 0.90; I did not measure it, and it is
+not Olist's real cost ratio. Customer harm may not grow linearly with late days; if one late
+day already does most of the damage, a coverage constraint is closer to the truth than a
+linear cost. Therefore the study reports the trade-off between coverage and promised
+days. It does not claim a profit-optimal date.
+
+
+3. Sample and comparison design
+Sample. The population is defined on Olist's own estimated delivery week: an order enters
+only if that week lies between 27 February 2017 and 23 July 2018, its final outcome is
+delivered (on time or late), and it has a single seller. For the evaluation period E
+(purchases from 1 April 2018) this keeps 19,950 of 32,803 purchases. The week condition
+
+
+
+
+                                                                                        Page 2 of 7
+Integer-valued delivery promises
+
+
+
+
+removes 5,175 of the 6,292 July purchases and every later one, so a late-window order
+enters only if Olist promised it a short time. The evaluation sample is therefore filtered on
+one of the comparators (Supplement S3c).
+
+Matched design. Each calibrated policy used the same training orders, the same label
+cut-off, the same rule for seller-history features and the same calibration procedure. A
+matched procedure is not automatically neutral: rounding the calibrated bound up treats
+a continuous forecast differently from a whole-day rule (Section 5). The uncalibrated
+controls (B1 and the retained rule B0) are kept apart. A label counts only if the order was
+delivered before the decision date.
+
+
+  Segment              Purchases               Orders        Late rate*   Role
+
+  F0 → V               Jan–Jun → Jul–Sep       13,616 /         3.89% /   fit and select
+                       2017                     12,045           3.38%    settings
+
+  F                    Jan–Sep 2017            25,666            3.67%    final fit
+
+  C                    Oct–Dec 2017             17,056           8.74%    calibration shift
+
+  E                    Apr–Jul 2018             19,950           4.26%    final scoring run
+
+
+*Against Olist's own estimated date.
+
+Calibration. Each calibrated policy is shifted by its own number computed on C: the k-th
+smallest of its residuals y − ŷ, with k = ⌈(n + 1) · 0.9⌉ and n = 17,056. The promise is then
+rounded up: max{1, ⌈ŷ + shift⌉}. This has the form of split conformal, but its guarantee
+needs C and E to be exchangeable, and C had a much higher late rate than E (Barber et
+al.). Section 5 shows how this rounding treats continuous and whole-day predictors
+differently.
+
+Stepwise comparison. The earlier comparison (R0) differed in three conditions at once,
+so I changed one condition per step. The pre-set primary comparison is R3 against R0; R1
+and R2 are descriptive.
+
+
+
+
+                                                                                              Page 3 of 7
+Integer-valued delivery promises
+
+
+
+
+outputs/e1/score/h1_steps.csv · E, April–July 2018, 19,950 orders
+
+Under this fixed order, changing the design alone reversed the judgement; the largest
+step is giving the state rule the same calibration shift (+6 days). This is design sensitivity,
+not a causal statement about which method is better. Two references are kept apart: the
+matched reference B1c (registered under the name "fair reference": the state rule on F
+with the same calibration) and the replacement reference B0 (the project's retained rule,
+fitted on F + C without a shift).
+
+
+4. Results
+The E1 models and decision rules were frozen before the final scoring run on E, and each
+policy was scored once in that run. The figure keeps two kinds of evidence apart. Filled
+squares are those frozen policies, calibrated on C only. Dashed lines are diagnostic
+curves: each model's shift is moved using E's own outcomes, which aligns coverage after
+the fact. They describe the trade-off between days and coverage; they are not deployable
+policies and were not used to choose a model.
+
+
+
+
+                                                                                          Page 4 of 7
+Integer-valued delivery promises
+
+
+
+
+outputs/e1/posthoc_m4/diagnostic_curves_E.csv and outputs/e1/score/policy_table.csv · E, 19,950 orders ·
+dashed curves use E's outcomes, are post hoc and choose no policy
+
+The frozen HGB policy covered 97.10% with 23.67 days, the frozen linear policy 96.18%
+with 22.45 days and B1c 96.49% with 23.99 days. Whole-day promises make coverage
+move in steps, so every diagnostic comparison reports the coverage actually reached
+rather than an interpolated match. At 90.02% HGB needs 16.60 days and the linear model
+17.20; at 96.18% they need 21.71 and 22.44, while the state rule's nearest step is 96.49% at
+23.99 days. In this sample and for this family of shift policies the HGB curve is the more
+favourable one; that is not a general ranking of the two models. On C at the registered
+shifts, HGB covered 91.14% with 24.54 days and the linear model 91.19% with 24.68.
+
+The registered verdicts are unchanged. Intervals are week-block bootstrap intervals over
+17 purchase weeks of unequal size with the models held fixed; they leave out refitting and
+selection uncertainty and are approximate. As a stability check (not a new interval),
+removing any one purchase week never changes the sign of a registered difference
+(Supplement S3e).
+
+
+  Question                         Comparison       Registered result                 Verdict
+
+  H1: does the matched             R3 vs R0         gap moved by −4.11 days           met
+  design change the
+  judgement?
+
+
+
+
+                                                                                                     Page 5 of 7
+Integer-valued delivery promises
+
+
+
+
+  Question                         Comparison     Registered result            Verdict
+
+  H2: does a linear change         C* vs B3       V selected no new linear     recorded as "not
+  help?                                           setting, so no final         supported"
+                                                  comparison between
+                                                  different linear models
+                                                  was formed
+
+  H3: does shallow HGB             D* vs B1c      −0.32 days (about −0.55 to   below the 1-day
+  help?                                           −0.17), coverage +0.61 pts   bar
+
+  Replace the retained rule?       C*, D* vs B0   +2.15 and +3.37 days         standard not met
+
+
+At q = 0.9126, a target matching Olist's coverage on C, the linear policy promised 23.42
+days at 96.62% coverage against Olist's 24.44 days at 95.74%. It passes the pre-set rule by
+0.02 days, and a post-hoc interval for the day difference (−3.25 to +0.69) includes zero.
+Section 5 adds a further reason for caution: the evaluation sample is filtered on Olist's
+own estimated date.
+
+
+5. Rounding, sample window and calibration period
+Four features of the design move the registered points. All numbers below are post hoc:
+they reuse the frozen predictions, choose no new policy and change no registered
+verdict.
+
+Rounding to whole days. The registered promise rounds the calibrated bound U = ŷ +
+shift up. Because Y is a whole number, Y ≤ U exactly when Y ≤ ⌊U⌋, so rounding down
+keeps the coverage event of the untruncated bound, and the one-day minimum can only
+enlarge it. Rounding up adds slack only when U is not a whole number, i.e. for continuous
+forecasts. Rounding down would shorten each continuous promise by exactly 1 day on E
+and leave B1c unchanged. Coverage on C would fall from 91.1–91.2% to 90.01%, which still
+meets the rank bound, and HGB would be 1.32 days shorter than B1c at +0.18 points. A
+plain "subtract one day" is not coverage-preserving in general: it can exclude orders that
+sit exactly at a whole-number bound (Supplement S3b). The registered rule is therefore
+conservative rather than wrong, and the registered H3 verdict stands.
+
+Evaluation window. July contributes 1,085 orders, with Olist promises of at most 26 days
+(56–63 in April–June) and a mean actual time of 6.2 days. In April–May alone, coverage is
+95.1% for the linear policy, 96.4% for HGB and 95.5% for B1c; in June–July it is 98.3–98.5%.
+Coverage is higher in the later, more heavily selected months. This is consistent with a
+contribution from the window restriction, but the analysis does not separate it from
+changes over time or in the order mix. The comparison with Olist is also filtered on the
+comparator itself.
+
+
+
+                                                                                           Page 6 of 7
+Integer-valued delivery promises
+
+
+
+
+Calibration period. C runs from October to December 2017. Late rates were 4.2%, 12.5%
+and 7.4% by month, and November holds 42% of C, so a shift learned there may over-
+cover a calmer period. This is a candidate explanation; a high November late rate does not
+by itself show that it caused the over-coverage.
+
+Replacement standard. A policy may lose up to 1 point of coverage but gets no credit for
+extra coverage. At B0's own coverage (93.95%) on E, the diagnostic curves need 19.12 days
+for HGB and 19.83 for the linear model, against 20.31 for B0. The verdict says that the
+registered policies missed the standard, not that the models lack decision value.
+
+These four points do not overturn the registered results. They change how the results
+should be read: each registered difference mixes forecast quality with calibration level,
+rounding and sample window, and this study does not separate those parts.
+
+
+6. Limits and conclusion
+Limits. One evaluation period, already examined earlier in the project and filtered on
+Olist's estimated week; a conditional population (single-seller, eventually delivered
+orders); a small stepwise model search; approximate intervals from 17 week clusters; no
+separate test of seasonality. Promised dates do not change logistics, so nothing here
+shows faster delivery or happier customers.
+
+Conclusion. The pre-registered verdicts stand: the matched design reversed the
+regression-versus-rule judgement, V selected no new linear setting, HGB did not clear the
+1-day bar, and the registered policies did not meet the replacement standard. The
+sensitivity checks narrow what these verdicts mean. The frozen policies reached
+different coverage, rounding up gave continuous forecasts extra slack, and the evaluation
+window was filtered on Olist's own dates. The next step is a small, separately recorded
+methods study: how to turn a continuous calibrated bound into a whole-day promise
+(rounding down and its boundary cases), and a paired simulation that separates rounding,
+temporal shift and selective labels. Online recalibration is left for later, because Olist
+labels arrive late and the first orders to be delivered are not a random subset.
+
+Supplementary material (model selection, the simulation, all post-hoc sensitivity tables),
+the integrity record and a contribution statement: ​Supplement (a separate PDF by email).
+
+
+
+
+                                                                                          Page 7 of 7
+

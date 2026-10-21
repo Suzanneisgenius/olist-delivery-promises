@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/claude/olist063-e1/src/olist_analytics/run_e1.py", line 148, in <module>
+    r = run_select()
+  File "/home/claude/olist063-e1/src/olist_analytics/e1_pipeline.py", line 369, in run_select
+    p = fit_hgb(spec, hgb, Q_MAIN, XF0, yF0, **hgb_pick["setting"]).predict(XV)
+        ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: fit_hgb() got an unexpected keyword argument 'max_depth'
+
+real	1m35.096s
+user	1m35.739s
+sys	0m0.519s

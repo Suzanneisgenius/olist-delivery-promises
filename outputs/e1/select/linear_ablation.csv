@@ -1,0 +1,7 @@
+step,dow_categorical,target,alpha,v_pinball_int,v_pinball_unrounded,solver,fallback_retry,status,adopted,decision,rel_improvement_vs_current_best,compared_with,in_tie_set,alpha_tie_threshold,selected
+C0,False,log1p,0.0,1.2885595682855955,1.274132090650061,highs,False,ok,True,registered starting point,,,,,True
+C1,True,log1p,0.0,1.2916977999169779,1.277836031514629,highs,False,ok,False,rejected: V loss change -0.24% vs C0 (< 1% lower); keep C0,-0.002435457163658907,C0,,,False
+C2,False,days,0.0,1.2893233706932334,1.274078070634458,highs,False,ok,False,rejected: V loss change -0.06% vs C0 (< 1% lower); keep C0,-0.0005927567699909939,C0,,,False
+C3 alpha=0.0001,False,log1p,0.0001,1.2871315898713158,1.2744363732525454,highs,False,ok,False,alpha pick; rejected: V loss change +0.11% vs C0 (< 1% lower); keep C0,0.0011081974395483797,C0,True,1.288418721461187,False
+C3 alpha=0.001,False,log1p,0.001,1.2928767123287668,1.2772820033777568,highs,False,ok,False,not the alpha pick (outside tie set (> 1.001 x min)),,,False,1.288418721461187,False
+C3 alpha=0.01,False,log1p,0.01,1.3702615193026149,1.3537468705071247,highs,False,ok,False,not the alpha pick (outside tie set (> 1.001 x min)),,,False,1.288418721461187,False

@@ -1,0 +1,15 @@
+{
+  "pages": {
+    "weekly": "626bdf1c0e9ffa341ff9a63e3203519e40291aca5f0edf7c57bbc148acca68c8",
+    "dq": "d603c45db7925d71463805e052b442e61ed90c7ffc817b38af2b4e77f6343c50",
+    "model": "de3013aa333e7e104703129e01139fe2e5602d5aaa19aa5c854285f549d4108b"
+  },
+  "inputs": {
+    "stage2_lineage": "951a7c0d3d20a13212bb3a2f049cdd4d3d8ea2c71c01d45e9706b996c74a1fac",
+    "stage3_lineage": "e3daff60ecc1504b25756cdabfbde7375216f42b15339015341136e2b687e28c",
+    "independent_verification": "3ef051b7c9745bcff03e78d228ded54b505846e2bca08b721481bafa07a46ec6",
+    "stage1_facts": "1740fb72e61c9f2dccde584b2a883747d5cea927f4270b71b6425e93f2eb1fe8",
+    "mart": "3dc5ec78507b23f9990e2ad30c80085d06c233c709f553365d4f368e7e452273"
+  },
+  "checks_pass": true
+}

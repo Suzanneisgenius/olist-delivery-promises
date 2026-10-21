@@ -1,0 +1,15 @@
+> SUPERSEDED — historical copy, not the current release.
+
+{
+  "generated_at": "2026-10-14T06:05:53.110675+00:00",
+  "pages_sha256": {
+    "weekly_review.html": "626bdf1c0e9ffa341ff9a63e3203519e40291aca5f0edf7c57bbc148acca68c8",
+    "data_quality.html": "d603c45db7925d71463805e052b442e61ed90c7ffc817b38af2b4e77f6343c50",
+    "model_report.html": "932f4ec7e1442d84569e5ab2c7fba7ef136b63a805e6bf36078b4e4e436b4784"
+  },
+  "stage4_lineage_sha256": "f72cafb8a9f359f446c384aa0e1818e90c05a098f020744fc833b07027c29368",
+  "ui_checks_sha256": "1591b94d48b4bb8fd2cf1c6e7292fd263b130a170eefef28db440830632eb1c3",
+  "checks": 33,
+  "checks_pass": true,
+  "browser": "chromium 141.0.7390.37"
+}

@@ -1,0 +1,10 @@
+stage 1: ok (32s)
+stage 2: ok (8s)
+stage 3: ok (48s)
+independent verification: all match (3 models x 9 quantities + identities)
+independent verification: ok (2s)
+/tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/repro/A/src/olist_analytics/site.py:130: FutureWarning: The default of observed=False is deprecated and will be changed to True in a future version of pandas. Pass observed=False to retain current behavior or observed=True to adopt the future default and silence this warning.
+  for i, (m, d) in enumerate(cal.groupby("model", sort=False)):
+stage 4: ok (1s)
+stage 5 (backtest): ok (12s)
+Pages: outputs/weekly_review.html · outputs/data_quality.html · outputs/model_report.html

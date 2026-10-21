@@ -1,0 +1,5 @@
+# e1_pipeline under test: /home/claude/olist063-e1/src/olist_analytics/e1_pipeline.py sha256 34d2568d938dd2557fdffc36daba717e6aa0db4d082e94c245d5fe9967a8a773
+PASSED tests/test_e1_final.py::test_same_ids_changed_e_labels_stop_before_e
+PASSED tests/test_e1_final.py::test_same_ids_changed_e_feature_stops_before_e
+PASSED tests/test_e1_final.py::test_changed_b0_reference_stops_before_e
+3 passed, 11 deselected in 9.77s

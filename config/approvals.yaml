@@ -1,0 +1,12 @@
+# Owner decisions on record. The pipeline compares what it computes with these;
+# a mismatch means "needs re-approval", never a silent pass.
+stage1:
+  decided_on: "2026-10-12"
+  decided_by: "project owner"
+  comparison_window: {first_week: "2017-02-27", last_week: "2018-07-23", weeks: 74}
+  status: "approved with conditions"
+  conditions:
+    - "retrospective comparison window; keep the censoring note and the 31/45/60-day sensitivity table"
+    - "main KPI name keeps 'delivered orders with valid dates': A/(A+L), shown with U, coverage, X, eligible denominator"
+    - "stage-timing anomalies affect stage analysis only, never OTD eligibility"
+    - "state decomposition follows docs/metric_dictionary.md exactly"

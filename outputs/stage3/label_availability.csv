@@ -1,0 +1,4 @@
+fit,cutoff,rows_in_split,label_known,excluded_label_unknown,late_share_excluded
+tuning fit (train),2018-01-01,42729,40250,2479,0.27753126260588945
+final fit (train+dev),2018-04-01,63113,59299,3814,0.3940744625065548
+model selection (dev),2018-04-01,20384,16577,3807,0.39296033622274756

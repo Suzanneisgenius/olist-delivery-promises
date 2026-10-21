@@ -1,0 +1,83 @@
+> SUPERSEDED — historical copy, not the current release.
+
+{
+  "generated_at": "2026-10-14T14:20:45.385930+00:00",
+  "all_match": true,
+  "compared": {
+    "models": [
+      "baseline",
+      "logistic",
+      "gbm"
+    ],
+    "quantities_per_model": [
+      "n",
+      "late",
+      "average_precision",
+      "roc_auc",
+      "brier",
+      "selected",
+      "true_late_in_selected",
+      "precision_at_top",
+      "recall_at_top"
+    ],
+    "identities": [
+      "precision = hits/selected",
+      "recall = hits/late",
+      "prevalence = late/n"
+    ]
+  },
+  "population": 83063,
+  "original_dev_n": 20384,
+  "selection_n": 16577,
+  "selection_late": 1156,
+  "selection_late_rate": 0.0697351752428063,
+  "unavailable_dev_n": 3807,
+  "unavailable_dev_late": 1496,
+  "test_labels_match_raw": true,
+  "all_raw_hashes_match": true,
+  "blocking_checks_pass": 9,
+  "score_checks": {
+    "baseline": {
+      "n": 19950,
+      "late": 850,
+      "average_precision": 0.042606516290726815,
+      "roc_auc": 0.5,
+      "brier": 0.0411110221549173,
+      "selected": 1986,
+      "true_late_in_selected": 72,
+      "precision_at_top": 0.03625377643504532,
+      "recall_at_top": 0.08470588235294117
+    },
+    "logistic": {
+      "n": 19950,
+      "late": 850,
+      "average_precision": 0.1234582172321187,
+      "roc_auc": 0.7609260240221744,
+      "brier": 0.04013391588582371,
+      "selected": 1986,
+      "true_late_in_selected": 259,
+      "precision_at_top": 0.13041289023162134,
+      "recall_at_top": 0.30470588235294116
+    },
+    "gbm": {
+      "n": 19950,
+      "late": 850,
+      "average_precision": 0.11138647536133153,
+      "roc_auc": 0.7212754850631352,
+      "brier": 0.04065440073758528,
+      "selected": 1986,
+      "true_late_in_selected": 226,
+      "precision_at_top": 0.11379657603222558,
+      "recall_at_top": 0.26588235294117646
+    }
+  },
+  "bound_sha256": {
+    "test_predictions": "9b53b5dd063b1d6dd3b7912276d3b466a297adce02237a4f2eefb483ef809eb8",
+    "test_metrics": "86b3b6a8444e556641005b5885b21038e9a2d1bc84d1240a3ad1690f9e15cbf9",
+    "stage3_checks": "b3b8cd24e407f13fcd65e6c89a2afc3b2ce520c5636c1122ca809606867cafa6",
+    "stage3_lineage": "9298826599df4558caa14cb686695d6ac0d2eadae3e601049cc5398bf0820230",
+    "model_config": "08cbd5cf903dcd007d867aa3921d37d54d8c02ff828c6064838114e729676346",
+    "source_manifest": "36cab99ef97559b29b5476a65908a51256f75781790a904338ab7f051fe6329d",
+    "stage1_facts": "1740fb72e61c9f2dccde584b2a883747d5cea927f4270b71b6425e93f2eb1fe8"
+  }
+}

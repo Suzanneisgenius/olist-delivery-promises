@@ -1,0 +1,34 @@
+# E2a — whole-day promises from a continuous calibrated bound. DRAFT, NOT REGISTERED, NOT RUN.
+# Registration = the author approves this file unchanged (or edits it) and its SHA-256 is logged in
+# docs/E1_DECISIONS.md BEFORE any run with the main seed. Synthetic data only; no Olist data.
+status: draft
+q: 0.90
+rules: [ceil, floor, minus_one]          # max(1, ceil(U)), max(1, floor(U)), max(1, ceil(U - 1)); TOL = 1e-9 toward keeping the event
+reference: continuous_bound              # share with Y <= U, reported beside the three rules
+dgp:                                     # log Y* = a + b x + s e, x ~ U(0, 1), e ~ N(0, 1); Y = max(1, ceil(Y*))
+  a: 2.2
+  b: 0.5
+  s: 0.45
+predictors:
+  continuous: "exp(a + b x)  (conditional median; deliberately not the 90% quantile)"
+  integer: "round(exp(a + b x))  (whole-day forecast, like the state rule)"
+scenarios:
+  S1_same_distribution: {}
+  S2a_later_faster: {eval_scale: 0.85}   # continuous delivery time rescaled BEFORE rounding
+  S2b_later_slower: {eval_scale: 1.15}
+  S3_heavy_ties: {support: [3, 5, 7, 10, 14, 20, 30], rule: "Y = smallest support value >= Y*; Y* > 30 gives 30", predictor_step: 0.5}   # predictor rounded to the nearest 0.5 day
+  S4_selective_labels: {window_days: 90}  # purchase t ~ U(0, W); calibration label usable only if t + Y < W
+sizes: {n_cal: 2000, n_eval: 5000, reps: 2000}
+paired: true                             # within a replication, every rule and predictor sees the same calibration and evaluation draws
+seed: 20261101
+outputs:
+  per_cell: [share_min_binds, coverage_mean, coverage_mc_se, coverage_p05, coverage_p95, share_reps_below_q, days_mean, days_mc_se,
+             cal_coverage_mean, share_reps_cal_below_k_over_n]
+  paired_vs_floor: [d_coverage_mean, d_coverage_mc_se, d_days_mean, d_days_mc_se]
+expectations_not_criteria:               # written before the run; a mismatch is reported, not tuned away
+  - "floor: calibration coverage >= share with Y <= U (equal when the one-day minimum never binds) >= k/n in every replication"
+  - "S1, floor: mean evaluation coverage >= q up to Monte Carlo error (marginal guarantee)"
+  - "minus_one: not coverage-preserving in general; expected below k/n on calibration where the one-day minimum rarely binds (the k-th order always sits on a whole-number bound); it can still cover where the minimum binds; largest loss expected for the integer predictor"
+  - "S3: over-coverage possible for every rule because of ties"
+  - "S2, S4: no rule restores the guarantee; rounding and distribution change act separately"
+out_of_scope: [online or adaptive recalibration, new forecasting models, new Olist cohort, any reuse of E as a test]

@@ -1,0 +1,38 @@
+# Stage 1 assumptions. Every item here is a decision, not a fact about Olist.
+# Items marked "unverified" cannot be confirmed from the data itself.
+
+data:
+  raw_dir: data/raw
+  source: "Olist Brazilian E-Commerce Public Dataset (Kaggle: olistbr/brazilian-ecommerce)"
+  source_url: "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce"
+  data_license: "CC BY-NC-SA 4.0 (per Kaggle page; record again at download)"
+  obtained_via: "archive.zip uploaded by project owner on 2026-10-11; Kaggle version number not recorded in the archive"
+
+time:
+  timezone: "America/Sao_Paulo"      # unverified: timestamps are naive; assumed Brazilian local time
+  week_start: "Monday"
+  cohort_field: order_estimated_delivery_date
+
+on_time_rule:
+  compare_at: "calendar day"        # delivered date <= estimated date (estimated dates carry 00:00:00)
+  name: "On-time rate among delivered orders with valid dates"
+  numerator: A
+  denominator: "A + L"
+
+geo:
+  brazil_bbox: {lat_min: -34.0, lat_max: 5.5, lng_min: -74.5, lng_max: -28.5}
+  dispersion_flag_km: 50            # prefix whose points sit far from their median is flagged, not dropped
+  distance_type: "haversine between zip-prefix median points (proxy, not route distance)"
+
+quality:
+  payment_mismatch_tolerance_brl: 1.00
+  multi_review_policy_primary: "first review answered on/after delivery"
+  multi_review_policy_sensitivity: "latest review answered"
+
+cohort_proposal:                    # proposal only; frozen after owner review
+  min_eligible_orders_per_week: 200 # A + L (the KPI denominator), not all orders
+  min_outcome_coverage: 0.95        # U in 2017 is long-unconfirmed (cause not identifiable from static data); 98% fragments 2017
+  activity_drop_ratio: 0.10         # inferred observation boundary = last day with deliveries >= 10% of the median active-day volume
+  lateness_quantile: 0.95           # horizon = ceil(p95 of OBSERVED days late); itself affected by censoring
+  sensitivity_horizons_days: [45, 60]
+  sensitivity_coverage: [0.98]

@@ -1,0 +1,603 @@
+--- checkpoint2/src/olist_analytics/e1_freeze.py
++++ fixed/src/olist_analytics/e1_freeze.py
+@@ -1,17 +1,56 @@
+ """E1 freeze record. Evaluation-set (E) scoring refuses to run unless a complete, untampered record exists.
+ 
+-The record lists everything that must not change after it is written: config hash, partition id hashes, feature
+-rules, preprocessing and selected hyperparameters, fitted model files (with SHA-256), shifts by policy and q,
+-the scoring code hash and the thresholds. `require_frozen` re-hashes every listed file before E is opened.
++Checks in `require_frozen` (every one raises FreezeError; nothing is skipped when a field is empty):
++  1. record bytes == the SHA-256 written next to it at freeze time (FREEZE.sha256) and reported to the owner;
++  2. schema: every required key present, non-empty, right type, nested fields complete;
++  3. config file == record == latest registered hash;
++  4. partition id hashes RECOMPUTED from the actual scoring inputs == record (all five segments);
++  5. run list == the registered E runs: each is either 'frozen' (model file, feature rule, settings, and a shift
++     for every shifted run, with n and k consistent with q) or 'failed' with a reason (-> 'not evaluable');
++  6. every model file re-hashed;
++  7. shifts optionally RECOMPUTED from the frozen models on C (callback) and compared;
++  8. code fingerprint over every .py of the package (the whole feature and prediction path) + library versions;
++  9. thresholds == the constants the verdict functions use.
+ """
+ from __future__ import annotations
+ 
+ import hashlib
+ import json
++import math
++import re
+ from pathlib import Path
++from typing import Callable, Iterable
+ 
+ REQUIRED = ["config_sha256", "partition_id_sha256", "feature_rules", "preprocessing_and_selected_hyperparameters",
+             "fitted_model_files_sha256", "shifts_by_policy_and_q", "scoring_code_sha256", "thresholds"]
++EXTRA_REQUIRED = ["runs", "code_files_sha256", "environment"]   # implementation detail; config lists the minimum
++SEGMENTS = ("F0", "V", "F", "C", "E")
++CAL_N = 17056
++
++# Registered runs scored on E (config `runs`, `quantiles`, `seller_snapshot`). key = "<run>@<q>".
++REGISTERED_RUNS = {
++    "B1@0.90":       {"model": "state",  "snapshot": "none", "q": 0.90,   "shifted": False},
++    "B1c@0.90":      {"model": "state",  "snapshot": "none", "q": 0.90,   "shifted": True},
++    "B2@0.90":       {"model": "linear", "snapshot": "O",    "q": 0.90,   "shifted": True},
++    "B3@0.90":       {"model": "linear", "snapshot": "U",    "q": 0.90,   "shifted": True},
++    "Cstar@0.90":    {"model": "linear", "snapshot": "U",    "q": 0.90,   "shifted": True},
++    "Dstar@0.90":    {"model": "hgb",    "snapshot": "U",    "q": 0.90,   "shifted": True},
++    "B1c@0.9126":    {"model": "state",  "snapshot": "none", "q": 0.9126, "shifted": True},
++    "Cstar@0.9126":  {"model": "linear", "snapshot": "U",    "q": 0.9126, "shifted": True},
++    "Dstar@0.9126":  {"model": "hgb",    "snapshot": "U",    "q": 0.9126, "shifted": True},
++}
++
++# Pre-registered thresholds (config `metrics`, `hypotheses`, `bootstrap`); the verdict functions use these values.
++THRESHOLDS = {
++    "practical_rule": {"days": 1.0, "coverage_pts": 1.0},
++    "monthly_reliability": {"min_orders": 1000, "max_pts_below_target": 3.0},
++    "H1": {"days": 0.5, "coverage_pts": 0.5},
++    "H2": {"relative_improvement": 0.02, "interval": "percentile 95%, upper end < 0"},
++    "ties": {"tie_rel": 0.001, "adopt_rel": 0.01},
++    "bootstrap": {"replicates": 2000, "seed": 20261015, "unit": "purchase week"},
++}
++
++_HEX = re.compile(r"^[0-9a-f]{64}$")
+ 
+ 
+ class FreezeError(RuntimeError):
+@@ -22,38 +61,175 @@
+     return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+ 
+ 
+-def write_freeze(path: Path, record: dict) -> Path:
+-    missing = [k for k in REQUIRED if k not in record or record[k] in (None, {}, [], "")]
++def id_sha256(order_ids: Iterable) -> str:
++    """Same definition as e1_data.id_sha256: SHA-256 of the sorted ids, one per line."""
++    return hashlib.sha256("\n".join(sorted(map(str, order_ids))).encode()).hexdigest()
++
++
++# ------------------------------------------------------------------ code fingerprint
++def package_files(pkg_dir: Path) -> list[Path]:
++    return sorted(Path(pkg_dir).glob("*.py"))
++
++
++def code_fingerprint(pkg_dir: Path) -> tuple[str, dict]:
++    """(combined SHA-256, {file name: SHA-256}) over every module of the package, so a change anywhere on the
++    feature / prediction path (features.py, date_policy.py, e1_*.py, io.py, ...) is caught."""
++    files = {f.name: file_sha(f) for f in package_files(pkg_dir)}
++    if not files:
++        raise FreezeError(f"no python files under {pkg_dir}")
++    combined = hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest()
++    return combined, files
++
++
++def environment() -> dict:
++    import numpy, pandas, scipy, sklearn
++    return {"numpy": numpy.__version__, "pandas": pandas.__version__, "scipy": scipy.__version__,
++            "scikit-learn": sklearn.__version__}
++
++
++def scoring_code_sha(files: list[Path]) -> str:            # kept for the existing caller; prefer code_fingerprint
++    return hashlib.sha256(b"".join(Path(f).read_bytes() for f in files)).hexdigest()
++
++
++# ------------------------------------------------------------------ schema
++def _hex(v, what):
++    if not isinstance(v, str) or not _HEX.match(v):
++        raise FreezeError(f"{what}: not a SHA-256 hex string")
++
++
++def _nonempty_dict(rec, key):
++    v = rec.get(key)
++    if not isinstance(v, dict) or not v:
++        raise FreezeError(f"freeze record: '{key}' must be a non-empty object")
++    return v
++
++
++def validate_record(rec: dict) -> None:
++    """Structure only (no files): raises on any missing, empty, mistyped or incomplete field."""
++    if not isinstance(rec, dict):
++        raise FreezeError("freeze record is not an object")
++    missing = [k for k in REQUIRED + EXTRA_REQUIRED if k not in rec or rec[k] in (None, {}, [], "")]
+     if missing:
+-        raise FreezeError(f"freeze record incomplete: {missing}")
++        raise FreezeError(f"freeze record incomplete or empty: {missing}")
++    _hex(rec["config_sha256"], "config_sha256")
++    _hex(rec["scoring_code_sha256"], "scoring_code_sha256")
++
++    parts = _nonempty_dict(rec, "partition_id_sha256")
++    if set(parts) != set(SEGMENTS):
++        raise FreezeError(f"partition_id_sha256 must list exactly {SEGMENTS}, got {sorted(parts)}")
++    for s, h in parts.items():
++        _hex(h, f"partition_id_sha256[{s}]")
++
++    runs = _nonempty_dict(rec, "runs")
++    if set(runs) != set(REGISTERED_RUNS):
++        raise FreezeError(f"runs must be exactly the registered E runs; missing {sorted(set(REGISTERED_RUNS) - set(runs))}, "
++                          f"unregistered {sorted(set(runs) - set(REGISTERED_RUNS))}")
++    feats = _nonempty_dict(rec, "feature_rules")
++    prep = _nonempty_dict(rec, "preprocessing_and_selected_hyperparameters")
++    models = _nonempty_dict(rec, "fitted_model_files_sha256")
++    shifts = _nonempty_dict(rec, "shifts_by_policy_and_q")
++    for key, reg in REGISTERED_RUNS.items():
++        st = runs[key]
++        status = st.get("status") if isinstance(st, dict) else None
++        if status == "failed":
++            if not str(st.get("reason", "")).strip():
++                raise FreezeError(f"run {key}: 'failed' needs a reason")
++            continue
++        if status != "frozen":
++            raise FreezeError(f"run {key}: status must be 'frozen' or 'failed', got {status!r}")
++        fr = feats.get(key)
++        if not isinstance(fr, dict) or fr.get("snapshot") != reg["snapshot"]:
++            raise FreezeError(f"run {key}: feature rule must state snapshot = {reg['snapshot']!r}")
++        if reg["model"] != "state" and not fr.get("features"):
++            raise FreezeError(f"run {key}: feature list missing")
++        pp = prep.get(key)
++        if not isinstance(pp, dict) or not pp or pp.get("model") != reg["model"] or pp.get("q") != reg["q"]:
++            raise FreezeError(f"run {key}: preprocessing/hyperparameters missing or model/q mismatch")
++        mf = models.get(key)
++        if not isinstance(mf, dict) or not mf.get("path"):
++            raise FreezeError(f"run {key}: model file missing")
++        _hex(mf.get("sha256"), f"run {key} model sha256")
++        if reg["shifted"]:
++            sh = shifts.get(key)
++            if not isinstance(sh, dict):
++                raise FreezeError(f"run {key}: shift missing")
++            n, k, s = sh.get("n"), sh.get("k"), sh.get("shift_days")
++            if n != CAL_N:
++                raise FreezeError(f"run {key}: calibration n = {n}, expected {CAL_N}")
++            if k != math.ceil((n + 1) * reg["q"]):
++                raise FreezeError(f"run {key}: k = {k} is not ceil((n+1)q) for q = {reg['q']}")
++            if not isinstance(s, (int, float)) or isinstance(s, bool) or not math.isfinite(s):
++                raise FreezeError(f"run {key}: shift_days must be a finite number")
++        elif key in shifts:
++            raise FreezeError(f"run {key} is registered without a shift but the record has one")
++    if rec["thresholds"] != THRESHOLDS:
++        raise FreezeError("thresholds differ from the pre-registered values")
++    files = _nonempty_dict(rec, "code_files_sha256")
++    for name, h in files.items():
++        _hex(h, f"code_files_sha256[{name}]")
++
++
++# ------------------------------------------------------------------ write / verify
++def write_freeze(path: Path, record: dict) -> str:
++    """Validate, write once, and write the record's own SHA-256 to FREEZE.sha256. Returns that hash."""
++    validate_record(record)
+     path = Path(path)
+     if path.exists():
+         raise FreezeError(f"{path} already exists: a freeze is written once")
+     path.parent.mkdir(parents=True, exist_ok=True)
+     path.write_text(json.dumps(record, indent=2, sort_keys=True))
+-    return path
++    sha = file_sha(path)
++    (path.parent / "FREEZE.sha256").write_text(f"{sha}  {path.name}\n")
++    return sha
+ 
+ 
+-def require_frozen(path: Path, root: Path, config_path: Path, scoring_files: list[Path]) -> dict:
+-    """Verify the record against the files on disk; raise FreezeError on any gap or change."""
++def require_frozen(path: Path, root: Path, config_path: Path, *, registered_config_sha: str,
++                   partition_ids: dict, pkg_dir: Path,
++                   recompute_shift: Callable[[str], float] | None = None, tol: float = 1e-9) -> dict:
++    """Verify the record against the files and inputs actually used for E scoring; raise FreezeError on any gap."""
+     path = Path(path)
+     if not path.exists():
+         raise FreezeError("no freeze record: E may not be scored before the freeze (execution step 5)")
++    sha_file = path.parent / "FREEZE.sha256"
++    if not sha_file.exists():
++        raise FreezeError("FREEZE.sha256 missing: the record cannot be checked")
++    if file_sha(path) != sha_file.read_text().split()[0]:
++        raise FreezeError("freeze record changed after it was written (hash mismatch)")
+     rec = json.loads(path.read_text())
+-    missing = [k for k in REQUIRED if k not in rec]
+-    if missing:
+-        raise FreezeError(f"freeze record incomplete: {missing}")
+-    if rec["config_sha256"] != file_sha(config_path):
+-        raise FreezeError("config changed after the freeze")
+-    for rel, sha in rec["fitted_model_files_sha256"].items():
+-        f = Path(root) / rel
+-        if not f.exists() or file_sha(f) != sha:
+-            raise FreezeError(f"model file missing or changed after the freeze: {rel}")
+-    code = hashlib.sha256(b"".join(Path(f).read_bytes() for f in scoring_files)).hexdigest()
+-    if rec["scoring_code_sha256"] != code:
+-        raise FreezeError("scoring code changed after the freeze")
++    validate_record(rec)
++
++    actual_cfg = file_sha(config_path)
++    if not (rec["config_sha256"] == actual_cfg == registered_config_sha):
++        raise FreezeError("config differs between the record, the file and the latest registration")
++
++    if set(partition_ids) != set(SEGMENTS):
++        raise FreezeError(f"scoring inputs must provide ids for {SEGMENTS}")
++    for s in SEGMENTS:
++        if id_sha256(partition_ids[s]) != rec["partition_id_sha256"][s]:
++            raise FreezeError(f"partition {s}: ids used now differ from the frozen sample list")
++
++    for key, st in rec["runs"].items():
++        if st["status"] != "frozen":
++            continue
++        mf = rec["fitted_model_files_sha256"][key]
++        f = Path(root) / mf["path"]
++        if not f.exists() or file_sha(f) != mf["sha256"]:
++            raise FreezeError(f"run {key}: model file missing or changed after the freeze")
++        if recompute_shift is not None and REGISTERED_RUNS[key]["shifted"]:
++            s_now = recompute_shift(key)
++            if not math.isfinite(s_now) or abs(s_now - rec["shifts_by_policy_and_q"][key]["shift_days"]) > tol:
++                raise FreezeError(f"run {key}: shift recomputed on C ({s_now}) differs from the record")
++
++    combined, files = code_fingerprint(pkg_dir)
++    if rec["scoring_code_sha256"] != combined or rec["code_files_sha256"] != files:
++        changed = sorted(n for n in set(files) | set(rec["code_files_sha256"])
++                         if files.get(n) != rec["code_files_sha256"].get(n))
++        raise FreezeError(f"package code changed after the freeze: {changed}")
++    if rec["environment"] != environment():
++        raise FreezeError("library versions differ from the freeze")
+     return rec
+ 
+ 
+-def scoring_code_sha(files: list[Path]) -> str:
+-    return hashlib.sha256(b"".join(Path(f).read_bytes() for f in files)).hexdigest()
++def not_evaluable_runs(rec: dict) -> list[str]:
++    """Runs recorded as failed: reported as 'not evaluable', never as 'not supported', never substituted."""
++    return sorted(k for k, v in rec["runs"].items() if v["status"] == "failed")
+--- checkpoint2/src/olist_analytics/e1_models.py
++++ fixed/src/olist_analytics/e1_models.py
+@@ -15,22 +15,54 @@
+ from sklearn.preprocessing import FunctionTransformer, OneHotEncoder, OrdinalEncoder, StandardScaler
+ 
+ from .date_policy import apply_state_policy, conformal_shift, state_quantile_policy, to_promise
++from .e1_freeze import THRESHOLDS
++
++
++# ------------------------------------------------------------------ input checks (stop, never drop rows)
++class InputError(ValueError):
++    pass
++
++
++def check_q(q) -> float:
++    if isinstance(q, bool) or not isinstance(q, (int, float, np.floating)) or not (0 < float(q) < 1):
++        raise InputError(f"q must be a number with 0 < q < 1, got {q!r}")
++    return float(q)
++
++
++def check_pair(y, pred, what: str) -> tuple[np.ndarray, np.ndarray]:
++    """Labels and predictions: 1-D, same length, non-empty, all finite. Raises; never drops or repairs rows."""
++    try:
++        a, b = np.asarray(y, float), np.asarray(pred, float)
++    except (TypeError, ValueError) as e:
++        raise InputError(f"{what}: not numeric ({e})") from e
++    if a.ndim != 1 or b.ndim != 1:
++        raise InputError(f"{what}: labels and predictions must be 1-D (got {a.ndim}-D and {b.ndim}-D)")
++    if len(a) == 0:
++        raise InputError(f"{what}: empty input")
++    if len(a) != len(b):
++        raise InputError(f"{what}: {len(a)} labels but {len(b)} predictions")
++    for name, v in (("labels", a), ("predictions", b)):
++        bad = ~np.isfinite(v)
++        if bad.any():
++            raise InputError(f"{what}: {int(bad.sum())} non-finite {name}")
++    return a, b
+ 
+ 
+ # ------------------------------------------------------------------ metrics
+ def pinball(y, pred, q: float) -> float:
+     """Mean pinball (quantile) loss in days: q*u if u >= 0 else (q-1)*u, u = y - pred."""
+-    u = np.asarray(y, float) - np.asarray(pred, float)
+-    return float(np.mean(np.maximum(q * u, (q - 1) * u)))
++    return float(np.mean(pinball_per_order(y, pred, q)))
+ 
+ 
+ def pinball_per_order(y, pred, q: float) -> np.ndarray:
+-    u = np.asarray(y, float) - np.asarray(pred, float)
++    q = check_q(q)
++    a, b = check_pair(y, pred, "pinball")
++    u = a - b
+     return np.maximum(q * u, (q - 1) * u)
+ 
+ 
+ def policy_score(y, promised) -> dict:
+-    y, d = np.asarray(y), np.asarray(promised)
++    y, d = check_pair(y, promised, "policy score")
+     miss = y > d
+     return {"orders": int(len(y)), "coverage": float((~miss).mean()), "mean_promised_days": float(d.mean()),
+             "median_promised_days": float(np.median(d)), "n_missed": int(miss.sum()),
+@@ -56,8 +88,8 @@
+ def shift(cal_y, cal_pred_unrounded, q: float) -> float:
+     """Delta = s_(k), s_i = y_i - yhat_i (day scale, unrounded), k = ceil((n+1) q). May be negative.
+     Raises when k > n (no finite shift exists) or on non-finite input; never falls back to 0."""
+-    y = np.asarray(cal_y, float)
+-    pred = checked(cal_pred_unrounded, len(y), "calibration prediction")
++    q = check_q(q)
++    y, pred = check_pair(cal_y, cal_pred_unrounded, "calibration")
+     s = conformal_shift(y, pred, q)
+     if not np.isfinite(s):
+         raise PredictionError(f"no finite shift: k = ceil((n+1)q) > n for n = {len(y)}, q = {q}")
+@@ -67,6 +99,10 @@
+ def promise(pred_unrounded, s: float = 0.0) -> np.ndarray:
+     """d(x) = max(1, ceil(yhat(x) + s)), with ceil(x - 1e-9) so float noise cannot add a day."""
+     p = np.asarray(pred_unrounded, float)
++    if p.ndim != 1 or len(p) == 0:
++        raise InputError("promise: predictions must be a non-empty 1-D array")
++    if isinstance(s, bool) or not np.isfinite(s):
++        raise InputError(f"promise: shift must be finite, got {s!r}")
+     return to_promise(checked(p, len(p)) + s)
+ 
+ 
+@@ -167,6 +203,10 @@
+                      stat=np.mean) -> dict[str, np.ndarray]:
+     """Same week draws for every series; each replicate pools ALL orders of the drawn weeks (a week drawn twice
+     counts twice) and recomputes the per-order statistic. Returns {name: replicate values}."""
++    weeks = np.asarray(weeks)
++    for k, v in per_order.items():
++        if np.shape(v) != weeks.shape or not np.isfinite(np.asarray(v, float)).all():
++            raise InputError(f"bootstrap: series {k!r} must be finite with one value per order")
+     order_lists = [np.flatnonzero(weeks == w) for w in range(weeks.max() + 1)]
+     out = {k: np.empty(len(draws)) for k in per_order}
+     for r, d in enumerate(draws):
+@@ -180,7 +220,7 @@
+ NOT_EVALUABLE = "not evaluable"
+ 
+ 
+-def select_with_ties(losses: dict, prefer, tie_rel: float = 0.001):
++def select_with_ties(losses: dict, prefer, tie_rel: float = THRESHOLDS["ties"]["tie_rel"]):
+     """Pick from {candidate: V loss}. Failed candidates carry None/NaN and are skipped. The tie set is every
+     candidate with L_i <= (1 + tie_rel) * L_min (global minimum, so the result does not depend on iteration order);
+     `prefer` is a sort key applied inside the tie set (smaller = preferred). Returns (choice, tie_set) or
+@@ -193,7 +233,8 @@
+     return tie[0], tie
+ 
+ 
+-def h1_verdict(r0: dict, r3: dict, day_thr: float = 0.5, pt_thr: float = 0.5) -> dict:
++def h1_verdict(r0: dict, r3: dict, day_thr: float = THRESHOLDS["H1"]["days"],
++               pt_thr: float = THRESHOLDS["H1"]["coverage_pts"]) -> dict:
+     """Primary H1 judgment uses R0 and R3 only. Each dict: day_gap (regression - state, days),
+     cov_gap (regression - state, coverage share), keep (practical-rule verdict). R1/R2 are descriptive."""
+     vals = [r0.get("day_gap"), r0.get("cov_gap"), r3.get("day_gap"), r3.get("cov_gap")]
+@@ -207,7 +248,7 @@
+ 
+ 
+ def h2_outcome(loss_b3: float, loss_cstar: float, delta_ci_upper: float, cstar_is_c0: bool,
+-               g_thr: float = 0.02) -> dict:
++               g_thr: float = THRESHOLDS["H2"]["relative_improvement"]) -> dict:
+     """g = (L_B3 - L_C*) / L_B3 (relative improvement); delta = L_C* - L_B3 (absolute, its interval decides
+     the evidence). 'No change selected' is recorded separately from the three outcomes."""
+     if any(v is None or not np.isfinite(v) for v in (loss_b3, loss_cstar, delta_ci_upper)) or loss_b3 <= 0:
+--- checkpoint2/tests/test_e1.py
++++ fixed/tests/test_e1.py
+@@ -1,5 +1,8 @@
+ """E1 checkpoint-2 tests: future labels, training-only preprocessing, partitions, rounding, calibration with q,
+ per-order/summary reconciliation, HGB settings, week bootstrap, registration gate. Synthetic data only (fast)."""
++import copy
++import json
++
+ import numpy as np
+ import pandas as pd
+ import pytest
+@@ -228,25 +231,199 @@
+ 
+ 
+ # ------------------------------------------------------------------ freeze guard
++from olist_analytics import e1_freeze as Z  # noqa: E402
++
++IDS = {s: [f"{s}-{i}" for i in range(5)] for s in Z.SEGMENTS}
++
++
++def freeze_fixture(tmp_path):
++    """A complete synthetic record: config file, a model file per frozen run, a tiny package directory."""
++    cfgf = tmp_path / "cfg.yaml"; cfgf.write_text("a: 1\n")
++    pkg = tmp_path / "pkg"; pkg.mkdir(exist_ok=True)
++    (pkg / "features.py").write_text("x = 1\n"); (pkg / "e1_models.py").write_text("y = 2\n")
++    (tmp_path / "models").mkdir(exist_ok=True)
++    rec = {k: {} for k in Z.REQUIRED + Z.EXTRA_REQUIRED}
++    for key, reg in Z.REGISTERED_RUNS.items():
++        f = tmp_path / "models" / f"{key}.bin"; f.write_bytes(key.encode())
++        rec["runs"][key] = {"status": "frozen"}
++        rec["feature_rules"][key] = {"snapshot": reg["snapshot"], "features": [] if reg["model"] == "state" else ["distance_km"]}
++        rec["preprocessing_and_selected_hyperparameters"][key] = {"model": reg["model"], "q": reg["q"]}
++        rec["fitted_model_files_sha256"][key] = {"path": f"models/{key}.bin", "sha256": Z.file_sha(f)}
++        if reg["shifted"]:
++            rec["shifts_by_policy_and_q"][key] = {"n": Z.CAL_N, "k": int(np.ceil((Z.CAL_N + 1) * reg["q"])), "shift_days": 6.0}
++    combined, files = Z.code_fingerprint(pkg)
++    rec.update(config_sha256=Z.file_sha(cfgf), partition_id_sha256={s: Z.id_sha256(v) for s, v in IDS.items()},
++               scoring_code_sha256=combined, code_files_sha256=files, thresholds=copy.deepcopy(Z.THRESHOLDS),
++               environment=Z.environment())
++    return rec, cfgf, pkg
++
++
++def verify(tmp_path, rec_path, cfgf, pkg, ids=IDS, **kw):
++    return Z.require_frozen(rec_path, tmp_path, cfgf, registered_config_sha=Z.file_sha(cfgf), partition_ids=ids,
++                            pkg_dir=pkg, **kw)
++
++
+ def test_e_scoring_refuses_without_a_complete_untampered_freeze(tmp_path):
+-    from olist_analytics import e1_freeze as Z
+-    cfgf, model, code = tmp_path / "cfg.yaml", tmp_path / "m.pkl", tmp_path / "score.py"
+-    cfgf.write_text("a: 1\n"); model.write_bytes(b"model"); code.write_text("x = 1\n")
++    rec, cfgf, pkg = freeze_fixture(tmp_path)
+     rec_path = tmp_path / "freeze" / "FREEZE.json"
+     with pytest.raises(Z.FreezeError):
+-        Z.require_frozen(rec_path, tmp_path, cfgf, [code])              # no record yet
++        verify(tmp_path, rec_path, cfgf, pkg)                                # no record yet
+     with pytest.raises(Z.FreezeError):
+-        Z.write_freeze(rec_path, {"config_sha256": "x"})                # incomplete record
+-    rec = {k: {"x": 1} for k in Z.REQUIRED}
+-    rec.update(config_sha256=Z.file_sha(cfgf), fitted_model_files_sha256={"m.pkl": Z.file_sha(model)},
+-               scoring_code_sha256=Z.scoring_code_sha([code]))
++        Z.write_freeze(rec_path, {"config_sha256": "x"})                     # incomplete record
+     Z.write_freeze(rec_path, rec)
+-    assert Z.require_frozen(rec_path, tmp_path, cfgf, [code])["config_sha256"] == Z.file_sha(cfgf)
++    assert verify(tmp_path, rec_path, cfgf, pkg)["config_sha256"] == Z.file_sha(cfgf)
+     with pytest.raises(Z.FreezeError):
+-        Z.write_freeze(rec_path, rec)                                   # written once
+-    model.write_bytes(b"retrained")
++        Z.write_freeze(rec_path, rec)                                        # written once
++    (tmp_path / "models" / "Cstar@0.90.bin").write_bytes(b"retrained")
++    with pytest.raises(Z.FreezeError, match="model file"):
++        verify(tmp_path, rec_path, cfgf, pkg)                                # model changed after the freeze
++
++
++def _tamper(rec, path_keys, value):
++    d = rec
++    for k in path_keys[:-1]:
++        d = d[k]
++    d[path_keys[-1]] = value
++
++
++@pytest.mark.parametrize("path_keys,value", [
++    (["partition_id_sha256", "E"], "0" * 64),                                # another partition hash
++    (["shifts_by_policy_and_q", "Cstar@0.90", "shift_days"], 1000.0),        # 1000-day shift
++    (["feature_rules"], {}),                                                 # empty feature rules
++    (["thresholds"], {}),                                                    # empty thresholds
++    (["fitted_model_files_sha256"], {}),                                     # empty model list (loop would skip)
++])
++def test_edited_freeze_record_is_refused(tmp_path, path_keys, value):
++    """The reviewer's negative cases: each edit made AFTER writing the record must stop E scoring."""
++    rec, cfgf, pkg = freeze_fixture(tmp_path)
++    rec_path = tmp_path / "freeze" / "FREEZE.json"
++    Z.write_freeze(rec_path, rec)
++    edited = json.loads(rec_path.read_text())
++    _tamper(edited, path_keys, value)
++    rec_path.write_text(json.dumps(edited, indent=2, sort_keys=True))
++    with pytest.raises(Z.FreezeError, match="hash mismatch"):
++        verify(tmp_path, rec_path, cfgf, pkg)
++    # even if the hash file is rewritten too, the content checks still refuse it
++    (rec_path.parent / "FREEZE.sha256").write_text(Z.file_sha(rec_path) + "  FREEZE.json\n")
++    with pytest.raises(Z.FreezeError):
++        verify(tmp_path, rec_path, cfgf, pkg, recompute_shift=lambda key: 6.0)
++
++
++@pytest.mark.parametrize("path_keys,value", [
++    # (a well-formed but different partition hash or shift is caught at verification, see the test above)
++    (["feature_rules"], {}), (["thresholds"], {}), (["fitted_model_files_sha256"], {}),
++    (["partition_id_sha256"], {"E": "0" * 64}), (["shifts_by_policy_and_q", "Cstar@0.90", "k"], 100), (["shifts_by_policy_and_q", "Dstar@0.90", "n"], 17063),
++    (["shifts_by_policy_and_q", "B2@0.90", "shift_days"], float("nan")),
++    (["feature_rules", "B2@0.90", "snapshot"], "U"), (["preprocessing_and_selected_hyperparameters", "Dstar@0.90", "q"], 0.9126),
++    (["runs", "B3@0.90", "status"], "skipped"), (["thresholds", "H2", "relative_improvement"], 0.01),
++    (["code_files_sha256"], {}), (["config_sha256"], "abc"),
++])
++def test_invalid_records_cannot_be_written(tmp_path, path_keys, value):
++    rec, _, _ = freeze_fixture(tmp_path)
++    _tamper(rec, path_keys, value)
+     with pytest.raises(Z.FreezeError):
+-        Z.require_frozen(rec_path, tmp_path, cfgf, [code])              # model changed after the freeze
++        Z.write_freeze(tmp_path / "freeze" / "FREEZE.json", rec)
++
++
++def test_missing_run_needs_an_explicit_failed_status(tmp_path):
++    rec, cfgf, pkg = freeze_fixture(tmp_path)
++    del rec["runs"]["Dstar@0.9126"]
++    with pytest.raises(Z.FreezeError, match="missing"):
++        Z.write_freeze(tmp_path / "f1" / "FREEZE.json", rec)                 # silently omitted -> refused
++    rec, cfgf, pkg = freeze_fixture(tmp_path)
++    rec["runs"]["Dstar@0.9126"] = {"status": "failed", "reason": ""}
++    with pytest.raises(Z.FreezeError, match="reason"):
++        Z.write_freeze(tmp_path / "f2" / "FREEZE.json", rec)
++    rec["runs"]["Dstar@0.9126"] = {"status": "failed", "reason": "all HGB candidates failed to fit"}
++    p = tmp_path / "f3" / "FREEZE.json"
++    Z.write_freeze(p, rec)
++    assert Z.not_evaluable_runs(verify(tmp_path, p, cfgf, pkg)) == ["Dstar@0.9126"]
++    rec["runs"]["Extra@0.90"] = {"status": "frozen"}
++    with pytest.raises(Z.FreezeError, match="unregistered"):
++        Z.write_freeze(tmp_path / "f4" / "FREEZE.json", rec)
++
++
++def test_scoring_inputs_are_rehashed_not_read_from_the_record(tmp_path):
++    rec, cfgf, pkg = freeze_fixture(tmp_path)
++    p = tmp_path / "freeze" / "FREEZE.json"
++    Z.write_freeze(p, rec)
++    other = dict(IDS, E=IDS["E"][:-1] + ["new-order"])
++    with pytest.raises(Z.FreezeError, match="partition E"):
++        verify(tmp_path, p, cfgf, pkg, ids=other)
++    with pytest.raises(Z.FreezeError, match="shift recomputed"):
++        verify(tmp_path, p, cfgf, pkg, recompute_shift=lambda key: 6.0 if key != "B3@0.90" else 6.5)
++    assert verify(tmp_path, p, cfgf, pkg, recompute_shift=lambda key: 6.0)
++    with pytest.raises(Z.FreezeError, match="latest registration"):
++        Z.require_frozen(p, tmp_path, cfgf, registered_config_sha="0" * 64, partition_ids=IDS, pkg_dir=pkg)
++
++
++def test_dependency_code_change_is_caught(tmp_path):
++    rec, cfgf, pkg = freeze_fixture(tmp_path)
++    p = tmp_path / "freeze" / "FREEZE.json"
++    Z.write_freeze(p, rec)
++    (pkg / "features.py").write_text("x = 2\n")                               # not a scoring file, but on the feature path
++    with pytest.raises(Z.FreezeError, match="features.py"):
++        verify(tmp_path, p, cfgf, pkg)
++
++
++def test_registered_runs_and_thresholds_match_the_config():
++    names = {k.split("@")[0] for k in Z.REGISTERED_RUNS}
++    assert names <= set(CFG["runs"]) | {"B1c"}
++    assert {r["q"] for r in Z.REGISTERED_RUNS.values()} == set(CFG["quantiles"].values())
++    assert CFG["models"]["linear_ablation"]["tie_rel"] == Z.THRESHOLDS["ties"]["tie_rel"]
++    assert CFG["models"]["linear_ablation"]["adopt_rel"] == Z.THRESHOLDS["ties"]["adopt_rel"]
++    assert CFG["bootstrap"]["replicates"] == Z.THRESHOLDS["bootstrap"]["replicates"]
++    assert CFG["bootstrap"]["seed"] == Z.THRESHOLDS["bootstrap"]["seed"]
++    assert "reference - 1.0" in CFG["metrics"]["practical_rule"] and "1.0 pt" in CFG["metrics"]["practical_rule"]
++    assert "1,000 orders" in CFG["metrics"]["monthly_reliability"] and "3.0 pts" in CFG["metrics"]["monthly_reliability"]
++    assert ">= 0.5 day" in CFG["hypotheses"]["H1"]["supported_if"] and ">= 0.5 pt" in CFG["hypotheses"]["H1"]["supported_if"]
++    assert "g >= 2%" in CFG["hypotheses"]["H2"]["outcomes"]["supported"]
++    assert Z.id_sha256(["b", "a"]) == D.id_sha256(["a", "b"])
++    import inspect
++    assert inspect.signature(M.h1_verdict).parameters["day_thr"].default == Z.THRESHOLDS["H1"]["days"]
++    assert inspect.signature(M.h2_outcome).parameters["g_thr"].default == Z.THRESHOLDS["H2"]["relative_improvement"]
++
++
++# ------------------------------------------------------------------ invalid inputs stop, never become results
++@pytest.mark.parametrize("bad", [np.nan, np.inf, -np.inf])
++def test_calibration_refuses_non_finite_labels(bad):
++    y = np.arange(100, dtype=float); y[3] = bad                          # sits in the tail the k-th value never reaches
++    with pytest.raises(M.InputError, match="labels"):
++        M.shift(y, np.zeros(100), 0.90)
++
++
++@pytest.mark.parametrize("fn", [lambda y, p: M.policy_score(y, p), lambda y, p: M.pinball(y, p, 0.9),
++                                lambda y, p: M.pinball_per_order(y, p, 0.9), lambda y, p: M.shift(y, p, 0.5)])
++@pytest.mark.parametrize("y,p", [([np.nan, 2.0], [1.0, 2.0]), ([np.inf, 2.0], [1.0, 2.0]), ([1.0, 2.0], [np.nan, 2.0]),
++                                 ([1.0, 2.0, 3.0], [1.0, 2.0]), ([], []), ([[1.0, 2.0]], [[1.0, 2.0]])])
++def test_scoring_and_calibration_refuse_invalid_inputs(fn, y, p):
++    with pytest.raises(M.InputError):
++        fn(y, p)
++
++
++def test_nan_label_is_not_counted_as_covered():
++    with pytest.raises(M.InputError):                                    # previously coverage = 100%
++        M.policy_score([np.nan, 2], [1, 2])
++
++
++@pytest.mark.parametrize("q", [0, 1, -0.1, 1.5, np.nan, True, "0.9"])
++def test_q_must_be_strictly_between_0_and_1(q):
++    with pytest.raises(M.InputError):
++        M.shift(np.arange(100.0), np.zeros(100), q)
++    with pytest.raises(M.InputError):
++        M.pinball([1.0], [1.0], q)
++
++
++def test_promise_and_bootstrap_refuse_invalid_inputs():
++    with pytest.raises(M.InputError):
++        M.promise(np.array([]))
++    with pytest.raises(M.InputError):
++        M.promise(np.array([1.0, 2.0]), float("nan"))
++    weeks = np.array([0, 0, 1])
++    with pytest.raises(M.InputError):
++        M.bootstrap_pooled({"a": np.array([1.0, np.nan, 2.0])}, weeks, np.array([[0, 1]]))
++    with pytest.raises(M.InputError):
++        M.bootstrap_pooled({"a": np.array([1.0, 2.0])}, weeks, np.array([[0, 1]]))
+ 
+ 
+ def test_partition_manifest_has_one_line_per_segment_with_id_hash():

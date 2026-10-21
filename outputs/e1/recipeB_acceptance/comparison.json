@@ -1,0 +1,95 @@
+{
+ "byte_identical": 22,
+ "differing": [
+  [
+   "select/RUN_REGISTRATION.json",
+   "bytes differ"
+  ],
+  [
+   "select/RUN_REGISTRATION_attempt1_aborted.json",
+   "missing in rerun"
+  ],
+  [
+   "select/post_run_checks.csv",
+   "bytes differ"
+  ],
+  [
+   "select/pre_run_checks_attempt1_aborted.csv",
+   "missing in rerun"
+  ],
+  [
+   "select/pytest.log",
+   "missing in rerun"
+  ],
+  [
+   "select/pytest_junit.xml",
+   "missing in rerun"
+  ],
+  [
+   "select/run.log",
+   "missing in rerun"
+  ],
+  [
+   "select/run_attempt1_aborted.log",
+   "missing in rerun"
+  ],
+  [
+   "select/selection.json",
+   "bytes differ"
+  ],
+  [
+   "final/FIT_SUMMARY.json",
+   "bytes differ"
+  ],
+  [
+   "final/RUN_REGISTRATION.json",
+   "bytes differ"
+  ],
+  [
+   "final/c_predictions_per_order.csv.gz",
+   "bytes differ"
+  ],
+  [
+   "score/RUN_REGISTRATION.json",
+   "bytes differ"
+  ],
+  [
+   "score/bootstrap_draws.csv.gz",
+   "bytes differ"
+  ],
+  [
+   "score/e_promises_per_order.csv.gz",
+   "bytes differ"
+  ],
+  [
+   "score/results.json",
+   "bytes differ"
+  ]
+ ],
+ "freeze_shifts_equal": true,
+ "freeze_partition_ids_equal": true,
+ "freeze_model_file_hashes_equal": {
+  "B1@0.90": true,
+  "B1c@0.90": true,
+  "B1c@0.9126": true,
+  "B2@0.90": true,
+  "B3@0.90": true,
+  "Cstar@0.90": true,
+  "Cstar@0.9126": true,
+  "Dstar@0.90": true,
+  "Dstar@0.9126": true
+ },
+ "freeze_scoring_code_equal": true,
+ "e_per_order_equal": true,
+ "raw_csv_match_manifest": {
+  "olist_orders_dataset.csv": true,
+  "olist_order_items_dataset.csv": true,
+  "olist_order_payments_dataset.csv": true,
+  "olist_order_reviews_dataset.csv": true,
+  "olist_customers_dataset.csv": true,
+  "olist_sellers_dataset.csv": true,
+  "olist_products_dataset.csv": true,
+  "olist_geolocation_dataset.csv": true,
+  "product_category_name_translation.csv": true
+ }
+}

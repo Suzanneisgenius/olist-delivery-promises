@@ -1,0 +1,161 @@
+Why a quantile sets the promised date, and where the calibration
+guarantee stops
+This note answers two questions. First, why the promised date is a quantile of delivery time
+rather than its mean. Second, what “the coverage is met” means after calibration. I separate
+three quantities that are easy to confuse: a proportion on the calibration set, a probability under
+exchangeability, and a proportion observed in the evaluation period. The results used here are
+standard: the quantile as the minimiser of an asymmetric linear loss, and the rank argument
+behind split conformal calibration. I state and prove them in the form this project uses and then
+apply them; none of them is new.
+
+1. Why an asymmetric loss leads to a quantile
+Let the delivery time be an integer Y ≥ 1 with E[Y ] < ∞, and the promise an integer d ≥ 1. A
+promise that is too short makes the order late; one that is too long leaves the customer waiting. I
+describe both costs with a linear loss,
+
+                   L(d, Y ) = clate (Y − d)+ + cslack (d − Y )+ ,    clate , cslack > 0.
+
+This is a simplifying assumption: cost grows linearly in days. Let R(d) = E[L(d, Y )], F (d) =
+P (Y ≤ d) and q = clate /(clate + cslack ).
+
+Proposition 1. d∗ = min{d ≥ 1 : F (d) ≥ q} minimises R(d). If F (d∗ ) = q, then d∗ + 1 is also
+optimal.
+
+Proof. Compare a promise of d days with one of d + 1. Order by order,
+                                                 
+                                                 −c , Y > d,
+                                                     late
+                       L(d + 1, Y ) − L(d, Y ) =
+                                                 +cslack , Y ≤ d.
+
+Taking expectations,
+                                                     (         )                   (         )
+       ∆(d) := R(d + 1) − R(d) = cslack F (d) − clate 1 − F (d) = (clate + cslack ) F (d) − q .
+
+F is non-decreasing, so ∆ is non-decreasing. For d < d∗ , F (d) < q, so ∆(d) < 0; for d ≥ d∗ ,
+∆(d) ≥ 0. Thus R strictly decreases up to d∗ and does not decrease afterwards, so d∗ is a
+minimiser. Since F (0) = 0 < q, d∗ ≥ 1. If F (d∗ ) = q, then ∆(d∗ ) = 0, that is, R(d∗ + 1) = R(d∗ ).
+                                                                                                  QED
+
+For a single order with information X = x at checkout, replace F by F (d | x) = P (Y ≤ d | X = x);
+the optimal promise is then the conditional q-quantile. With clate = q and cslack = 1 − q, L is the
+quantile (pinball) loss.
+This loss gives the quantile target its decision meaning, but it is not every model’s fitting objective.
+In the project the linear model fits a quantile regression on the log(1+Y ) scale and transforms back
+to days; HGB fits on days directly; model selection and evaluation are on the day scale. Quantiles
+are preserved under monotone transformations, so both scales aim at the same conditional quantile.
+In a finite sample, however, the two fitting objectives differ.
+The mean minimises squared loss, which treats a late day and a spare day as equally costly.
+The mean does not generally minimise the asymmetric loss defined here; for some distributions it
+
+
+                                                    1
+may happen to coincide with the optimal quantile. Choosing q = 0.90 is the same as assuming
+clate /cslack = 9: one late day costs as much as nine spare days. This is a target I chose, not a cost
+ratio estimated from the Olist data.
+
+2. Calibration: three different “coverages”
+A model’s f (x) is only an estimate, so using it directly need not reach the target. A separate
+calibration set corrects it. Let f be fitted already, without the calibration set. On n calibration
+orders compute
+
+            ri = Yi − f (Xi ),     k = ⌈(n + 1)q⌉ ≤ n,          s = r(k) ,   U (x) = f (x) + s,
+
+where r(k) is the k-th smallest residual. Note that Yi ≤ U (Xi ) ⇐⇒ ri ≤ s.
+First quantity: the proportion on the calibration set, at least k/n.
+
+                                      1∑
+                                                  n
+                                                           k
+Proposition 2. For any data, ĉcal :=    1{Yi ≤ U (Xi )} ≥ .
+                                      n                    n
+                                                 i=1
+
+Proof. By definition, at least k residuals are at most r(k) = s (more if there are ties). The claim
+follows from Yi ≤ U (Xi ) ⇐⇒ ri ≤ s.
+                                                                                                   QED
+
+This inequality uses no probability assumption, and it holds even if delivery conditions later change.
+It is a necessary consequence of the specified calibration rule. Satisfying it alone neither verifies the
+implementation nor establishes coverage on future orders: a shift wrongly set to 1,000 days would
+satisfy it too. A more direct implementation check is to recompute the k-th residual independently
+and compare it with the frozen shift.
+Second quantity: the probability that a new order is covered, at least k/(n + 1).
+
+Proposition 3. If (X1 , Y1 ), . . . , (Xn , Yn ), (Xn+1 , Yn+1 ) are exchangeable, then
+                                  (                )             k
+                                 P Yn+1 ≤ U (Xn+1 ) ≥               ≥ q.
+                                                                n+1
+
+Proof. Since f is fixed, r1 , . . . , rn+1 are exchangeable too. Break ties at random and rank the
+n + 1 residuals; let ρ be the rank of the new residual rn+1 . By exchangeability ρ is uniform
+on {1, . . . , n + 1}, so P (ρ ≤ k) = k/(n + 1). If ρ ≤ k, at most k − 1 of the first n residuals
+rank before rn+1 ; hence the k-th smallest of them is at least rn+1 , that is, rn+1 ≤ s. Thus
+P (rn+1 ≤ s) ≥ k/(n + 1). Finally, k ≥ (n + 1)q.
+                                                                                                   QED
+
+The denominator is n + 1 because the new order is itself one of the n + 1 exchangeable draws. The
+probability averages over which calibration set was drawn and which new order arrives. It does
+not guarantee the target in every month or state, nor after one particular calibration set has been
+observed. Random tie-breaking is used only in the proof; the algorithm is unchanged.
+Third quantity: the proportion observed in the evaluation period.
+With m evaluation orders,
+                                                 1 ∑
+                                                       m
+                                     ĉeval :=       1{Yj ≤ U (Xj )}.
+                                                 m
+                                                      j=1
+
+
+                                                            2
+This is an observed proportion, not a probability. If every evaluation order is exchangeable with
+the calibration orders, Proposition 3 gives E[ĉeval ] ≥ k/(n + 1); even then, a finite m adds sampling
+variation, so a single value can fall below or above it. If exchangeability fails, it describes only
+these evaluation orders.
+
+ Quantity                     What it shows                        What it does not show
+ ĉcal ≥ k/n (Prop. 2)        A necessary consequence of the       That the implementation is
+                              specified rule                       correct; that future orders will
+                                                                   reach the target
+ P (Yn+1 ≤ U ) ≥ k/(n + 1)    Under exchangeability, coverage of   The target in every calibration set,
+ (Prop. 3)                    at least q, averaged over the        state or month. Exchangeability
+                              calibration set and the new order    between C and E has not been
+                                                                   established, so the guarantee is not
+                                                                   asserted for the evaluation period
+ ĉeval                       Empirical performance of the         Reliability on all orders or in
+                              frozen policy on these evaluation    future operations
+                              orders
+
+
+A simple example shows that the first and third quantities can come apart completely. The model
+always predicts 10 days, and every calibration order arrives in 10 days, so s = 0 and ĉcal = 100%.
+If future orders all take 15 days, ĉeval = 0. Conversely, if they all take 5 days, ĉeval = 100%, but
+every order is promised 5 days too many. Proposition 2 holds in both cases; the exchangeability
+behind Proposition 3 does not, so its guarantee does not carry over (Barber et al.).
+
+3. Whole-day promises
+A promise must be a whole number of days. Since Y is an integer, Y ≤ U ⇐⇒ Y ≤ ⌊U ⌋. Thus
+rounding down covers exactly the orders that U covers; a minimum of one day can only enlarge
+that set. The registered rule is max{1, ⌈U ⌉}. It covers every order that U covers, so the lower
+bounds of Propositions 2 and 3 hold for it as well. Rounding U up to ⌈U ⌉ adds less than one day.
+The minimum-one-day constraint is a separate adjustment and can only increase coverage.
+
+4. Back to Olist
+The calibration set has n = 17,056 orders and k = 15,352, so k/n ≈ 90.01% and k/(n+1) ≈ 90.00%.
+For the linear model the three quantities are:
+
+  • on the calibration set, the registered rounded-up promise covers 91.19%, not below k/n,
+    consistent with Proposition 2; recomputing the k-th residual independently gives the frozen
+    shift (6.1479 days);
+  • the guarantee under exchangeability is at least k/(n + 1), but whether C (October–December
+    2017) and the evaluation period E (April–July 2018) are exchangeable is itself the question;
+  • in the evaluation period, the observed coverage on 19,950 orders is 96.18%.
+
+The over-coverage on E suggests that the relation between the calibration and evaluation periods
+deserves a closer look. It is compatible with changes in delivery times, with the sample selection,
+and with changes in the order mix. This note runs no formal test of exchangeability and cannot
+separate these contributions. Therefore I treat it as a diagnostic signal, not as confirmation of any
+single cause. All conclusions apply only to single-seller orders that were eventually delivered.
+
+                                                   3
+

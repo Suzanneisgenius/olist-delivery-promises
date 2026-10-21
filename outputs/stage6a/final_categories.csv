@@ -1,0 +1,49 @@
+observation_end,stale_threshold_days,category,orders,in_window
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",EVENT,96470,84129
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",RECENT_U_CANDIDATE,123,0
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",U_STALE_MISSING_OUTCOME,1606,1557
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",DELIVERED_TIME_MISSING,8,6
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",CANCELED_OR_UNAVAILABLE,1234,1037
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",PURCHASED_AT_OR_AFTER_OBSERVATION_END,0,0
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",NO_VALID_ESTIMATE,0,0
+day_inclusive (primary),"31 (stage-1 horizon, p95 of days late)",UNCLASSIFIED,0,0
+day_inclusive (primary),60 (stage-1 stale-U rule),EVENT,96470,84129
+day_inclusive (primary),60 (stage-1 stale-U rule),RECENT_U_CANDIDATE,177,40
+day_inclusive (primary),60 (stage-1 stale-U rule),U_STALE_MISSING_OUTCOME,1552,1517
+day_inclusive (primary),60 (stage-1 stale-U rule),DELIVERED_TIME_MISSING,8,6
+day_inclusive (primary),60 (stage-1 stale-U rule),CANCELED_OR_UNAVAILABLE,1234,1037
+day_inclusive (primary),60 (stage-1 stale-U rule),PURCHASED_AT_OR_AFTER_OBSERVATION_END,0,0
+day_inclusive (primary),60 (stage-1 stale-U rule),NO_VALID_ESTIMATE,0,0
+day_inclusive (primary),60 (stage-1 stale-U rule),UNCLASSIFIED,0,0
+day_inclusive (primary),72 (p99 of days late),EVENT,96470,84129
+day_inclusive (primary),72 (p99 of days late),RECENT_U_CANDIDATE,193,56
+day_inclusive (primary),72 (p99 of days late),U_STALE_MISSING_OUTCOME,1536,1501
+day_inclusive (primary),72 (p99 of days late),DELIVERED_TIME_MISSING,8,6
+day_inclusive (primary),72 (p99 of days late),CANCELED_OR_UNAVAILABLE,1234,1037
+day_inclusive (primary),72 (p99 of days late),PURCHASED_AT_OR_AFTER_OBSERVATION_END,0,0
+day_inclusive (primary),72 (p99 of days late),NO_VALID_ESTIMATE,0,0
+day_inclusive (primary),72 (p99 of days late),UNCLASSIFIED,0,0
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",EVENT,96470,84129
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",RECENT_U_CANDIDATE,127,0
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",U_STALE_MISSING_OUTCOME,1601,1557
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",DELIVERED_TIME_MISSING,8,6
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",CANCELED_OR_UNAVAILABLE,1234,1037
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",PURCHASED_AT_OR_AFTER_OBSERVATION_END,1,0
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",NO_VALID_ESTIMATE,0,0
+midnight (sensitivity),"31 (stage-1 horizon, p95 of days late)",UNCLASSIFIED,0,0
+midnight (sensitivity),60 (stage-1 stale-U rule),EVENT,96470,84129
+midnight (sensitivity),60 (stage-1 stale-U rule),RECENT_U_CANDIDATE,178,42
+midnight (sensitivity),60 (stage-1 stale-U rule),U_STALE_MISSING_OUTCOME,1550,1515
+midnight (sensitivity),60 (stage-1 stale-U rule),DELIVERED_TIME_MISSING,8,6
+midnight (sensitivity),60 (stage-1 stale-U rule),CANCELED_OR_UNAVAILABLE,1234,1037
+midnight (sensitivity),60 (stage-1 stale-U rule),PURCHASED_AT_OR_AFTER_OBSERVATION_END,1,0
+midnight (sensitivity),60 (stage-1 stale-U rule),NO_VALID_ESTIMATE,0,0
+midnight (sensitivity),60 (stage-1 stale-U rule),UNCLASSIFIED,0,0
+midnight (sensitivity),72 (p99 of days late),EVENT,96470,84129
+midnight (sensitivity),72 (p99 of days late),RECENT_U_CANDIDATE,193,57
+midnight (sensitivity),72 (p99 of days late),U_STALE_MISSING_OUTCOME,1535,1500
+midnight (sensitivity),72 (p99 of days late),DELIVERED_TIME_MISSING,8,6
+midnight (sensitivity),72 (p99 of days late),CANCELED_OR_UNAVAILABLE,1234,1037
+midnight (sensitivity),72 (p99 of days late),PURCHASED_AT_OR_AFTER_OBSERVATION_END,1,0
+midnight (sensitivity),72 (p99 of days late),NO_VALID_ESTIMATE,0,0
+midnight (sensitivity),72 (p99 of days late),UNCLASSIFIED,0,0

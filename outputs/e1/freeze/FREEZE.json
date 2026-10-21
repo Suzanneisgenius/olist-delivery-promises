@@ -1,0 +1,502 @@
+{
+  "code_files_sha256": {
+    "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cohort.py": "e40261c3f9e8f343c09089e6e4cb502ea7e8e9ad9e12544cbb4d1901acd31143",
+    "contract.py": "2800987ca122253f12c80def205f89c5e4b75cdac205243557317635ddff4d64",
+    "dashboard.py": "d45325f11bf6ccd0ce596c52376ab6934d909d5f401ce3bf5742458eddac5f28",
+    "date_policy.py": "2f58e88a29c05be6a08559f62afaa75ca4acc1e1c7ffdd251deedd9fe4688d46",
+    "decompose.py": "78f973303cd936a6f645e77637b47951e0cb9c84bcbb7cfea682079263c18aaa",
+    "e1_data.py": "3167bc61457dceebb10d33f88c34e40b0a271ed89fda3195600c2e094fbd77bb",
+    "e1_freeze.py": "b1916172e95bdf5f27afe270693922e763ad6f474d996d3e5daf3e5b8d68aee7",
+    "e1_models.py": "0ea2895e00fb7b8ae03e3422099aec0a837936b0a36caa1bacb8fcd8ed3f8fdb",
+    "e1_pipeline.py": "0c21349c31dc5809b066ce3fe01d6eeb4a71a790cad3bb3a22c4f8b07fc98377",
+    "features.py": "96b7229c63e4dcf0f6dbb3fdb946f8e7326664c25c5de51cda943d9dafe264ca",
+    "gate.py": "fdca15d31b7c18648bde8caa668331b73cb90f5578d913c6afeb7a8e1982b666",
+    "io.py": "225a6cd8b3127202bcfaa97241f4de8b1e47f1b5f4585554729a1eaf1841a7df",
+    "mart.py": "41301fc0b595e865672e193f4957250e01fc603b1a1509569c9165aee04e3282",
+    "modeling.py": "496dfa5675ff67fed9481a1282e4db10d8a156a06e64329d0ac774cc0de53d65",
+    "monitoring.py": "63bd6799b265ffd7fce898ed78c70a05768adc2b616ce425219f349886eb57b3",
+    "report.py": "ab3781d4d87807027d9129e5a658da31b6e740bcc7d092c88745f0eaf540910c",
+    "report2.py": "9faadeb4675162599d33e70649d2d2e50e01f3e2f89dd287677598ca09454f56",
+    "report3.py": "e71fc5d890e244162de2068353e7830fc378870196b4f4fddea77d538fa9bc38",
+    "run_all.py": "cdd889c3ccf43f80bd6e78cb291ed8634cc2e3c5d4381757f030cdc93fc977ae",
+    "run_e1.py": "966a9d476dd08861624331c6d74b17897718566a06049bf806c1fec844054ad0",
+    "run_stage1.py": "57df4e820e65c63e1ca9abd23e25a70ff65837fcced3d9786a3fd1fa42606651",
+    "run_stage2.py": "ee9b9ff4ca0034f741feff76c76d3900c60651e3a97c4ff58f5511f0e2f9c120",
+    "run_stage3.py": "0955cceb61ea7d3c2523cb6ae0dff159071497ead052adde0ad5bc395f57fbca",
+    "run_stage4.py": "7cd6a211c82418c76ee511ed07d75ad85473f3f9eb97c09e2c160cd625129792",
+    "run_stage5.py": "2ce0f33548d9c572883532114a9b0ce5f03cd01fb0525fa70056ca4073d64baa",
+    "run_stage7.py": "3e230b8774745b0a47b8d7ebe5307a4972f893758061d80e30d9d3c6d538c4b7",
+    "run_stage7_monitor.py": "4ba51b02063a9139f7d4e5a0017b3c3c8b8297a5a7f2f710ff4b1edb38ee7b6e",
+    "site.py": "1d152dd8f81b22d843c9fcee6c0c9a8029c9ac606327e71ac860016c4cd37ff7",
+    "survival_audit.py": "87217aac2e0548c6e2ab7356779e82cec7aae4a180d5494cd35f59406d90cacb",
+    "weekly.py": "37655f754f7b6ba3b3dd125be982da260890e55226737de51df27f0a7e06980a"
+  },
+  "config_sha256": "ae6a4a4664c82124399d9da38354376955e6e783fd720eece608ac801eb20152",
+  "environment": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "feature_rules": {
+    "B1@0.90": {
+      "features": [],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "none"
+    },
+    "B1c@0.90": {
+      "features": [],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "none"
+    },
+    "B1c@0.9126": {
+      "features": [],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "none"
+    },
+    "B2@0.90": {
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "O"
+    },
+    "B3@0.90": {
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "U"
+    },
+    "Cstar@0.90": {
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "U"
+    },
+    "Cstar@0.9126": {
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "U"
+    },
+    "Dstar@0.90": {
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "U"
+    },
+    "Dstar@0.9126": {
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "label_rule": "only orders delivered before the snapshot contribute seller-history labels",
+      "snapshot": "U"
+    }
+  },
+  "fitted_model_files_sha256": {
+    "B1@0.90": {
+      "path": "models/B1@0.90.joblib",
+      "sha256": "0863dd25b033a0f7706feb0b529e3cb30f88280aeb59cec725ab5fb200fd9be9"
+    },
+    "B1c@0.90": {
+      "path": "models/B1c@0.90.joblib",
+      "sha256": "0863dd25b033a0f7706feb0b529e3cb30f88280aeb59cec725ab5fb200fd9be9"
+    },
+    "B1c@0.9126": {
+      "path": "models/B1c@0.9126.joblib",
+      "sha256": "fabc0b759476f737ad1b1a178cb29d385e1a59dfda78a8862fcaa80ef0d17412"
+    },
+    "B2@0.90": {
+      "path": "models/B2@0.90.joblib",
+      "sha256": "b4de11e19e25854c00f0c12755d30811c8de9275f477513cc3586f4cf9d1bec2"
+    },
+    "B3@0.90": {
+      "path": "models/B3@0.90.joblib",
+      "sha256": "b4de11e19e25854c00f0c12755d30811c8de9275f477513cc3586f4cf9d1bec2"
+    },
+    "Cstar@0.90": {
+      "path": "models/Cstar@0.90.joblib",
+      "sha256": "b4de11e19e25854c00f0c12755d30811c8de9275f477513cc3586f4cf9d1bec2"
+    },
+    "Cstar@0.9126": {
+      "path": "models/Cstar@0.9126.joblib",
+      "sha256": "850383b5da46d047094a27ad92db9417c9325cf8c048bea993fabc1ff5a956f9"
+    },
+    "Dstar@0.90": {
+      "path": "models/Dstar@0.90.joblib",
+      "sha256": "d4a2de6b2f1a829c394b950c03edbe1596f30b870a3e3d2ef62b6c1ad90b2cd4"
+    },
+    "Dstar@0.9126": {
+      "path": "models/Dstar@0.9126.joblib",
+      "sha256": "bbb0a86f2f35843d9c879fbe9da28a9b0a523082a15ae917448b82d342e80190"
+    }
+  },
+  "frozen_at": "2026-10-20T05:30:21.200178+00:00",
+  "partition_id_sha256": {
+    "C": "33b8c5e770da60bb319e1220d47096544ccd7f02ac75370dddc4fc2d8ade468d",
+    "E": "702ce5bdf7e111fd029e408548dfadb4a8e204e151624ade0393a8c38ceeec3c",
+    "F": "1342d043d3cccfde9133cccbde395795ab77feacdaf50ec423409a6db164d1be",
+    "F0": "878110e04927bdc46330685571fb7495071847de443b85fb1370ffad25f08e02",
+    "V": "3874b514719a25c56e33e2703494c3d6cef6a516e45d8f323675113e80921f66"
+  },
+  "preprocessing_and_selected_hyperparameters": {
+    "B1@0.90": {
+      "min_state_orders": 300,
+      "model": "state",
+      "q": 0.9,
+      "quantile_method": "inverted_cdf"
+    },
+    "B1c@0.90": {
+      "min_state_orders": 300,
+      "model": "state",
+      "q": 0.9,
+      "quantile_method": "inverted_cdf"
+    },
+    "B1c@0.9126": {
+      "min_state_orders": 300,
+      "model": "state",
+      "q": 0.9126,
+      "quantile_method": "inverted_cdf"
+    },
+    "B2@0.90": {
+      "alpha": 0.0,
+      "dow_categorical": false,
+      "fallback_retry": false,
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "model": "linear",
+      "q": 0.9,
+      "solver": "highs",
+      "target": "log1p"
+    },
+    "B3@0.90": {
+      "alpha": 0.0,
+      "dow_categorical": false,
+      "fallback_retry": false,
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "model": "linear",
+      "q": 0.9,
+      "solver": "highs",
+      "target": "log1p"
+    },
+    "Cstar@0.90": {
+      "alpha": 0.0,
+      "dow_categorical": false,
+      "fallback_retry": false,
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "model": "linear",
+      "q": 0.9,
+      "selected_on_V": {
+        "name": "C0",
+        "setting": {
+          "alpha": 0.0,
+          "dow_categorical": false,
+          "target": "log1p"
+        },
+        "v_pinball_int": 1.2885595682855955
+      },
+      "solver": "highs",
+      "target": "log1p"
+    },
+    "Cstar@0.9126": {
+      "alpha": 0.0,
+      "dow_categorical": false,
+      "fallback_retry": false,
+      "features": [
+        "distance_km",
+        "same_state",
+        "weight_g_sum",
+        "items_price_sum",
+        "items_freight_sum",
+        "freight_ratio",
+        "n_item_lines",
+        "purchase_dow",
+        "seller_hist_late_rate",
+        "seller_hist_handling_median_h",
+        "seller_hist_n_delivered",
+        "customer_state_reported",
+        "seller_state"
+      ],
+      "model": "linear",
+      "q": 0.9126,
+      "selected_on_V": {
+        "name": "C0",
+        "setting": {
+          "alpha": 0.0,
+          "dow_categorical": false,
+          "target": "log1p"
+        },
+        "v_pinball_int": 1.2885595682855955
+      },
+      "solver": "highs",
+      "target": "log1p"
+    },
+    "Dstar@0.90": {
+      "categorical": [
+        "customer_state_reported",
+        "seller_state",
+        "purchase_dow"
+      ],
+      "early_stopping": false,
+      "l2_regularization": 1.0,
+      "learning_rate": 0.05,
+      "max_depth": 2,
+      "max_iter": 400,
+      "min_samples_leaf": 100,
+      "model": "hgb",
+      "q": 0.9,
+      "random_state": 20261015,
+      "selected_on_V": {
+        "name": "D3",
+        "setting": {
+          "max_depth": 2,
+          "max_iter": 400
+        },
+        "v_pinball_int": 1.2626567040265668
+      }
+    },
+    "Dstar@0.9126": {
+      "categorical": [
+        "customer_state_reported",
+        "seller_state",
+        "purchase_dow"
+      ],
+      "early_stopping": false,
+      "l2_regularization": 1.0,
+      "learning_rate": 0.05,
+      "max_depth": 2,
+      "max_iter": 400,
+      "min_samples_leaf": 100,
+      "model": "hgb",
+      "q": 0.9126,
+      "random_state": 20261015,
+      "selected_on_V": {
+        "name": "D3",
+        "setting": {
+          "max_depth": 2,
+          "max_iter": 400
+        },
+        "v_pinball_int": 1.2626567040265668
+      }
+    }
+  },
+  "runs": {
+    "B1@0.90": {
+      "status": "frozen"
+    },
+    "B1c@0.90": {
+      "status": "frozen"
+    },
+    "B1c@0.9126": {
+      "status": "frozen"
+    },
+    "B2@0.90": {
+      "status": "frozen"
+    },
+    "B3@0.90": {
+      "status": "frozen"
+    },
+    "Cstar@0.90": {
+      "status": "frozen"
+    },
+    "Cstar@0.9126": {
+      "status": "frozen"
+    },
+    "Dstar@0.90": {
+      "status": "frozen"
+    },
+    "Dstar@0.9126": {
+      "status": "frozen"
+    }
+  },
+  "scoring_code_sha256": "6eac633d5e0838f59fe1ec665007ef6bab321ab52fc049cedfab8b4e51dcaf40",
+  "selection_from": "select",
+  "selection_registration_sha256": "69545d58ceb6bf37984153d7dfe1bee3218df81054d46ddff5e4f2f237d9bee2",
+  "shifts_by_policy_and_q": {
+    "B1c@0.90": {
+      "k": 15352,
+      "n": 17056,
+      "shift_days": 6.0
+    },
+    "B1c@0.9126": {
+      "k": 15567,
+      "n": 17056,
+      "shift_days": 7.0
+    },
+    "B2@0.90": {
+      "k": 15352,
+      "n": 17056,
+      "shift_days": 6.018039891200836
+    },
+    "B3@0.90": {
+      "k": 15352,
+      "n": 17056,
+      "shift_days": 6.147869316295726
+    },
+    "Cstar@0.90": {
+      "k": 15352,
+      "n": 17056,
+      "shift_days": 6.147869316295726
+    },
+    "Cstar@0.9126": {
+      "k": 15567,
+      "n": 17056,
+      "shift_days": 6.560815389064963
+    },
+    "Dstar@0.90": {
+      "k": 15352,
+      "n": 17056,
+      "shift_days": 6.459147803541677
+    },
+    "Dstar@0.9126": {
+      "k": 15567,
+      "n": 17056,
+      "shift_days": 6.99190671129406
+    }
+  },
+  "thresholds": {
+    "H1": {
+      "coverage_pts": 0.5,
+      "days": 0.5
+    },
+    "H2": {
+      "interval": "percentile 95%, upper end < 0",
+      "relative_improvement": 0.02
+    },
+    "bootstrap": {
+      "replicates": 2000,
+      "seed": 20261015,
+      "unit": "purchase week"
+    },
+    "monthly_reliability": {
+      "max_pts_below_target": 3.0,
+      "min_orders": 1000
+    },
+    "practical_rule": {
+      "coverage_pts": 1.0,
+      "days": 1.0
+    },
+    "ties": {
+      "adopt_rel": 0.01,
+      "tie_rel": 0.001
+    }
+  }
+}

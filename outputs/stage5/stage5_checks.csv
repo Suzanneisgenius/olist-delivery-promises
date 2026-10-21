@@ -1,0 +1,31 @@
+check,expected,actual,detail,pass
+stage 3 report is current,True,True,,True
+stage 3 is not blocked,True,True,,True
+raw files unchanged since stage 1,True,True,,True
+stage 3 built on the current mart,True,True,,True
+independent verification exists for this stage-3 run,True,True,,True
+independent verification reports all_match,True,True,,True
+independent verification is bound to the current stage-3 files,True,True,,True
+2018-04-01: fit uses only labels delivered before T,True,True,,True
+2018-04-01: fit uses only purchases before T,True,True,,True
+"2018-04-01: eval purchases inside [T, T+1 month)",True,True,,True
+2018-04-01: no eval order in the fit,0,0,,True
+2018-04-01: eval seller snapshot frozen at T,['2018-04-01 00:00:00'],['2018-04-01 00:00:00'],,True
+2018-04-01: every seller snapshot holds only labels delivered before its T,True,True,,True
+2018-04-01: eval block has both classes,True,True,,True
+2018-05-01: fit uses only labels delivered before T,True,True,,True
+2018-05-01: fit uses only purchases before T,True,True,,True
+"2018-05-01: eval purchases inside [T, T+1 month)",True,True,,True
+2018-05-01: no eval order in the fit,0,0,,True
+2018-05-01: eval seller snapshot frozen at T,['2018-05-01 00:00:00'],['2018-05-01 00:00:00'],,True
+2018-05-01: every seller snapshot holds only labels delivered before its T,True,True,,True
+2018-05-01: eval block has both classes,True,True,,True
+2018-06-01: fit uses only labels delivered before T,True,True,,True
+2018-06-01: fit uses only purchases before T,True,True,,True
+"2018-06-01: eval purchases inside [T, T+1 month)",True,True,,True
+2018-06-01: no eval order in the fit,0,0,,True
+2018-06-01: eval seller snapshot frozen at T,['2018-06-01 00:00:00'],['2018-06-01 00:00:00'],,True
+2018-06-01: every seller snapshot holds only labels delivered before its T,True,True,,True
+2018-06-01: eval block has both classes,True,True,,True
+fold 2018-04-01 reproduces stage-3 test scores for its month,True,True,"max |difference| = 9.97e-17 over 6,670 orders",True
+"evaluation months are inside the stage-3 test period (stability study, not a new test)",True,True,,True

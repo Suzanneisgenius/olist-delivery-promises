@@ -1,0 +1,44 @@
+> SUPERSEDED — historical copy, not the current release.
+
+{
+  "population": 83063,
+  "original_dev_n": 20384,
+  "selection_n": 16577,
+  "selection_late": 1156,
+  "selection_late_rate": 0.0697351752428063,
+  "unavailable_dev_n": 3807,
+  "unavailable_dev_late": 1496,
+  "unavailable_dev_last_delivery": "2018-09-19 23:24:07",
+  "test_labels_match_raw": true,
+  "score_checks": {
+    "baseline": {
+      "ap": 0.042606516290726815,
+      "roc_auc": 0.5,
+      "brier": 0.0411110221549173,
+      "selected": 1986,
+      "hits": 72,
+      "precision": 0.03625377643504532,
+      "recall": 0.08470588235294117
+    },
+    "logistic": {
+      "ap": 0.1234582172321187,
+      "roc_auc": 0.7609260240221744,
+      "brier": 0.04013391588582371,
+      "selected": 1986,
+      "hits": 259,
+      "precision": 0.13041289023162134,
+      "recall": 0.30470588235294116
+    },
+    "gbm": {
+      "ap": 0.11138647536133153,
+      "roc_auc": 0.7212754850631352,
+      "brier": 0.04065440073758528,
+      "selected": 1986,
+      "hits": 226,
+      "precision": 0.11379657603222558,
+      "recall": 0.26588235294117646
+    }
+  },
+  "all_raw_hashes_match": true,
+  "blocking_checks_pass": 9
+}

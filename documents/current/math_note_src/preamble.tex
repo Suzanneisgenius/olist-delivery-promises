@@ -1,0 +1,18 @@
+\usepackage{fontspec}
+\setmainfont{Noto Serif CJK SC}[BoldFont={Noto Serif CJK SC SemiBold}]
+\setsansfont{Noto Sans CJK SC}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\linespread{1.25}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\newcommand{\cl}{c_{\text{late}}}
+\newcommand{\cs}{c_{\text{slack}}}
+\newcommand{\1}{\mathbf 1}
+\newcounter{prop}
+\newenvironment{prop}[1][]{\refstepcounter{prop}\par\medskip\noindent\textbf{命题 \theprop}\if\relax\detokenize{#1}\relax\else\ \textbf{（#1）}\fi\textbf{.}\ }{\par\medskip}
+\newenvironment{pf}{\par\noindent\textbf{证明.}\ }{\par\noindent\hfill QED\par\medskip}

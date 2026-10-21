@@ -1,0 +1,18 @@
+check,expected,actual,pass
+config unchanged since v3 registration,True,True,True
+partition F0 ids == checkpoint-2 manifest,878110e04927bdc46330685571fb7495071847de443b85fb1370ffad25f08e02,878110e04927bdc46330685571fb7495071847de443b85fb1370ffad25f08e02,True
+partition V ids == checkpoint-2 manifest,3874b514719a25c56e33e2703494c3d6cef6a516e45d8f323675113e80921f66,3874b514719a25c56e33e2703494c3d6cef6a516e45d8f323675113e80921f66,True
+partition F ids == checkpoint-2 manifest,1342d043d3cccfde9133cccbde395795ab77feacdaf50ec423409a6db164d1be,1342d043d3cccfde9133cccbde395795ab77feacdaf50ec423409a6db164d1be,True
+partition C ids == checkpoint-2 manifest,33b8c5e770da60bb319e1220d47096544ccd7f02ac75370dddc4fc2d8ade468d,33b8c5e770da60bb319e1220d47096544ccd7f02ac75370dddc4fc2d8ade468d,True
+partition E ids == checkpoint-2 manifest,702ce5bdf7e111fd029e408548dfadb4a8e204e151624ade0393a8c38ceeec3c,702ce5bdf7e111fd029e408548dfadb4a8e204e151624ade0393a8c38ceeec3c,True
+entry module e1_data imported from this working copy,True,True,True
+entry module e1_models imported from this working copy,True,True,True
+entry module e1_freeze imported from this working copy,True,True,True
+entry module e1_pipeline imported from this working copy,True,True,True
+entry module features imported from this working copy,True,True,True
+entry module date_policy imported from this working copy,True,True,True
+entry module io imported from this working copy,True,True,True
+runtime: policy_score refuses a NaN label,True,True,True
+runtime: shift refuses a NaN label,True,True,True
+runtime: pinball refuses unequal lengths,True,True,True
+runtime: freeze validation refuses a record with an empty model list,True,True,True

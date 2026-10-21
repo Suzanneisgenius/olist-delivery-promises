@@ -1,0 +1,458 @@
+Supplement
+
+
+
+
+Supplement, appendix and contribution
+statement
+Everything here supports the main document; none of it changes a registered result. Post-
+hoc and synthetic analyses are labelled as such. Model names: B1c = per-state quantile
+rule with the calibration shift; C* = linear quantile regression; D* = shallow HGB; B0 = the
+project's retained rule (no shift).
+
+
+S1. Model selection on validation data (F0 → V)
+Metric: pinball loss at q = 0.90 on the unshifted integer promise max{1, ⌈ŷ⌉}. A linear step
+was adopted only if it lowered the loss by at least 1%. Candidates within 1.001 × the global
+minimum counted as tied; inside a tie the simpler setting won.
+
+
+  Candidate                               V loss          Change vs     Decision
+                                                        current best
+
+  C0 registered linear (log1p target,    1.28856                   —    start
+  numeric weekday, no penalty)
+
+  C1 weekday as a category               1.29170             −0.24%     rejected
+
+  C2 raw-days target                     1.28932             −0.06%     rejected
+
+  C3 L1 penalty, best of 3 alphas        1.28713              +0.11%    rejected (< 1%)
+  (0.0001)
+
+  D3 HGB, depth 2, 400 iterations        1.26266                   —    selected; tie set D3,
+  (best of 8)                                                           D4, D7
+
+
+Post-hoc intervals on V. A week-block bootstrap on V (14 weeks, 2,000 draws) gives an
+improvement over C0 of 0.11% (−0.002% to 0.245%) for the C3 pick and 2.01% (1.11% to
+2.85%) for D3. No improvement in the first interval reaches the pre-set 1% bar, so the
+original choice stands. Both candidates were picked on this same V, and the intervals
+leave out selection and refitting uncertainty, so D3's figure is optimistic and was only a
+reason to evaluate it.
+
+
+S2. A small simulation of two calibration failures (synthetic data)
+Question: does a calibration shift fail because the delivery distribution changes over time,
+or because at the freeze only the fast, already-delivered orders can be used? Delivery
+days follow log Y = 2.2 + 0.5x + 0.45ε, rounded up. The predictor is the conditional median,
+
+
+
+                                                                                          Page 1 of 9
+Supplement
+
+
+
+
+and the calibration code is the project's. Each of 1,000 replications draws 2,000 calibration
+and 5,000 evaluation orders (seed 20261021). All scenarios share the evaluation sample.
+For the time-change scenarios, the continuous delivery time is rescaled before rounding.
+
+
+  Scenario minus the stable,    Coverage change, pts     Middle 90% of        Promised days
+  complete-label scenario       (mean ± MC s.e.)         replications               change
+
+  Only delivered-by-freeze      −1.68 ± 0.015            −2.48 to −0.94                −0.99
+  labels (90-day window)
+
+  Random subset of the same     +0.02 ± 0.009            −0.42 to +0.46                +0.02
+  size (diagnostic)
+
+  Later deliveries 15% slower   −5.77 ± 0.014            −6.50 to −5.08                         0
+
+  Later deliveries 15% faster   +4.26 ± 0.012            +3.66 to +4.90                         0
+
+
+The two mechanisms leave different traces. Selective labels shrink the shift itself, so
+promised days and coverage fall together; a random subset of the same size does not. A
+later change in delivery times leaves the promise unchanged and moves only coverage.
+The "middle 90%" column is the spread of replications, not a confidence interval for the
+mean. A first, unpaired run (seed 20261020) gave the same picture. This explains
+mechanisms; it does not show which one, if either, acted in the Olist data.
+
+
+S3. Post-hoc methodological review
+Everything in S3 was computed after the scoring run, in response to the third and fourth
+reviews. It reuses the frozen per-order predictions on C and E, fits nothing, chooses no
+policy and changes no registered verdict. Sources: scripts/e1_posthoc_review3.py →
+outputs/e1/posthoc_r3/ and scripts/e1_posthoc_methods.py → outputs/e1/posthoc_m4/
+(checksums in each MANIFEST.sha256). S3b replaces an earlier version of the same
+analysis that used a "subtract one day" rule, and explains why that rule is not valid in
+general.
+
+S3a. Diagnostic comparison at matched coverage on E. Each model's shift is moved over
+E (steps of 0.01 day; whole days for the state rule), and the table reads off the fewest
+mean days among the steps that reach the target. Whole-day promises make coverage
+move in steps, so the table shows the coverage actually reached; nothing is interpolated.
+These curves use E's outcomes; they are not deployable policies.
+
+
+
+
+                                                                                           Page 2 of 9
+Supplement
+
+
+
+
+  Target coverage      Linear C*: reached,        HGB D*: reached,         State rule: reached,
+                       days                       days                     days
+
+  90.00%               90.02%, 17.20              90.02%, 16.60            90.75%, 17.99
+
+  93.95% (B0)          93.95%, 19.83              93.96%, 19.12            94.45%, 20.99
+
+  96.18% (C*           96.18%, 22.44              96.18%, 21.71            96.49%, 23.99
+  frozen)
+
+  97.10% (D*           97.11%, 24.57              97.10%, 23.66            97.33%, 25.99
+  frozen)
+
+
+In this sample and for this family of shift policies, the HGB curve lies 0.60–0.91 days below
+the linear curve at the four targets in the table. That is not a general ranking of the models.
+On C at the registered shifts: D* 91.14% with 24.54 days, C* 91.19% with 24.68, B1c 90.30%
+with 24.49.
+
+S3b. From a continuous bound to a whole-day promise. Let Rᵢ = Yᵢ − f̂(Xᵢ) on the
+calibration set, k = ⌈(n + 1)q⌉, s = R₍ₖ₎ and U(x) = f̂(x) + s. If calibration and evaluation
+scores are exchangeable, the rank argument gives P(Y ≤ U(X)) ≥ q. A change over time is
+not covered by this guarantee (Barber et al.). Three ways to turn U into whole days:
+
+    Round up (registered): d = max{1, ⌈U⌉}. Y ≤ U implies Y ≤ d. Conservative: it adds slack
+    whenever U is not a whole number.
+    Round down: d = max{1, ⌊U⌋}. Because Y is a whole number, Y ≤ U holds exactly when Y
+    ≤ ⌊U⌋, so the untruncated ⌊U⌋ has exactly the coverage event of U. The one-day
+    minimum can only enlarge that event: with Y = 1 for every order and forecasts 0, 1, …, 99
+    (q = 0.9), U covers 91% and max{1, ⌊U⌋} covers 100%.
+    Subtract one day: d = max{1, ⌈U − 1⌉}. This equals ⌊U⌋ when U is not a whole number,
+    and U − 1 when it is (before the one-day minimum). Counterexample: every delivery
+    takes 10 days and the forecast is constant at 0.5, so s = 9.5 and U = 10 for every order.
+    Rounding up or down promises 10 days and covers every order; subtracting one day
+    promises 9 and covers none. The rule is not coverage-preserving in general, but it does
+    not always under-cover either. Without the minimum its event is Y < U, which on the
+    calibration set means Rᵢ < R₍ₖ₎: fewer than k orders. The minimum can restore coverage
+    for one-day outcomes: with 100 orders of 1 day and a forecast of 0.5, U = 1 and max{1,
+    ⌈0⌉} = 1 covers all of them.
+
+Numerical detail: U = f̂ + s is a floating-point sum, so a bound that should be a whole
+number can come out just below it. The code compares against U ± 10⁻⁹ in the direction
+that keeps the event (⌊U + 10⁻⁹⌋), as the registered rule already does (⌈U − 10⁻⁹⌉). Tests:
+
+
+
+
+                                                                                                Page 3 of 9
+Supplement
+
+
+
+
+tests/test_posthoc_rounding.py (45 cases: the counterexamples, the event identity on 60
+random calibration sets, the one-day minimum, boundary and tolerance cases, and refusal
+of non-finite or malformed inputs).
+
+
+ Policy                  Shift Rule                   Coverage on C Days on E Coverage on E
+
+ B1c state rule          6.00 round up = round down         90.30%      23.99       96.49%
+
+ B1c state rule          6.00 subtract one day              89.08%      22.99       95.92%
+
+ B2 earlier regression   6.02 round up                      91.17%      22.87       96.45%
+
+ B2 earlier regression   6.02 round down                    90.01%      21.87       95.87%
+
+ C* linear               6.15 round up                      91.19%      22.45       96.18%
+
+ C* linear               6.15 round down                    90.01%      21.45       95.51%
+
+ D* HGB                  6.46 round up                      91.14%      23.67       97.10%
+
+ D* HGB                  6.46 round down                    90.01%      22.67       96.66%
+
+
+q = 0.90, k = 15,352 of n = 17,056 (k / n = 90.01%). No bound on C or E is below 12.5 days for
+any of these policies, so the one-day minimum never binds here and the table is
+unaffected by it. Rounding down meets the rank bound on C for every policy. For the
+continuous policies, subtracting one day gives the same E numbers as rounding down to
+two decimals (only one E order, for C*, has a bound within 10⁻⁶ of a whole number) but
+reaches only 90.00% on C, below k / n. For the integer-valued state rule it falls to 89.08%.
+
+Two different quantities: the registered promise exceeds U by 0.50 day on average (C*
+0.497, D* 0.503), which is the arithmetic part of what was done. Rounding down instead
+shortens every continuous promise by exactly 1 day, because ⌊U⌋ = ⌈U⌉ − 1 when U is not a
+whole number; that is a counterfactual. With every policy rounded down: D* − B1c = −1.32
+days at +0.18 points; C* − B1c = −2.54 days at −0.97 points; against B0, D* +2.37 days (+2.71
+points) and C* +1.15 days (+1.56 points). These are point estimates; the rule was not
+registered, and the registered H3 verdict stands.
+
+Correction. The third-review version of this table applied "subtract one day" to
+continuous predictors and left integer predictors unchanged. On these data its E
+numbers equal those of rounding down, but the rule is not coverage-preserving in general
+(counterexample above), and on C it reached 90.00% < k / n. It is replaced by rounding
+down.
+
+S3c. The evaluation sample and its window. The cohort rule keeps orders whose Olist
+estimated delivery week is no later than 23 July 2018.
+
+
+
+
+                                                                                              Page 4 of 9
+Supplement
+
+
+
+
+  Purchase month     Purchases        Estimated week ≤ 23      Delivered (on time          Single
+                                                 Jul 2018                 or late)      seller = E
+
+  April 2018                  6,939                 6,939                   6,798           6,670
+
+  May 2018                    6,873                 6,862                   6,738           6,630
+
+  June 2018                   6,167                 5,732                   5,665           5,565
+
+  July 2018                   6,292                  1,117                  1,095           1,085
+
+  August–October              6,532                     0                       0                0
+  2018
+
+  Total                  32,803                    20,650                  20,296          19,950
+
+
+
+ Purchase month (E) Orders Mean actual days Olist promise, mean Olist promise, max Late vs Olist
+
+ April 2018           6,670              11.47               24.27               63        4.59%
+
+ May 2018             6,630              11.36               23.41               60        6.67%
+
+ June 2018            5,565              8.92                27.45               56        1.26%
+
+ July 2018            1,085              6.22                16.33               26        2.95%
+
+
+
+
+  Policy            Full E: coverage,       April–May: coverage,        June–July: coverage,
+                    days                    days                        days
+
+  B0 retained       93.95%, 20.31           92.23%, 20.55               97.38%, 19.82
+  rule
+
+  Olist promise     95.74%, 24.44           94.38%, 23.84               98.47%, 25.64
+
+  B1c state rule    96.49%, 23.99           95.53%, 24.15               98.39%, 23.67
+
+  C* linear         96.18%, 22.45           95.13%, 22.75               98.27%, 21.85
+
+  D* HGB            97.10%, 23.67           96.39%, 24.01               98.51%, 22.99
+
+
+April–May inherits the same cohort rule, so it is a sensitivity check, not a correction.
+Removing the dependence on Olist's estimated date would need a new purchase-time
+cohort with its own observation cut-off and handling of unconfirmed deliveries; that is a
+new design and was not done here. Every calibrated policy still covers well above 90% in
+April–May.
+
+
+
+
+                                                                                            Page 5 of 9
+Supplement
+
+
+
+
+S3d. Calibration period. Late rates against Olist's date on C, by purchase month: October
+2017 4.24% (4,414 orders), November 12.49% (7,191; 42% of C), December 7.43% (5,451).
+The C shift was therefore learned largely in a peak period. This is a candidate explanation
+for over-coverage on E; a high November late rate does not by itself show that it caused it,
+and it was not tested separately.
+
+S3e. Leave one purchase week out. Each of the 17 purchase weeks of E is removed in turn
+and the registered differences are recomputed from the frozen promises. This is a
+stability diagnostic, not a confidence interval.
+
+
+  Statistic                                 Full E            Range with one week      Sign
+                                                                          removed      kept
+
+  H1 gap at R3 (C* − B1c), days             −1.54                     −1.60 to −1.49   yes
+
+  H3 D* − B1c, days                         −0.32                    −0.36 to −0.26    yes
+
+  H3 D* − B1c, coverage points              +0.61                    +0.52 to +0.67    yes
+
+  C* − B0, days                             +2.15                    +2.09 to +2.21    yes
+
+  D* − B0, days                             +3.37                    +3.34 to +3.40    yes
+
+  C* (q = 0.9126) − Olist, days             −1.02                     −1.41 to −0.35   yes
+
+  C* (q = 0.9126) − Olist, coverage         +0.88                     +0.38 to +1.05   yes
+  points
+
+
+The comparison with Olist's promise is the least stable: removing a single week moves its
+day difference between −1.41 and −0.35.
+
+
+A. Reproducibility and checks
+
+  Item                            Value
+
+  Pre-registered configuration    config/date_model_e1.yaml v3, SHA-256
+                                  ae6a4a46…20152
+
+  Freeze record                   FREEZE.json, SHA-256 3b62af1a…328dd; 9 runs.
+                                  The final E1 scoring run came after it (E had been
+                                  examined in Stage 7)
+
+  Code at scoring time            combined fingerprint 6eac633d…af40; a full copy
+                                  is kept in snapshots/src_at_e1_scoring
+
+
+
+
+                                                                                              Page 6 of 9
+Supplement
+
+
+
+
+  Item                        Value
+
+  Automated tests             362 pass in the final repository version (317 for the
+                              registered pipeline, 45 for the post-hoc rounding
+                              rules; log in
+                              AGENT_REVIEW/verify_output/06_pytest.log
+                              after running verify_all.sh), including synthetic
+                              end-to-end tests showing that scoring stops
+                              before any E output if the freeze, a model file, the
+                              sample, the calibration shifts or (after the post-hoc
+                              hardening) any input content changed, or if the
+                              post-hoc addendum is malformed or bound to a
+                              different freeze. The defect tests were also run
+                              against the earlier code to show that they failed
+                              there
+
+  Independent recomputation   every reported number recomputed from the
+                              saved per-order files with plain NumPy / pandas:
+                              43 / 43 for E results, 43 / 43 for supplementary
+                              results
+
+  Post-hoc hardening          content hashes of all inputs, added after scoring as
+                              a labelled addendum bound to the freeze record's
+                              hash; the original freeze record is unchanged
+
+  Reproduction guide          docs/REPRODUCE_E1.md, recipes A–C; erratum of
+                              2026-10-21 corrects the path used by recipe B (the
+                              historical code must sit at src/)
+
+  Process record              docs/E1_DECISIONS.md logs every change to the
+                              plan with its time, its reason and whether it came
+                              from the author or from a review
+
+  Environment                 Python 3.13.16; numpy 2.5.3, pandas 3.0.5, scikit-
+                              learn 1.9.1, scipy 1.18.1
+
+  Data                        public Olist e-commerce dataset (Kaggle); raw files
+                              and order-level marts are not redistributed
+
+  Not done                    a full rebuild from the raw CSVs by an independent
+                              reviewer; a second evaluation period; a cohort that
+                              does not depend on Olist's estimated date; a
+                              registered study of whole-day rounding rules and
+                              of calibration under temporal shift (an E2a protocol
+                              is drafted, not run)
+
+
+
+
+                                                                                      Page 7 of 9
+Supplement
+
+
+
+
+B. Contribution statement (draft — the author must check every
+line)
+
+  Part                                    Who                                       Author to
+                                                                                    confirm
+
+  Reframing the question from late-       Author, through the project and           []
+  order prediction to promise setting     discussions
+
+  Experiment scope and constraints        Author                                    []
+  (three model families, no tuning on
+  E, staged checkpoints, disclosure
+  rule)
+
+  Pre-registration text, code for         Drafted and implemented with an AI        []
+  selection, freeze and scoring, tests,   assistant (Claude), revised over
+  simulation, post-hoc checks, the        several review rounds
+  rounding argument and its
+  counterexamples as written here
+
+  Reviews that found design and code      Several review rounds by AI reviewers,    []
+  issues (comparison confound,            run at the author's request; not formal
+  freeze gaps, rounding, evaluation       peer review [author: name the tools
+  window, wording)                        and any human reader]
+
+  Mathematical note (quantile             Author's first draft; restructured and    []
+  optimality; k/n, k/(n+1) and            rewritten with an AI assistant; then
+  evaluation coverage; whole-day          checked by the author [author:
+  rounding)                               confirm]
+
+  Notebook                                Drafted with an AI assistant [author:     []
+  notebooks/e1_by_hand.ipynb (loss        re-run it and say which cells you can
+  enumeration, hand calibration,          explain or wrote yourself]
+  rounding cases, one recomputed
+  comparison)
+
+  Libraries                               scikit-learn (QuantileRegressor,          —
+                                          HistGradientBoostingRegressor,
+                                          mean_pinball_loss definition), NumPy,
+                                          pandas, SciPy
+
+  Results I recomputed or re-derived      [author: list, e.g. the integer-day       []
+  myself                                  derivation, the V check, one E
+                                          comparison]
+
+
+
+
+                                                                                          Page 8 of 9
+Supplement
+
+
+
+
+The lines above should be filled from the actual records, not from memory:
+docs/E1_DECISIONS.md and the review reports and evidence packages kept with it. The
+author should be able to explain, without notes: the integer-day derivation; why the
+calibration shift uses the (n + 1)q-th residual; why rounding the bound down keeps its
+coverage event while subtracting one day does not; why C* and B3 are the same model;
+and why the frozen HGB and linear policies cannot be ranked from their registered points
+alone.
+
+
+
+
+                                                                                       Page 9 of 9
+

@@ -1,0 +1,6 @@
+# e1_pipeline under test: /tmp/claude-0/-home-claude/d5525519-8a74-5b87-94ee-57a0c654c2a7/scratchpad/redcopy2/src/olist_analytics/e1_pipeline.py sha256 77e7cc85015e1985b79e402e954c5fba74035ce673f8ad60bd2920283325709a
+>       assert not (st / "selection.json").exists()
+E       AssertionError: assert not True
+E        +  where True = exists()
+E        +    where exists = (PosixPath('/tmp/pytest-of-root/pytest-97/test_runner_failure_after_fitt0/e1/select') / 'selection.json').exists
+1 failed in 4.53s

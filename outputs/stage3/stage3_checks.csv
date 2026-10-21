@@ -1,0 +1,10 @@
+check,expected,actual,pass
+population == train + dev + test,83063,83063,True
+"splits ordered by purchase time (max train < min dev, max dev < min test)",True,True,True
+tuning fit uses only labels delivered before T1,True,True,True
+final fit uses only labels delivered before T2,True,True,True
+model selection uses only dev labels delivered before T2,True,True,True
+every seller snapshot holds only labels delivered before its T,True,True,True
+no test row is in any fit,0,0,True
+feature matrix == whitelist (no forbidden column),"['customer_state_reported', 'distance_km', 'estimated_days', 'freight_ratio', 'items_freight_sum', 'items_price_sum', 'n_distinct_products', 'n_item_lines', 'purchase_dow', 'purchase_hour', 'same_state', 'seller_age_days', 'seller_hist_handling_median_h', 'seller_hist_late_rate', 'seller_hist_n_delivered', 'seller_hist_n_placed', 'seller_state', 'top_price_category', 'weight_g_sum']","['customer_state_reported', 'distance_km', 'estimated_days', 'freight_ratio', 'items_freight_sum', 'items_price_sum', 'n_distinct_products', 'n_item_lines', 'purchase_dow', 'purchase_hour', 'same_state', 'seller_age_days', 'seller_hist_handling_median_h', 'seller_hist_late_rate', 'seller_hist_n_delivered', 'seller_hist_n_placed', 'seller_state', 'top_price_category', 'weight_g_sum']",True
+baseline AP == test prevalence,0.0426065163,0.0426065163,True

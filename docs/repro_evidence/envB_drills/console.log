@@ -1,0 +1,11 @@
+baseline
+D1: exit 1, assertion found
+D2: exit 1, assertion found
+D3a: exit 1, assertion found
+D3b: exit 1, assertion found
+D4: exit 1, assertion found
+D5: exit 1, assertion found
+D6: exit 1, assertion found
+restoring the copy to a full, passing state
+done: /home/claude/olist031/docs/repro_evidence/envB_drills/failure_drills.jsonl
+drills_rc=0

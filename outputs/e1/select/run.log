@@ -1,0 +1,60 @@
+{
+ "linear": {
+  "name": "C0",
+  "setting": {
+   "dow_categorical": false,
+   "target": "log1p",
+   "alpha": 0.0
+  },
+  "v_pinball_int": 1.2885595682855955
+ },
+ "hgb": {
+  "name": "D3",
+  "setting": {
+   "max_depth": 2,
+   "max_iter": 400
+  },
+  "v_pinball_int": 1.2626567040265668
+ },
+ "q": 0.9,
+ "metric": "V pinball on unshifted integer promise max(1, ceil(yhat))",
+ "rows": {
+  "F0": 13616,
+  "V": 12045
+ },
+ "runtime_seconds": 89.39473,
+ "residual_flags": [
+  {
+   "grouping": "predicted-duration quartile",
+   "group": "Q4 longest",
+   "orders": 3011,
+   "coverage": 0.8990368648289605,
+   "gap_pts_vs_overall": -3.1722786478636023,
+   "flag": true,
+   "model": "HGB D3",
+   "overall_v_coverage": 0.9307596513075965
+  }
+ ],
+ "registration_sha256": "69545d58ceb6bf37984153d7dfe1bee3218df81054d46ddff5e4f2f237d9bee2",
+ "e_or_c_touched": false
+}
+           step  dow_categorical target  alpha  v_pinball_int  v_pinball_unrounded solver  fallback_retry status  adopted                                                               decision  rel_improvement_vs_current_best compared_with in_tie_set  alpha_tie_threshold  selected
+             C0            False  log1p 0.0000       1.288560             1.274132  highs           False     ok     True                                              registered starting point                              NaN           NaN        NaN                  NaN      True
+             C1             True  log1p 0.0000       1.291698             1.277836  highs           False     ok    False             rejected: V loss change -0.24% vs C0 (< 1% lower); keep C0                        -0.002435            C0        NaN                  NaN     False
+             C2            False   days 0.0000       1.289323             1.274078  highs           False     ok    False             rejected: V loss change -0.06% vs C0 (< 1% lower); keep C0                        -0.000593            C0        NaN                  NaN     False
+C3 alpha=0.0001            False  log1p 0.0001       1.287132             1.274436  highs           False     ok    False alpha pick; rejected: V loss change +0.11% vs C0 (< 1% lower); keep C0                         0.001108            C0       True             1.288419     False
+ C3 alpha=0.001            False  log1p 0.0010       1.292877             1.277282  highs           False     ok    False                   not the alpha pick (outside tie set (> 1.001 x min))                              NaN           NaN      False             1.288419     False
+  C3 alpha=0.01            False  log1p 0.0100       1.370262             1.353747  highs           False     ok    False                   not the alpha pick (outside tie set (> 1.001 x min))                              NaN           NaN      False             1.288419     False
+step  max_depth  max_iter  v_pinball_int  v_pinball_unrounded status  tie_threshold  in_tie_set  selected                                                     decision
+  D1          2       100       1.272503             1.261351     ok       1.263919       False     False                              outside tie set (> 1.001 x min)
+  D2          2       200       1.265131             1.255357     ok       1.263919       False     False                              outside tie set (> 1.001 x min)
+  D3          2       400       1.262657             1.254445     ok       1.263919        True      True selected: in tie set of 3, shallowest then fewest iterations
+  D4          2       800       1.262806             1.255920     ok       1.263919        True     False                    in tie set, but deeper or more iterations
+  D5          3       100       1.266169             1.256437     ok       1.263919       False     False                              outside tie set (> 1.001 x min)
+  D6          3       200       1.264599             1.256582     ok       1.263919       False     False                              outside tie set (> 1.001 x min)
+  D7          3       400       1.263346             1.257542     ok       1.263919        True     False                    in tie set, but deeper or more iterations
+  D8          3       800       1.269074             1.264288     ok       1.263919       False     False                              outside tie set (> 1.001 x min)
+
+real	1m32.808s
+user	1m37.459s
+sys	0m0.481s

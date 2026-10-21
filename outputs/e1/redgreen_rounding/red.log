@@ -1,0 +1,13 @@
+# RED: tests/test_posthoc_rounding.py (fifth-review version) against the r4 helper scripts/e1_rounding_rules.py sha256 7d1c78c7ac50e7191aa4e83be7890a248ec0855ceae042e0718459dd5117ce8d
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_posthoc_rounding.py::test_promise_refuses_bad_shift[nan] - ...
+FAILED tests/test_posthoc_rounding.py::test_promise_refuses_bad_shift[inf] - ...
+FAILED tests/test_posthoc_rounding.py::test_promise_refuses_bad_shift[-inf]
+FAILED tests/test_posthoc_rounding.py::test_promise_refuses_bad_pred_shape[pred0]
+FAILED tests/test_posthoc_rounding.py::test_promise_refuses_bad_pred_shape[pred1]
+FAILED tests/test_posthoc_rounding.py::test_promise_refuses_overflowing_sum
+FAILED tests/test_posthoc_rounding.py::test_shift_refuses_non_integer_or_zero_labels[y0]
+FAILED tests/test_posthoc_rounding.py::test_shift_refuses_non_integer_or_zero_labels[y1]
+8 failed, 37 passed, 1 warning in 1.29s

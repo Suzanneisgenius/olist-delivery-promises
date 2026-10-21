@@ -1,0 +1,44 @@
+check,expected,recomputed,pass
+E orders,19950,19950,True
+"B1@0.90: coverage, mean days, pinball","[np.float64(0.9075187969924812), np.float64(17.992781954887217), np.float64(1.4655989974937342)]","[0.9075187969924812, 17.992781954887217, 1.4655989974937342]",True
+"B1c@0.90 (shifted): coverage, mean days, pinball","[np.float64(0.9648621553884712), np.float64(23.992781954887217), np.float64(1.6866015037593984)]","[0.9648621553884712, 23.992781954887217, 1.6866015037593984]",True
+"B2@0.90 (shifted): coverage, mean days, pinball","[np.float64(0.9644611528822056), np.float64(22.874335839599), np.float64(1.576110275689223)]","[0.9644611528822055, 22.874335839599, 1.5761102756892227]",True
+"B3@0.90 (shifted): coverage, mean days, pinball","[np.float64(0.9617543859649124), np.float64(22.453483709273183), np.float64(1.560190476190476)]","[0.9617543859649123, 22.453483709273183, 1.560190476190476]",True
+"Cstar@0.90 (shifted): coverage, mean days, pinball","[np.float64(0.9617543859649124), np.float64(22.453483709273183), np.float64(1.560190476190476)]","[0.9617543859649123, 22.453483709273183, 1.560190476190476]",True
+"Dstar@0.90 (shifted): coverage, mean days, pinball","[np.float64(0.9709774436090226), np.float64(23.670977443609026), np.float64(1.6058997493734333)]","[0.9709774436090226, 23.670977443609022, 1.6058997493734333]",True
+"B3@0.90 (unshifted): coverage, mean days, pinball","[np.float64(0.8832581453634085), np.float64(16.308521303258146), np.float64(1.4167218045112782)]","[0.8832581453634085, 16.308521303258146, 1.4167218045112782]",True
+"Cstar@0.90 (unshifted): coverage, mean days, pinball","[np.float64(0.8832581453634085), np.float64(16.308521303258146), np.float64(1.4167218045112782)]","[0.8832581453634085, 16.308521303258146, 1.4167218045112782]",True
+"Dstar@0.90 (unshifted): coverage, mean days, pinball","[np.float64(0.910827067669173), np.float64(17.20952380952381), np.float64(1.3241654135338343)]","[0.910827067669173, 17.20952380952381, 1.3241654135338343]",True
+"replacement reference: stage-7 B0 (F + C, no shift): coverage, mean days, pinball","[np.float64(0.939498746867168), np.float64(20.30516290726817), np.float64(1.4827017543859646)]","[0.9394987468671679, 20.30516290726817, 1.4827017543859646]",True
+"R0 regression: stage-7 Q2 calibration A: coverage, mean days, pinball","[np.float64(0.9644611528822056), np.float64(22.874335839599), np.float64(1.576110275689223)]","[0.9644611528822055, 22.874335839599, 1.5761102756892227]",True
+"B1c@0.90: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+"B1c@0.9126: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+"B2@0.90: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+"B3@0.90: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+"Cstar@0.90: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+"Cstar@0.9126: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+"Dstar@0.90: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+"Dstar@0.9126: promise == max(1, ceil(pred + frozen shift - 1e-9))",0,0,True
+H1 change in day gap (R3 - R0),-4.108471177944864,-4.108471177944864,True
+"H1 change in coverage gap, pts",-2.8070175438596467,-2.8070175438596467,True
+H1 verdict changed (R0 keep -> R3 keep),1.0,1.0,True
+H2 g = 0 (C* identical to B3),0.0,0.0,True
+"Dstar@0.90 vs fair: B1c@0.: day diff, coverage diff pts","[-0.3218045112781951, 0.6115288220551407]","[np.float64(-0.3218045112781951), np.float64(0.6115288220551407)]",True
+Dstar@0.90 vs fair: B1c@0.: practical rule,0.0,0.0,True
+Dstar@0.90 vs fair: B1c@0.: day-diff interval (iid),"[-0.5458607804060034, -0.16770117896530212]",[-0.54586078 -0.16770118],True
+Dstar@0.90 vs fair: B1c@0.: day-diff interval (moving2),"[-0.6068236808502901, -0.12373393670262348]",[-0.60682368 -0.12373394],True
+"Dstar@0.90 vs replacement:: day diff, coverage diff pts","[3.365814536340853, 3.147869674185466]","[np.float64(3.365814536340853), np.float64(3.147869674185466)]",True
+Dstar@0.90 vs replacement:: practical rule,0.0,0.0,True
+Dstar@0.90 vs replacement:: day-diff interval (iid),"[3.2316136946831038, 3.465469760327049]",[3.23161369 3.46546976],True
+Dstar@0.90 vs replacement:: day-diff interval (moving2),"[3.1967039673981374, 3.489462462458722]",[3.19670397 3.48946246],True
+"Cstar@0.90 vs fair: B1c@0.: day diff, coverage diff pts","[-1.5392982456140345, -0.3107769423558948]","[np.float64(-1.5392982456140345), np.float64(-0.3107769423558948)]",True
+Cstar@0.90 vs fair: B1c@0.: practical rule,1.0,1.0,True
+Cstar@0.90 vs fair: B1c@0.: day-diff interval (iid),"[-1.7835723232144203, -1.3004485001173052]",[-1.78357232 -1.3004485 ],True
+Cstar@0.90 vs fair: B1c@0.: day-diff interval (moving2),"[-1.8392179245932923, -1.2572889233716245]",[-1.83921792 -1.25728892],True
+"Cstar@0.90 vs replacement:: day diff, coverage diff pts","[2.1483208020050135, 2.2255639097744306]","[np.float64(2.1483208020050135), np.float64(2.2255639097744306)]",True
+Cstar@0.90 vs replacement:: practical rule,0.0,0.0,True
+Cstar@0.90 vs replacement:: day-diff interval (iid),"[1.9364306045942399, 2.357460068404732]",[1.9364306  2.35746007],True
+Cstar@0.90 vs replacement:: day-diff interval (moving2),"[1.8984427971355222, 2.3998837933414583]",[1.8984428  2.39988379],True
+M B1c@0.9126: tighter-at-similar-reliability rule,0.0,0.0,True
+M Cstar@0.9126: tighter-at-similar-reliability rule,1.0,1.0,True
+M Dstar@0.9126: tighter-at-similar-reliability rule,0.0,0.0,True

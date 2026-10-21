@@ -1,0 +1,27 @@
+> SUPERSEDED — historical copy, not the current release.
+
+check,expected,actual,detail,pass
+stage 1 report is current,True,True,,True
+stage 1 is not blocked,True,True,,True
+stage 2 report is current,True,True,,True
+stage 2 is not blocked,True,True,,True
+stage 3 report is current,True,True,,True
+stage 3 is not blocked,True,True,,True
+raw files unchanged since stage 1,True,True,,True
+stage 2 built on the current mart,True,True,,True
+stage 3 built on the current mart,True,True,,True
+stage 2 built on the current stage-1 facts,True,True,,True
+stage 2 and stage 3 checks passed,True,True,,True
+weekly page = stage-2 page rebuilt from review_data.json (before nav/links),True,True,,True
+weekly page embeds review_data.json unchanged,True,True,,True
+weekly page weeks == weekly_kpis.csv weeks,74,74,,True
+data-quality page buckets == outcome_buckets.csv,99441,99441,,True
+data-quality page window == stage-1 selection,"{""A"": 78176, ""L"": 5953, ""U"": 1563, ""X"": 1037, ""confirmed_on_time_share"": 0.9122905288708397, ""first_week"": ""2017-02-27"", ""last_week"": ""2018-07-23"", ""otd_rate"": 0.9292396201072163, ""outcome_coverage"": 0.9817602576669934, ""status"": ""OK"", ""weeks"": 74}","{""A"": 78176, ""L"": 5953, ""U"": 1563, ""X"": 1037, ""confirmed_on_time_share"": 0.9122905288708397, ""first_week"": ""2017-02-27"", ""last_week"": ""2018-07-23"", ""otd_rate"": 0.9292396201072163, ""outcome_coverage"": 0.9817602576669934, ""status"": ""OK"", ""weeks"": 74}",,True
+model page AP / AUC / top-10% == test_metrics.csv,True,True,,True
+model page AP == independent verification (headline),True,True,,True
+weekly page: every local link resolves,[],[],,True
+weekly page: links to the other two pages,True,True,,True
+dq page: every local link resolves,[],[],,True
+dq page: links to the other two pages,True,True,,True
+model page: every local link resolves,[],[],,True
+model page: links to the other two pages,True,True,,True

@@ -1,0 +1,10 @@
+[project]
+name = "olist-delivery-risk"
+version = "0.6.3"
+description = "Offline delivery-performance analysis and late-delivery risk model on the public Olist dataset"
+requires-python = ">=3.10"
+dependencies = ["pandas>=2.2", "numpy>=1.26", "pyyaml>=6", "duckdb>=1.0", "scikit-learn>=1.4", "scipy>=1.11", "pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]

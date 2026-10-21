@@ -1,0 +1,61 @@
+{
+ "linear": {
+  "name": "C0",
+  "setting": {
+   "dow_categorical": false,
+   "target": "log1p",
+   "alpha": 0.0
+  },
+  "v_pinball_int": 1.2885595682855955
+ },
+ "hgb": {
+  "name": "D3",
+  "setting": {
+   "max_depth": 2,
+   "max_iter": 400
+  },
+  "v_pinball_int": 1.2626567040265668
+ },
+ "q": 0.9,
+ "metric": "V pinball on unshifted integer promise max(1, ceil(yhat))",
+ "rows": {
+  "F0": 13616,
+  "V": 12045
+ },
+ "runtime_seconds": 79.730996,
+ "residual_flags": [
+  {
+   "grouping": "predicted-duration quartile",
+   "group": "Q4 longest",
+   "orders": 3011,
+   "coverage": 0.8990368648289605,
+   "gap_pts_vs_overall": -3.1722786478636023,
+   "flag": true,
+   "model": "HGB D3",
+   "overall_v_coverage": 0.9307596513075965
+  }
+ ],
+ "registration_sha256": "683812953b87f50921cd15687cfdf2252db3a8cf4534d192043799c3cfbd16fd",
+ "reproduces": "select",
+ "e_or_c_touched": false
+}
+                 v_pinball_int_original  flag_original  v_pinball_int_reproduction  flag_reproduction      abs_diff
+step                                                                                                               
+C0                             1.288560           True                    1.288560               True  2.220446e-16
+C1                             1.291698          False                    1.291698              False  2.220446e-16
+C2                             1.289323          False                    1.289323              False  0.000000e+00
+C3 alpha=0.0001                1.287132          False                    1.287132              False  0.000000e+00
+C3 alpha=0.001                 1.292877          False                    1.292877              False  0.000000e+00
+C3 alpha=0.01                  1.370262          False                    1.370262              False  0.000000e+00
+D1                             1.272503          False                    1.272503              False  0.000000e+00
+D2                             1.265131          False                    1.265131              False  0.000000e+00
+D3                             1.262657           True                    1.262657               True  0.000000e+00
+D4                             1.262806          False                    1.262806              False  2.220446e-16
+D5                             1.266169          False                    1.266169              False  0.000000e+00
+D6                             1.264599          False                    1.264599              False  2.220446e-16
+D7                             1.263346          False                    1.263346              False  2.220446e-16
+D8                             1.269074          False                    1.269074              False  2.220446e-16
+
+real	1m23.509s
+user	1m28.032s
+sys	0m0.669s

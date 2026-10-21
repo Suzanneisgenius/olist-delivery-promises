@@ -1,0 +1,5 @@
+flag,orders,share_of_all_orders
+is_otd_eligible,96470,0.9701
+is_stage_eligible,95082,0.9562
+is_model_eligible_prelim,95195,0.9573
+is_review_eligible,91171,0.9168

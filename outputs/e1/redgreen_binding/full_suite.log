@@ -1,0 +1,345 @@
+........................................................................ [ 22%]
+........................................................................ [ 45%]
+........................................................................ [ 68%]
+........................................................................ [ 90%]
+.............................                                            [100%]
+==================================== PASSES ====================================
+______________ test_clean_tree_passes_and_leaves_owner_cases_open ______________
+----------------------------- Captured stdout call -----------------------------
+11 files in manifest; gate PASS
+___________________ test_failed_automated_uat_fails_the_gate ___________________
+----------------------------- Captured stdout call -----------------------------
+11 files in manifest; gate FAIL: automated UAT not PASS: UAT-01
+__ test_block_marker_failed_tests_missing_log_or_changed_config_fail_the_gate __
+----------------------------- Captured stdout call -----------------------------
+12 files in manifest; gate FAIL: block markers present: outputs/stage7/qa/RELEASE_BLOCKED.json
+11 files in manifest; gate FAIL: pytest: {'tests': 3, 'failures': 1, 'errors': 0, 'skipped': 0}
+10 files in manifest; gate FAIL: missing logs: ui_check.log
+11 files in manifest; gate PASS
+11 files in manifest; gate FAIL: stage-7 config does not match its registered SHA-256
+_________ test_verifier_failure_removes_old_evidence_and_exits_nonzero _________
+----------------------------- Captured stderr call -----------------------------
+INDEPENDENT VERIFICATION FAILED
+  verifier error: FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-root/pytest-115/test_verifier_failure_removes_0/config/model.yaml'
+_________________ test_failed_verification_stops_before_stage4 _________________
+----------------------------- Captured stdout call -----------------------------
+stage 3: ok (0s)
+=========================== short test summary info ============================
+PASSED tests/test_cohort.py::test_missing_week_breaks_the_run_and_flags_stay_separate
+PASSED tests/test_cohort.py::test_min_eligible_uses_a_plus_l_not_all_orders
+PASSED tests/test_cohort.py::test_zero_denominator_is_missing_not_zero
+PASSED tests/test_cohort.py::test_no_late_orders_gives_no_horizon_and_no_window
+PASSED tests/test_cohort.py::test_empty_inputs_do_not_crash
+PASSED tests/test_cohort.py::test_boundary_ignores_thin_tail
+PASSED tests/test_contract.py::test_contract_flags_duplicate_key_and_bad_zip
+PASSED tests/test_contract.py::test_review_key_is_review_id_plus_order_id
+PASSED tests/test_contract.py::test_orders_customer_foreign_key_is_checked
+PASSED tests/test_decompose.py::test_same_states_identity_and_centring_keeps_mix_total
+PASSED tests/test_decompose.py::test_shift_toward_low_otd_state_has_negative_mix
+PASSED tests/test_decompose.py::test_entry_and_exit_are_centred_and_reconcile
+PASSED tests/test_decompose.py::test_uncentred_entry_exit_would_break_the_identity
+PASSED tests/test_decompose.py::test_unknown_state_is_a_normal_group
+PASSED tests/test_decompose.py::test_zero_eligible_week_is_not_comparable
+PASSED tests/test_decompose.py::test_small_states_are_flagged_not_dropped
+PASSED tests/test_drills_safety.py::test_backup_is_removed_after_a_clean_restore
+PASSED tests/test_drills_safety.py::test_backup_is_kept_when_restore_fails
+PASSED tests/test_e1.py::test_used_rows_need_a_label_known_at_the_cutoff
+PASSED tests/test_e1.py::test_seller_snapshot_ignores_labels_delivered_at_or_after_T
+PASSED tests/test_e1.py::test_snapshot_rules
+PASSED tests/test_e1.py::test_partition_checks_catch_overlap_and_duplicates
+PASSED tests/test_e1.py::test_linear_preprocessing_is_learned_from_training_rows_only
+PASSED tests/test_e1.py::test_hgb_settings_and_training_only_categories
+PASSED tests/test_e1.py::test_dow_categorical_and_raw_target_variants_fit
+PASSED tests/test_e1.py::test_promise_is_max_one_ceil_of_unrounded_prediction_plus_shift
+PASSED tests/test_e1.py::test_shift_uses_the_order_statistic_for_its_own_q[0.9]
+PASSED tests/test_e1.py::test_shift_uses_the_order_statistic_for_its_own_q[0.9126]
+PASSED tests/test_e1.py::test_calibration_sort_index_uses_sorted_residuals
+PASSED tests/test_e1.py::test_calibration_with_repeated_residuals
+PASSED tests/test_e1.py::test_calibration_allows_a_negative_shift
+PASSED tests/test_e1.py::test_too_small_calibration_set_raises_instead_of_using_zero
+PASSED tests/test_e1.py::test_each_q_gets_its_own_shift
+PASSED tests/test_e1.py::test_integer_boundary_is_not_pushed_up_by_float_noise
+PASSED tests/test_e1.py::test_non_finite_or_missing_predictions_are_errors_not_drops
+PASSED tests/test_e1.py::test_log_model_residuals_are_on_the_day_scale
+PASSED tests/test_e1.py::test_shift_is_computed_on_unrounded_predictions
+PASSED tests/test_e1.py::test_per_order_values_reconcile_with_summaries
+PASSED tests/test_e1.py::test_pinball_known_values
+PASSED tests/test_e1.py::test_bootstrap_pools_orders_and_shares_draws_across_models
+PASSED tests/test_e1.py::test_moving_block_draws_have_valid_starts_and_length
+PASSED tests/test_e1.py::test_changed_config_blocks_prep
+PASSED tests/test_e1.py::test_e_scoring_refuses_without_a_complete_untampered_freeze
+PASSED tests/test_e1.py::test_edited_freeze_record_is_refused[path_keys0-0000000000000000000000000000000000000000000000000000000000000000]
+PASSED tests/test_e1.py::test_edited_freeze_record_is_refused[path_keys1-1000.0]
+PASSED tests/test_e1.py::test_edited_freeze_record_is_refused[path_keys2-value2]
+PASSED tests/test_e1.py::test_edited_freeze_record_is_refused[path_keys3-value3]
+PASSED tests/test_e1.py::test_edited_freeze_record_is_refused[path_keys4-value4]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys0-value0]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys1-value1]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys2-value2]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys3-value3]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys4-100]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys5-17063]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys6-nan]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys7-U]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys8-0.9126]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys9-skipped]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys10-0.01]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys11-value11]
+PASSED tests/test_e1.py::test_invalid_records_cannot_be_written[path_keys12-abc]
+PASSED tests/test_e1.py::test_missing_run_needs_an_explicit_failed_status
+PASSED tests/test_e1.py::test_scoring_inputs_are_rehashed_not_read_from_the_record
+PASSED tests/test_e1.py::test_dependency_code_change_is_caught
+PASSED tests/test_e1.py::test_registered_runs_and_thresholds_match_the_config
+PASSED tests/test_e1.py::test_calibration_refuses_non_finite_labels[nan]
+PASSED tests/test_e1.py::test_calibration_refuses_non_finite_labels[inf]
+PASSED tests/test_e1.py::test_calibration_refuses_non_finite_labels[-inf]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y0-p0-<lambda>0]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y0-p0-<lambda>1]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y0-p0-<lambda>2]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y0-p0-<lambda>3]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y1-p1-<lambda>0]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y1-p1-<lambda>1]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y1-p1-<lambda>2]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y1-p1-<lambda>3]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y2-p2-<lambda>0]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y2-p2-<lambda>1]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y2-p2-<lambda>2]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y2-p2-<lambda>3]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y3-p3-<lambda>0]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y3-p3-<lambda>1]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y3-p3-<lambda>2]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y3-p3-<lambda>3]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y4-p4-<lambda>0]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y4-p4-<lambda>1]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y4-p4-<lambda>2]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y4-p4-<lambda>3]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y5-p5-<lambda>0]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y5-p5-<lambda>1]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y5-p5-<lambda>2]
+PASSED tests/test_e1.py::test_scoring_and_calibration_refuse_invalid_inputs[y5-p5-<lambda>3]
+PASSED tests/test_e1.py::test_nan_label_is_not_counted_as_covered
+PASSED tests/test_e1.py::test_q_must_be_strictly_between_0_and_1[0]
+PASSED tests/test_e1.py::test_q_must_be_strictly_between_0_and_1[1]
+PASSED tests/test_e1.py::test_q_must_be_strictly_between_0_and_1[-0.1]
+PASSED tests/test_e1.py::test_q_must_be_strictly_between_0_and_1[1.5]
+PASSED tests/test_e1.py::test_q_must_be_strictly_between_0_and_1[nan]
+PASSED tests/test_e1.py::test_q_must_be_strictly_between_0_and_1[True]
+PASSED tests/test_e1.py::test_q_must_be_strictly_between_0_and_1[0.9]
+PASSED tests/test_e1.py::test_promise_and_bootstrap_refuse_invalid_inputs
+PASSED tests/test_e1.py::test_partition_manifest_has_one_line_per_segment_with_id_hash
+PASSED tests/test_e1.py::test_tie_set_uses_the_global_minimum_and_is_order_independent
+PASSED tests/test_e1.py::test_all_failed_candidates_are_not_evaluable_not_unsupported
+PASSED tests/test_e1.py::test_h1_uses_r0_and_r3_only
+PASSED tests/test_e1.py::test_h2_threshold_is_relative_not_absolute
+PASSED tests/test_e1_final.py::test_freeze_record_is_complete_and_valid
+PASSED tests/test_e1_final.py::test_end_to_end_scores_once_and_recomputes_every_shift
+PASSED tests/test_e1_final.py::test_missing_freeze_stops_before_e
+PASSED tests/test_e1_final.py::test_changed_model_file_stops_before_e
+PASSED tests/test_e1_final.py::test_changed_e_sample_stops_before_e
+PASSED tests/test_e1_final.py::test_shift_mismatch_on_c_stops_before_e
+PASSED tests/test_e1_final.py::test_edited_freeze_shift_stops_before_e
+PASSED tests/test_e1_final.py::test_fit_freeze_refuses_a_blocked_selection
+PASSED tests/test_e1_final.py::test_freeze_records_input_identity
+PASSED tests/test_e1_final.py::test_same_ids_changed_e_labels_stop_before_e
+PASSED tests/test_e1_final.py::test_same_ids_changed_e_feature_stops_before_e
+PASSED tests/test_e1_final.py::test_changed_b0_reference_stops_before_e
+PASSED tests/test_e1_final.py::test_canonical_hash_ignores_row_and_column_order_but_not_values
+PASSED tests/test_e1_final.py::test_freeze_without_any_input_identity_is_refused
+PASSED tests/test_e1_final.py::test_addendum_bound_to_this_freeze_is_accepted
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[wrong binding (all zeros)-kw0]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[missing binding-kw1]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: not JSON-kw2]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: a list-kw3]
+PASSED tests/test_e1_final.py::test_bad_addendum_stops_before_e[malformed: no input identity-kw4]
+PASSED tests/test_e1_red_green.py::test_untampered_record_is_accepted
+PASSED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[sample list (partition id hash) changed]
+PASSED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[calibration shift changed to 1000 days]
+PASSED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[threshold changed (H2 2% -> 1%)]
+PASSED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[thresholds emptied]
+PASSED tests/test_e1_red_green.py::test_edited_freeze_record_blocks_e_scoring[model file list emptied]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-label-NaN]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-label-+inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-label--inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-prediction-NaN]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-prediction-+inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[shift-prediction--inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-label-NaN]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-label-+inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-label--inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-prediction-NaN]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-prediction-+inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[pinball-prediction--inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-label-NaN]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-label-+inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-label--inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-prediction-NaN]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-prediction-+inf]
+PASSED tests/test_e1_red_green.py::test_non_finite_values_raise[policy_score-prediction--inf]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[shift-1]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[shift-99]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[shift-101]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[pinball-1]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[pinball-99]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[pinball-101]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[policy_score-1]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[policy_score-99]
+PASSED tests/test_e1_red_green.py::test_unequal_lengths_raise[policy_score-101]
+PASSED tests/test_e1_select.py::test_one_percent_rule_and_alpha_tie_pick
+PASSED tests/test_e1_select.py::test_alpha_adopted_when_it_clears_one_percent
+PASSED tests/test_e1_select.py::test_log1p_target_uses_its_own_alpha_grid
+PASSED tests/test_e1_select.py::test_failed_step_is_rejected_and_recorded
+PASSED tests/test_e1_select.py::test_failed_registered_start_is_not_evaluable
+PASSED tests/test_e1_select.py::test_fallback_solver_is_one_labelled_retry
+PASSED tests/test_e1_select.py::test_hgb_tie_set_prefers_shallower_then_fewer_iterations
+PASSED tests/test_e1_select.py::test_hgb_failure_recorded_and_all_failed_not_evaluable
+PASSED tests/test_e1_select.py::test_residual_flag_needs_500_orders_and_3_points
+PASSED tests/test_e1_select.py::test_runtime_self_check_passes_on_fixed_code
+PASSED tests/test_e1_select.py::test_selected_settings_can_be_passed_back_to_the_fitters
+PASSED tests/test_e1_select.py::test_failed_post_check_leaves_no_official_file
+PASSED tests/test_e1_select.py::test_passing_checks_publish_and_downstream_accepts
+PASSED tests/test_e1_select.py::test_unpublished_stage_is_refused
+PASSED tests/test_e1_select.py::test_per_order_file_reproduces_logged_losses
+PASSED tests/test_e1_select.py::test_selection_keeps_every_successful_candidate_prediction
+PASSED tests/test_e1_select.py::test_runner_failure_after_fitting_publishes_nothing
+PASSED tests/test_e1_select.py::test_runner_end_to_end_and_reproduction
+PASSED tests/test_e1_sim.py::test_label_usable_only_if_delivered_before_freeze
+PASSED tests/test_e1_sim.py::test_reproducible_and_same_promise_under_time_shift
+PASSED tests/test_e1_sim.py::test_paired_run_shares_evaluation_and_isolates_selection
+PASSED tests/test_features.py::test_snapshot_uses_delivery_time_not_purchase_time
+PASSED tests/test_features.py::test_changing_a_future_label_does_not_change_past_features
+PASSED tests/test_features.py::test_new_seller_gets_prior_and_smoothing_shrinks
+PASSED tests/test_features.py::test_row_scored_before_its_snapshot_is_rejected
+PASSED tests/test_features.py::test_target_order_never_feeds_its_own_feature
+PASSED tests/test_features.py::test_whitelist_rejects_forbidden_columns
+PASSED tests/test_features.py::test_split_boundaries
+PASSED tests/test_features.py::test_top_share_uses_floor_per_week_and_counts_hits
+PASSED tests/test_features.py::test_preprocessing_is_fit_on_training_rows_only
+PASSED tests/test_features.py::test_future_development_labels_cannot_select_parameters
+PASSED tests/test_features.py::test_invalid_stage_history_does_not_contaminate_handling_feature
+PASSED tests/test_mart.py::test_one_row_per_order_and_no_amount_doubling
+PASSED tests/test_mart.py::test_order_item_id_keeps_repeated_product_lines
+PASSED tests/test_mart.py::test_on_time_is_compared_by_calendar_day
+PASSED tests/test_mart.py::test_stage_anomaly_keeps_order_in_otd
+PASSED tests/test_mart.py::test_delivered_without_date_is_unconfirmed_not_labelled
+PASSED tests/test_mart.py::test_canceled_and_in_progress_buckets
+PASSED tests/test_mart.py::test_buckets_are_exclusive_and_reasons_may_overlap
+PASSED tests/test_mart.py::test_multi_seller_has_no_single_seller_or_distance
+PASSED tests/test_mart.py::test_stage_identity_holds
+PASSED tests/test_mart.py::test_review_primary_is_first_answered_after_delivery
+PASSED tests/test_mart.py::test_geo_excludes_out_of_brazil_points_and_keeps_leading_zeros
+PASSED tests/test_mart.py::test_join_checked_refuses_fan_out
+PASSED tests/test_mart.py::test_estimate_before_purchase_is_not_labelled
+PASSED tests/test_mart.py::test_missing_customer_kept_as_unknown_state
+PASSED tests/test_mart.py::test_weekly_totals_plus_unassigned_equal_mart
+PASSED tests/test_release_evidence.py::test_clean_tree_passes_and_leaves_owner_cases_open
+PASSED tests/test_release_evidence.py::test_failed_automated_uat_fails_the_gate
+PASSED tests/test_release_evidence.py::test_block_marker_failed_tests_missing_log_or_changed_config_fail_the_gate
+PASSED tests/test_release_gate.py::test_injected_failure_blocks_and_removes_stale_report
+PASSED tests/test_release_gate.py::test_all_pass_clears_old_block_marker
+PASSED tests/test_release_gate.py::test_hard_contract_failure_leaves_no_current_passing_report
+PASSED tests/test_release_gate.py::test_unexpected_error_is_also_a_blocked_release
+PASSED tests/test_release_gate.py::test_no_window_is_never_ready
+PASSED tests/test_release_gate.py::test_window_different_from_approval_needs_re_approval
+PASSED tests/test_release_gate.py::test_classifier_matches_mart_rule_order
+PASSED tests/test_stage2_gate.py::test_blocked_stage1_blocks_stage2
+PASSED tests/test_stage2_gate.py::test_window_mismatch_blocks_stage2
+PASSED tests/test_stage2_gate.py::test_ready_stage1_passes
+PASSED tests/test_stage2_gate.py::test_stage2_failure_does_not_block_retry_on_ready_stage1
+PASSED tests/test_stage2_gate.py::test_stage3_refuses_a_blocked_stage1
+PASSED tests/test_stage4.py::test_rebase_links_prefixes_relative_targets_only
+PASSED tests/test_stage4.py::test_nav_marks_only_the_current_page
+PASSED tests/test_stage4.py::test_embedded_page_data_round_trips_including_angle_brackets
+PASSED tests/test_stage4.py::test_broken_local_link_is_reported
+PASSED tests/test_stage4.py::test_consistent_upstream_passes_preconditions
+PASSED tests/test_stage4.py::test_blocked_stage3_blocks_stage4
+PASSED tests/test_stage4.py::test_stage3_built_on_another_mart_blocks_stage4
+PASSED tests/test_stage4.py::test_failed_precondition_publishes_nothing
+PASSED tests/test_stage4.py::test_missing_independent_verification_blocks_stage4
+PASSED tests/test_stage4.py::test_verification_reporting_a_mismatch_blocks_stage4
+PASSED tests/test_stage4.py::test_stale_verification_blocks_stage4_when_predictions_change_after_it
+PASSED tests/test_stage4.py::test_stale_verification_blocks_stage4_when_metrics_change_after_it
+PASSED tests/test_stage41.py::test_verifier_metrics_agree_with_sklearn
+PASSED tests/test_stage41.py::test_consistent_metrics_have_no_mismatch
+PASSED tests/test_stage41.py::test_auc_changed_to_one_is_caught_even_though_ap_is_unchanged
+PASSED tests/test_stage41.py::test_recall_changed_while_hits_kept_is_caught_twice
+PASSED tests/test_stage41.py::test_non_headline_model_is_checked
+PASSED tests/test_stage41.py::test_missing_model_row_is_a_mismatch
+PASSED tests/test_stage41.py::test_verifier_failure_removes_old_evidence_and_exits_nonzero
+PASSED tests/test_stage41.py::test_refresh_order_puts_independent_verification_between_stage3_and_stage4
+PASSED tests/test_stage41.py::test_failed_verification_stops_before_stage4
+PASSED tests/test_stage41.py::test_verifier_runs_isolated_from_project_modules
+PASSED tests/test_stage41.py::test_upstream_rerun_retires_pages_and_their_ui_uat_evidence
+PASSED tests/test_stage41.py::test_one_failing_regression_test_fails_uat_even_if_case_tests_pass
+PASSED tests/test_stage41.py::test_nonzero_pytest_exit_fails_uat_even_with_clean_report
+PASSED tests/test_stage41.py::test_zero_collected_tests_fails_uat
+PASSED tests/test_stage41.py::test_skipped_test_is_listed_and_not_counted_as_passed
+PASSED tests/test_stage41.py::test_markdown_cells_escape_pipes_and_newlines
+PASSED tests/test_stage41.py::test_signoff_file_is_not_overwritten_and_other_release_is_stale
+PASSED tests/test_stage41.py::test_missing_signoff_file_gets_header_only
+PASSED tests/test_stage41.py::test_current_evidence_passes
+PASSED tests/test_stage41.py::test_ui_evidence_from_older_pages_is_rejected
+PASSED tests/test_stage41.py::test_page_edited_after_release_is_rejected
+PASSED tests/test_stage41.py::test_blocked_stage4_is_rejected
+PASSED tests/test_stage41.py::test_failing_browser_evidence_is_rejected
+PASSED tests/test_stage5.py::test_fold_split_drops_labels_unknown_at_cutoff
+PASSED tests/test_stage5.py::test_clean_fold_passes_all_checks
+PASSED tests/test_stage5.py::test_leaked_future_label_in_fit_is_caught
+PASSED tests/test_stage5.py::test_eval_row_outside_block_is_caught
+PASSED tests/test_stage5.py::test_seller_snapshot_with_label_after_its_time_is_caught
+PASSED tests/test_stage5.py::test_eval_snapshot_refreshed_inside_month_is_caught
+PASSED tests/test_stage5.py::test_eval_order_also_in_fit_is_caught
+PASSED tests/test_stage5.py::test_reproduction_check_fails_on_different_scores_or_missing_rows
+PASSED tests/test_stage5.py::test_failed_precondition_blocks_stage5_and_publishes_nothing
+PASSED tests/test_stage6a.py::test_observation_end_conventions_are_explicit
+PASSED tests/test_stage6a.py::test_late_iff_delivery_time_reaches_deadline_so_p_late_is_survival_at_deadline
+PASSED tests/test_stage6a.py::test_final_file_categories
+PASSED tests/test_stage6a.py::test_order_bought_after_a_midnight_cut_never_enters_the_risk_set
+PASSED tests/test_stage6a.py::test_stale_u_is_never_a_censoring_candidate
+PASSED tests/test_stage6a.py::test_delivery_after_the_cut_is_unresolved_at_the_cut_not_an_event
+PASSED tests/test_stage6a.py::test_canceled_order_with_a_record_before_the_cut_is_a_conflict_not_open_and_not_an_event
+PASSED tests/test_stage6a.py::test_guards_catch_entry_after_cut_and_non_positive_times
+PASSED tests/test_stage6a.py::test_unresolved_table_keeps_conflicts_out_of_unresolved
+PASSED tests/test_stage7.py::test_conformal_shift_is_the_right_order_statistic
+PASSED tests/test_stage7.py::test_conformal_shift_is_infinite_when_calibration_is_too_small
+PASSED tests/test_stage7.py::test_conformal_promise_reaches_nominal_coverage_on_exchangeable_data
+PASSED tests/test_stage7.py::test_promises_are_whole_days_and_at_least_one
+PASSED tests/test_stage7.py::test_state_policy_falls_back_to_overall_for_small_states
+PASSED tests/test_stage7.py::test_score_uses_the_project_on_time_rule
+PASSED tests/test_stage7.py::test_registered_rule_needs_one_day_shorter_and_at_most_one_point_lower[19.0-0.93-True]
+PASSED tests/test_stage7.py::test_registered_rule_needs_one_day_shorter_and_at_most_one_point_lower[19.5-0.94-False]
+PASSED tests/test_stage7.py::test_registered_rule_needs_one_day_shorter_and_at_most_one_point_lower[19.0-0.929-False]
+PASSED tests/test_stage7.py::test_registered_rule_needs_one_day_shorter_and_at_most_one_point_lower[18.0-0.95-True]
+PASSED tests/test_stage7.py::test_monthly_reliability_flags_only_large_months_far_below_target
+PASSED tests/test_stage7.py::test_split_rows_uses_only_labels_known_at_the_freeze
+PASSED tests/test_stage7.py::test_changed_config_blocks_the_run
+PASSED tests/test_stage7.py::test_state_quantile_is_the_empirical_inverse_cdf
+PASSED tests/test_stage7.py::test_infinite_shift_cannot_become_a_promise
+PASSED tests/test_stage7.py::test_rule_edges_survive_floating_point
+PASSED tests/test_stage7_monitor.py::test_weekly_cohorts_use_monday_weeks_and_finalise_after_the_largest_promise
+PASSED tests/test_stage7_monitor.py::test_cusum_weights_have_the_right_signs
+PASSED tests/test_stage7_monitor.py::test_cusum_accumulates_and_resets_after_an_alarm
+PASSED tests/test_stage7_monitor.py::test_threshold_rule_needs_two_consecutive_large_low_weeks
+PASSED tests/test_stage7_monitor.py::test_h_is_zero_when_the_registered_arl_is_unattainable
+PASSED tests/test_stage7_monitor.py::test_h_hits_the_target_arl_when_it_is_attainable
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[none-20-1.0]
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[sudden-8-1.0]
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[sudden-9-1.2]
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[gradual-4-1.0]
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[gradual-5-1.02]
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[gradual-14-1.2]
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[transient-10-1.3]
+PASSED tests/test_stage7_monitor.py::test_registered_scenarios[transient-11-1.0]
+PASSED tests/test_stage7_monitor.py::test_shifted_days_round_half_up
+PASSED tests/test_stage7_monitor.py::test_simulation_never_alarms_when_every_order_is_covered
+PASSED tests/test_stage7_monitor.py::test_simulation_detects_a_sudden_shift_that_breaks_every_promise
+PASSED tests/test_stage7_monitor.py::test_dispersion_ratio_is_near_one_for_binomial_weeks
+PASSED tests/test_stage7_monitor.py::test_monitoring_is_blocked_without_a_parts_1_2_verdict
+PASSED tests/test_stage7_monitor.py::test_h0_cusum_never_carries_evidence_across_weeks
+PASSED tests/test_stage7_monitor.py::test_exact_in_control_arls_match_independent_binomial_values
+PASSED tests/test_stage7_monitor.py::test_threshold_arl_formula_agrees_with_simulation
+PASSED tests/test_stage7_monitor.py::test_threshold_arl_when_every_week_crosses
+PASSED tests/test_stage7_monitor.py::test_calibrate_h_refuses_a_target_beyond_the_restricted_mean
+PASSED tests/test_weekly.py::test_single_seller_queue_denominators_and_sample_flag
+PASSED tests/test_weekly.py::test_stage_diagnosis_excludes_invalid_and_unconfirmed_orders
+PASSED tests/test_weekly.py::test_wilson_interval_for_one_observed_success
+317 passed in 21.40s

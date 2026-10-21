@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-10-15T14:51:31.844200+00:00",
+  "cutoffs": [
+    "2018-04-01",
+    "2018-05-01",
+    "2018-06-01"
+  ],
+  "parameters_from_stage3": {
+    "gbm": {
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 15,
+      "max_iter": 250,
+      "l2_regularization": 1.0
+    },
+    "logistic": {
+      "C": 0.1
+    }
+  },
+  "stage3_lineage_sha256": "e3daff60ecc1504b25756cdabfbde7375216f42b15339015341136e2b687e28c",
+  "mart_sha256": "3dc5ec78507b23f9990e2ad30c80085d06c233c709f553365d4f368e7e452273",
+  "config_sha256": "0ded11578b892f558640e695dcfbcd73fce45e4bb1a9043c4a3134f2289f8c33",
+  "environment": {
+    "pandas": "3.0.5",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1"
+  },
+  "checks_pass": true
+}

@@ -1,0 +1,12 @@
+{
+  "generated_at": "2026-10-15T14:54:07.956535+00:00",
+  "config_sha256": "9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747",
+  "registered_sha256": "9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747",
+  "mart_sha256": "3dc5ec78507b23f9990e2ad30c80085d06c233c709f553365d4f368e7e452273",
+  "environment": {
+    "pandas": "3.0.5",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1"
+  },
+  "checks_pass": true
+}

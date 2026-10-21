@@ -1,0 +1,10 @@
+check,expected,actual,pass
+config matches the registered SHA-256,9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747,9c1ff876fb1777719a95cdb606b1f78be7989441b328a7b664dc8076a95b4747,True
+parts 1-2 report is current,True,True,True
+parts 1-2 kept the simple state rule (B0) at target 0.90,True,True,True
+B0 rebuilt here reproduces parts 1-2 coverage,True,True,True
+weekly replay counts every evaluation order once,19950,19950,True
+h is the attainable value (h >= 0) closest to an in-control ARL of 52 weeks,True,True,True
+"h = 0: simulated restricted mean agrees with the exact geometric ARL (within 10%, given censoring)",True,True,True
+"'none' scenario keeps the evaluation coverage (bootstrap sanity, +/- 0.5 pt)",True,True,True
+each scenario has replications x weeks simulated weeks,True,True,True

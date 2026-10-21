@@ -1,0 +1,59 @@
+{
+  "1_helper_guards": {
+    "selection": "refuses",
+    "summary": "11 passed, 34 deselected",
+    "ok": true
+  },
+  "2_one_day_minimum_and_boundaries": {
+    "selection": "minimum or boundary_cells or counterexample",
+    "summary": "8 passed, 37 deselected",
+    "ok": true
+  },
+  "3_recipe_b": {
+    "reads_saved_freeze": true,
+    "no_read_of_moved_freeze": true,
+    "per_recipe_saved_dir": true,
+    "acceptance_B_e_per_order_equal": true,
+    "acceptance_B_shifts_equal": true,
+    "acceptance_B_model_hashes_equal": true,
+    "acceptance_C_recorded": true,
+    "ok": true
+  },
+  "4_documents": {
+    "main: window sentence narrowed": true,
+    "main: rounding adds less than a day": true,
+    "main: points to the math note": true,
+    "main: summary closing sentence": true,
+    "supplement: untruncated floor identity": true,
+    "supplement: AI review is not peer review": true,
+    "supplement: math note in contribution statement": true,
+    "note: mean not generally optimal": true,
+    "note: rounding up adds less than one day": true,
+    "note: k/(n+1) proposition": true,
+    "main: k/n is only a necessary consequence": true,
+    "main: k/n does not verify the implementation": true,
+    "main: exchangeability not established (not asserted false)": true,
+    "note: k/n is only a necessary consequence": true,
+    "note: direct implementation check named": true,
+    "supplement: test count 362": true,
+    "main: old causal window sentence (absent)": true,
+    "note: absolute rejection of the mean (absent)": true,
+    "note: Beta paragraph (absent)": true,
+    "supplement: 'always loses the k-th order' (absent)": true,
+    "main: k/n read as proof of correct execution (absent)": true,
+    "main: non-exchangeability asserted (absent)": true,
+    "note: k/n read as proof of correct execution (absent)": true,
+    "supplement: stale test count (absent)": true,
+    "ok": true
+  },
+  "5_invariants": {
+    "freeze_sha256": true,
+    "config_sha256": true,
+    "scoring_snapshot_fingerprint": true,
+    "model_files_match_freeze": true,
+    "registered_results_equal_sealed": true,
+    "registered_policy_table_equal_sealed": true,
+    "ok": true
+  },
+  "all_ok": true
+}

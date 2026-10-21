@@ -6,8 +6,10 @@ Olist e-commerce data. Question: **when does a lower forecast loss fail to give 
 Three policies were compared under one fixed protocol: a per-state quantile rule, linear quantile regression and a
 shallow gradient-boosted model (HGB), each calibrated by a one-sided split-conformal-style shift.
 
-The implementation was AI-assisted and went through ten earlier review rounds (see PRIOR_REVIEWS.md). Every
-change to the plan is logged with time and reason in `docs/E1_DECISIONS.md`.
+The author led the project, developed the initial research design, and carried out multiple rounds of revisions.
+Claude helped refine selected portions of the code; see `AUTHORSHIP.md` for the confirmed scope. The project went
+through ten earlier review rounds (see PRIOR_REVIEWS.md). Every change to the plan is logged with time and reason
+in `docs/E1_DECISIONS.md`.
 
 ## 2. Your task
 Give an independent, critical review. Report only what you can support with evidence from this package.
@@ -73,7 +75,7 @@ Claims C22 (rewritten), C25-C28. Please check in particular: (a) the round-down 
 ```
 cd olist-e1-agent-review
 pip install -r requirements-e1-tested.txt     # if needed
-bash AGENT_REVIEW/verify_all.sh                 # expected: 9 x PASS, "ALL CHECKS PASSED"
+bash AGENT_REVIEW/verify_all.sh                 # expected: 10 x PASS, "ALL CHECKS PASSED"
 ```
 It checks: package manifest; config and freeze hashes; the scoring-time source fingerprint against the freeze; the
 post-hoc addendum's binding to the freeze; the full test suite (362); recomputation of every E1 number and every
@@ -102,7 +104,8 @@ Passing means the saved outputs are internally consistent. It is not a raw-data-
 - Over-coverage on E is not explained; delivery times, original estimated dates and order mix are not separated.
 - No independent full rebuild from raw data has been done; hashes and logs cannot prove no unrecorded runs.
 - Input-content hashing was added after scoring (addendum); it is not evidence that such checks existed earlier.
-- The contribution statement in the supplement is an unfilled draft for the author.
+- The old contribution draft in the historical review copy is superseded by `AUTHORSHIP.md` and part B of
+  `documents/current/E1_supplement.pdf`. It is not the current account of the author's contribution.
 
 ## 7. What to return
 Use `AGENT_REVIEW/REPORT_TEMPLATE.md`. For each finding: severity, location (file and line or section), what is wrong,

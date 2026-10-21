@@ -1,6 +1,10 @@
 # Start here
 
-This package is prepared for an agent reviewer.
+For the research question, results, and reading paths, start with [README.md](README.md).
+The author's confirmed division of work is in [AUTHORSHIP.md](AUTHORSHIP.md).
+Current reports are in `documents/current/`; older review copies are retained as historical records.
+
+## Reproducing checks or reviewing the project
 
 1. Read `AGENT_REVIEW/REVIEW_BRIEF.md` (task, priorities, ground rules).
 2. Run `bash AGENT_REVIEW/verify_all.sh` from this folder (about one minute; no raw data needed).

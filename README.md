@@ -12,15 +12,18 @@ with 90% target coverage.
 *Filled squares: policies calibrated on Oct–Dec 2017 only, frozen, scored once on Apr–Jul 2018. Dashed lines: post-hoc
 diagnostic curves that use the evaluation outcomes; not deployable, not used to choose a model.*
 
-## Three answers
+## Authorship
 
-*[Author: these are drafts. Rewrite them in your own words before sharing.]*
+I led this project, developed the initial research design, and carried out multiple rounds of revisions. I used Claude
+to help refine selected portions of the code. See the [authorship statement](AUTHORSHIP.md) for the scope of that assistance.
+
+## Research question and findings
 
 | Question | Answer |
 |---|---|
-| What did I expect at first? | That a model with lower forecast loss would give shorter promised dates at the same reliability, and that a regression would beat a simple per-state rule. |
-| Which result changed my mind? | Matching the comparison reversed the regression-versus-rule result (+2.57 → −1.54 days). Also, HGB had lower loss, yet its frozen policy promised 1.22 more days: it reached 97.1% coverage against 96.2%, so the two points were not at the same reliability. |
-| What do I still not know? | Why every calibrated policy over-covers the evaluation period (96–97% for a 90% target): changing delivery times, the cohort filter on Olist's estimated date, or order mix. I also don't know whether rounding down or recalibration would hold up in a new period, or how the results extend beyond single-seller delivered orders. |
+| What does the study ask? | Does lower forecast loss lead to shorter promised dates at comparable reliability, and does regression improve on a simple per-state rule? |
+| What did the comparison show? | Matching the comparison reversed the regression-versus-rule result (+2.57 → −1.54 days). Also, HGB had lower loss, yet its frozen policy promised 1.22 more days: it reached 97.1% coverage against 96.2%, so the two points were not at the same reliability. |
+| What remains unresolved? | Why every calibrated policy over-covers the evaluation period (96–97% for a 90% target): changing delivery times, the cohort filter on Olist's estimated date, or order mix. Whether rounding down or recalibration would hold up in a new period, and whether the results extend beyond single-seller delivered orders, remain untested. |
 
 ## Current version: start here
 
@@ -43,7 +46,7 @@ Rerunning the whole study from the raw Kaggle CSVs: `docs/REPRODUCE_E1.md`.
 ### Reading paths
 
 **Statistics faculty:** research question (main report §1) → main figure (§4) → mathematical note → limits (§6) →
-contribution statement (supplement, part B).
+[authorship statement](AUTHORSHIP.md) (also in the supplement, part B).
 
 **Data science / analytics recruiters:**
 

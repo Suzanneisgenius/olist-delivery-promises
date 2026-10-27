@@ -1,9 +1,20 @@
 # Authorship and assistance
 
-I led this project, developed the initial research design, and carried out multiple rounds of revisions. I used Claude
-to help refine selected portions of the code, not to carry out the project's overall research design or implementation.
+I built this project around a question I wanted to answer: when does a better forecast actually produce a better
+delivery promise? I designed the study, wrote the preregistration, and implemented the scoring code, tests, and
+simulations. Across successive revisions, I initiated each review and decided which findings required a change to
+the code, the comparison, or the conclusions.
 
-本项目由我主导，最初的研究设计由我提出，并由我完成多轮修改。Claude 用于协助完善部分代码内容；这不代表其承担整个项目的研究设计或实现。
+I also led the work that turned the research into a portfolio dashboard, including the verification workflow,
+diagnostic page, and release preparation. The E2b protocol remains a draft for future work.
+
+Claude assisted with selected code refinements and initial drafts of supporting documentation.
+
+我从一个自己想回答的问题出发设计了这个项目：预测更准，是否真的能带来更好的交付日期？研究设计、预注册文本、评分代码、测试和模拟由我完成。在后续多轮修改中，我发起各轮审查，并决定哪些意见需要落实到代码、比较方法或结论中。
+
+我也主导了把研究整理成作品集 dashboard 的工作，包括验证流程、诊断页面和发布准备。E2b 方案目前仍是后续研究草案。
+
+Claude 协助完善部分代码，并起草部分配套说明文档。
 
 ## Scope of this statement
 

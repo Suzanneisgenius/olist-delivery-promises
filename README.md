@@ -12,10 +12,18 @@ with 90% target coverage.
 *Filled squares: policies calibrated on Oct–Dec 2017 only, frozen, scored once on Apr–Jul 2018. Dashed lines: post-hoc
 diagnostic curves that use the evaluation outcomes; not deployable, not used to choose a model.*
 
-## Authorship
+## My contribution
 
-I led this project, developed the initial research design, and carried out multiple rounds of revisions. I used Claude
-to help refine selected portions of the code. See the [authorship statement](AUTHORSHIP.md) for the scope of that assistance.
+I built this project around a question I wanted to answer: when does a better forecast actually produce a better
+delivery promise? I designed the study, wrote the preregistration, and implemented the scoring code, tests, and
+simulations. Across successive revisions, I initiated each review and decided which findings required a change to
+the code, the comparison, or the conclusions.
+
+I also led the work that turned the research into a portfolio dashboard, including the verification workflow,
+diagnostic page, and release preparation. The E2b protocol remains a draft for future work.
+
+Claude assisted with selected code refinements and initial drafts of supporting documentation.
+See [AUTHORSHIP.md](AUTHORSHIP.md) for details.
 
 ## Research question and findings
 

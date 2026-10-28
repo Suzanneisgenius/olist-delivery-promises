@@ -1,19 +1,24 @@
 """Independent re-computation of the E1 final results from the saved per-order E file and bootstrap draws ONLY
 (numpy / pandas; no project code). Also one POST-HOC number that the registered output did not include: a
 week-block interval for the q = 0.9126 comparison with Olist (the registered rule passed by a narrow margin).
-Writes outputs/e1/score_verification.csv and outputs/e1/posthoc/e_olist_interval.json; exits non-zero on mismatch."""
+Usage: python3 scripts/e1_verify_score.py [OUT_DIR]   (default AGENT_REVIEW/verify_output)
+Writes OUT_DIR/score_verification.csv and OUT_DIR/e_olist_interval.json and checks them against the saved copies
+outputs/e1/score_verification.csv and outputs/e1/posthoc/e_olist_interval.json, which it never writes.
+Exits non-zero on any mismatch."""
 import json, sys
+from pathlib import Path
 import numpy as np, pandas as pd
 
+OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "AGENT_REVIEW/verify_output"); OUT.mkdir(parents=True, exist_ok=True)
 S = "outputs/e1/score"
 po = pd.read_csv(f"{S}/e_promises_per_order.csv.gz")
 res = json.load(open(f"{S}/results.json")); pt = pd.read_csv(f"{S}/policy_table.csv").set_index("policy")
 comps = json.load(open(f"{S}/comparisons.json"))
 y = po.actual_days.to_numpy()
 rows = []
+close = lambda a, b, tol: bool(np.all(np.abs(np.asarray(a, float) - np.asarray(b, float)) <= tol))
 def chk(name, exp, act, tol=1e-9):
-    rows.append({"check": name, "expected": exp, "recomputed": act,
-                 "pass": bool(np.all(np.abs(np.asarray(exp, float) - np.asarray(act, float)) <= tol))})
+    rows.append({"check": name, "expected": exp, "recomputed": act, "pass": close(exp, act, tol)})
 cov = lambda d: float((y <= d).mean()); days = lambda d: float(np.mean(d))
 pin = lambda d, q: float(np.mean(np.maximum(q * (y - d), (q - 1) * (y - d))))
 col = {"B1@0.90": "B1@0.90|promise", "B1c@0.90 (shifted)": "B1c@0.90|promise", "B2@0.90 (shifted)": "B2@0.90|promise",
@@ -68,8 +73,16 @@ for k in ("B1c@0.9126", "Cstar@0.9126", "Dstar@0.9126"):
                "day_diff_ci95_iid": interval(a - ol, "iid").tolist(),
                "coverage_diff_pts_ci95_iid": interval(((y <= a).astype(float) - (y <= ol)) * 100, "iid").tolist(),
                "note": "post hoc (not in the registered output); same saved week draws; does not change the registered verdict"}
-json.dump(post, open("outputs/e1/posthoc/e_olist_interval.json", "w"), indent=2)
-out = pd.DataFrame(rows); out.to_csv("outputs/e1/score_verification.csv", index=False)
+json.dump(post, open(OUT / "e_olist_interval.json", "w"), indent=2)
+out = pd.DataFrame(rows); out.to_csv(OUT / "score_verification.csv", index=False)
 print(out[["check", "pass"]].to_string(index=False)); print(f"{out['pass'].sum()} / {len(out)} pass")
 print(json.dumps(post, indent=1))
-sys.exit(0 if out["pass"].all() else 1)
+old = pd.read_csv("outputs/e1/score_verification.csv")
+same_checks = old.check.tolist() == out.check.tolist() and old["pass"].tolist() == out["pass"].tolist()
+saved = json.load(open("outputs/e1/posthoc/e_olist_interval.json"))
+num = lambda d: np.concatenate([np.ravel(d[k][f]) for k in sorted(d) for f in ("day_diff_vs_olist", "coverage_diff_pts_vs_olist",
+                                                                                "day_diff_ci95_iid", "coverage_diff_pts_ci95_iid")])
+same_post = saved.keys() == post.keys() and close(num(saved), num(post), 1e-9)
+print(f"saved outputs/e1/score_verification.csv has the same checks and results: {same_checks}")
+print(f"saved outputs/e1/posthoc/e_olist_interval.json reproduced to within 1e-9: {same_post}")
+sys.exit(0 if out["pass"].all() and same_checks and same_post else 1)

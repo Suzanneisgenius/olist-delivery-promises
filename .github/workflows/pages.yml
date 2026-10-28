@@ -1,0 +1,45 @@
+# Publishes the diagnostics page (docs/diagnostics_page/index.html and data/) to GitHub Pages.
+# One-time repository setting: Settings > Pages > Build and deployment > Source: GitHub Actions.
+name: Diagnostics page
+
+on:
+  push:
+    branches: [main]
+    paths: ["docs/diagnostics_page/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rebuild the data from the saved outputs and compare with the committed files
+        run: |
+          python3 -I docs/diagnostics_page/aggregate.py . "$RUNNER_TEMP/data"
+          diff -r "$RUNNER_TEMP/data" docs/diagnostics_page/data
+      - name: Collect the page and its data
+        run: |
+          mkdir "$RUNNER_TEMP/site"
+          cp -r docs/diagnostics_page/index.html docs/diagnostics_page/data "$RUNNER_TEMP/site/"
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ${{ runner.temp }}/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

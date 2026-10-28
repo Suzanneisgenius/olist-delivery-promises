@@ -1,0 +1,62 @@
+[
+ {
+  "key": "B1c",
+  "code": "B1c",
+  "label": "State rule, calibrated",
+  "kind": "registered",
+  "q": 0.9,
+  "orders": 19950,
+  "coverage": 0.9648621553884712,
+  "mean_promised_days": 23.992781954887217,
+  "n_missed": 701,
+  "source_policy": "B1c@0.90 (shifted)"
+ },
+ {
+  "key": "C*",
+  "code": "C*",
+  "label": "Linear quantile regression",
+  "kind": "registered",
+  "q": 0.9,
+  "orders": 19950,
+  "coverage": 0.9617543859649123,
+  "mean_promised_days": 22.453483709273183,
+  "n_missed": 763,
+  "source_policy": "Cstar@0.90 (shifted)"
+ },
+ {
+  "key": "D*",
+  "code": "D*",
+  "label": "Shallow gradient boosting (HGB)",
+  "kind": "registered",
+  "q": 0.9,
+  "orders": 19950,
+  "coverage": 0.9709774436090226,
+  "mean_promised_days": 23.670977443609022,
+  "n_missed": 579,
+  "source_policy": "Dstar@0.90 (shifted)"
+ },
+ {
+  "key": "B0",
+  "code": "B0",
+  "label": "Retained state rule",
+  "kind": "reference",
+  "q": 0.9,
+  "orders": 19950,
+  "coverage": 0.9394987468671679,
+  "mean_promised_days": 20.30516290726817,
+  "n_missed": 1207,
+  "source_policy": "replacement reference: stage-7 B0 (F + C, no shift)"
+ },
+ {
+  "key": "Olist",
+  "code": "Olist",
+  "label": "Olist's estimated date",
+  "kind": "reference",
+  "q": 0.9126,
+  "orders": 19950,
+  "coverage": 0.9573934837092731,
+  "mean_promised_days": 24.440350877192984,
+  "n_missed": 850,
+  "source_policy": "Olist promise"
+ }
+]

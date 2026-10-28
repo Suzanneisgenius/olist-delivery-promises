@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Olist delivery diagnostics</title>
+<meta name="description" content="Risk ranking, probability reliability and promised delivery dates on Olist orders, April to July 2018: aggregates of saved model outputs.">
+<meta name="color-scheme" content="light dark">
+<style>
+:root{color-scheme:light;
+  --bg:#fcfcfb;--fg:#0b0b0b;--muted:#52514e;--line:#dedcd6;--bad:#d03b3b;
+  --axis:#b5b4ae;--grid:#ecebe7;--ref:#8a8984;--pop:#ffffff;--pop-line:#dedcd6;--shadow:0 4px 16px rgb(0 0 0 / .08);
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",P052,Georgia,serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
+  --fs:.95rem;--fs-cap:.8rem;--gap-xs:4px;--gap-sm:8px;--gap-md:12px;--gap-lg:20px;--gap-xl:32px;--radius:6px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#1a1a19;--fg:#f0efec;--muted:#c3c2b7;--line:#3a3935;--axis:#6b6a65;--grid:#2c2c2a;--ref:#9a9993;--pop:#262624;--pop-line:#3a3935;--shadow:0 4px 16px rgb(0 0 0 / .4);
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#1a1a19;--fg:#f0efec;--muted:#c3c2b7;--line:#3a3935;--axis:#6b6a65;--grid:#2c2c2a;--ref:#9a9993;--pop:#262624;--pop-line:#3a3935;--shadow:0 4px 16px rgb(0 0 0 / .4);
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:var(--fs);line-height:1.45;-webkit-text-size-adjust:100%}
+a{color:inherit;text-underline-offset:.15em}
+.od{container:od/inline-size;max-width:72rem;margin-inline:auto;padding:40px 16px 56px;display:flex;flex-direction:column;gap:var(--gap-xl)}
+.od p,.od h1,.od h2,.od h3,.od figure,.od ol{margin:0}
+.od .od-b{font-weight:600}
+.od-fn{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.od-head{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--gap-lg) var(--gap-xl);align-items:end}
+.od-head-main{display:flex;flex-direction:column;gap:var(--gap-md)}
+.od-title{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,1.4rem + 3.4cqi,3.4rem);line-height:1.02;letter-spacing:-.015em}
+.od-lede{font-family:var(--serif);font-size:clamp(1.1rem,.95rem + .7cqi,1.3rem);line-height:1.45;max-width:58ch;font-variant-numeric:tabular-nums}
+.od-scope{font-size:var(--fs-cap);color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding-top:var(--gap-sm)}
+.od-tabs{display:flex;flex-wrap:wrap;gap:var(--gap-xs) var(--gap-xl);border-bottom:1px solid var(--line)}
+.od-tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:var(--gap-sm) 0;font:inherit;color:var(--muted);cursor:pointer;display:inline-flex;align-items:baseline;gap:var(--gap-sm)}
+.od-tab:hover,.od-tab[aria-selected="true"]{color:var(--fg)}
+.od-tab[aria-selected="true"]{border-bottom-color:var(--fg)}
+.od-tab:focus-visible,.od-seg button:focus-visible,.od-select:focus-visible,.od-range:focus-visible,.od a:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.od-view{display:flex;flex-direction:column;gap:var(--gap-lg)}
+.od-q{font-family:var(--serif);font-weight:400;font-size:clamp(1.45rem,1.15rem + 1.3cqi,1.9rem);line-height:1.15;max-width:34ch;text-wrap:balance}
+.od-controls{display:flex;flex-wrap:wrap;gap:var(--gap-md) var(--gap-lg);align-items:flex-end}
+.od-field{display:flex;flex-direction:column;gap:var(--gap-xs);font-size:var(--fs-cap);color:var(--muted)}
+.od-seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.od-seg button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-size:var(--fs-cap);padding:6px var(--gap-sm);min-height:32px;cursor:pointer}
+.od-seg button+button{border-left:1px solid var(--line)}
+.od-seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.od-select{font:inherit;font-size:var(--fs-cap);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:6px var(--gap-sm);min-height:32px}
+.od-range-row{display:flex;align-items:center;gap:var(--gap-sm)}
+.od-range{width:min(14rem,55vw);accent-color:var(--fg)}
+.od-range-val{font-family:var(--mono);color:var(--fg);min-width:4ch}
+.od-split{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--gap-xl);align-items:start}
+.od-split.r57{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.od-split.r75{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.od-fig{display:flex;flex-direction:column;gap:var(--gap-sm);border-top:1px solid var(--fg);padding-top:var(--gap-sm);min-width:0}
+.od-fig h3,.od-aside h3{font-size:var(--fs);font-weight:500;text-wrap:balance}
+.od-aside{display:flex;flex-direction:column;gap:var(--gap-md);border-top:1px solid var(--line);padding-top:var(--gap-sm);line-height:1.55;font-variant-numeric:tabular-nums;min-width:0}
+.od-margin{border-top:0;padding-top:0;border-left:2px solid var(--fg);padding-left:var(--gap-md)}
+.od-big{font-family:var(--serif);font-size:clamp(3rem,2rem + 4cqi,4.6rem);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.od-note{font-size:var(--fs-cap);color:var(--muted);line-height:1.5;max-width:72ch;font-variant-numeric:tabular-nums}
+.od-list{list-style:decimal-leading-zero;padding-left:2rem;display:flex;flex-direction:column;gap:var(--gap-sm)}
+.od-list li::marker{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.od-chart{position:relative;min-height:300px}
+.od-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.od-ax text{fill:var(--muted);font-size:var(--fs-cap);font-family:var(--mono)}
+.od-ax .domain,.od-ax .tick line{stroke:var(--axis)}
+.od-grid-l line{stroke:var(--grid)}
+.od-grid-l .domain{display:none}
+.od-axlbl{fill:var(--muted);font-size:var(--fs-cap);font-family:var(--sans)}
+.od-dl{fill:var(--fg);font-size:var(--fs-cap);font-family:var(--sans);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.od-tip{position:absolute;z-index:2;pointer-events:none;background:var(--pop);border:1px solid var(--pop-line);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--gap-xs) var(--gap-sm);font-size:var(--fs-cap);color:var(--fg);font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;flex-direction:column;gap:2px}
+.od-tip .h{color:var(--muted)}
+.od-tip .r{display:flex;align-items:center;gap:var(--gap-xs)}
+.od-legend{display:flex;flex-wrap:wrap;gap:var(--gap-xs) var(--gap-md);font-size:var(--fs-cap);color:var(--muted)}
+.od-legend>span{display:inline-flex;align-items:center;gap:var(--gap-xs)}
+.od-key{display:inline-block;width:.75rem;height:.75rem;flex:none;border-radius:2px}
+.od-key.line,.od-key.dash{height:0;width:1.1rem;border-radius:0;border-top:2px solid var(--muted)}
+.od-key.dash{border-top-style:dashed}
+.od-key.ring{border-radius:50%;border:1.5px solid var(--muted);background:transparent}
+.od-key.ink{background:var(--fg);border-radius:50%;width:.55rem;height:.55rem}
+.od-twrap{overflow-x:auto}
+.od-t{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:.78rem;font-variant-numeric:tabular-nums}
+.od-t th,.od-t td{text-align:right;padding:var(--gap-xs) var(--gap-sm);border-bottom:1px solid var(--line);white-space:nowrap}
+.od-t th:first-child,.od-t td:first-child{text-align:left;padding-left:0;white-space:normal}
+.od-t th{font-family:var(--sans);font-size:var(--fs-cap);color:var(--muted);font-weight:500;vertical-align:bottom;white-space:normal}
+.od-t tr.od-total td{font-weight:600}
+.od-sub{display:block;font-size:.7rem;color:var(--muted);font-weight:400}
+.od-foot{display:flex;flex-direction:column;gap:var(--gap-md);font-size:var(--fs-cap);color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:var(--gap-md)}
+.od-foot summary{cursor:pointer;color:var(--fg)}
+.od-foot .od-t{max-width:56rem;margin-top:var(--gap-sm)}
+.od-foot .od-t th,.od-foot .od-t td{white-space:normal;text-align:left}
+.od-msg{display:flex;align-items:center;justify-content:center;gap:var(--gap-xs);min-height:300px;color:var(--muted);font-size:var(--fs-cap);text-align:center;padding:0 var(--gap-md)}
+.od-msg.fail::before{content:"";flex:none;width:.375rem;height:.375rem;border-radius:50%;background:var(--bad)}
+@container od (max-width:46rem){.od-head,.od-split,.od-split.r57,.od-split.r75{grid-template-columns:minmax(0,1fr)}.od-t th,.od-t td{padding-inline:var(--gap-xs)}}
+</style>
+</head>
+<body>
+<main class="od">
+  <header class="od-head">
+    <div class="od-head-main">
+      <p class="od-fn">Olist orders, Brazil · purchases April to July 2018</p>
+      <h1 class="od-title">Olist delivery diagnostics</h1>
+      <p class="od-lede">Replaying each week of saved predictions and picking the 10% of orders with the highest risk, the monthly-refit
+        logistic model's picks included <span class="od-b" data-source="risk_budget" data-field="recall" data-key="refit|logistic|all|10" data-fmt="pct1">—</span>
+        of the orders that turned out late, <span class="od-b" data-source="risk_budget" data-field="lift_vs_random" data-key="refit|logistic|all|10" data-fmt="f1">—</span>
+        times as many as a random pick with the same weekly budget. In every month the risk scores overstated the late rate. In the E1 promise study,
+        neither regression policy met the standard for replacing the retained state rule.</p>
+    </div>
+    <p class="od-scope">Single-seller orders that were eventually delivered. Late means delivered after Olist's own estimated date.
+      The monthly refit scores April to June only. A historical analysis of saved predictions, not a live system: no order was
+      followed up. Not affiliated with Olist.</p>
+  </header>
+
+  <div class="od-tabs" role="tablist" aria-label="Views">
+    <button class="od-tab" type="button" role="tab" id="tab-risk" aria-controls="risk" aria-selected="true"><span class="od-fn">01</span>Who to check first</button>
+    <button class="od-tab" type="button" role="tab" id="tab-reliability" aria-controls="reliability" aria-selected="false" tabindex="-1"><span class="od-fn">02</span>Are the risk scores right</button>
+    <button class="od-tab" type="button" role="tab" id="tab-promises" aria-controls="promises" aria-selected="false" tabindex="-1"><span class="od-fn">03</span>Promised dates</button>
+  </div>
+
+  <section class="od-view" id="risk" role="tabpanel" aria-labelledby="tab-risk">
+    <h2 class="od-q">With limited staff, which orders should be checked first?</h2>
+    <div class="od-controls">
+      <div class="od-field"><span id="lbl-version-1">Model version</span>
+        <div class="od-seg" data-param="version" role="group" aria-labelledby="lbl-version-1">
+          <button type="button" data-value="refit">Refit each month</button><button type="button" data-value="frozen">Frozen on 1 Apr 2018</button></div></div>
+      <div class="od-field"><span id="lbl-model-1">Model</span>
+        <div class="od-seg" data-param="model" role="group" aria-labelledby="lbl-model-1">
+          <button type="button" data-value="logistic">Logistic regression</button><button type="button" data-value="gbm">Gradient boosting</button></div></div>
+      <label class="od-field" for="sel-month">Purchase month<select id="sel-month" class="od-select"></select></label>
+      <label class="od-field" for="rng-share">Share of each week's orders picked
+        <span class="od-range-row"><input id="rng-share" class="od-range" type="range" min="1" max="30" step="1" value="10"><span class="od-range-val" id="val-share">10%</span></span></label>
+    </div>
+    <div class="od-split">
+      <figure class="od-fig">
+        <span class="od-fn">Fig. 1</span>
+        <h3>Late orders among the picks as the weekly share grows</h3>
+        <p class="od-note">In every purchase week the orders with the highest risk scores are picked first, by the rule each model was
+          scored with: the frozen model ranks each week of the whole test period (stage 3), the monthly refit ranks each week within
+          its own month (stage 5). For the frozen model a week that spans two months is ranked once, so one month's picks can be
+          slightly above or below the chosen share. The dashed line is a random pick with the same weekly budgets, on average.</p>
+        <div class="od-legend" id="leg-budget"></div>
+        <div class="od-chart" id="ch-budget"></div>
+      </figure>
+      <aside class="od-aside">
+        <span class="od-fn">At the chosen share</span>
+        <p class="od-big"><span class="od-dyn" data-source="risk_budget" data-field="recall" data-fmt="pct1">—</span></p>
+        <p>of the <span class="od-dyn od-b" data-source="risk_budget" data-field="late_total" data-fmt="int">—</span>
+          orders that turned out late were among the picks. The picks were <span class="od-dyn" data-source="risk_budget" data-field="selected" data-fmt="int">—</span>
+          of <span class="od-dyn" data-source="risk_budget" data-field="orders" data-fmt="int">—</span> orders, and
+          <span class="od-dyn" data-source="risk_budget" data-field="late_in_selected" data-fmt="int">—</span> of them turned out late,
+          where a random pick with the same weekly budgets would find about <span class="od-dyn" data-source="risk_budget" data-field="random_expected_late" data-fmt="f1">—</span>:
+          <span class="od-dyn od-b" data-source="risk_budget" data-field="lift_vs_random" data-fmt="f1">—</span> times as many.</p>
+        <p class="od-note">This replays historical weeks with saved predictions: the risk-ranked picks included these eventually late orders.
+          No follow-up took place, and nothing here shows that a delay could have been prevented.
+          The picks use only the order of scores within each week. One strictly increasing transform of the probabilities, applied to
+          the whole batch, would pick the same orders; a recalibration that differs by group or by month could change them.
+          Canceled and never-delivered orders are not scored.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="od-view" id="reliability" role="tabpanel" aria-labelledby="tab-reliability" hidden>
+    <h2 class="od-q">When a score says 10% risk, is the late rate really near 10%?</h2>
+    <div class="od-controls">
+      <div class="od-field"><span id="lbl-version-2">Model version</span>
+        <div class="od-seg" data-param="version" role="group" aria-labelledby="lbl-version-2">
+          <button type="button" data-value="refit">Refit each month</button><button type="button" data-value="frozen">Frozen on 1 Apr 2018</button></div></div>
+      <div class="od-field"><span id="lbl-model-2">Model</span>
+        <div class="od-seg" data-param="model" role="group" aria-labelledby="lbl-model-2">
+          <button type="button" data-value="logistic">Logistic regression</button><button type="button" data-value="gbm">Gradient boosting</button></div></div>
+    </div>
+    <div class="od-split">
+      <figure class="od-fig">
+        <span class="od-fn">Fig. 2</span>
+        <h3>Late rate by purchase month</h3>
+        <p class="od-note">Average predicted probability against the share of orders that were late. Whiskers: 95% Wilson interval for the observed rate, treating orders as independent.</p>
+        <div class="od-legend" id="leg-monthly"></div>
+        <div class="od-chart" id="ch-monthly"></div>
+      </figure>
+      <aside class="od-aside od-margin">
+        <span class="od-fn">Not tested here</span>
+        <h3>Recalibration was not evaluated</h3>
+        <p class="od-note">Labels that arrive early come mostly from on-time orders. A fixed reporting lag, for example waiting 30 days after a
+          month ends, would need an order-level audit of when labels became available: waiting alone does not show that a month's labels are
+          complete or representative. Under such a lag, a model frozen on 1 April 2018 could be checked on June and July 2018 only, with
+          <span data-source="prob_monthly" data-field="late" data-key="frozen|logistic|2018-06" data-fmt="int">—</span>
+          and <span data-source="prob_monthly" data-field="late" data-key="frozen|logistic|2018-07" data-fmt="int">—</span> late orders.
+          Those months are small and have already been inspected, so any such test would be exploratory, not blind. Figure 2 shows that the
+          scores overpredict; it does not show whether a correction fitted later would help.</p>
+      </aside>
+    </div>
+    <div class="od-split r57">
+      <figure class="od-fig">
+        <span class="od-fn">Fig. 3</span>
+        <h3>Observed late rate by risk band</h3>
+        <div class="od-controls"><label class="od-field" for="sel-relmonth">Purchase month<select id="sel-relmonth" class="od-select"></select></label></div>
+        <p class="od-note">Orders sorted by score and cut into equal-count bands: ten for all months together, five for one month. A well-calibrated score puts the points on the dashed diagonal.</p>
+        <div class="od-chart" id="ch-bins"></div>
+      </figure>
+      <figure class="od-fig">
+        <span class="od-fn">Table 1</span>
+        <h3>Monthly figures</h3>
+        <p class="od-note">Observed over expected below 1 means the scores predicted more late orders than happened.</p>
+        <div class="od-twrap">
+          <table class="od-t" id="tb-monthly">
+            <thead><tr><th>Month</th><th>Orders</th><th>Late</th><th>Observed</th><th>Predicted</th><th>Obs. / exp.</th><th>Brier</th><th>Log loss</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="od-view" id="promises" role="tabpanel" aria-labelledby="tab-promises" hidden>
+    <h2 class="od-q">Is a more complex model worth switching to for promised delivery dates?</h2>
+    <p class="od-note">From the E1 study: each policy was calibrated on October to December 2017 orders for 90% coverage, frozen, and scored once on
+      April to July 2018 (<span data-source="e1_policies" data-field="orders" data-key="D*" data-fmt="int">—</span> orders). That period had been looked at
+      earlier in the project, so this is pre-registered exploratory work, not a blind test. How some conclusions of the sealed
+      E1 reports should be read is set out in the <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/docs/E1_WORDING_CORRECTIONS_2026-10-27.md">wording corrections</a>.</p>
+    <div class="od-split">
+      <figure class="od-fig">
+        <span class="od-fn">Fig. 4</span>
+        <h3>Promised days against coverage on April to July 2018</h3>
+        <div class="od-legend" id="leg-days"></div>
+        <div class="od-chart" id="ch-days"></div>
+        <p class="od-note">Squares: registered policies, scored once. Hollow circles: the retained state rule B0 and Olist's own estimated date.
+          Dashed lines: post-hoc curves that slide each model's shift over the evaluation orders' own outcomes. They are diagnostic, not deployable, and were not used to choose a model.</p>
+      </figure>
+      <aside class="od-aside">
+        <span class="od-fn">Reading Fig. 4</span>
+        <h3>What the comparison shows</h3>
+        <ol class="od-list">
+          <li>The same target does not give the same coverage. All three policies aimed at 90% and covered
+            <span data-source="e1_policies" data-field="coverage" data-key="B1c" data-fmt="pct1">—</span> (state rule),
+            <span data-source="e1_policies" data-field="coverage" data-key="C*" data-fmt="pct1">—</span> (linear) and
+            <span data-source="e1_policies" data-field="coverage" data-key="D*" data-fmt="pct1">—</span> (HGB) of orders.</li>
+          <li>Shorter promises are not at the same reliability. Linear promised
+            <span data-source="e1_policies" data-field="mean_promised_days" data-key="C*" data-fmt="f2">—</span> days on average and HGB
+            <span data-source="e1_policies" data-field="mean_promised_days" data-key="D*" data-fmt="f2">—</span>, at different coverage, so the two registered points do not rank the models.</li>
+          <li>Every calibrated policy covered more than its target. That is consistent with changing delivery times, the cohort filter on Olist's estimated date and order mix; the study does not separate these.</li>
+        </ol>
+      </aside>
+    </div>
+    <div class="od-split r75">
+      <figure class="od-fig">
+        <span class="od-fn">Table 2</span>
+        <h3>Registered result and the rounding rule</h3>
+        <p class="od-note">First policy minus second; negative days mean a sooner promise. Under the registered round-up rule HGB was
+          <span data-source="e1_rounding" data-field="day_diff" data-key="ceil|D*|B1c" data-fmt="s2">—</span> days against the calibrated state rule, below the one-day bar.
+          Rounding down is a post-hoc check: it gives <span data-source="e1_rounding" data-field="day_diff" data-key="floor|D*|B1c" data-fmt="s2">—</span> days and does not replace the registered result.
+          Neither model met the standard for replacing B0.</p>
+        <div class="od-twrap">
+          <table class="od-t" id="tb-rounding">
+            <thead><tr><th>Comparison</th><th>Days, round up (registered)</th><th>Coverage pts, round up</th><th>Days, round down (post hoc)</th><th>Coverage pts, round down</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="od-fig">
+        <span class="od-fn">Table 3</span>
+        <h3>Days at the first shift reaching each coverage level (post hoc)</h3>
+        <p class="od-note">For each policy, the shift is set after the fact on the evaluation orders: among the evaluated shifts (every 0.01 day
+          for the two models, every whole day for the state rule) whose coverage reaches the level, the one with the fewest promised days.
+          Each cell gives the mean promised days and, below it, the coverage actually reached. Whole-day steps make a policy overshoot the
+          level, the state rule most of all, so a row does not compare policies at exactly equal coverage. A diagnostic, not a deployable
+          policy.</p>
+        <div class="od-twrap">
+          <table class="od-t" id="tb-matched">
+            <thead><tr><th>Coverage level</th><th>State rule<span class="od-sub">days, reached</span></th><th>Linear<span class="od-sub">days, reached</span></th><th>HGB<span class="od-sub">days, reached</span></th><th>HGB minus linear<span class="od-sub">days</span></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <footer class="od-foot">
+    <p>Every figure is an aggregate of saved files in the <a href="https://github.com/Suzanneisgenius/olist-delivery-promises">olist-delivery-promises</a>
+      repository; no order-level rows are shown. <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/tree/main/docs/diagnostics_page">aggregate.py</a>
+      builds the seven data files below from the repository and checks them against the saved stage-3 and stage-5 metrics.
+      Wording corrections to the E1 reports, audit notes and the corrections made to this page before publication:
+      <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/docs/E1_WORDING_CORRECTIONS_2026-10-27.md">E1_WORDING_CORRECTIONS_2026-10-27.md</a>.</p>
+    <details>
+      <summary>Sources</summary>
+      <table class="od-t">
+        <thead><tr><th>Data file</th><th>Built from</th></tr></thead>
+        <tbody>
+          <tr><td><a href="data/risk_budget.json">risk_budget.json</a></td><td>outputs/stage3/test_predictions.csv, outputs/stage5/fold_predictions.csv: weekly picks at 1–30%, by version, model and month</td></tr>
+          <tr><td><a href="data/prob_monthly.json">prob_monthly.json</a></td><td>the same two files: observed and predicted late rate, Brier score and log loss by month</td></tr>
+          <tr><td><a href="data/prob_bins.json">prob_bins.json</a></td><td>the same two files: equal-count score bands</td></tr>
+          <tr><td><a href="data/e1_policies.json">e1_policies.json</a></td><td>outputs/e1/score/policy_table.csv, copied</td></tr>
+          <tr><td><a href="data/e1_curves.json">e1_curves.json</a></td><td>outputs/e1/posthoc_m4/diagnostic_curves_E.csv, copied (post hoc)</td></tr>
+          <tr><td><a href="data/e1_matched.json">e1_matched.json</a></td><td>outputs/e1/posthoc_m4/matched_coverage_E.csv, copied (post hoc)</td></tr>
+          <tr><td><a href="data/e1_rounding.json">e1_rounding.json</a></td><td>outputs/e1/posthoc_m4/rounding_comparisons.csv, copied</td></tr>
+        </tbody>
+      </table>
+    </details>
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const CHARTS = ['#ch-budget', '#ch-monthly', '#ch-bins', '#ch-days'];
+  const message = (text, fail) => CHARTS.forEach((s) => {
+    const m = document.createElement('div'); m.className = 'od-msg' + (fail ? ' fail' : ''); m.textContent = text; $(s).replaceChildren(m);
+  });
+  if (!window.d3) { message('The chart library could not be loaded.', true); return; }
+
+  const pct1 = d3.format('.1%'), pct2 = d3.format('.2%'), pct0 = d3.format('.0%'), int = d3.format(','), f1 = d3.format(',.1f'), f2 = d3.format('.2f'),
+    f3 = d3.format('.3f'), f4 = d3.format('.4f'), s2 = d3.format('+.2f');
+  const FMT = { pct1, int, f1, f2, s2 };
+  const MODEL = { logistic: 'Logistic regression', gbm: 'Gradient boosting' };
+  const modelColor = (m) => (m === 'logistic' ? 'var(--s1)' : 'var(--s2)');
+  const e1Color = (k) => ({ state: 'var(--s1)', linear: 'var(--s2)', hgb: 'var(--s3)' })[k];
+  const CURVE_CODE = { 'state rule': 'state', 'linear C*': 'linear', 'HGB D*': 'hgb' };
+  const POLICY_CODE = { B1c: 'state', 'C*': 'linear', 'D*': 'hgb' };
+  const E1_NAME = { state: 'State rule (B1c)', linear: 'Linear quantile regression (C*)', hgb: 'HGB (D*)' };
+  const monthShort = (m) => d3.utcFormat('%b %Y')(new Date(m + '-01T00:00:00Z'));
+  const monthLabel = (m) => (m === 'all' ? 'All months' : monthShort(m));
+  const FILES = ['risk_budget', 'prob_monthly', 'prob_bins', 'e1_policies', 'e1_curves', 'e1_matched', 'e1_rounding'];
+  const D = {}, KEYED = {};
+
+  // Filter state lives in the address, so a refresh or a shared link shows the same view.
+  const VIEWS = ['risk', 'reliability', 'promises'];
+  const DEFAULTS = { version: 'refit', model: 'logistic', month: 'all', share: '10', rel_month: 'all' };
+  const ALLOWED = { version: ['refit', 'frozen'], model: ['logistic', 'gbm'] };
+  const P = { ...DEFAULTS };
+  for (const [k, v] of new URLSearchParams(location.search)) if (k in P && (!ALLOWED[k] || ALLOWED[k].includes(v))) P[k] = v;
+  let current = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'risk';
+  function setParams(change) {
+    Object.assign(P, change);
+    const q = new URLSearchParams(Object.entries(P).filter(([k, v]) => v !== DEFAULTS[k])).toString();
+    history.replaceState(null, '', (q ? '?' + q : location.pathname) + (current === 'risk' ? '' : '#' + current));
+    draw();
+  }
+
+  function fillMarks() {
+    for (const el of $$('[data-fmt]')) {
+      const v = KEYED[el.dataset.source]?.get(el.dataset.key)?.[el.dataset.field];
+      el.textContent = v == null ? '—' : FMT[el.dataset.fmt](v);
+    }
+  }
+
+  $$('.od-seg').forEach((g) => g.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-value]');
+    if (b) setParams({ [g.dataset.param]: b.dataset.value });
+  }));
+  const selMonth = $('#sel-month'), selRel = $('#sel-relmonth'), rng = $('#rng-share');
+  selMonth.addEventListener('change', () => setParams({ month: selMonth.value }));
+  selRel.addEventListener('change', () => setParams({ rel_month: selRel.value }));
+  rng.addEventListener('input', () => setParams({ share: rng.value }));
+
+  function syncSegs() {
+    $$('.od-seg').forEach((g) => $$('button', g).forEach((b) => b.setAttribute('aria-pressed', String(P[g.dataset.param] === b.dataset.value))));
+  }
+  function pickMonth(all, version, wanted, sel) {
+    const months = [...new Set(all.filter((r) => r.source === version && r.month !== 'all').map((r) => r.month))].sort();
+    const month = months.includes(wanted) ? wanted : 'all';
+    const values = ['all', ...months];
+    if ([...sel.options].map((o) => o.value).join('|') !== values.join('|')) sel.replaceChildren(...values.map((v) => new Option(monthLabel(v), v)));
+    sel.value = month;
+    return month;
+  }
+
+  function show(id) {
+    current = id;
+    for (const v of VIEWS) {
+      $('#' + v).hidden = v !== id;
+      const t = $('#tab-' + v);
+      t.setAttribute('aria-selected', String(v === id));
+      t.tabIndex = v === id ? 0 : -1;
+    }
+    setParams({});
+  }
+  VIEWS.forEach((v, i) => {
+    const t = $('#tab-' + v);
+    t.addEventListener('click', () => show(v));
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const n = VIEWS[(i + (e.key === 'ArrowRight' ? 1 : VIEWS.length - 1)) % VIEWS.length];
+      show(n); $('#tab-' + n).focus();
+    });
+  });
+  addEventListener('hashchange', () => {
+    const h = location.hash.slice(1);
+    if (VIEWS.includes(h) && h !== current) show(h);
+  });
+
+  function textWidth(svg, strings, cls) {
+    const t = svg.append('text').attr('class', cls).attr('visibility', 'hidden');
+    let w = 0;
+    for (const s of strings) { t.text(s); w = Math.max(w, t.node().getComputedTextLength()); }
+    t.remove();
+    return w;
+  }
+  function styleAxis(g) { g.attr('font-size', null).attr('font-family', null).attr('class', 'od-ax'); }
+  // A touch shows the tooltip until the next touch elsewhere; a mouse hides it on leaving the plot.
+  document.addEventListener('pointerdown', (e) => $$('.od-tip').forEach((t) => { if (!t.parentElement.contains(e.target)) t.hidden = true; }));
+  function tooltip(box, W) {
+    const tip = document.createElement('div'); tip.className = 'od-tip'; tip.hidden = true; box.appendChild(tip);
+    return {
+      show(lines, vx, vy) {
+        tip.replaceChildren(...lines.map((l, i) => {
+          const d = document.createElement('div'); d.className = i === 0 ? 'h' : 'r';
+          if (l.color) { const k = document.createElement('span'); k.className = 'od-key'; k.style.background = l.color; d.appendChild(k); }
+          d.appendChild(document.createTextNode(l.text)); return d;
+        }));
+        tip.hidden = false;
+        const s = box.clientWidth / W, x = vx * s, y = vy * s, bw = box.clientWidth, tw = tip.offsetWidth, th = tip.offsetHeight;
+        let left = x + 12; if (left + tw > bw) left = Math.max(0, x - 12 - tw);
+        let top = y - th - 8; if (top < 0) top = y + 12;
+        tip.style.left = left + 'px'; tip.style.top = top + 'px';
+      },
+      hide(ev) { if (!ev || ev.pointerType === 'mouse') tip.hidden = true; },
+    };
+  }
+  const hoverable = (sel, onShow, tip) => sel.on('pointermove', onShow).on('pointerdown', onShow).on('pointerleave', (ev) => tip.hide(ev));
+  function legend(el, items) {
+    el.replaceChildren(...items.map((it) => {
+      const s = document.createElement('span'); const k = document.createElement('span');
+      k.className = 'od-key' + (it.kind ? ' ' + it.kind : '');
+      if (it.color) k.style[it.kind === 'line' ? 'borderTopColor' : 'background'] = it.color;
+      s.append(k, document.createTextNode(it.text)); return s;
+    }));
+  }
+  function dodge(labels, minGap, lo, hi) {           // keep end labels at least minGap apart, inside [lo, hi]
+    labels.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < minGap) labels[i].y = labels[i - 1].y + minGap;
+    const over = labels.length ? labels[labels.length - 1].y - hi : 0;
+    if (over > 0) for (const l of labels) l.y -= over;
+    for (const l of labels) l.y = Math.max(lo, l.y);
+    return labels;
+  }
+  function chart(box, H, label, yTicks, yFmt, right = 16, bottom = 40) {
+    const W = Math.max(280, box.clientWidth);
+    box.replaceChildren();
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', label);
+    const m = { t: 12, r: typeof right === 'function' ? right(svg) : right, b: bottom, l: textWidth(svg, yTicks.map(yFmt), 'od-ax') + 14 };
+    return { svg, W, H, m, tip: tooltip(box, W) };
+  }
+  function axes({ svg, W, H, m }, y, yTicks, yFmt, xAxis, xLabel) {
+    svg.append('g').attr('class', 'od-grid-l').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues(yTicks).tickSize(-(W - m.l - m.r)).tickFormat(''));
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(xAxis).call(styleAxis);
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues(yTicks).tickFormat(yFmt).tickSize(0).tickPadding(8)).call(styleAxis).call((g) => g.select('.domain').remove());
+    if (xLabel) svg.append('text').attr('class', 'od-axlbl').attr('x', (m.l + W - m.r) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text(xLabel);
+  }
+  function fillRows(sel, data, cells, { total } = {}) {
+    $(sel + ' tbody').replaceChildren(...data.map((r) => {
+      const tr = document.createElement('tr');
+      if (total && total(r)) tr.className = 'od-total';
+      for (const v of cells(r)) {
+        const td = document.createElement('td');
+        if (Array.isArray(v)) { const s = document.createElement('span'); s.className = 'od-sub'; s.textContent = v[1]; td.append(v[0], s); }
+        else td.textContent = v;
+        tr.appendChild(td);
+      }
+      return tr;
+    }));
+  }
+
+  function drawRisk(vis) {
+    const all = D.risk_budget;
+    const month = pickMonth(all, P.version, P.month, selMonth);
+    const share = Math.min(30, Math.max(1, Math.round(Number(P.share) || 10)));
+    if (document.activeElement !== rng) rng.value = String(share);
+    $('#val-share').textContent = share + '%';
+    $$('.od-dyn').forEach((el) => { el.dataset.key = `${P.version}|${P.model}|${month}|${share}`; });
+    if (vis) chartBudget($('#ch-budget'), all.filter((x) => x.source === P.version && x.month === month), P.model, share);
+  }
+
+  function chartBudget(box, data, model, share) {
+    const series = ['logistic', 'gbm'].map((m) => ({ m, pts: data.filter((r) => r.model === m).sort((a, b) => a.share_pct - b.share_pct) }));
+    const rnd = series[0].pts.map((r) => ({ x: r.share_pct, y: r.random_expected_recall }));
+    const y0 = d3.scaleLinear([0, Math.min(1, (d3.max(data, (r) => r.recall) || 0.5) * 1.08)], [0, 1]).nice();
+    const yTicks = y0.ticks(5);
+    const END = { logistic: 'Logistic', gbm: 'Gradient boosting', random: 'Random' };
+    const c = chart(box, 300, 'Share of late orders among the picks against the weekly share picked', yTicks, pct0,
+      (svg) => textWidth(svg, Object.values(END), 'od-dl') + 16);
+    const { svg, W, H, m, tip } = c;
+    const x = d3.scaleLinear([1, 30], [m.l, W - m.r]);
+    const y = d3.scaleLinear(y0.domain(), [H - m.b, m.t]);
+    axes(c, y, yTicks, pct0, d3.axisBottom(x).ticks(Math.min(6, Math.floor((W - m.l - m.r) / 45))).tickFormat((v) => v + '%'), "Share of each week's orders picked");
+    const line = d3.line().x((d) => x(d.x)).y((d) => y(d.y));
+    svg.append('path').datum(rnd).attr('fill', 'none').attr('stroke-width', 1.5).attr('stroke-dasharray', '4 4').style('stroke', 'var(--ref)').attr('d', line);
+    for (const s of series) {
+      svg.append('path').datum(s.pts.map((r) => ({ x: r.share_pct, y: r.recall })))
+        .attr('fill', 'none').attr('stroke-width', s.m === model ? 2.5 : 1.5).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+        .style('stroke', modelColor(s.m)).style('opacity', s.m === model ? 1 : 0.55).attr('d', line);
+    }
+    const labels = dodge([
+      ...series.map((s) => ({ text: END[s.m], y: y(s.pts[s.pts.length - 1].recall) })),
+      { text: END.random, y: y(rnd[rnd.length - 1].y) },
+    ], 14, m.t + 4, H - m.b);
+    for (const l of labels) svg.append('text').attr('class', 'od-dl').attr('x', W - m.r + 8).attr('y', l.y).attr('dy', '0.32em').text(l.text);
+    svg.append('line').attr('x1', x(share)).attr('x2', x(share)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke-width', 1).style('stroke', 'var(--axis)');
+    for (const s of series) {
+      const pt = s.pts.find((r) => r.share_pct === share);
+      if (pt) svg.append('circle').attr('cx', x(share)).attr('cy', y(pt.recall)).attr('r', 4.5).attr('stroke-width', 2).style('fill', modelColor(s.m)).style('stroke', 'var(--bg)');
+    }
+    legend($('#leg-budget'), [
+      { text: MODEL.logistic, color: modelColor('logistic'), kind: 'line' },
+      { text: MODEL.gbm, color: modelColor('gbm'), kind: 'line' },
+      { text: 'Random pick, same weekly budgets (expected)', kind: 'dash' },
+    ]);
+    const hover = svg.append('g').style('pointer-events', 'none');
+    const plot = svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent');
+    hoverable(plot, (ev) => {
+      const [px, py] = d3.pointer(ev);
+      const v = Math.min(30, Math.max(1, Math.round(x.invert(px))));
+      hover.selectAll('*').remove();
+      hover.append('line').attr('x1', x(v)).attr('x2', x(v)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke-width', 1).attr('stroke-dasharray', '2 3').style('stroke', 'var(--axis)');
+      const lines = [{ text: v + "% of each week's orders" }];
+      for (const s of series) {
+        const pt = s.pts.find((r) => r.share_pct === v);
+        if (!pt) continue;
+        hover.append('circle').attr('cx', x(v)).attr('cy', y(pt.recall)).attr('r', 4).style('fill', modelColor(s.m));
+        lines.push({ text: `${MODEL[s.m]}: ${pct1(pt.recall)} (${int(pt.late_in_selected)} of ${int(pt.late_total)})`, color: modelColor(s.m) });
+      }
+      const rp = rnd.find((r) => r.x === v);
+      if (rp) lines.push({ text: `Random pick: ${pct1(rp.y)}` });
+      tip.show(lines, x(v), py);
+    }, tip);
+    plot.on('pointerleave.line', (ev) => { if (ev.pointerType === 'mouse') hover.selectAll('*').remove(); });
+  }
+
+  function drawReliability(vis) {
+    const sel = D.prob_monthly.filter((r) => r.source === P.version && r.model === P.model);
+    if (vis) chartMonthly($('#ch-monthly'), sel.filter((r) => r.month !== 'all').sort((a, b) => d3.ascending(a.month, b.month)), P.model);
+    fillRows('#tb-monthly', sel.slice().sort((a, b) => (a.month === 'all') - (b.month === 'all') || d3.ascending(a.month, b.month)),
+      (r) => [monthLabel(r.month), int(r.orders), int(r.late), pct1(r.observed_rate), pct1(r.mean_predicted), f2(r.observed_to_expected), f4(r.brier), f3(r.log_loss)],
+      { total: (r) => r.month === 'all' });
+    const month = pickMonth(D.prob_bins, P.version, P.rel_month, selRel);
+    if (vis) chartBins($('#ch-bins'), D.prob_bins.filter((r) => r.source === P.version && r.model === P.model && r.month === month).sort((a, b) => a.bin - b.bin), P.model);
+  }
+
+  function chartMonthly(box, data, model) {
+    const y0 = d3.scaleLinear([0, d3.max(data, (r) => Math.max(r.mean_predicted, r.observed_hi)) * 1.1], [0, 1]).nice();
+    const yTicks = y0.ticks(5);
+    const c = chart(box, 300, 'Mean predicted probability and observed late rate by purchase month', yTicks, pct0, 16, 32);
+    const { svg, W, H, m, tip } = c;
+    const x = d3.scalePoint(data.map((r) => r.month), [m.l, W - m.r]).padding(0.5);
+    const y = d3.scaleLinear(y0.domain(), [H - m.b, m.t]);
+    axes(c, y, yTicks, pct0, d3.axisBottom(x).tickFormat(monthShort).tickSizeOuter(0));
+    const col = modelColor(model);
+    svg.append('path').datum(data).attr('fill', 'none').attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').style('stroke', col)
+      .attr('d', d3.line().x((d) => x(d.month)).y((d) => y(d.mean_predicted)));
+    svg.append('path').datum(data).attr('fill', 'none').attr('stroke-width', 1).style('stroke', 'var(--muted)')
+      .attr('d', d3.line().x((d) => x(d.month)).y((d) => y(d.observed_rate)));
+    for (const r of data) {
+      const cx = x(r.month);
+      svg.append('line').attr('x1', cx).attr('x2', cx).attr('y1', y(r.observed_lo)).attr('y2', y(r.observed_hi)).attr('stroke-width', 1.5).style('stroke', 'var(--fg)');
+      svg.append('circle').attr('cx', cx).attr('cy', y(r.observed_rate)).attr('r', 4.5).attr('stroke-width', 2).style('fill', 'var(--fg)').style('stroke', 'var(--bg)');
+      svg.append('circle').attr('cx', cx).attr('cy', y(r.mean_predicted)).attr('r', 4.5).attr('stroke-width', 2).style('fill', col).style('stroke', 'var(--bg)');
+    }
+    legend($('#leg-monthly'), [
+      { text: 'Mean predicted probability, ' + MODEL[model].toLowerCase(), color: col, kind: 'line' },
+      { text: 'Observed late rate with 95% interval', kind: 'ink' },
+    ]);
+    const step = data.length > 1 ? x(data[1].month) - x(data[0].month) : W;
+    hoverable(svg.append('g').selectAll('rect').data(data).join('rect')
+      .attr('x', (r) => x(r.month) - step / 2).attr('width', step).attr('y', m.t).attr('height', H - m.t - m.b).attr('fill', 'transparent'),
+    (ev, r) => tip.show([
+      { text: monthLabel(r.month) },
+      { text: `Mean predicted: ${pct1(r.mean_predicted)}`, color: col },
+      { text: `Observed: ${pct1(r.observed_rate)} (${pct1(r.observed_lo)} to ${pct1(r.observed_hi)})` },
+      { text: `${int(r.late)} late of ${int(r.orders)} orders` },
+      { text: `Observed / expected: ${f2(r.observed_to_expected)}` },
+    ], x(r.month), y(r.mean_predicted)), tip);
+  }
+
+  function chartBins(box, data, model) {
+    const s0 = d3.scaleLinear([0, d3.max(data, (r) => Math.max(r.mean_predicted, r.observed_hi)) * 1.05], [0, 1]).nice();
+    const ticks = s0.ticks(5);
+    const c = chart(box, 300, 'Observed late rate against mean predicted probability by risk band', ticks, pct0);
+    const { svg, W, H, m, tip } = c;
+    const x = d3.scaleLinear(s0.domain(), [m.l, W - m.r]);
+    const y = d3.scaleLinear(s0.domain(), [H - m.b, m.t]);
+    axes(c, y, ticks, pct0, d3.axisBottom(x).tickValues(ticks).tickFormat(pct0), 'Mean predicted probability in the band');
+    const top = s0.domain()[1];
+    svg.append('line').attr('x1', x(0)).attr('y1', y(0)).attr('x2', x(top)).attr('y2', y(top)).attr('stroke-width', 1.5).attr('stroke-dasharray', '4 4').style('stroke', 'var(--ref)');
+    const col = modelColor(model);
+    for (const r of data) {
+      svg.append('line').attr('x1', x(r.mean_predicted)).attr('x2', x(r.mean_predicted)).attr('y1', y(r.observed_lo)).attr('y2', y(r.observed_hi)).attr('stroke-width', 1.5).style('stroke', col);
+      svg.append('circle').attr('cx', x(r.mean_predicted)).attr('cy', y(r.observed_rate)).attr('r', 5).attr('stroke-width', 2).style('fill', col).style('stroke', 'var(--bg)');
+    }
+    hoverable(svg.append('g').selectAll('circle').data(data).join('circle')
+      .attr('cx', (r) => x(r.mean_predicted)).attr('cy', (r) => y(r.observed_rate)).attr('r', 12).attr('fill', 'transparent'),
+    (ev, r) => tip.show([
+      { text: `Risk band ${r.bin} of ${r.bins}` },
+      { text: `Mean predicted: ${pct1(r.mean_predicted)}`, color: col },
+      { text: `Observed: ${pct1(r.observed_rate)} (${pct1(r.observed_lo)} to ${pct1(r.observed_hi)})` },
+      { text: `${int(r.late)} late of ${int(r.orders)} orders` },
+    ], x(r.mean_predicted), y(r.observed_rate)), tip);
+  }
+
+  function drawPromises(vis) {
+    if (vis) chartDays($('#ch-days'), D.e1_policies, D.e1_curves);
+    const piv = new Map();
+    for (const r of D.e1_rounding) {
+      const k = r.policy_code + ' vs ' + r.ref_code;
+      if (!piv.has(k)) piv.set(k, { comparison: k });
+      piv.get(k)[r.rule + '_days'] = r.day_diff;
+      piv.get(k)[r.rule + '_cov_pts'] = r.coverage_diff_pts;
+    }
+    fillRows('#tb-rounding', [...piv.values()], (r) => [r.comparison, s2(r.ceil_days), s2(r.ceil_cov_pts), s2(r.floor_days), s2(r.floor_cov_pts)]);
+    const wide = new Map();
+    for (const r of D.e1_matched) {
+      if (!wide.has(r.target)) wide.set(r.target, { target: r.target, target_coverage: r.target_coverage });
+      wide.get(r.target)[r.model_code] = [r.mean_days, r.achieved_coverage];
+    }
+    const cell = ([days, cov]) => [f2(days), pct2(cov)];
+    fillRows('#tb-matched', [...wide.values()],
+      (r) => [`${r.target} (${pct2(r.target_coverage)})`, cell(r.state), cell(r.linear), cell(r.hgb), s2(r.hgb[0] - r.linear[0])]);
+  }
+
+  function chartDays(box, pol, curves) {
+    const CY = [0.85, 0.99];
+    const yTicks = [0.86, 0.88, 0.9, 0.92, 0.94, 0.96, 0.98];
+    const cv = curves.filter((r) => r.coverage >= CY[0] && r.coverage <= CY[1]);
+    const x0 = d3.scaleLinear(d3.extent([...cv.map((r) => r.mean_days), ...pol.map((r) => r.mean_promised_days)]), [0, 1]).nice();
+    const c = chart(box, 340, 'Mean promised days against coverage for the registered policies and post-hoc curves', yTicks, pct0, 18);
+    const { svg, W, H, m, tip } = c;
+    const x = d3.scaleLinear(x0.domain(), [m.l, W - m.r]);
+    const y = d3.scaleLinear(CY, [H - m.b, m.t]);
+    axes(c, y, yTicks, pct0, d3.axisBottom(x).ticks(Math.min(8, Math.floor((W - m.l - m.r) / 50))), 'Mean promised days');
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0.9)).attr('y2', y(0.9)).attr('stroke-width', 1).attr('stroke-dasharray', '6 4').style('stroke', 'var(--ref)');
+    svg.append('text').attr('class', 'od-axlbl').attr('x', W - m.r - 4).attr('y', y(0.9) - 6).attr('text-anchor', 'end').text('90% target');
+    const line = d3.line().x((d) => x(d.mean_days)).y((d) => y(d.coverage));
+    for (const [name, code] of Object.entries(CURVE_CODE)) {
+      const pts = cv.filter((r) => r.model === name).sort((a, b) => a.shift - b.shift);
+      svg.append('path').datum(pts).attr('fill', 'none').attr('stroke-width', 1.5).attr('stroke-dasharray', '5 4').style('stroke', e1Color(code)).attr('d', line);
+    }
+    const LABEL = { B1c: [10, 0, 'start'], 'C*': [-10, -8, 'end'], 'D*': [-10, -10, 'end'], B0: [10, 4, 'start'], Olist: [10, 4, 'start'] };
+    for (const r of pol) {
+      const px = x(r.mean_promised_days), py = y(r.coverage);
+      if (r.kind === 'registered') {
+        svg.append('rect').attr('x', px - 6).attr('y', py - 6).attr('width', 12).attr('height', 12).attr('rx', 2).attr('stroke-width', 2)
+          .style('fill', e1Color(POLICY_CODE[r.code])).style('stroke', 'var(--bg)');
+      } else {
+        svg.append('circle').attr('cx', px).attr('cy', py).attr('r', 5.5).attr('stroke-width', 1.75).style('fill', 'var(--bg)').style('stroke', 'var(--muted)');
+      }
+      const [dx, dy, anchor] = LABEL[r.code] || [10, 4, 'start'];
+      svg.append('text').attr('class', 'od-dl').attr('x', px + dx).attr('y', py + dy).attr('text-anchor', anchor).attr('dy', '0.32em').text(r.code);
+      hoverable(svg.append('circle').attr('cx', px).attr('cy', py).attr('r', 13).attr('fill', 'transparent'), () => tip.show([
+        { text: `${r.label} (${r.code})` },
+        { text: `${f2(r.mean_promised_days)} days on average`, color: POLICY_CODE[r.code] ? e1Color(POLICY_CODE[r.code]) : null },
+        { text: `Coverage ${pct1(r.coverage)}, ${int(r.n_missed)} orders late against the promise` },
+        { text: r.kind === 'registered' ? 'Registered, scored once' : 'Reference' },
+      ], px, py), tip);
+    }
+    legend($('#leg-days'), [
+      ...Object.keys(E1_NAME).map((k) => ({ text: E1_NAME[k], color: e1Color(k) })),
+      { text: 'Post-hoc curve', kind: 'dash' },
+      { text: 'Reference: B0, Olist', kind: 'ring' },
+    ]);
+  }
+
+  function draw() {
+    syncSegs();
+    if (!D.risk_budget) return;
+    drawRisk(current === 'risk');
+    drawReliability(current === 'reliability');
+    drawPromises(current === 'promises');
+    fillMarks();
+  }
+  let lastWidth = 0;
+  new ResizeObserver(([e]) => {
+    const w = Math.round(e.contentRect.width);
+    if (w !== lastWidth) { lastWidth = w; draw(); }
+  }).observe($('.od'));
+
+  show(current);
+  message('Loading data…');
+  Promise.all(FILES.map((f) => fetch(`data/${f}.json`).then((r) => { if (!r.ok) throw new Error(f); return r.json(); })))
+    .then((all) => {
+      FILES.forEach((f, i) => { D[f] = all[i]; KEYED[f] = new Map(all[i].map((r) => [r.key, r])); });
+      draw();
+    })
+    .catch(() => message(location.protocol === 'file:'
+      ? 'The data files cannot be read from a local file. Serve this folder over HTTP, for example: python3 -m http.server'
+      : 'The data files could not be loaded.', true));
+})();
+</script>
+</body>
+</html>

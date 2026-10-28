@@ -1,8 +1,12 @@
 """Independent re-computation of the supplementary numbers from the saved files ONLY (numpy / pandas; no project
-code imported). Writes outputs/e1/supplementary_verification.csv; exits non-zero on any mismatch."""
+code imported). Usage: python3 scripts/e1_verify_supplementary.py [OUT_DIR]   (default AGENT_REVIEW/verify_output)
+Writes OUT_DIR/supplementary_verification.csv and checks it against the saved copy
+outputs/e1/supplementary_verification.csv, which it never writes. Exits non-zero on any mismatch."""
 import json, sys
+from pathlib import Path
 import numpy as np, pandas as pd
 
+OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "AGENT_REVIEW/verify_output"); OUT.mkdir(parents=True, exist_ok=True)
 rows = []
 def chk(name, expected, actual, tol=1e-9):
     ok = bool(np.all(np.abs(np.asarray(expected, float) - np.asarray(actual, float)) <= tol))
@@ -55,6 +59,9 @@ for run, path in [("run 1", "outputs/e1/sim"), ("run 2 paired", "outputs/e1/sim_
             chk(f"sim {run}: paired diff {sc[:7]} mean and MC SE", [dd.loc[sc, "d_coverage_pts_mean"], dd.loc[sc, "d_coverage_pts_mc_se"]],
                 [d.mean(), d.std(ddof=1) / np.sqrt(len(d))], 1e-10)
 
-out = pd.DataFrame(rows); out.to_csv("outputs/e1/supplementary_verification.csv", index=False)
+out = pd.DataFrame(rows); out.to_csv(OUT / "supplementary_verification.csv", index=False)
 print(out[["check", "pass"]].to_string(index=False)); print(f"{out['pass'].sum()} / {len(out)} pass")
-sys.exit(0 if out["pass"].all() else 1)
+old = pd.read_csv("outputs/e1/supplementary_verification.csv")
+same_checks = old.check.tolist() == out.check.tolist() and old["pass"].tolist() == out["pass"].tolist()
+print(f"saved outputs/e1/supplementary_verification.csv has the same checks and results: {same_checks}")
+sys.exit(0 if out["pass"].all() and same_checks else 1)

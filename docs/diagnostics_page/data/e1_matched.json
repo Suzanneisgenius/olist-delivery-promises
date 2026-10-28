@@ -1,0 +1,122 @@
+[
+ {
+  "key": "90% target|linear",
+  "model_code": "linear",
+  "target": "90% target",
+  "target_coverage": 0.9,
+  "model": "linear C*",
+  "achieved_coverage": 0.9001503759398496,
+  "shift": 0.89,
+  "mean_days": 17.198947368421052
+ },
+ {
+  "key": "90% target|hgb",
+  "model_code": "hgb",
+  "target": "90% target",
+  "target_coverage": 0.9,
+  "model": "HGB D*",
+  "achieved_coverage": 0.9001503759398496,
+  "shift": -0.61,
+  "mean_days": 16.599398496240603
+ },
+ {
+  "key": "90% target|state",
+  "model_code": "state",
+  "target": "90% target",
+  "target_coverage": 0.9,
+  "model": "state rule",
+  "achieved_coverage": 0.9075187969924812,
+  "shift": 0.0,
+  "mean_days": 17.992781954887217
+ },
+ {
+  "key": "B0 coverage|linear",
+  "model_code": "linear",
+  "target": "B0 coverage",
+  "target_coverage": 0.9394987468671679,
+  "model": "linear C*",
+  "achieved_coverage": 0.9395488721804511,
+  "shift": 3.52,
+  "mean_days": 19.828370927318296
+ },
+ {
+  "key": "B0 coverage|hgb",
+  "model_code": "hgb",
+  "target": "B0 coverage",
+  "target_coverage": 0.9394987468671679,
+  "model": "HGB D*",
+  "achieved_coverage": 0.9395989974937343,
+  "shift": 1.91,
+  "mean_days": 19.11979949874687
+ },
+ {
+  "key": "B0 coverage|state",
+  "model_code": "state",
+  "target": "B0 coverage",
+  "target_coverage": 0.9394987468671679,
+  "model": "state rule",
+  "achieved_coverage": 0.9444611528822056,
+  "shift": 3.0,
+  "mean_days": 20.992781954887217
+ },
+ {
+  "key": "C* registered coverage|linear",
+  "model_code": "linear",
+  "target": "C* registered coverage",
+  "target_coverage": 0.9617543859649124,
+  "model": "linear C*",
+  "achieved_coverage": 0.9617543859649123,
+  "shift": 6.13,
+  "mean_days": 22.43629072681704
+ },
+ {
+  "key": "C* registered coverage|hgb",
+  "model_code": "hgb",
+  "target": "C* registered coverage",
+  "target_coverage": 0.9617543859649124,
+  "model": "HGB D*",
+  "achieved_coverage": 0.9617543859649123,
+  "shift": 4.5,
+  "mean_days": 21.710526315789473
+ },
+ {
+  "key": "C* registered coverage|state",
+  "model_code": "state",
+  "target": "C* registered coverage",
+  "target_coverage": 0.9617543859649124,
+  "model": "state rule",
+  "achieved_coverage": 0.9648621553884712,
+  "shift": 6.0,
+  "mean_days": 23.992781954887217
+ },
+ {
+  "key": "D* registered coverage|linear",
+  "model_code": "linear",
+  "target": "D* registered coverage",
+  "target_coverage": 0.9709774436090226,
+  "model": "linear C*",
+  "achieved_coverage": 0.971077694235589,
+  "shift": 8.26,
+  "mean_days": 24.567318295739348
+ },
+ {
+  "key": "D* registered coverage|hgb",
+  "model_code": "hgb",
+  "target": "D* registered coverage",
+  "target_coverage": 0.9709774436090226,
+  "model": "HGB D*",
+  "achieved_coverage": 0.9709774436090226,
+  "shift": 6.45,
+  "mean_days": 23.66110275689223
+ },
+ {
+  "key": "D* registered coverage|state",
+  "model_code": "state",
+  "target": "D* registered coverage",
+  "target_coverage": 0.9709774436090226,
+  "model": "state rule",
+  "achieved_coverage": 0.9733333333333334,
+  "shift": 8.0,
+  "mean_days": 25.992781954887217
+ }
+]

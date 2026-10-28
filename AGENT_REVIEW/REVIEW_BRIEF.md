@@ -75,11 +75,14 @@ Claims C22 (rewritten), C25-C28. Please check in particular: (a) the round-down 
 ```
 cd olist-e1-agent-review
 pip install -r requirements-e1-tested.txt     # if needed
-bash AGENT_REVIEW/verify_all.sh                 # expected: 10 x PASS, "ALL CHECKS PASSED"
+bash AGENT_REVIEW/verify_all.sh                 # expected: 11 x PASS, "ALL CHECKS PASSED"
 ```
 It checks: package manifest; config and freeze hashes; the scoring-time source fingerprint against the freeze; the
 post-hoc addendum's binding to the freeze; the full test suite (362); recomputation of every E1 number and every
-supplementary number from saved per-order files (numpy / pandas only); every quantitative claim in `claims.json`.
+supplementary number from saved per-order files (numpy / pandas only); every quantitative claim in `claims.json`;
+the targeted re-verification; and the harness itself (`AGENT_REVIEW/harness_tests/`: missing PDF tools, unreadable
+PDFs, two runs in a row). Step 10 reads the PDFs with pdftotext or pypdf; with neither it is SKIP, not PASS, and the
+last line says "PASSED WITH SKIPS". Everything it writes goes to `AGENT_REVIEW/verify_output/`.
 Passing means the saved outputs are internally consistent. It is not a raw-data-to-model reproduction.
 
 ## 5. Where things are

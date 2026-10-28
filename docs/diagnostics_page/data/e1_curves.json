@@ -1,0 +1,6344 @@
+[
+ {
+  "model": "linear C*",
+  "shift": -2.95,
+  "coverage": 0.8003508771929825,
+  "mean_days": 13.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.9,
+  "coverage": 0.8018546365914787,
+  "mean_days": 13.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.85,
+  "coverage": 0.8036591478696742,
+  "mean_days": 13.456290726817043
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.8,
+  "coverage": 0.805563909774436,
+  "mean_days": 13.506766917293232
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.75,
+  "coverage": 0.807218045112782,
+  "mean_days": 13.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.7,
+  "coverage": 0.8091228070175439,
+  "mean_days": 13.606466165413535
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.65,
+  "coverage": 0.811328320802005,
+  "mean_days": 13.655889724310777
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.6,
+  "coverage": 0.8136340852130326,
+  "mean_days": 13.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.55,
+  "coverage": 0.815187969924812,
+  "mean_days": 13.756441102756892
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.5,
+  "coverage": 0.8168922305764411,
+  "mean_days": 13.808020050125313
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.45,
+  "coverage": 0.8183458646616542,
+  "mean_days": 13.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.4,
+  "coverage": 0.8201002506265664,
+  "mean_days": 13.911528822055137
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.35,
+  "coverage": 0.821453634085213,
+  "mean_days": 13.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.3,
+  "coverage": 0.8233082706766918,
+  "mean_days": 14.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.25,
+  "coverage": 0.8248621553884712,
+  "mean_days": 14.061604010025063
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.2,
+  "coverage": 0.8263659147869674,
+  "mean_days": 14.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.15,
+  "coverage": 0.8281704260651629,
+  "mean_days": 14.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.1,
+  "coverage": 0.8297744360902256,
+  "mean_days": 14.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.05,
+  "coverage": 0.8311278195488722,
+  "mean_days": 14.258295739348371
+ },
+ {
+  "model": "linear C*",
+  "shift": -2.0,
+  "coverage": 0.8325814536340852,
+  "mean_days": 14.308521303258145
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.95,
+  "coverage": 0.833984962406015,
+  "mean_days": 14.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.9,
+  "coverage": 0.8353383458646616,
+  "mean_days": 14.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.85,
+  "coverage": 0.8374436090225564,
+  "mean_days": 14.456290726817043
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.8,
+  "coverage": 0.8392481203007519,
+  "mean_days": 14.506766917293232
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.75,
+  "coverage": 0.8408521303258145,
+  "mean_days": 14.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.7,
+  "coverage": 0.8421052631578947,
+  "mean_days": 14.606466165413535
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.65,
+  "coverage": 0.844110275689223,
+  "mean_days": 14.655889724310777
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.6,
+  "coverage": 0.8457142857142858,
+  "mean_days": 14.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.55,
+  "coverage": 0.8473182957393484,
+  "mean_days": 14.756441102756892
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.5,
+  "coverage": 0.8484711779448622,
+  "mean_days": 14.808020050125313
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.45,
+  "coverage": 0.849624060150376,
+  "mean_days": 14.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.4,
+  "coverage": 0.8511779448621554,
+  "mean_days": 14.911528822055137
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.35,
+  "coverage": 0.8522305764411028,
+  "mean_days": 14.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.3,
+  "coverage": 0.8536340852130326,
+  "mean_days": 15.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.25,
+  "coverage": 0.8546365914786967,
+  "mean_days": 15.061604010025063
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.2,
+  "coverage": 0.8560401002506266,
+  "mean_days": 15.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.15,
+  "coverage": 0.8568922305764411,
+  "mean_days": 15.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.1,
+  "coverage": 0.8581453634085213,
+  "mean_days": 15.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.05,
+  "coverage": 0.8591478696741854,
+  "mean_days": 15.258295739348371
+ },
+ {
+  "model": "linear C*",
+  "shift": -1.0,
+  "coverage": 0.8607518796992482,
+  "mean_days": 15.308521303258145
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.95,
+  "coverage": 0.8616541353383459,
+  "mean_days": 15.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.9,
+  "coverage": 0.8632080200501253,
+  "mean_days": 15.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.85,
+  "coverage": 0.8647117794486215,
+  "mean_days": 15.456290726817043
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.8,
+  "coverage": 0.8658646616541353,
+  "mean_days": 15.506766917293232
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.75,
+  "coverage": 0.8672681704260652,
+  "mean_days": 15.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.7,
+  "coverage": 0.8679699248120301,
+  "mean_days": 15.606466165413535
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.65,
+  "coverage": 0.8693734335839599,
+  "mean_days": 15.655889724310777
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.6,
+  "coverage": 0.8705263157894737,
+  "mean_days": 15.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.55,
+  "coverage": 0.8716290726817043,
+  "mean_days": 15.756441102756892
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.5,
+  "coverage": 0.8725814536340852,
+  "mean_days": 15.808020050125313
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.45,
+  "coverage": 0.8731829573934837,
+  "mean_days": 15.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.4,
+  "coverage": 0.8743358395989975,
+  "mean_days": 15.911528822055137
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.35,
+  "coverage": 0.8753383458646616,
+  "mean_days": 15.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.3,
+  "coverage": 0.8764411027568922,
+  "mean_days": 16.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.25,
+  "coverage": 0.8776441102756892,
+  "mean_days": 16.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.2,
+  "coverage": 0.8789473684210526,
+  "mean_days": 16.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.15,
+  "coverage": 0.8798997493734336,
+  "mean_days": 16.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.1,
+  "coverage": 0.8809523809523809,
+  "mean_days": 16.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.05,
+  "coverage": 0.8818546365914787,
+  "mean_days": 16.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": -0.0,
+  "coverage": 0.8832581453634085,
+  "mean_days": 16.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.05,
+  "coverage": 0.8840601503759399,
+  "mean_days": 16.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.1,
+  "coverage": 0.8855137844611529,
+  "mean_days": 16.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.15,
+  "coverage": 0.8867167919799499,
+  "mean_days": 16.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.2,
+  "coverage": 0.887719298245614,
+  "mean_days": 16.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.25,
+  "coverage": 0.8889724310776942,
+  "mean_days": 16.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.3,
+  "coverage": 0.8895238095238095,
+  "mean_days": 16.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.35,
+  "coverage": 0.8902756892230577,
+  "mean_days": 16.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.4,
+  "coverage": 0.8913784461152883,
+  "mean_days": 16.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.45,
+  "coverage": 0.892280701754386,
+  "mean_days": 16.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.5,
+  "coverage": 0.8930325814536341,
+  "mean_days": 16.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.55,
+  "coverage": 0.8940852130325815,
+  "mean_days": 16.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.6,
+  "coverage": 0.8953383458646617,
+  "mean_days": 16.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.65,
+  "coverage": 0.896140350877193,
+  "mean_days": 16.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.7,
+  "coverage": 0.8971428571428571,
+  "mean_days": 17.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.75,
+  "coverage": 0.8981453634085214,
+  "mean_days": 17.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.8,
+  "coverage": 0.8986967418546365,
+  "mean_days": 17.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.85,
+  "coverage": 0.8996992481203008,
+  "mean_days": 17.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.9,
+  "coverage": 0.9002005012531328,
+  "mean_days": 17.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 0.95,
+  "coverage": 0.9008020050125314,
+  "mean_days": 17.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.0,
+  "coverage": 0.9016541353383458,
+  "mean_days": 17.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.05,
+  "coverage": 0.9024561403508772,
+  "mean_days": 17.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.1,
+  "coverage": 0.9034586466165414,
+  "mean_days": 17.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.15,
+  "coverage": 0.9045614035087719,
+  "mean_days": 17.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.2,
+  "coverage": 0.9054636591478696,
+  "mean_days": 17.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.25,
+  "coverage": 0.9061152882205514,
+  "mean_days": 17.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.3,
+  "coverage": 0.9066165413533834,
+  "mean_days": 17.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.35,
+  "coverage": 0.907468671679198,
+  "mean_days": 17.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.4,
+  "coverage": 0.9084711779448622,
+  "mean_days": 17.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.45,
+  "coverage": 0.9091729323308271,
+  "mean_days": 17.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.5,
+  "coverage": 0.9104260651629072,
+  "mean_days": 17.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.55,
+  "coverage": 0.9110275689223057,
+  "mean_days": 17.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.6,
+  "coverage": 0.9116791979949874,
+  "mean_days": 17.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.65,
+  "coverage": 0.9126817042606516,
+  "mean_days": 17.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.7,
+  "coverage": 0.9135839598997494,
+  "mean_days": 18.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.75,
+  "coverage": 0.9145864661654135,
+  "mean_days": 18.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.8,
+  "coverage": 0.9152380952380952,
+  "mean_days": 18.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.85,
+  "coverage": 0.9159899749373434,
+  "mean_days": 18.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.9,
+  "coverage": 0.9164912280701755,
+  "mean_days": 18.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 1.95,
+  "coverage": 0.917092731829574,
+  "mean_days": 18.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.0,
+  "coverage": 0.9180952380952381,
+  "mean_days": 18.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.05,
+  "coverage": 0.9189473684210526,
+  "mean_days": 18.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.1,
+  "coverage": 0.9195989974937343,
+  "mean_days": 18.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.15,
+  "coverage": 0.9203508771929825,
+  "mean_days": 18.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.2,
+  "coverage": 0.9210025062656642,
+  "mean_days": 18.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.25,
+  "coverage": 0.9216040100250626,
+  "mean_days": 18.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.3,
+  "coverage": 0.9226065162907268,
+  "mean_days": 18.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.35,
+  "coverage": 0.9233583959899749,
+  "mean_days": 18.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.4,
+  "coverage": 0.9240601503759398,
+  "mean_days": 18.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.45,
+  "coverage": 0.9249624060150375,
+  "mean_days": 18.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.5,
+  "coverage": 0.9254636591478697,
+  "mean_days": 18.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.55,
+  "coverage": 0.926265664160401,
+  "mean_days": 18.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.6,
+  "coverage": 0.9269674185463659,
+  "mean_days": 18.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.65,
+  "coverage": 0.9280200501253133,
+  "mean_days": 18.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.7,
+  "coverage": 0.9287218045112782,
+  "mean_days": 19.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.75,
+  "coverage": 0.9293233082706767,
+  "mean_days": 19.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.8,
+  "coverage": 0.930125313283208,
+  "mean_days": 19.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.85,
+  "coverage": 0.9307769423558897,
+  "mean_days": 19.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.9,
+  "coverage": 0.9311779448621554,
+  "mean_days": 19.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 2.95,
+  "coverage": 0.9319799498746867,
+  "mean_days": 19.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.0,
+  "coverage": 0.9327318295739349,
+  "mean_days": 19.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.05,
+  "coverage": 0.9333333333333333,
+  "mean_days": 19.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.1,
+  "coverage": 0.9337844611528822,
+  "mean_days": 19.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.15,
+  "coverage": 0.9346365914786967,
+  "mean_days": 19.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.2,
+  "coverage": 0.9352380952380952,
+  "mean_days": 19.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.25,
+  "coverage": 0.9359398496240602,
+  "mean_days": 19.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.3,
+  "coverage": 0.9366917293233082,
+  "mean_days": 19.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.35,
+  "coverage": 0.9371929824561404,
+  "mean_days": 19.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.4,
+  "coverage": 0.9378947368421052,
+  "mean_days": 19.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.45,
+  "coverage": 0.9386466165413534,
+  "mean_days": 19.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.5,
+  "coverage": 0.9393483709273183,
+  "mean_days": 19.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.55,
+  "coverage": 0.9396491228070175,
+  "mean_days": 19.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.6,
+  "coverage": 0.9401002506265664,
+  "mean_days": 19.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.65,
+  "coverage": 0.9408521303258145,
+  "mean_days": 19.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.7,
+  "coverage": 0.9418045112781955,
+  "mean_days": 20.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.75,
+  "coverage": 0.9423558897243107,
+  "mean_days": 20.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.8,
+  "coverage": 0.9430075187969925,
+  "mean_days": 20.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.85,
+  "coverage": 0.9432581453634086,
+  "mean_days": 20.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.9,
+  "coverage": 0.9439097744360903,
+  "mean_days": 20.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 3.95,
+  "coverage": 0.9442105263157895,
+  "mean_days": 20.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.0,
+  "coverage": 0.9447619047619048,
+  "mean_days": 20.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.05,
+  "coverage": 0.9456140350877194,
+  "mean_days": 20.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.1,
+  "coverage": 0.9459147869674186,
+  "mean_days": 20.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.15,
+  "coverage": 0.9463659147869674,
+  "mean_days": 20.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.2,
+  "coverage": 0.9470175438596491,
+  "mean_days": 20.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.25,
+  "coverage": 0.947468671679198,
+  "mean_days": 20.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.3,
+  "coverage": 0.9478696741854636,
+  "mean_days": 20.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.35,
+  "coverage": 0.9483208020050126,
+  "mean_days": 20.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.4,
+  "coverage": 0.9489223057644111,
+  "mean_days": 20.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.45,
+  "coverage": 0.9491228070175438,
+  "mean_days": 20.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.5,
+  "coverage": 0.9494736842105264,
+  "mean_days": 20.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.55,
+  "coverage": 0.9498245614035088,
+  "mean_days": 20.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.6,
+  "coverage": 0.950125313283208,
+  "mean_days": 20.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.65,
+  "coverage": 0.9506766917293233,
+  "mean_days": 20.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.7,
+  "coverage": 0.9511278195488722,
+  "mean_days": 21.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.75,
+  "coverage": 0.9517293233082706,
+  "mean_days": 21.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.8,
+  "coverage": 0.9523809523809523,
+  "mean_days": 21.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.85,
+  "coverage": 0.9529323308270676,
+  "mean_days": 21.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.9,
+  "coverage": 0.9532330827067669,
+  "mean_days": 21.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 4.95,
+  "coverage": 0.9535839598997494,
+  "mean_days": 21.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.0,
+  "coverage": 0.9540350877192982,
+  "mean_days": 21.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.05,
+  "coverage": 0.9543859649122807,
+  "mean_days": 21.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.1,
+  "coverage": 0.9548370927318296,
+  "mean_days": 21.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.15,
+  "coverage": 0.9551378446115288,
+  "mean_days": 21.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.2,
+  "coverage": 0.9553383458646617,
+  "mean_days": 21.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.25,
+  "coverage": 0.955639097744361,
+  "mean_days": 21.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.3,
+  "coverage": 0.9560401002506266,
+  "mean_days": 21.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.35,
+  "coverage": 0.9565914786967419,
+  "mean_days": 21.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.4,
+  "coverage": 0.9567418546365914,
+  "mean_days": 21.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.45,
+  "coverage": 0.9571428571428572,
+  "mean_days": 21.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.5,
+  "coverage": 0.9577443609022557,
+  "mean_days": 21.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.55,
+  "coverage": 0.9580952380952381,
+  "mean_days": 21.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.6,
+  "coverage": 0.9584962406015037,
+  "mean_days": 21.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.65,
+  "coverage": 0.9589473684210527,
+  "mean_days": 21.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.7,
+  "coverage": 0.9593483709273183,
+  "mean_days": 22.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.75,
+  "coverage": 0.959498746867168,
+  "mean_days": 22.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.8,
+  "coverage": 0.9597994987468672,
+  "mean_days": 22.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.85,
+  "coverage": 0.9601002506265665,
+  "mean_days": 22.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.9,
+  "coverage": 0.9604511278195489,
+  "mean_days": 22.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 5.95,
+  "coverage": 0.960701754385965,
+  "mean_days": 22.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.0,
+  "coverage": 0.960952380952381,
+  "mean_days": 22.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.05,
+  "coverage": 0.9612531328320802,
+  "mean_days": 22.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.1,
+  "coverage": 0.9615538847117795,
+  "mean_days": 22.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.15,
+  "coverage": 0.9618045112781954,
+  "mean_days": 22.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.2,
+  "coverage": 0.9619047619047619,
+  "mean_days": 22.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.25,
+  "coverage": 0.9622556390977444,
+  "mean_days": 22.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.3,
+  "coverage": 0.9624060150375939,
+  "mean_days": 22.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.35,
+  "coverage": 0.96265664160401,
+  "mean_days": 22.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.4,
+  "coverage": 0.9630576441102757,
+  "mean_days": 22.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.45,
+  "coverage": 0.963358395989975,
+  "mean_days": 22.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.5,
+  "coverage": 0.9635087719298245,
+  "mean_days": 22.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.55,
+  "coverage": 0.9639598997493735,
+  "mean_days": 22.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.6,
+  "coverage": 0.9642105263157895,
+  "mean_days": 22.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.65,
+  "coverage": 0.9645112781954888,
+  "mean_days": 22.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.7,
+  "coverage": 0.9649122807017544,
+  "mean_days": 23.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.75,
+  "coverage": 0.9651127819548873,
+  "mean_days": 23.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.8,
+  "coverage": 0.9652130325814536,
+  "mean_days": 23.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.85,
+  "coverage": 0.9652631578947368,
+  "mean_days": 23.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.9,
+  "coverage": 0.9655639097744361,
+  "mean_days": 23.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 6.95,
+  "coverage": 0.9656140350877193,
+  "mean_days": 23.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.0,
+  "coverage": 0.9658646616541353,
+  "mean_days": 23.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.05,
+  "coverage": 0.9660651629072682,
+  "mean_days": 23.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.1,
+  "coverage": 0.9662155388471177,
+  "mean_days": 23.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.15,
+  "coverage": 0.9663659147869674,
+  "mean_days": 23.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.2,
+  "coverage": 0.9664160401002506,
+  "mean_days": 23.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.25,
+  "coverage": 0.9667167919799499,
+  "mean_days": 23.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.3,
+  "coverage": 0.9668170426065162,
+  "mean_days": 23.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.35,
+  "coverage": 0.9668671679197995,
+  "mean_days": 23.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.4,
+  "coverage": 0.9671679197994988,
+  "mean_days": 23.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.45,
+  "coverage": 0.9673182957393484,
+  "mean_days": 23.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.5,
+  "coverage": 0.967468671679198,
+  "mean_days": 23.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.55,
+  "coverage": 0.9676691729323308,
+  "mean_days": 23.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.6,
+  "coverage": 0.9679197994987468,
+  "mean_days": 23.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.65,
+  "coverage": 0.9681704260651629,
+  "mean_days": 23.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.7,
+  "coverage": 0.968421052631579,
+  "mean_days": 24.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.75,
+  "coverage": 0.968671679197995,
+  "mean_days": 24.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.8,
+  "coverage": 0.9690225563909775,
+  "mean_days": 24.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.85,
+  "coverage": 0.9693233082706767,
+  "mean_days": 24.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.9,
+  "coverage": 0.9694736842105263,
+  "mean_days": 24.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 7.95,
+  "coverage": 0.9696240601503759,
+  "mean_days": 24.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.0,
+  "coverage": 0.9697744360902255,
+  "mean_days": 24.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.05,
+  "coverage": 0.9701754385964912,
+  "mean_days": 24.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.1,
+  "coverage": 0.9702756892230576,
+  "mean_days": 24.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.15,
+  "coverage": 0.9705263157894737,
+  "mean_days": 24.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.2,
+  "coverage": 0.9705263157894737,
+  "mean_days": 24.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.25,
+  "coverage": 0.9708771929824561,
+  "mean_days": 24.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.3,
+  "coverage": 0.9714786967418546,
+  "mean_days": 24.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.35,
+  "coverage": 0.9716290726817043,
+  "mean_days": 24.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.4,
+  "coverage": 0.971829573934837,
+  "mean_days": 24.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.45,
+  "coverage": 0.9720802005012531,
+  "mean_days": 24.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.5,
+  "coverage": 0.9722305764411028,
+  "mean_days": 24.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.55,
+  "coverage": 0.9723308270676692,
+  "mean_days": 24.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.6,
+  "coverage": 0.972531328320802,
+  "mean_days": 24.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.65,
+  "coverage": 0.9726315789473684,
+  "mean_days": 24.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.7,
+  "coverage": 0.9728320802005013,
+  "mean_days": 25.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.75,
+  "coverage": 0.9729824561403508,
+  "mean_days": 25.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.8,
+  "coverage": 0.9731829573934837,
+  "mean_days": 25.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.85,
+  "coverage": 0.9734335839598998,
+  "mean_days": 25.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.9,
+  "coverage": 0.9735839598997493,
+  "mean_days": 25.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 8.95,
+  "coverage": 0.9738345864661654,
+  "mean_days": 25.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.0,
+  "coverage": 0.9740852130325814,
+  "mean_days": 25.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.05,
+  "coverage": 0.9742355889724311,
+  "mean_days": 25.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.1,
+  "coverage": 0.9743859649122807,
+  "mean_days": 25.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.15,
+  "coverage": 0.9744862155388471,
+  "mean_days": 25.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.2,
+  "coverage": 0.9746867167919799,
+  "mean_days": 25.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.25,
+  "coverage": 0.9748872180451128,
+  "mean_days": 25.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.3,
+  "coverage": 0.9752380952380952,
+  "mean_days": 25.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.35,
+  "coverage": 0.9753884711779449,
+  "mean_days": 25.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.4,
+  "coverage": 0.9754385964912281,
+  "mean_days": 25.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.45,
+  "coverage": 0.9755889724310777,
+  "mean_days": 25.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.5,
+  "coverage": 0.9756892230576442,
+  "mean_days": 25.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.55,
+  "coverage": 0.9757894736842105,
+  "mean_days": 25.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.6,
+  "coverage": 0.9759398496240601,
+  "mean_days": 25.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.65,
+  "coverage": 0.9762907268170427,
+  "mean_days": 25.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.7,
+  "coverage": 0.9765413533834586,
+  "mean_days": 26.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.75,
+  "coverage": 0.9767919799498747,
+  "mean_days": 26.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.8,
+  "coverage": 0.9768922305764411,
+  "mean_days": 26.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.85,
+  "coverage": 0.9770426065162907,
+  "mean_days": 26.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.9,
+  "coverage": 0.97734335839599,
+  "mean_days": 26.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 9.95,
+  "coverage": 0.9774937343358396,
+  "mean_days": 26.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.0,
+  "coverage": 0.9775438596491228,
+  "mean_days": 26.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.05,
+  "coverage": 0.9777443609022557,
+  "mean_days": 26.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.1,
+  "coverage": 0.9779448621553885,
+  "mean_days": 26.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.15,
+  "coverage": 0.9780952380952381,
+  "mean_days": 26.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.2,
+  "coverage": 0.9782456140350877,
+  "mean_days": 26.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.25,
+  "coverage": 0.9782456140350877,
+  "mean_days": 26.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.3,
+  "coverage": 0.9782957393483709,
+  "mean_days": 26.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.35,
+  "coverage": 0.9784962406015038,
+  "mean_days": 26.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.4,
+  "coverage": 0.9785964912280701,
+  "mean_days": 26.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.45,
+  "coverage": 0.9788471177944862,
+  "mean_days": 26.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.5,
+  "coverage": 0.9788972431077694,
+  "mean_days": 26.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.55,
+  "coverage": 0.9789974937343359,
+  "mean_days": 26.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.6,
+  "coverage": 0.979047619047619,
+  "mean_days": 26.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.65,
+  "coverage": 0.9791979949874686,
+  "mean_days": 26.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.7,
+  "coverage": 0.9792982456140351,
+  "mean_days": 27.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.75,
+  "coverage": 0.9794987468671679,
+  "mean_days": 27.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.8,
+  "coverage": 0.9795488721804512,
+  "mean_days": 27.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.85,
+  "coverage": 0.9795488721804512,
+  "mean_days": 27.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.9,
+  "coverage": 0.9795488721804512,
+  "mean_days": 27.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 10.95,
+  "coverage": 0.9798496240601504,
+  "mean_days": 27.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.0,
+  "coverage": 0.9799498746867168,
+  "mean_days": 27.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.05,
+  "coverage": 0.9800501253132832,
+  "mean_days": 27.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.1,
+  "coverage": 0.9800501253132832,
+  "mean_days": 27.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.15,
+  "coverage": 0.9801002506265665,
+  "mean_days": 27.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.2,
+  "coverage": 0.9802005012531328,
+  "mean_days": 27.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.25,
+  "coverage": 0.980250626566416,
+  "mean_days": 27.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.3,
+  "coverage": 0.9803508771929824,
+  "mean_days": 27.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.35,
+  "coverage": 0.9805012531328321,
+  "mean_days": 27.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.4,
+  "coverage": 0.9806015037593985,
+  "mean_days": 27.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.45,
+  "coverage": 0.980701754385965,
+  "mean_days": 27.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.5,
+  "coverage": 0.9808020050125313,
+  "mean_days": 27.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.55,
+  "coverage": 0.9809022556390977,
+  "mean_days": 27.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.6,
+  "coverage": 0.9809523809523809,
+  "mean_days": 27.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.65,
+  "coverage": 0.9811528822055138,
+  "mean_days": 27.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.7,
+  "coverage": 0.9812531328320802,
+  "mean_days": 28.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.75,
+  "coverage": 0.981453634085213,
+  "mean_days": 28.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.8,
+  "coverage": 0.9816541353383459,
+  "mean_days": 28.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.85,
+  "coverage": 0.9817543859649123,
+  "mean_days": 28.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.9,
+  "coverage": 0.9819548872180451,
+  "mean_days": 28.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 11.95,
+  "coverage": 0.9821553884711779,
+  "mean_days": 28.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.0,
+  "coverage": 0.9822055137844612,
+  "mean_days": 28.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.05,
+  "coverage": 0.9822055137844612,
+  "mean_days": 28.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.1,
+  "coverage": 0.9825062656641604,
+  "mean_days": 28.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.15,
+  "coverage": 0.9826065162907268,
+  "mean_days": 28.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.2,
+  "coverage": 0.9827568922305765,
+  "mean_days": 28.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.25,
+  "coverage": 0.9828070175438597,
+  "mean_days": 28.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.3,
+  "coverage": 0.9830075187969924,
+  "mean_days": 28.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.35,
+  "coverage": 0.9830576441102757,
+  "mean_days": 28.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.4,
+  "coverage": 0.9832080200501253,
+  "mean_days": 28.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.45,
+  "coverage": 0.9833082706766917,
+  "mean_days": 28.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.5,
+  "coverage": 0.9834085213032582,
+  "mean_days": 28.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.55,
+  "coverage": 0.9835087719298246,
+  "mean_days": 28.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.6,
+  "coverage": 0.9836591478696742,
+  "mean_days": 28.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.65,
+  "coverage": 0.9837593984962406,
+  "mean_days": 28.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.7,
+  "coverage": 0.9839097744360902,
+  "mean_days": 29.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.75,
+  "coverage": 0.9841604010025062,
+  "mean_days": 29.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.8,
+  "coverage": 0.9841604010025062,
+  "mean_days": 29.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.85,
+  "coverage": 0.9842606516290727,
+  "mean_days": 29.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.9,
+  "coverage": 0.9844611528822055,
+  "mean_days": 29.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 12.95,
+  "coverage": 0.984561403508772,
+  "mean_days": 29.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.0,
+  "coverage": 0.9847619047619047,
+  "mean_days": 29.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.05,
+  "coverage": 0.9848120300751879,
+  "mean_days": 29.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.1,
+  "coverage": 0.9848120300751879,
+  "mean_days": 29.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.15,
+  "coverage": 0.9849122807017544,
+  "mean_days": 29.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.2,
+  "coverage": 0.9849122807017544,
+  "mean_days": 29.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.25,
+  "coverage": 0.9849624060150376,
+  "mean_days": 29.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.3,
+  "coverage": 0.9851127819548873,
+  "mean_days": 29.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.35,
+  "coverage": 0.9851629072681705,
+  "mean_days": 29.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.4,
+  "coverage": 0.9853634085213032,
+  "mean_days": 29.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.45,
+  "coverage": 0.9854135338345865,
+  "mean_days": 29.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.5,
+  "coverage": 0.9854636591478697,
+  "mean_days": 29.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.55,
+  "coverage": 0.9854636591478697,
+  "mean_days": 29.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.6,
+  "coverage": 0.9855137844611529,
+  "mean_days": 29.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.65,
+  "coverage": 0.9857142857142858,
+  "mean_days": 29.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.7,
+  "coverage": 0.9858646616541353,
+  "mean_days": 30.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.75,
+  "coverage": 0.9859147869674185,
+  "mean_days": 30.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.8,
+  "coverage": 0.9859649122807017,
+  "mean_days": 30.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.85,
+  "coverage": 0.9859649122807017,
+  "mean_days": 30.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.9,
+  "coverage": 0.9860651629072682,
+  "mean_days": 30.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 13.95,
+  "coverage": 0.9862155388471178,
+  "mean_days": 30.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.0,
+  "coverage": 0.9863157894736843,
+  "mean_days": 30.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.05,
+  "coverage": 0.9864661654135338,
+  "mean_days": 30.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.1,
+  "coverage": 0.986516290726817,
+  "mean_days": 30.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.15,
+  "coverage": 0.9866666666666667,
+  "mean_days": 30.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.2,
+  "coverage": 0.9868671679197994,
+  "mean_days": 30.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.25,
+  "coverage": 0.9869674185463659,
+  "mean_days": 30.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.3,
+  "coverage": 0.9871679197994987,
+  "mean_days": 30.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.35,
+  "coverage": 0.987218045112782,
+  "mean_days": 30.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.4,
+  "coverage": 0.9873684210526316,
+  "mean_days": 30.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.45,
+  "coverage": 0.9874185463659148,
+  "mean_days": 30.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.5,
+  "coverage": 0.9875689223057644,
+  "mean_days": 30.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.55,
+  "coverage": 0.9876691729323308,
+  "mean_days": 30.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.6,
+  "coverage": 0.987719298245614,
+  "mean_days": 30.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.65,
+  "coverage": 0.9878195488721805,
+  "mean_days": 30.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.7,
+  "coverage": 0.98796992481203,
+  "mean_days": 31.010827067669172
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.75,
+  "coverage": 0.9880701754385965,
+  "mean_days": 31.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.8,
+  "coverage": 0.9881203007518797,
+  "mean_days": 31.113233082706767
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.85,
+  "coverage": 0.9882205513784461,
+  "mean_days": 31.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.9,
+  "coverage": 0.9882205513784461,
+  "mean_days": 31.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 14.95,
+  "coverage": 0.9882205513784461,
+  "mean_days": 31.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.0,
+  "coverage": 0.9883208020050125,
+  "mean_days": 31.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.05,
+  "coverage": 0.9883208020050125,
+  "mean_days": 31.360250626566415
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.1,
+  "coverage": 0.9883208020050125,
+  "mean_days": 31.406315789473684
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.15,
+  "coverage": 0.9884711779448622,
+  "mean_days": 31.45629072681704
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.2,
+  "coverage": 0.988671679197995,
+  "mean_days": 31.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.25,
+  "coverage": 0.9887719298245614,
+  "mean_days": 31.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.3,
+  "coverage": 0.9887719298245614,
+  "mean_days": 31.606466165413533
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.35,
+  "coverage": 0.9888220551378446,
+  "mean_days": 31.65588972431078
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.4,
+  "coverage": 0.988922305764411,
+  "mean_days": 31.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.45,
+  "coverage": 0.988922305764411,
+  "mean_days": 31.75644110275689
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.5,
+  "coverage": 0.9889724310776943,
+  "mean_days": 31.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.55,
+  "coverage": 0.9889724310776943,
+  "mean_days": 31.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.6,
+  "coverage": 0.989172932330827,
+  "mean_days": 31.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.65,
+  "coverage": 0.989172932330827,
+  "mean_days": 31.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.7,
+  "coverage": 0.9893233082706767,
+  "mean_days": 32.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.75,
+  "coverage": 0.9894235588972431,
+  "mean_days": 32.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.8,
+  "coverage": 0.9895238095238095,
+  "mean_days": 32.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.85,
+  "coverage": 0.9895238095238095,
+  "mean_days": 32.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.9,
+  "coverage": 0.9895238095238095,
+  "mean_days": 32.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 15.95,
+  "coverage": 0.9895238095238095,
+  "mean_days": 32.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.0,
+  "coverage": 0.9895238095238095,
+  "mean_days": 32.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.05,
+  "coverage": 0.989624060150376,
+  "mean_days": 32.36025062656642
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.1,
+  "coverage": 0.989624060150376,
+  "mean_days": 32.40631578947369
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.15,
+  "coverage": 0.9896741854636592,
+  "mean_days": 32.456290726817045
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.2,
+  "coverage": 0.9897243107769423,
+  "mean_days": 32.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.25,
+  "coverage": 0.9897744360902255,
+  "mean_days": 32.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.3,
+  "coverage": 0.9897744360902255,
+  "mean_days": 32.606466165413536
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.35,
+  "coverage": 0.9897744360902255,
+  "mean_days": 32.655889724310775
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.4,
+  "coverage": 0.9898245614035087,
+  "mean_days": 32.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.45,
+  "coverage": 0.9899248120300752,
+  "mean_days": 32.756441102756895
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.5,
+  "coverage": 0.9899248120300752,
+  "mean_days": 32.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.55,
+  "coverage": 0.9899749373433584,
+  "mean_days": 32.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.6,
+  "coverage": 0.9900751879699248,
+  "mean_days": 32.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.65,
+  "coverage": 0.9901754385964913,
+  "mean_days": 32.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.7,
+  "coverage": 0.9902756892230576,
+  "mean_days": 33.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.75,
+  "coverage": 0.990375939849624,
+  "mean_days": 33.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.8,
+  "coverage": 0.9904761904761905,
+  "mean_days": 33.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.85,
+  "coverage": 0.9905263157894737,
+  "mean_days": 33.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.9,
+  "coverage": 0.9905263157894737,
+  "mean_days": 33.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 16.95,
+  "coverage": 0.9905263157894737,
+  "mean_days": 33.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.0,
+  "coverage": 0.9906265664160401,
+  "mean_days": 33.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.05,
+  "coverage": 0.9906265664160401,
+  "mean_days": 33.36025062656642
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.1,
+  "coverage": 0.9906265664160401,
+  "mean_days": 33.40631578947369
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.15,
+  "coverage": 0.9907268170426066,
+  "mean_days": 33.456290726817045
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.2,
+  "coverage": 0.9907268170426066,
+  "mean_days": 33.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.25,
+  "coverage": 0.9907268170426066,
+  "mean_days": 33.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.3,
+  "coverage": 0.9908771929824561,
+  "mean_days": 33.606466165413536
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.35,
+  "coverage": 0.9909273182957393,
+  "mean_days": 33.655889724310775
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.4,
+  "coverage": 0.9909273182957393,
+  "mean_days": 33.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.45,
+  "coverage": 0.9909273182957393,
+  "mean_days": 33.756441102756895
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.5,
+  "coverage": 0.9909273182957393,
+  "mean_days": 33.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.55,
+  "coverage": 0.9909273182957393,
+  "mean_days": 33.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.6,
+  "coverage": 0.9909273182957393,
+  "mean_days": 33.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.65,
+  "coverage": 0.991077694235589,
+  "mean_days": 33.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.7,
+  "coverage": 0.9911779448621554,
+  "mean_days": 34.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.75,
+  "coverage": 0.9912280701754386,
+  "mean_days": 34.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.8,
+  "coverage": 0.9912280701754386,
+  "mean_days": 34.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.85,
+  "coverage": 0.9912280701754386,
+  "mean_days": 34.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.9,
+  "coverage": 0.9912280701754386,
+  "mean_days": 34.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 17.95,
+  "coverage": 0.9913283208020051,
+  "mean_days": 34.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.0,
+  "coverage": 0.9913784461152882,
+  "mean_days": 34.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.05,
+  "coverage": 0.9913784461152882,
+  "mean_days": 34.36025062656642
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.1,
+  "coverage": 0.9913784461152882,
+  "mean_days": 34.40631578947369
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.15,
+  "coverage": 0.9913784461152882,
+  "mean_days": 34.456290726817045
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.2,
+  "coverage": 0.9914285714285714,
+  "mean_days": 34.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.25,
+  "coverage": 0.9914786967418546,
+  "mean_days": 34.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.3,
+  "coverage": 0.991578947368421,
+  "mean_days": 34.606466165413536
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.35,
+  "coverage": 0.991578947368421,
+  "mean_days": 34.655889724310775
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.4,
+  "coverage": 0.9916290726817043,
+  "mean_days": 34.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.45,
+  "coverage": 0.9916290726817043,
+  "mean_days": 34.756441102756895
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.5,
+  "coverage": 0.9916290726817043,
+  "mean_days": 34.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.55,
+  "coverage": 0.9917293233082707,
+  "mean_days": 34.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.6,
+  "coverage": 0.9917794486215539,
+  "mean_days": 34.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.65,
+  "coverage": 0.9918295739348371,
+  "mean_days": 34.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.7,
+  "coverage": 0.9919298245614036,
+  "mean_days": 35.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.75,
+  "coverage": 0.9920300751879699,
+  "mean_days": 35.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.8,
+  "coverage": 0.9921303258145363,
+  "mean_days": 35.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.85,
+  "coverage": 0.9921303258145363,
+  "mean_days": 35.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.9,
+  "coverage": 0.9921804511278195,
+  "mean_days": 35.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 18.95,
+  "coverage": 0.9922305764411028,
+  "mean_days": 35.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.0,
+  "coverage": 0.992280701754386,
+  "mean_days": 35.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.05,
+  "coverage": 0.9923308270676692,
+  "mean_days": 35.36025062656642
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.1,
+  "coverage": 0.9924310776942356,
+  "mean_days": 35.40631578947369
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.15,
+  "coverage": 0.9924310776942356,
+  "mean_days": 35.456290726817045
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.2,
+  "coverage": 0.992531328320802,
+  "mean_days": 35.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.25,
+  "coverage": 0.9925814536340852,
+  "mean_days": 35.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.3,
+  "coverage": 0.9925814536340852,
+  "mean_days": 35.606466165413536
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.35,
+  "coverage": 0.9925814536340852,
+  "mean_days": 35.655889724310775
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.4,
+  "coverage": 0.9925814536340852,
+  "mean_days": 35.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.45,
+  "coverage": 0.9926315789473684,
+  "mean_days": 35.756441102756895
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.5,
+  "coverage": 0.9926817042606516,
+  "mean_days": 35.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.55,
+  "coverage": 0.9926817042606516,
+  "mean_days": 35.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.6,
+  "coverage": 0.9926817042606516,
+  "mean_days": 35.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.65,
+  "coverage": 0.9927318295739348,
+  "mean_days": 35.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.7,
+  "coverage": 0.9928320802005013,
+  "mean_days": 36.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.75,
+  "coverage": 0.9928320802005013,
+  "mean_days": 36.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.8,
+  "coverage": 0.9928320802005013,
+  "mean_days": 36.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.85,
+  "coverage": 0.9928320802005013,
+  "mean_days": 36.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.9,
+  "coverage": 0.9928822055137845,
+  "mean_days": 36.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 19.95,
+  "coverage": 0.9929323308270677,
+  "mean_days": 36.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.0,
+  "coverage": 0.9929323308270677,
+  "mean_days": 36.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.05,
+  "coverage": 0.9929323308270677,
+  "mean_days": 36.36025062656642
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.1,
+  "coverage": 0.9929824561403509,
+  "mean_days": 36.40631578947369
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.15,
+  "coverage": 0.9930827067669173,
+  "mean_days": 36.456290726817045
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.2,
+  "coverage": 0.9930827067669173,
+  "mean_days": 36.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.25,
+  "coverage": 0.9931829573934837,
+  "mean_days": 36.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.3,
+  "coverage": 0.9932832080200501,
+  "mean_days": 36.606466165413536
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.35,
+  "coverage": 0.9933834586466166,
+  "mean_days": 36.655889724310775
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.4,
+  "coverage": 0.9933834586466166,
+  "mean_days": 36.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.45,
+  "coverage": 0.9934335839598998,
+  "mean_days": 36.756441102756895
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.5,
+  "coverage": 0.9934335839598998,
+  "mean_days": 36.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.55,
+  "coverage": 0.9935338345864662,
+  "mean_days": 36.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.6,
+  "coverage": 0.9935839598997493,
+  "mean_days": 36.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.65,
+  "coverage": 0.9935839598997493,
+  "mean_days": 36.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.7,
+  "coverage": 0.9936340852130325,
+  "mean_days": 37.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.75,
+  "coverage": 0.9936340852130325,
+  "mean_days": 37.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.8,
+  "coverage": 0.9936842105263158,
+  "mean_days": 37.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.85,
+  "coverage": 0.9936842105263158,
+  "mean_days": 37.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.9,
+  "coverage": 0.9936842105263158,
+  "mean_days": 37.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 20.95,
+  "coverage": 0.9936842105263158,
+  "mean_days": 37.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.0,
+  "coverage": 0.9936842105263158,
+  "mean_days": 37.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.05,
+  "coverage": 0.9936842105263158,
+  "mean_days": 37.36025062656642
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.1,
+  "coverage": 0.9936842105263158,
+  "mean_days": 37.40631578947369
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.15,
+  "coverage": 0.993734335839599,
+  "mean_days": 37.456290726817045
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.2,
+  "coverage": 0.9938345864661654,
+  "mean_days": 37.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.25,
+  "coverage": 0.9939348370927318,
+  "mean_days": 37.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.3,
+  "coverage": 0.9939348370927318,
+  "mean_days": 37.606466165413536
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.35,
+  "coverage": 0.9939348370927318,
+  "mean_days": 37.655889724310775
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.4,
+  "coverage": 0.9939348370927318,
+  "mean_days": 37.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.45,
+  "coverage": 0.9939849624060151,
+  "mean_days": 37.756441102756895
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.5,
+  "coverage": 0.9940350877192983,
+  "mean_days": 37.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.55,
+  "coverage": 0.9940350877192983,
+  "mean_days": 37.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.6,
+  "coverage": 0.9940350877192983,
+  "mean_days": 37.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.65,
+  "coverage": 0.9940852130325815,
+  "mean_days": 37.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.7,
+  "coverage": 0.9941353383458646,
+  "mean_days": 38.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.75,
+  "coverage": 0.994235588972431,
+  "mean_days": 38.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.8,
+  "coverage": 0.9942857142857143,
+  "mean_days": 38.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.85,
+  "coverage": 0.9943358395989975,
+  "mean_days": 38.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.9,
+  "coverage": 0.9943859649122807,
+  "mean_days": 38.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 21.95,
+  "coverage": 0.9944360902255639,
+  "mean_days": 38.25829573934837
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.0,
+  "coverage": 0.9944862155388471,
+  "mean_days": 38.308521303258146
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.05,
+  "coverage": 0.9944862155388471,
+  "mean_days": 38.36025062656642
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.1,
+  "coverage": 0.9944862155388471,
+  "mean_days": 38.40631578947369
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.15,
+  "coverage": 0.9945363408521303,
+  "mean_days": 38.456290726817045
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.2,
+  "coverage": 0.9945363408521303,
+  "mean_days": 38.506766917293234
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.25,
+  "coverage": 0.99468671679198,
+  "mean_days": 38.557443609022556
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.3,
+  "coverage": 0.99468671679198,
+  "mean_days": 38.606466165413536
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.35,
+  "coverage": 0.99468671679198,
+  "mean_days": 38.655889724310775
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.4,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.706616541353384
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.45,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.756441102756895
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.5,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.808020050125315
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.55,
+  "coverage": 0.9947869674185463,
+  "mean_days": 38.857894736842105
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.6,
+  "coverage": 0.9948370927318295,
+  "mean_days": 38.91152882205514
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.65,
+  "coverage": 0.9948370927318295,
+  "mean_days": 38.961303258145364
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.7,
+  "coverage": 0.9948370927318295,
+  "mean_days": 39.010827067669176
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.75,
+  "coverage": 0.9948370927318295,
+  "mean_days": 39.061604010025064
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.8,
+  "coverage": 0.9948872180451128,
+  "mean_days": 39.11323308270677
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.85,
+  "coverage": 0.9948872180451128,
+  "mean_days": 39.162456140350876
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.9,
+  "coverage": 0.9948872180451128,
+  "mean_days": 39.208822055137844
+ },
+ {
+  "model": "linear C*",
+  "shift": 22.95,
+  "coverage": 0.9949874686716792,
+  "mean_days": 39.25829573934837
+ },
+ {
+  "model": "HGB D*",
+  "shift": -4.1,
+  "coverage": 0.8,
+  "mean_days": 13.110827067669172
+ },
+ {
+  "model": "HGB D*",
+  "shift": -4.05,
+  "coverage": 0.8019548872180451,
+  "mean_days": 13.159699248120301
+ },
+ {
+  "model": "HGB D*",
+  "shift": -4.0,
+  "coverage": 0.8040601503759398,
+  "mean_days": 13.209523809523809
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.95,
+  "coverage": 0.8057644110275689,
+  "mean_days": 13.257844611528823
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.9,
+  "coverage": 0.8074185463659148,
+  "mean_days": 13.305964912280702
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.85,
+  "coverage": 0.8093734335839599,
+  "mean_days": 13.354085213032581
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.8,
+  "coverage": 0.8116791979949874,
+  "mean_days": 13.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.75,
+  "coverage": 0.8133834586466165,
+  "mean_days": 13.456190476190477
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.7,
+  "coverage": 0.815187969924812,
+  "mean_days": 13.505513784461153
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.65,
+  "coverage": 0.8174436090225564,
+  "mean_days": 13.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.6,
+  "coverage": 0.819749373433584,
+  "mean_days": 13.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.55,
+  "coverage": 0.821453634085213,
+  "mean_days": 13.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.5,
+  "coverage": 0.8231077694235589,
+  "mean_days": 13.710526315789474
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.45,
+  "coverage": 0.8247619047619048,
+  "mean_days": 13.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.4,
+  "coverage": 0.8267167919799498,
+  "mean_days": 13.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.35,
+  "coverage": 0.8283208020050126,
+  "mean_days": 13.861203007518798
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.3,
+  "coverage": 0.8302255639097744,
+  "mean_days": 13.909624060150376
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.25,
+  "coverage": 0.832280701754386,
+  "mean_days": 13.959047619047618
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.2,
+  "coverage": 0.8337844611528822,
+  "mean_days": 14.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.15,
+  "coverage": 0.8352882205513784,
+  "mean_days": 14.061353383458647
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.1,
+  "coverage": 0.8369423558897243,
+  "mean_days": 14.110827067669172
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.05,
+  "coverage": 0.8384461152882206,
+  "mean_days": 14.159699248120301
+ },
+ {
+  "model": "HGB D*",
+  "shift": -3.0,
+  "coverage": 0.8408521303258145,
+  "mean_days": 14.209523809523809
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.95,
+  "coverage": 0.8425062656641604,
+  "mean_days": 14.257844611528823
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.9,
+  "coverage": 0.8441604010025062,
+  "mean_days": 14.305964912280702
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.85,
+  "coverage": 0.8461654135338346,
+  "mean_days": 14.354085213032581
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.8,
+  "coverage": 0.8477694235588973,
+  "mean_days": 14.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.75,
+  "coverage": 0.8492230576441103,
+  "mean_days": 14.456190476190477
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.7,
+  "coverage": 0.850375939849624,
+  "mean_days": 14.505513784461153
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.65,
+  "coverage": 0.8520300751879699,
+  "mean_days": 14.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.6,
+  "coverage": 0.8542355889724311,
+  "mean_days": 14.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.55,
+  "coverage": 0.8555889724310777,
+  "mean_days": 14.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.5,
+  "coverage": 0.8572932330827068,
+  "mean_days": 14.710526315789474
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.45,
+  "coverage": 0.8593984962406015,
+  "mean_days": 14.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.4,
+  "coverage": 0.8605012531328321,
+  "mean_days": 14.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.35,
+  "coverage": 0.8620551378446115,
+  "mean_days": 14.861203007518798
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.3,
+  "coverage": 0.8636090225563909,
+  "mean_days": 14.909624060150376
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.25,
+  "coverage": 0.8647117794486215,
+  "mean_days": 14.959047619047618
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.2,
+  "coverage": 0.8656140350877193,
+  "mean_days": 15.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.15,
+  "coverage": 0.8670175438596491,
+  "mean_days": 15.061353383458647
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.1,
+  "coverage": 0.8687218045112782,
+  "mean_days": 15.110827067669172
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.05,
+  "coverage": 0.870125313283208,
+  "mean_days": 15.159699248120301
+ },
+ {
+  "model": "HGB D*",
+  "shift": -2.0,
+  "coverage": 0.8708771929824561,
+  "mean_days": 15.209523809523809
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.95,
+  "coverage": 0.8721303258145363,
+  "mean_days": 15.257844611528823
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.9,
+  "coverage": 0.8735338345864662,
+  "mean_days": 15.305964912280702
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.85,
+  "coverage": 0.8743358395989975,
+  "mean_days": 15.354085213032581
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.8,
+  "coverage": 0.8751879699248121,
+  "mean_days": 15.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.75,
+  "coverage": 0.8760902255639098,
+  "mean_days": 15.456190476190477
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.7,
+  "coverage": 0.8776942355889724,
+  "mean_days": 15.505513784461153
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.65,
+  "coverage": 0.8792481203007518,
+  "mean_days": 15.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.6,
+  "coverage": 0.8805012531328321,
+  "mean_days": 15.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.55,
+  "coverage": 0.8817042606516291,
+  "mean_days": 15.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.5,
+  "coverage": 0.8829072681704261,
+  "mean_days": 15.710526315789474
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.45,
+  "coverage": 0.8837092731829574,
+  "mean_days": 15.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.4,
+  "coverage": 0.8847117794486216,
+  "mean_days": 15.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.35,
+  "coverage": 0.8858646616541354,
+  "mean_days": 15.861203007518798
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.3,
+  "coverage": 0.8871679197994987,
+  "mean_days": 15.909624060150376
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.25,
+  "coverage": 0.8880701754385965,
+  "mean_days": 15.959047619047618
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.2,
+  "coverage": 0.8888721804511278,
+  "mean_days": 16.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.15,
+  "coverage": 0.8897243107769424,
+  "mean_days": 16.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.1,
+  "coverage": 0.8909774436090225,
+  "mean_days": 16.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.05,
+  "coverage": 0.8923308270676692,
+  "mean_days": 16.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": -1.0,
+  "coverage": 0.8934335839598998,
+  "mean_days": 16.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.95,
+  "coverage": 0.8940852130325815,
+  "mean_days": 16.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.9,
+  "coverage": 0.8947368421052632,
+  "mean_days": 16.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.85,
+  "coverage": 0.895889724310777,
+  "mean_days": 16.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.8,
+  "coverage": 0.8967418546365915,
+  "mean_days": 16.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.75,
+  "coverage": 0.8977443609022556,
+  "mean_days": 16.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.7,
+  "coverage": 0.8983458646616541,
+  "mean_days": 16.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.65,
+  "coverage": 0.8994987468671679,
+  "mean_days": 16.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.6,
+  "coverage": 0.9005012531328321,
+  "mean_days": 16.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.55,
+  "coverage": 0.901203007518797,
+  "mean_days": 16.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.5,
+  "coverage": 0.9023057644110276,
+  "mean_days": 16.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.45,
+  "coverage": 0.9032080200501253,
+  "mean_days": 16.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.4,
+  "coverage": 0.9043609022556391,
+  "mean_days": 16.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.35,
+  "coverage": 0.9053634085213033,
+  "mean_days": 16.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.3,
+  "coverage": 0.906265664160401,
+  "mean_days": 16.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.25,
+  "coverage": 0.9068671679197995,
+  "mean_days": 16.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.2,
+  "coverage": 0.9076190476190477,
+  "mean_days": 17.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.15,
+  "coverage": 0.9084210526315789,
+  "mean_days": 17.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.1,
+  "coverage": 0.9092731829573935,
+  "mean_days": 17.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.05,
+  "coverage": 0.909874686716792,
+  "mean_days": 17.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": -0.0,
+  "coverage": 0.910827067669173,
+  "mean_days": 17.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.05,
+  "coverage": 0.9119799498746867,
+  "mean_days": 17.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.1,
+  "coverage": 0.912781954887218,
+  "mean_days": 17.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.15,
+  "coverage": 0.913734335839599,
+  "mean_days": 17.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.2,
+  "coverage": 0.9150877192982456,
+  "mean_days": 17.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.25,
+  "coverage": 0.9160401002506265,
+  "mean_days": 17.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.3,
+  "coverage": 0.9168421052631579,
+  "mean_days": 17.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.35,
+  "coverage": 0.9176441102756893,
+  "mean_days": 17.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.4,
+  "coverage": 0.9182456140350878,
+  "mean_days": 17.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.45,
+  "coverage": 0.9189473684210526,
+  "mean_days": 17.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.5,
+  "coverage": 0.919749373433584,
+  "mean_days": 17.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.55,
+  "coverage": 0.9204010025062657,
+  "mean_days": 17.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.6,
+  "coverage": 0.9208521303258146,
+  "mean_days": 17.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.65,
+  "coverage": 0.9216040100250626,
+  "mean_days": 17.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.7,
+  "coverage": 0.9222055137844611,
+  "mean_days": 17.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.75,
+  "coverage": 0.9229072681704261,
+  "mean_days": 17.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.8,
+  "coverage": 0.9236591478696742,
+  "mean_days": 18.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.85,
+  "coverage": 0.9242606516290727,
+  "mean_days": 18.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.9,
+  "coverage": 0.9249122807017544,
+  "mean_days": 18.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 0.95,
+  "coverage": 0.9257644110275689,
+  "mean_days": 18.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.0,
+  "coverage": 0.9263157894736842,
+  "mean_days": 18.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.05,
+  "coverage": 0.9273684210526316,
+  "mean_days": 18.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.1,
+  "coverage": 0.9279699248120301,
+  "mean_days": 18.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.15,
+  "coverage": 0.928671679197995,
+  "mean_days": 18.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.2,
+  "coverage": 0.9293734335839599,
+  "mean_days": 18.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.25,
+  "coverage": 0.9303258145363409,
+  "mean_days": 18.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.3,
+  "coverage": 0.9311779448621554,
+  "mean_days": 18.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.35,
+  "coverage": 0.9318796992481203,
+  "mean_days": 18.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.4,
+  "coverage": 0.9328320802005012,
+  "mean_days": 18.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.45,
+  "coverage": 0.9334335839598997,
+  "mean_days": 18.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.5,
+  "coverage": 0.9342857142857143,
+  "mean_days": 18.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.55,
+  "coverage": 0.9350375939849624,
+  "mean_days": 18.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.6,
+  "coverage": 0.9356390977443609,
+  "mean_days": 18.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.65,
+  "coverage": 0.9365413533834587,
+  "mean_days": 18.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.7,
+  "coverage": 0.937092731829574,
+  "mean_days": 18.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.75,
+  "coverage": 0.9375438596491228,
+  "mean_days": 18.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.8,
+  "coverage": 0.9382456140350878,
+  "mean_days": 19.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.85,
+  "coverage": 0.938796992481203,
+  "mean_days": 19.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.9,
+  "coverage": 0.9394486215538848,
+  "mean_days": 19.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 1.95,
+  "coverage": 0.9401002506265664,
+  "mean_days": 19.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.0,
+  "coverage": 0.9404010025062657,
+  "mean_days": 19.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.05,
+  "coverage": 0.9410025062656642,
+  "mean_days": 19.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.1,
+  "coverage": 0.941203007518797,
+  "mean_days": 19.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.15,
+  "coverage": 0.9420050125313283,
+  "mean_days": 19.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.2,
+  "coverage": 0.9424561403508772,
+  "mean_days": 19.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.25,
+  "coverage": 0.9430075187969925,
+  "mean_days": 19.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.3,
+  "coverage": 0.943609022556391,
+  "mean_days": 19.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.35,
+  "coverage": 0.9440100250626566,
+  "mean_days": 19.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.4,
+  "coverage": 0.9447117794486215,
+  "mean_days": 19.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.45,
+  "coverage": 0.9452631578947368,
+  "mean_days": 19.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.5,
+  "coverage": 0.9457644110275689,
+  "mean_days": 19.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.55,
+  "coverage": 0.946015037593985,
+  "mean_days": 19.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.6,
+  "coverage": 0.9463157894736842,
+  "mean_days": 19.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.65,
+  "coverage": 0.9468671679197995,
+  "mean_days": 19.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.7,
+  "coverage": 0.9473684210526315,
+  "mean_days": 19.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.75,
+  "coverage": 0.9477694235588973,
+  "mean_days": 19.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.8,
+  "coverage": 0.9482205513784461,
+  "mean_days": 20.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.85,
+  "coverage": 0.9485714285714286,
+  "mean_days": 20.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.9,
+  "coverage": 0.9490225563909774,
+  "mean_days": 20.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 2.95,
+  "coverage": 0.9495238095238095,
+  "mean_days": 20.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.0,
+  "coverage": 0.9500250626566416,
+  "mean_days": 20.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.05,
+  "coverage": 0.9507268170426065,
+  "mean_days": 20.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.1,
+  "coverage": 0.951077694235589,
+  "mean_days": 20.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.15,
+  "coverage": 0.9515789473684211,
+  "mean_days": 20.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.2,
+  "coverage": 0.9518295739348371,
+  "mean_days": 20.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.25,
+  "coverage": 0.9520300751879699,
+  "mean_days": 20.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.3,
+  "coverage": 0.9526315789473684,
+  "mean_days": 20.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.35,
+  "coverage": 0.9530827067669173,
+  "mean_days": 20.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.4,
+  "coverage": 0.9533333333333334,
+  "mean_days": 20.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.45,
+  "coverage": 0.9536340852130326,
+  "mean_days": 20.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.5,
+  "coverage": 0.9541353383458646,
+  "mean_days": 20.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.55,
+  "coverage": 0.9546867167919799,
+  "mean_days": 20.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.6,
+  "coverage": 0.9550877192982457,
+  "mean_days": 20.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.65,
+  "coverage": 0.9552380952380952,
+  "mean_days": 20.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.7,
+  "coverage": 0.9558395989974937,
+  "mean_days": 20.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.75,
+  "coverage": 0.9562406015037594,
+  "mean_days": 20.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.8,
+  "coverage": 0.9568922305764411,
+  "mean_days": 21.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.85,
+  "coverage": 0.9572932330827068,
+  "mean_days": 21.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.9,
+  "coverage": 0.9576441102756892,
+  "mean_days": 21.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 3.95,
+  "coverage": 0.9581453634085213,
+  "mean_days": 21.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.0,
+  "coverage": 0.9584461152882205,
+  "mean_days": 21.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.05,
+  "coverage": 0.958796992481203,
+  "mean_days": 21.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.1,
+  "coverage": 0.959047619047619,
+  "mean_days": 21.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.15,
+  "coverage": 0.9592982456140351,
+  "mean_days": 21.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.2,
+  "coverage": 0.9595989974937343,
+  "mean_days": 21.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.25,
+  "coverage": 0.96,
+  "mean_days": 21.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.3,
+  "coverage": 0.9602005012531328,
+  "mean_days": 21.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.35,
+  "coverage": 0.960701754385965,
+  "mean_days": 21.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.4,
+  "coverage": 0.9610025062656642,
+  "mean_days": 21.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.45,
+  "coverage": 0.961453634085213,
+  "mean_days": 21.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.5,
+  "coverage": 0.9617543859649123,
+  "mean_days": 21.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.55,
+  "coverage": 0.962155388471178,
+  "mean_days": 21.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.6,
+  "coverage": 0.9622556390977444,
+  "mean_days": 21.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.65,
+  "coverage": 0.9624060150375939,
+  "mean_days": 21.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.7,
+  "coverage": 0.9624561403508772,
+  "mean_days": 21.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.75,
+  "coverage": 0.9627067669172933,
+  "mean_days": 21.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.8,
+  "coverage": 0.9631578947368421,
+  "mean_days": 22.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.85,
+  "coverage": 0.9635588972431077,
+  "mean_days": 22.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.9,
+  "coverage": 0.9638095238095238,
+  "mean_days": 22.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 4.95,
+  "coverage": 0.9642105263157895,
+  "mean_days": 22.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.0,
+  "coverage": 0.9645112781954888,
+  "mean_days": 22.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.05,
+  "coverage": 0.9647117794486215,
+  "mean_days": 22.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.1,
+  "coverage": 0.9649624060150376,
+  "mean_days": 22.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.15,
+  "coverage": 0.9652130325814536,
+  "mean_days": 22.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.2,
+  "coverage": 0.96531328320802,
+  "mean_days": 22.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.25,
+  "coverage": 0.9655137844611529,
+  "mean_days": 22.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.3,
+  "coverage": 0.9656641604010026,
+  "mean_days": 22.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.35,
+  "coverage": 0.9659649122807018,
+  "mean_days": 22.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.4,
+  "coverage": 0.9662155388471177,
+  "mean_days": 22.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.45,
+  "coverage": 0.966516290726817,
+  "mean_days": 22.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.5,
+  "coverage": 0.9666666666666667,
+  "mean_days": 22.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.55,
+  "coverage": 0.9668671679197995,
+  "mean_days": 22.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.6,
+  "coverage": 0.9671177944862155,
+  "mean_days": 22.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.65,
+  "coverage": 0.967218045112782,
+  "mean_days": 22.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.7,
+  "coverage": 0.9675187969924812,
+  "mean_days": 22.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.75,
+  "coverage": 0.9678696741854637,
+  "mean_days": 22.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.8,
+  "coverage": 0.9682205513784461,
+  "mean_days": 23.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.85,
+  "coverage": 0.9683709273182958,
+  "mean_days": 23.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.9,
+  "coverage": 0.9686215538847118,
+  "mean_days": 23.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 5.95,
+  "coverage": 0.9689724310776943,
+  "mean_days": 23.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.0,
+  "coverage": 0.969172932330827,
+  "mean_days": 23.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.05,
+  "coverage": 0.9692230576441103,
+  "mean_days": 23.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.1,
+  "coverage": 0.9694235588972431,
+  "mean_days": 23.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.15,
+  "coverage": 0.9696240601503759,
+  "mean_days": 23.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.2,
+  "coverage": 0.9700751879699248,
+  "mean_days": 23.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.25,
+  "coverage": 0.9702255639097744,
+  "mean_days": 23.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.3,
+  "coverage": 0.9704761904761905,
+  "mean_days": 23.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.35,
+  "coverage": 0.9705263157894737,
+  "mean_days": 23.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.4,
+  "coverage": 0.9705764411027569,
+  "mean_days": 23.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.45,
+  "coverage": 0.9709774436090226,
+  "mean_days": 23.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.5,
+  "coverage": 0.9711278195488722,
+  "mean_days": 23.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.55,
+  "coverage": 0.971328320802005,
+  "mean_days": 23.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.6,
+  "coverage": 0.9714786967418546,
+  "mean_days": 23.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.65,
+  "coverage": 0.9717293233082707,
+  "mean_days": 23.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.7,
+  "coverage": 0.9719298245614035,
+  "mean_days": 23.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.75,
+  "coverage": 0.9720802005012531,
+  "mean_days": 23.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.8,
+  "coverage": 0.9723809523809523,
+  "mean_days": 24.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.85,
+  "coverage": 0.9727318295739349,
+  "mean_days": 24.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.9,
+  "coverage": 0.9729323308270676,
+  "mean_days": 24.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 6.95,
+  "coverage": 0.9731328320802005,
+  "mean_days": 24.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.0,
+  "coverage": 0.9733333333333334,
+  "mean_days": 24.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.05,
+  "coverage": 0.9733333333333334,
+  "mean_days": 24.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.1,
+  "coverage": 0.973483709273183,
+  "mean_days": 24.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.15,
+  "coverage": 0.9735338345864661,
+  "mean_days": 24.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.2,
+  "coverage": 0.9738345864661654,
+  "mean_days": 24.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.25,
+  "coverage": 0.9739348370927319,
+  "mean_days": 24.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.3,
+  "coverage": 0.9741854636591478,
+  "mean_days": 24.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.35,
+  "coverage": 0.9742355889724311,
+  "mean_days": 24.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.4,
+  "coverage": 0.9744360902255639,
+  "mean_days": 24.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.45,
+  "coverage": 0.9747869674185463,
+  "mean_days": 24.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.5,
+  "coverage": 0.9750877192982456,
+  "mean_days": 24.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.55,
+  "coverage": 0.975187969924812,
+  "mean_days": 24.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.6,
+  "coverage": 0.9752380952380952,
+  "mean_days": 24.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.65,
+  "coverage": 0.9753383458646616,
+  "mean_days": 24.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.7,
+  "coverage": 0.9755388471177945,
+  "mean_days": 24.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.75,
+  "coverage": 0.9756892230576442,
+  "mean_days": 24.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.8,
+  "coverage": 0.9758395989974937,
+  "mean_days": 25.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.85,
+  "coverage": 0.9759899749373434,
+  "mean_days": 25.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.9,
+  "coverage": 0.9762907268170427,
+  "mean_days": 25.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 7.95,
+  "coverage": 0.9764411027568922,
+  "mean_days": 25.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.0,
+  "coverage": 0.9766917293233083,
+  "mean_days": 25.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.05,
+  "coverage": 0.9768922305764411,
+  "mean_days": 25.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.1,
+  "coverage": 0.9770426065162907,
+  "mean_days": 25.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.15,
+  "coverage": 0.9771428571428571,
+  "mean_days": 25.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.2,
+  "coverage": 0.9772431077694236,
+  "mean_days": 25.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.25,
+  "coverage": 0.9774436090225563,
+  "mean_days": 25.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.3,
+  "coverage": 0.977593984962406,
+  "mean_days": 25.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.35,
+  "coverage": 0.9777443609022557,
+  "mean_days": 25.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.4,
+  "coverage": 0.9777944862155389,
+  "mean_days": 25.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.45,
+  "coverage": 0.9778446115288221,
+  "mean_days": 25.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.5,
+  "coverage": 0.9782456140350877,
+  "mean_days": 25.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.55,
+  "coverage": 0.9783458646616542,
+  "mean_days": 25.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.6,
+  "coverage": 0.9784962406015038,
+  "mean_days": 25.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.65,
+  "coverage": 0.9785964912280701,
+  "mean_days": 25.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.7,
+  "coverage": 0.9787468671679198,
+  "mean_days": 25.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.75,
+  "coverage": 0.9787468671679198,
+  "mean_days": 25.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.8,
+  "coverage": 0.9789473684210527,
+  "mean_days": 26.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.85,
+  "coverage": 0.979047619047619,
+  "mean_days": 26.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.9,
+  "coverage": 0.9790977443609022,
+  "mean_days": 26.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 8.95,
+  "coverage": 0.9793483709273183,
+  "mean_days": 26.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.0,
+  "coverage": 0.9794987468671679,
+  "mean_days": 26.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.05,
+  "coverage": 0.9796992481203007,
+  "mean_days": 26.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.1,
+  "coverage": 0.9796992481203007,
+  "mean_days": 26.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.15,
+  "coverage": 0.9797493734335839,
+  "mean_days": 26.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.2,
+  "coverage": 0.9797493734335839,
+  "mean_days": 26.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.25,
+  "coverage": 0.9797994987468671,
+  "mean_days": 26.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.3,
+  "coverage": 0.9802005012531328,
+  "mean_days": 26.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.35,
+  "coverage": 0.9803007518796992,
+  "mean_days": 26.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.4,
+  "coverage": 0.9803007518796992,
+  "mean_days": 26.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.45,
+  "coverage": 0.9804511278195489,
+  "mean_days": 26.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.5,
+  "coverage": 0.9806015037593985,
+  "mean_days": 26.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.55,
+  "coverage": 0.9806516290726817,
+  "mean_days": 26.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.6,
+  "coverage": 0.9807518796992482,
+  "mean_days": 26.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.65,
+  "coverage": 0.9808521303258145,
+  "mean_days": 26.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.7,
+  "coverage": 0.9810025062656642,
+  "mean_days": 26.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.75,
+  "coverage": 0.981203007518797,
+  "mean_days": 26.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.8,
+  "coverage": 0.9816040100250627,
+  "mean_days": 27.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.85,
+  "coverage": 0.9817042606516291,
+  "mean_days": 27.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.9,
+  "coverage": 0.9818546365914786,
+  "mean_days": 27.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 9.95,
+  "coverage": 0.9819548872180451,
+  "mean_days": 27.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.0,
+  "coverage": 0.9820050125313283,
+  "mean_days": 27.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.05,
+  "coverage": 0.9820551378446115,
+  "mean_days": 27.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.1,
+  "coverage": 0.9822055137844612,
+  "mean_days": 27.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.15,
+  "coverage": 0.9822556390977444,
+  "mean_days": 27.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.2,
+  "coverage": 0.9824561403508771,
+  "mean_days": 27.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.25,
+  "coverage": 0.9826065162907268,
+  "mean_days": 27.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.3,
+  "coverage": 0.98265664160401,
+  "mean_days": 27.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.35,
+  "coverage": 0.9827568922305765,
+  "mean_days": 27.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.4,
+  "coverage": 0.9829072681704261,
+  "mean_days": 27.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.45,
+  "coverage": 0.9831077694235589,
+  "mean_days": 27.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.5,
+  "coverage": 0.9832080200501253,
+  "mean_days": 27.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.55,
+  "coverage": 0.983358395989975,
+  "mean_days": 27.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.6,
+  "coverage": 0.9835588972431077,
+  "mean_days": 27.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.65,
+  "coverage": 0.9836090225563909,
+  "mean_days": 27.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.7,
+  "coverage": 0.9837092731829574,
+  "mean_days": 27.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.75,
+  "coverage": 0.9837593984962406,
+  "mean_days": 27.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.8,
+  "coverage": 0.9838095238095238,
+  "mean_days": 28.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.85,
+  "coverage": 0.983859649122807,
+  "mean_days": 28.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.9,
+  "coverage": 0.9840100250626567,
+  "mean_days": 28.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 10.95,
+  "coverage": 0.9840601503759399,
+  "mean_days": 28.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.0,
+  "coverage": 0.984110275689223,
+  "mean_days": 28.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.05,
+  "coverage": 0.9843107769423559,
+  "mean_days": 28.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.1,
+  "coverage": 0.9843609022556391,
+  "mean_days": 28.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.15,
+  "coverage": 0.9844110275689223,
+  "mean_days": 28.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.2,
+  "coverage": 0.9844611528822055,
+  "mean_days": 28.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.25,
+  "coverage": 0.984561403508772,
+  "mean_days": 28.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.3,
+  "coverage": 0.9846115288220552,
+  "mean_days": 28.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.35,
+  "coverage": 0.9847117794486215,
+  "mean_days": 28.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.4,
+  "coverage": 0.9848120300751879,
+  "mean_days": 28.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.45,
+  "coverage": 0.9849122807017544,
+  "mean_days": 28.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.5,
+  "coverage": 0.9851127819548873,
+  "mean_days": 28.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.55,
+  "coverage": 0.9852631578947368,
+  "mean_days": 28.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.6,
+  "coverage": 0.9853634085213032,
+  "mean_days": 28.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.65,
+  "coverage": 0.9854135338345865,
+  "mean_days": 28.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.7,
+  "coverage": 0.9854636591478697,
+  "mean_days": 28.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.75,
+  "coverage": 0.9855639097744361,
+  "mean_days": 28.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.8,
+  "coverage": 0.9855639097744361,
+  "mean_days": 29.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.85,
+  "coverage": 0.9855639097744361,
+  "mean_days": 29.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.9,
+  "coverage": 0.9856641604010025,
+  "mean_days": 29.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 11.95,
+  "coverage": 0.9858145363408521,
+  "mean_days": 29.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.0,
+  "coverage": 0.986015037593985,
+  "mean_days": 29.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.05,
+  "coverage": 0.9861152882205514,
+  "mean_days": 29.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.1,
+  "coverage": 0.9861654135338346,
+  "mean_days": 29.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.15,
+  "coverage": 0.9863157894736843,
+  "mean_days": 29.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.2,
+  "coverage": 0.9863659147869674,
+  "mean_days": 29.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.25,
+  "coverage": 0.9866165413533835,
+  "mean_days": 29.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.3,
+  "coverage": 0.9868170426065163,
+  "mean_days": 29.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.35,
+  "coverage": 0.9869674185463659,
+  "mean_days": 29.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.4,
+  "coverage": 0.9870175438596491,
+  "mean_days": 29.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.45,
+  "coverage": 0.9871177944862155,
+  "mean_days": 29.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.5,
+  "coverage": 0.987218045112782,
+  "mean_days": 29.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.55,
+  "coverage": 0.9872681704260652,
+  "mean_days": 29.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.6,
+  "coverage": 0.9873684210526316,
+  "mean_days": 29.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.65,
+  "coverage": 0.9874185463659148,
+  "mean_days": 29.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.7,
+  "coverage": 0.9875187969924812,
+  "mean_days": 29.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.75,
+  "coverage": 0.9875689223057644,
+  "mean_days": 29.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.8,
+  "coverage": 0.9875689223057644,
+  "mean_days": 30.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.85,
+  "coverage": 0.9877694235588973,
+  "mean_days": 30.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.9,
+  "coverage": 0.9878195488721805,
+  "mean_days": 30.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 12.95,
+  "coverage": 0.9878696741854637,
+  "mean_days": 30.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.0,
+  "coverage": 0.9880200501253132,
+  "mean_days": 30.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.05,
+  "coverage": 0.9882205513784461,
+  "mean_days": 30.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.1,
+  "coverage": 0.9882706766917293,
+  "mean_days": 30.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.15,
+  "coverage": 0.9882706766917293,
+  "mean_days": 30.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.2,
+  "coverage": 0.988421052631579,
+  "mean_days": 30.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.25,
+  "coverage": 0.9884711779448622,
+  "mean_days": 30.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.3,
+  "coverage": 0.9884711779448622,
+  "mean_days": 30.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.35,
+  "coverage": 0.9886215538847117,
+  "mean_days": 30.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.4,
+  "coverage": 0.9886215538847117,
+  "mean_days": 30.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.45,
+  "coverage": 0.988671679197995,
+  "mean_days": 30.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.5,
+  "coverage": 0.9887719298245614,
+  "mean_days": 30.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.55,
+  "coverage": 0.9888220551378446,
+  "mean_days": 30.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.6,
+  "coverage": 0.9889724310776943,
+  "mean_days": 30.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.65,
+  "coverage": 0.9890225563909775,
+  "mean_days": 30.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.7,
+  "coverage": 0.9890726817042607,
+  "mean_days": 30.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.75,
+  "coverage": 0.9890726817042607,
+  "mean_days": 30.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.8,
+  "coverage": 0.9891228070175438,
+  "mean_days": 31.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.85,
+  "coverage": 0.9891228070175438,
+  "mean_days": 31.06135338345865
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.9,
+  "coverage": 0.989172932330827,
+  "mean_days": 31.110827067669174
+ },
+ {
+  "model": "HGB D*",
+  "shift": 13.95,
+  "coverage": 0.989172932330827,
+  "mean_days": 31.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.0,
+  "coverage": 0.989172932330827,
+  "mean_days": 31.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.05,
+  "coverage": 0.989172932330827,
+  "mean_days": 31.25784461152882
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.1,
+  "coverage": 0.9892230576441102,
+  "mean_days": 31.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.15,
+  "coverage": 0.9892731829573935,
+  "mean_days": 31.354085213032583
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.2,
+  "coverage": 0.9892731829573935,
+  "mean_days": 31.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.25,
+  "coverage": 0.9893734335839599,
+  "mean_days": 31.456190476190475
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.3,
+  "coverage": 0.9894736842105263,
+  "mean_days": 31.505513784461154
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.35,
+  "coverage": 0.9895739348370928,
+  "mean_days": 31.558245614035087
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.4,
+  "coverage": 0.989624060150376,
+  "mean_days": 31.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.45,
+  "coverage": 0.9896741854636592,
+  "mean_days": 31.66110275689223
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.5,
+  "coverage": 0.9896741854636592,
+  "mean_days": 31.710526315789473
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.55,
+  "coverage": 0.9896741854636592,
+  "mean_days": 31.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.6,
+  "coverage": 0.9897243107769423,
+  "mean_days": 31.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.65,
+  "coverage": 0.9897243107769423,
+  "mean_days": 31.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.7,
+  "coverage": 0.9897744360902255,
+  "mean_days": 31.909624060150374
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.75,
+  "coverage": 0.989874686716792,
+  "mean_days": 31.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.8,
+  "coverage": 0.9899248120300752,
+  "mean_days": 32.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.85,
+  "coverage": 0.9900250626566416,
+  "mean_days": 32.061353383458645
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.9,
+  "coverage": 0.9901754385964913,
+  "mean_days": 32.11082706766917
+ },
+ {
+  "model": "HGB D*",
+  "shift": 14.95,
+  "coverage": 0.9902255639097745,
+  "mean_days": 32.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.0,
+  "coverage": 0.9902756892230576,
+  "mean_days": 32.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.05,
+  "coverage": 0.990375939849624,
+  "mean_days": 32.257844611528824
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.1,
+  "coverage": 0.9905263157894737,
+  "mean_days": 32.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.15,
+  "coverage": 0.9907268170426066,
+  "mean_days": 32.35408521303258
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.2,
+  "coverage": 0.9909774436090225,
+  "mean_days": 32.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.25,
+  "coverage": 0.9911278195488722,
+  "mean_days": 32.45619047619048
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.3,
+  "coverage": 0.9911278195488722,
+  "mean_days": 32.50551378446115
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.35,
+  "coverage": 0.9911278195488722,
+  "mean_days": 32.55824561403509
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.4,
+  "coverage": 0.9912280701754386,
+  "mean_days": 32.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.45,
+  "coverage": 0.9912781954887218,
+  "mean_days": 32.661102756892234
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.5,
+  "coverage": 0.9912781954887218,
+  "mean_days": 32.71052631578947
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.55,
+  "coverage": 0.9913283208020051,
+  "mean_days": 32.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.6,
+  "coverage": 0.9913784461152882,
+  "mean_days": 32.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.65,
+  "coverage": 0.9914285714285714,
+  "mean_days": 32.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.7,
+  "coverage": 0.9914285714285714,
+  "mean_days": 32.90962406015038
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.75,
+  "coverage": 0.9914786967418546,
+  "mean_days": 32.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.8,
+  "coverage": 0.9915288220551378,
+  "mean_days": 33.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.85,
+  "coverage": 0.9915288220551378,
+  "mean_days": 33.061353383458645
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.9,
+  "coverage": 0.9915288220551378,
+  "mean_days": 33.11082706766917
+ },
+ {
+  "model": "HGB D*",
+  "shift": 15.95,
+  "coverage": 0.9915288220551378,
+  "mean_days": 33.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.0,
+  "coverage": 0.991578947368421,
+  "mean_days": 33.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.05,
+  "coverage": 0.9916290726817043,
+  "mean_days": 33.257844611528824
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.1,
+  "coverage": 0.9916290726817043,
+  "mean_days": 33.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.15,
+  "coverage": 0.9916290726817043,
+  "mean_days": 33.35408521303258
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.2,
+  "coverage": 0.9916290726817043,
+  "mean_days": 33.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.25,
+  "coverage": 0.9917293233082707,
+  "mean_days": 33.45619047619048
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.3,
+  "coverage": 0.9918295739348371,
+  "mean_days": 33.50551378446115
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.35,
+  "coverage": 0.9919298245614036,
+  "mean_days": 33.55824561403509
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.4,
+  "coverage": 0.9919799498746867,
+  "mean_days": 33.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.45,
+  "coverage": 0.9920802005012531,
+  "mean_days": 33.661102756892234
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.5,
+  "coverage": 0.9920802005012531,
+  "mean_days": 33.71052631578947
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.55,
+  "coverage": 0.9920802005012531,
+  "mean_days": 33.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.6,
+  "coverage": 0.9921303258145363,
+  "mean_days": 33.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.65,
+  "coverage": 0.9921303258145363,
+  "mean_days": 33.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.7,
+  "coverage": 0.9921303258145363,
+  "mean_days": 33.90962406015038
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.75,
+  "coverage": 0.9921804511278195,
+  "mean_days": 33.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.8,
+  "coverage": 0.9921804511278195,
+  "mean_days": 34.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.85,
+  "coverage": 0.9921804511278195,
+  "mean_days": 34.061353383458645
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.9,
+  "coverage": 0.9921804511278195,
+  "mean_days": 34.11082706766917
+ },
+ {
+  "model": "HGB D*",
+  "shift": 16.95,
+  "coverage": 0.992280701754386,
+  "mean_days": 34.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.0,
+  "coverage": 0.9923308270676692,
+  "mean_days": 34.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.05,
+  "coverage": 0.9923308270676692,
+  "mean_days": 34.257844611528824
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.1,
+  "coverage": 0.9923809523809524,
+  "mean_days": 34.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.15,
+  "coverage": 0.9923809523809524,
+  "mean_days": 34.35408521303258
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.2,
+  "coverage": 0.9924812030075187,
+  "mean_days": 34.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.25,
+  "coverage": 0.992531328320802,
+  "mean_days": 34.45619047619048
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.3,
+  "coverage": 0.9925814536340852,
+  "mean_days": 34.50551378446115
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.35,
+  "coverage": 0.9926315789473684,
+  "mean_days": 34.55824561403509
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.4,
+  "coverage": 0.9926817042606516,
+  "mean_days": 34.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.45,
+  "coverage": 0.9927318295739348,
+  "mean_days": 34.661102756892234
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.5,
+  "coverage": 0.9927819548872181,
+  "mean_days": 34.71052631578947
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.55,
+  "coverage": 0.9928320802005013,
+  "mean_days": 34.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.6,
+  "coverage": 0.9929323308270677,
+  "mean_days": 34.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.65,
+  "coverage": 0.9929824561403509,
+  "mean_days": 34.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.7,
+  "coverage": 0.9929824561403509,
+  "mean_days": 34.90962406015038
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.75,
+  "coverage": 0.9930827067669173,
+  "mean_days": 34.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.8,
+  "coverage": 0.9930827067669173,
+  "mean_days": 35.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.85,
+  "coverage": 0.9931328320802005,
+  "mean_days": 35.061353383458645
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.9,
+  "coverage": 0.9932330827067669,
+  "mean_days": 35.11082706766917
+ },
+ {
+  "model": "HGB D*",
+  "shift": 17.95,
+  "coverage": 0.9932330827067669,
+  "mean_days": 35.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.0,
+  "coverage": 0.9932330827067669,
+  "mean_days": 35.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.05,
+  "coverage": 0.9933333333333333,
+  "mean_days": 35.257844611528824
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.1,
+  "coverage": 0.9934335839598998,
+  "mean_days": 35.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.15,
+  "coverage": 0.9934335839598998,
+  "mean_days": 35.35408521303258
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.2,
+  "coverage": 0.9934335839598998,
+  "mean_days": 35.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.25,
+  "coverage": 0.993483709273183,
+  "mean_days": 35.45619047619048
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.3,
+  "coverage": 0.9935338345864662,
+  "mean_days": 35.50551378446115
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.35,
+  "coverage": 0.9936340852130325,
+  "mean_days": 35.55824561403509
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.4,
+  "coverage": 0.9936340852130325,
+  "mean_days": 35.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.45,
+  "coverage": 0.993734335839599,
+  "mean_days": 35.661102756892234
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.5,
+  "coverage": 0.993734335839599,
+  "mean_days": 35.71052631578947
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.55,
+  "coverage": 0.993734335839599,
+  "mean_days": 35.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.6,
+  "coverage": 0.9937844611528822,
+  "mean_days": 35.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.65,
+  "coverage": 0.9939348370927318,
+  "mean_days": 35.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.7,
+  "coverage": 0.9939348370927318,
+  "mean_days": 35.90962406015038
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.75,
+  "coverage": 0.9939348370927318,
+  "mean_days": 35.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.8,
+  "coverage": 0.9939348370927318,
+  "mean_days": 36.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.85,
+  "coverage": 0.9939348370927318,
+  "mean_days": 36.061353383458645
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.9,
+  "coverage": 0.9939849624060151,
+  "mean_days": 36.11082706766917
+ },
+ {
+  "model": "HGB D*",
+  "shift": 18.95,
+  "coverage": 0.9939849624060151,
+  "mean_days": 36.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.0,
+  "coverage": 0.9939849624060151,
+  "mean_days": 36.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.05,
+  "coverage": 0.9939849624060151,
+  "mean_days": 36.257844611528824
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.1,
+  "coverage": 0.9940350877192983,
+  "mean_days": 36.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.15,
+  "coverage": 0.9940852130325815,
+  "mean_days": 36.35408521303258
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.2,
+  "coverage": 0.9941353383458646,
+  "mean_days": 36.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.25,
+  "coverage": 0.9941353383458646,
+  "mean_days": 36.45619047619048
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.3,
+  "coverage": 0.9941854636591478,
+  "mean_days": 36.50551378446115
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.35,
+  "coverage": 0.9941854636591478,
+  "mean_days": 36.55824561403509
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.4,
+  "coverage": 0.9941854636591478,
+  "mean_days": 36.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.45,
+  "coverage": 0.994235588972431,
+  "mean_days": 36.661102756892234
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.5,
+  "coverage": 0.9942857142857143,
+  "mean_days": 36.71052631578947
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.55,
+  "coverage": 0.9942857142857143,
+  "mean_days": 36.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.6,
+  "coverage": 0.9943358395989975,
+  "mean_days": 36.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.65,
+  "coverage": 0.9943358395989975,
+  "mean_days": 36.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.7,
+  "coverage": 0.9943358395989975,
+  "mean_days": 36.90962406015038
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.75,
+  "coverage": 0.9943358395989975,
+  "mean_days": 36.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.8,
+  "coverage": 0.9943358395989975,
+  "mean_days": 37.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.85,
+  "coverage": 0.9943859649122807,
+  "mean_days": 37.061353383458645
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.9,
+  "coverage": 0.9943859649122807,
+  "mean_days": 37.11082706766917
+ },
+ {
+  "model": "HGB D*",
+  "shift": 19.95,
+  "coverage": 0.9943859649122807,
+  "mean_days": 37.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.0,
+  "coverage": 0.9943859649122807,
+  "mean_days": 37.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.05,
+  "coverage": 0.9943859649122807,
+  "mean_days": 37.257844611528824
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.1,
+  "coverage": 0.9943859649122807,
+  "mean_days": 37.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.15,
+  "coverage": 0.9944862155388471,
+  "mean_days": 37.35408521303258
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.2,
+  "coverage": 0.9944862155388471,
+  "mean_days": 37.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.25,
+  "coverage": 0.9944862155388471,
+  "mean_days": 37.45619047619048
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.3,
+  "coverage": 0.9944862155388471,
+  "mean_days": 37.50551378446115
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.35,
+  "coverage": 0.9945864661654136,
+  "mean_days": 37.55824561403509
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.4,
+  "coverage": 0.9945864661654136,
+  "mean_days": 37.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.45,
+  "coverage": 0.9946365914786968,
+  "mean_days": 37.661102756892234
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.5,
+  "coverage": 0.9946365914786968,
+  "mean_days": 37.71052631578947
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.55,
+  "coverage": 0.9946365914786968,
+  "mean_days": 37.75874686716792
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.6,
+  "coverage": 0.9946365914786968,
+  "mean_days": 37.81062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.65,
+  "coverage": 0.9946365914786968,
+  "mean_days": 37.861203007518796
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.7,
+  "coverage": 0.9946365914786968,
+  "mean_days": 37.90962406015038
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.75,
+  "coverage": 0.9946365914786968,
+  "mean_days": 37.95904761904762
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.8,
+  "coverage": 0.99468671679198,
+  "mean_days": 38.010877192982456
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.85,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.061353383458645
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.9,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.11082706766917
+ },
+ {
+  "model": "HGB D*",
+  "shift": 20.95,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.1596992481203
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.0,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.20952380952381
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.05,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.257844611528824
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.1,
+  "coverage": 0.9947368421052631,
+  "mean_days": 38.3059649122807
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.15,
+  "coverage": 0.9947869674185463,
+  "mean_days": 38.35408521303258
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.2,
+  "coverage": 0.9948370927318295,
+  "mean_days": 38.405062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.25,
+  "coverage": 0.9948370927318295,
+  "mean_days": 38.45619047619048
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.3,
+  "coverage": 0.9948872180451128,
+  "mean_days": 38.50551378446115
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.35,
+  "coverage": 0.994937343358396,
+  "mean_days": 38.55824561403509
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.4,
+  "coverage": 0.994937343358396,
+  "mean_days": 38.61062656641604
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.45,
+  "coverage": 0.9949874686716792,
+  "mean_days": 38.661102756892234
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.5,
+  "coverage": 0.9949874686716792,
+  "mean_days": 38.71052631578947
+ },
+ {
+  "model": "HGB D*",
+  "shift": 21.55,
+  "coverage": 0.9949874686716792,
+  "mean_days": 38.75874686716792
+ },
+ {
+  "model": "state rule",
+  "shift": -4.0,
+  "coverage": 0.8139348370927318,
+  "mean_days": 13.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": -3.0,
+  "coverage": 0.8427067669172932,
+  "mean_days": 14.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": -2.0,
+  "coverage": 0.867218045112782,
+  "mean_days": 15.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": -1.0,
+  "coverage": 0.8897744360902256,
+  "mean_days": 16.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 0.0,
+  "coverage": 0.9075187969924812,
+  "mean_days": 17.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 1.0,
+  "coverage": 0.9229072681704261,
+  "mean_days": 18.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 2.0,
+  "coverage": 0.9338847117794487,
+  "mean_days": 19.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 3.0,
+  "coverage": 0.9444611528822056,
+  "mean_days": 20.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 4.0,
+  "coverage": 0.9530325814536341,
+  "mean_days": 21.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 5.0,
+  "coverage": 0.9591979949874687,
+  "mean_days": 22.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 6.0,
+  "coverage": 0.9648621553884712,
+  "mean_days": 23.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 7.0,
+  "coverage": 0.9696240601503759,
+  "mean_days": 24.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 8.0,
+  "coverage": 0.9733333333333334,
+  "mean_days": 25.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 9.0,
+  "coverage": 0.9767919799498747,
+  "mean_days": 26.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 10.0,
+  "coverage": 0.9801503759398497,
+  "mean_days": 27.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 11.0,
+  "coverage": 0.9827067669172932,
+  "mean_days": 28.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 12.0,
+  "coverage": 0.9845112781954887,
+  "mean_days": 29.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 13.0,
+  "coverage": 0.9861152882205514,
+  "mean_days": 30.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 14.0,
+  "coverage": 0.9878195488721805,
+  "mean_days": 31.992781954887217
+ },
+ {
+  "model": "state rule",
+  "shift": 15.0,
+  "coverage": 0.9890225563909775,
+  "mean_days": 32.99278195488722
+ },
+ {
+  "model": "state rule",
+  "shift": 16.0,
+  "coverage": 0.9900751879699248,
+  "mean_days": 33.99278195488722
+ },
+ {
+  "model": "state rule",
+  "shift": 17.0,
+  "coverage": 0.991077694235589,
+  "mean_days": 34.99278195488722
+ },
+ {
+  "model": "state rule",
+  "shift": 18.0,
+  "coverage": 0.9921303258145363,
+  "mean_days": 35.99278195488722
+ },
+ {
+  "model": "state rule",
+  "shift": 19.0,
+  "coverage": 0.9928822055137845,
+  "mean_days": 36.99278195488722
+ }
+]

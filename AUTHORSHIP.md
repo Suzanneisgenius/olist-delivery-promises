@@ -10,12 +10,6 @@ diagnostic page, and release preparation. The E2b protocol remains a draft for f
 
 Claude assisted with selected code refinements and initial drafts of supporting documentation.
 
-我从一个自己想回答的问题出发设计了这个项目：预测更准，是否真的能带来更好的交付日期？研究设计、预注册文本、评分代码、测试和模拟由我完成。在后续多轮修改中，我发起各轮审查，并决定哪些意见需要落实到代码、比较方法或结论中。
-
-我也主导了把研究整理成作品集 dashboard 的工作，包括验证流程、诊断页面和发布准备。E2b 方案目前仍是后续研究草案。
-
-Claude 协助完善部分代码，并起草部分配套说明文档。
-
 ## Scope of this statement
 
 This is the author's confirmed description of the project-level division of work. It is not a claim that every line

@@ -1,0 +1,82 @@
+[
+ {
+  "key": "ceil|D*|B1c",
+  "policy_code": "D*",
+  "ref_code": "B1c",
+  "rule": "ceil",
+  "policy": "Dstar@0.90",
+  "reference": "B1c, same rule",
+  "day_diff": -0.3218045112781951,
+  "coverage_diff_pts": 0.6115288220551407
+ },
+ {
+  "key": "ceil|D*|B0",
+  "policy_code": "D*",
+  "ref_code": "B0",
+  "rule": "ceil",
+  "policy": "Dstar@0.90",
+  "reference": "B0 retained rule",
+  "day_diff": 3.365814536340853,
+  "coverage_diff_pts": 3.147869674185466
+ },
+ {
+  "key": "ceil|C*|B1c",
+  "policy_code": "C*",
+  "ref_code": "B1c",
+  "rule": "ceil",
+  "policy": "Cstar@0.90",
+  "reference": "B1c, same rule",
+  "day_diff": -1.5392982456140345,
+  "coverage_diff_pts": -0.3107769423558948
+ },
+ {
+  "key": "ceil|C*|B0",
+  "policy_code": "C*",
+  "ref_code": "B0",
+  "rule": "ceil",
+  "policy": "Cstar@0.90",
+  "reference": "B0 retained rule",
+  "day_diff": 2.1483208020050135,
+  "coverage_diff_pts": 2.2255639097744306
+ },
+ {
+  "key": "floor|D*|B1c",
+  "policy_code": "D*",
+  "ref_code": "B1c",
+  "rule": "floor",
+  "policy": "Dstar@0.90",
+  "reference": "B1c, same rule",
+  "day_diff": -1.321804511278195,
+  "coverage_diff_pts": 0.17543859649122862
+ },
+ {
+  "key": "floor|D*|B0",
+  "policy_code": "D*",
+  "ref_code": "B0",
+  "rule": "floor",
+  "policy": "Dstar@0.90",
+  "reference": "B0 retained rule",
+  "day_diff": 2.365814536340853,
+  "coverage_diff_pts": 2.711779448621554
+ },
+ {
+  "key": "floor|C*|B1c",
+  "policy_code": "C*",
+  "ref_code": "B1c",
+  "rule": "floor",
+  "policy": "Cstar@0.90",
+  "reference": "B1c, same rule",
+  "day_diff": -2.5392982456140345,
+  "coverage_diff_pts": -0.9724310776942358
+ },
+ {
+  "key": "floor|C*|B0",
+  "policy_code": "C*",
+  "ref_code": "B0",
+  "rule": "floor",
+  "policy": "Cstar@0.90",
+  "reference": "B0 retained rule",
+  "day_diff": 1.1483208020050135,
+  "coverage_diff_pts": 1.5639097744360897
+ }
+]

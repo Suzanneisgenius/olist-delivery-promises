@@ -1,0 +1,70 @@
+# E2b — one destination-history feature group for E1's selected HGB. DRAFT, NOT REGISTERED, NOT RUN.
+# Registration = the author sets questions.Q3.include, approves this file unchanged (or edits it), and its SHA-256 is
+# logged in docs/E1_DECISIONS.md BEFORE any run. E1 stays sealed: no E1 file, freeze or verdict changes.
+status: draft
+motivation: "E1 V residual flag, before E was opened: HGB D3, longest predicted-duration quartile, 3011 orders, coverage 0.8990 vs 0.9308 overall (-3.17 pts)"
+base:
+  e1_config: config/date_model_e1.yaml
+  e1_config_sha256: "ae6a4a4664c82124399d9da38354376955e6e783fd720eece608ac801eb20152"
+  e1_freeze_sha256: "3b62af1ac385c2b8c9299e2e757a7e57e9ab2079526c9152878a1f5bfe8328dd"
+  segments: "F0, V, F, C, E as in E1; partition ids must equal outputs/e1/prep/partition_manifest.csv"
+  population: "E1 model population, unchanged"
+  snapshot_rule: U                       # start of the purchase month in every segment (D*'s rule)
+q: 0.90
+model:                                   # E1's selected D3 setting (= D*), held fixed; no search
+  estimator: "HistGradientBoostingRegressor(loss='quantile')"
+  target: days
+  params: {max_depth: 2, max_iter: 400, learning_rate: 0.05, min_samples_leaf: 100, l2_regularization: 1.0,
+           early_stopping: false, random_state: 20261015}
+  categorical: [customer_state_reported, seller_state, purchase_dow]
+  base_features: [distance_km, same_state, weight_g_sum, items_price_sum, items_freight_sum, freight_ratio, n_item_lines,
+                  purchase_dow, seller_hist_late_rate, seller_hist_handling_median_h, seller_hist_n_delivered,
+                  customer_state_reported, seller_state]
+  excluded: [estimated_days]             # as in D*; keeps any comparison with Olist's promise non-circular
+feature_group_G:
+  history: "single-seller orders, final outcome A or L, delivered before the row's snapshot T (E1 seller-history base)"
+  label: required_days                   # delivered calendar day - purchase calendar day
+  quantile: {level: 0.90, method: inverted_cdf}
+  shrinkage: {formula: "(n * q_group + k * q_parent) / (n + k)", k: 20, parent: customer_state_at_T, fallback: overall_at_T}
+  features:
+    lane_hist_q90_days: {key: [seller_state, customer_state_reported]}
+    dest_zip3_hist_q90_days: {key: "first 3 characters of customer_zip_code_prefix (read as text)"}
+  logged_not_features: [lane_hist_n, dest_zip3_hist_n]
+questions:
+  Q1_signal: {fit: F0, score: V, compare: "D3 vs D3 + G", metric: "integer-day pinball, as E1 v_pinball_int"}
+  Q2_where: {score: V, groups: ["predicted-duration quartile", "seller history n 0 / 1-9 / >= 10"], report: coverage_gap_pts}
+  Q3:
+    include: null                        # true or false, set by the author at registration; never after Q1 is seen
+    fit: F
+    calibrate: C
+    score: E
+    compare_with: ["Dstar@0.90 (E1 frozen, read only)", "B1c@0.90 (E1, read only)"]
+decision_rules:
+  reproduce_first: "D3 refitted on F0 reproduces outputs/e1/select_repro1/v_predictions_per_order.csv.gz and V pinball 1.2626567040265668 within 1e-9, else nothing is reported"
+  adopt_if: "L_V(D3 + G) <= (1 - 0.01) * L_V(D3)"
+  not_adopted: "reported as below the adoption bar; Q3 does not run"
+  not_evaluable: "fit failure or non-finite prediction; no substitute feature or setting"
+  q3_practical_rule: "mean days <= reference - 1.0 AND coverage >= reference - 1.0 pt; vs Dstar and vs B1c separately"
+  q3_monthly_reliability: "no month with >= 1,000 orders more than 3.0 pts below target"
+  q3_rounding: {registered: "E1 round-up: max(1, ceil(yhat + s_(k))), tolerance 1e-9",
+                reported_not_deciding: "round-down as in scripts/e1_rounding_rules.py"}
+calibration: {set: C, formula: "s_i = y_i - yhat_i (unrounded); k = ceil((n + 1) q)"}
+bootstrap:
+  V: {unit: "purchase week (Monday start)", scheme: iid, replicates: 2000, seed: 20261105, interval: "percentile 95%"}
+  E: "E1's saved week draws (outputs/e1/score/bootstrap_draws.csv.gz), so every E comparison is paired with E1's"
+expectations_not_criteria:               # written before the run; a mismatch is reported, not tuned away
+  - "Q1: small V gain, of the order of the 2% HGB-over-linear gap on V; it may fall below the 1% bar"
+  - "Q2: the coverage gap in the longest quartile narrows but does not close"
+  - "Q3: mean promised days change by less than one day; E1 policies cover 96-97% of E for a 90% target and G does not address the change between C and E"
+information_rules:
+  - "feature values only from orders delivered before T; T never after the row's purchase time; a violation raises"
+  - "final-status filter inherited from E1: 6 orders in the file have a delivery record but final status canceled (outputs/stage6a/record_status_conflicts.csv); history is every single-seller order in the mart, so up to 5 (delivered Oct-Nov 2016) can be missing from every later snapshot and 1 (delivered 2018-03-21) from snapshots from 2018-04-01; single-seller status not yet checked; a bound, assuming each delivery was recorded when it happened"
+  - "lanes and zip3 areas with no history take the parent value; no category is built from E"
+code_and_outputs:
+  code: "e2b/ (top level; imports olist_analytics read only)"
+  tests: "e2b/tests/"
+  outputs: "outputs/e2b/"
+  unchanged: ["src/", "tests/", "outputs/e1/", "config/date_model_e1.yaml"]
+  needs: ["raw Kaggle CSVs (not in the repository)", "recipe C environment (docs/REPRODUCE_E1.md)"]
+out_of_scope: [new model class, hyperparameter search, other feature groups, estimated_days as a feature,
+               online or adaptive recalibration, new Olist cohort, any change to E1]

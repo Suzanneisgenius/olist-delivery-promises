@@ -2,6 +2,63 @@
 
 Versions before 0.6.0 are described in `docs/manager_handoff.md`, the stage handoffs and `docs/REPRODUCIBILITY.md`.
 
+## Diagnostics page and wording, after the v5 review — 2026-10-27 (no result changed)
+- Table 3 shows the coverage each policy actually reached beside its mean days and is labelled as days at the first
+  shift reaching each coverage level; whole-day steps make policies overshoot (state rule 90.75% at the 90% level).
+- The recalibration note no longer treats a 30-day lag as making labels complete, or the visible direction of the
+  error as a reason a test would show little.
+- README and the wording-corrections note (A2, A6, Part C) describe what the verifier checks: the 26 numerical claims
+  marked `auto`, some against saved aggregates; the pinball comparisons are of whole-day, unshifted promises.
+
+## Verification from a symlinked path — 2026-10-27 (checks only; no result changed)
+- `AGENT_REVIEW/verify_all.sh` changes to the physical directory (`cd -P`) before setting `PYTHONPATH`. Started from a
+  path through a symlink (on macOS `/tmp` is one), the entry-module provenance checks in `tests/test_e1_final.py`
+  compared unresolved module paths with the resolved package path and step 06 failed (1 failed, 19 errors; review
+  2026-10-27). `src/` is unchanged.
+- New harness test `test_runs_from_a_symlinked_path` (step 11, now 7 tests): fails with the old script, passes with
+  the new one.
+
+## E1 wording corrections — 2026-10-27 (post-seal note; no result, freeze record or sealed PDF changed)
+- New: `docs/E1_WORDING_CORRECTIONS_2026-10-27.md`. Part A corrects the wording of existing conclusions (H3 under the
+  registered rounding rule, the loss comparison, what "frozen" covers, the k/n identity, the bootstrap name, the scope
+  of independent recomputation); Part B records audit findings without effect sizes (final-status filter with 6
+  candidate records, recipe B input); Part C lists the diagnostics-page corrections made before publication.
+- Linked from README and the diagnostics page; README's recomputation claim narrowed to `claims.json`; decision-log
+  entry added.
+
+## Diagnostics page on GitHub Pages — 2026-10-27 (publishing only; no result changed)
+- New: `.github/workflows/pages.yml` publishes `docs/diagnostics_page/index.html` and `data/` to GitHub Pages after
+  rebuilding the data with `aggregate.py` and comparing it with the committed files. Needs Settings > Pages > Source:
+  GitHub Actions.
+
+## Diagnostics page — 2026-10-27 (reading aid; aggregates of saved outputs; no result changed)
+- New: `docs/diagnostics_page/`. `aggregate.py` (standard library only, read-only) rebuilds seven aggregate tables
+  from saved stage-3, stage-5 and E1 outputs and checks them against the saved stage-5 fold metrics and the stage-3
+  top-10% picks and calibration bins. Weekly picks follow each stage's own rule (the stage-3 test set by purchase week,
+  each stage-5 fold by purchase week), and the random baseline uses the same weekly budgets. `check_budget.py`
+  rechecks every budget row with `modeling.top_share_by_week`.
+- `index.html` is a standalone three-view page (weekly picks, probability reliability, promised dates) that reads
+  `data/`. No order-level data and no recalibration; E1 numbers are copied, not recomputed.
+
+## E2b protocol draft — 2026-10-26 (draft only; not registered, not run; no E1 file changed)
+- New: `docs/E2B_PROTOCOL_DRAFT.md` and `config/e2b_features_draft.yaml`. One pre-specified group of two
+  destination-history features for E1's selected HGB setting (D3), motivated by E1's V residual flag;
+  hyperparameters held fixed; adopted only if V loss is at least 1% lower. Whether the optional second look at E
+  (Q3) is included is left to the author at registration.
+- E1's response to the residual flag (`features_added: none`) still has no entry in `docs/E1_DECISIONS.md`; that
+  belongs to the E1 wording revision, not to this draft.
+
+## Verification harness — 2026-10-25 (checks only; no result changed)
+- `verify_all.sh` reports PASS, FAIL or SKIP per step and says "PASSED WITH SKIPS (n)" instead of "ALL CHECKS
+  PASSED" when a check could not run; `--strict` turns a SKIP into a failure; steps can be run by name.
+- Step 10 (`scripts/e1_final_recheck.py`): without pdftotext it reads the PDFs with pypdf, and with neither it is
+  SKIP instead of a silent pass; an unreadable PDF is a FAIL. It no longer rewrites the sealed
+  `outputs/e1/final_recheck/recheck.json`.
+- Steps 07 and 08 write their recomputations to `AGENT_REVIEW/verify_output/` and compare them with the saved copies
+  in `outputs/e1/` instead of rewriting those.
+- New step 11: `AGENT_REVIEW/harness_tests/` (missing PDF tools, unreadable PDFs, two runs in a row, saved copy
+  compared). Kept outside `tests/`, so the registered suite is still 362 tests.
+
 ## E1 documents v6 — 2026-10-21 (wording only)
 - Summary reframed around whether a matched calibration and rounding procedure makes promised dates comparable; three
   points: same target, different coverage; same rounding, different effect on continuous vs whole-day bounds; cohort

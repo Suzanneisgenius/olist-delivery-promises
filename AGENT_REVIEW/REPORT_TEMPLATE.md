@@ -6,7 +6,7 @@ Reviewer:            Date:            Environment (Python / OS / key packages):
 (one of: accept / accept with caveats / revise / reject — plus two sentences why)
 
 ## verify_all.sh result
-(paste the 9 PASS/FAIL lines; explain any FAIL)
+(paste the 11 PASS / SKIP / FAIL lines; explain any FAIL or SKIP)
 
 ## Findings
 | # | Severity (P1 blocking / P2 should fix / P3 minor) | Location | Finding | Evidence (command or number) | Suggested fix | Confidence |

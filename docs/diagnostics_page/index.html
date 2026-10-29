@@ -4,119 +4,254 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Olist delivery diagnostics</title>
-<meta name="description" content="Risk ranking, probability reliability and promised delivery dates on Olist orders, April to July 2018: aggregates of saved model outputs.">
+<meta name="description" content="Risk ranking, probability reliability and promised delivery dates on Olist orders, April to July 2018, from saved model outputs, with the mathematics behind the promises worked through on small examples.">
 <meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;family=Kalam:wght@400;700&amp;display=swap" rel="stylesheet">
 <style>
+/* A study notebook: ink on paper, colour in the charts reserved for data. The author's own marks, view numbers,
+   margin notes and key results, are in a violet pen (Kalam) and a highlighter; the text stays hyperlegible. */
 :root{color-scheme:light;
-  --bg:#fcfcfb;--fg:#0b0b0b;--muted:#52514e;--line:#dedcd6;--bad:#d03b3b;
-  --axis:#b5b4ae;--grid:#ecebe7;--ref:#8a8984;--pop:#ffffff;--pop-line:#dedcd6;--shadow:0 4px 16px rgb(0 0 0 / .08);
+  --bg:#F7F8F6;--panel:#EDF0EC;--fg:#17324D;--muted:#556270;--line:#D8DDD9;--bad:#C2410C;
+  --axis:#9AA3AD;--grid:#E4E8E4;--ref:#7D8792;--pop:#FFFFFF;--pop-line:#D8DDD9;--shadow:0 6px 20px rgb(23 50 77 / .08);
   --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;
-  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",P052,Georgia,serif;
-  --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
-  --fs:.95rem;--fs-cap:.8rem;--gap-xs:4px;--gap-sm:8px;--gap-md:12px;--gap-lg:20px;--gap-xl:32px;--radius:6px}
+  --pen:#5B3FC4;--hl:#FFE27A;--dot:#CDD4CF;
+  --sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --hand:"Kalam","Bradley Hand","Segoe Print","Chalkboard SE",cursive;
+  --fs:1.0625rem;--fs-sm:.9375rem;--fs-cap:.875rem;
+  --gap-xs:4px;--gap-sm:8px;--gap-md:16px;--gap-lg:24px;--gap-xl:40px;--gap-2xl:72px;--r-ctl:6px;--r-box:10px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
-  --bg:#1a1a19;--fg:#f0efec;--muted:#c3c2b7;--line:#3a3935;--axis:#6b6a65;--grid:#2c2c2a;--ref:#9a9993;--pop:#262624;--pop-line:#3a3935;--shadow:0 4px 16px rgb(0 0 0 / .4);
-  --s1:#3987e5;--s2:#d95926;--s3:#199e70}}
+  --bg:#14181D;--panel:#1C2229;--fg:#E6EBF0;--muted:#A3ADB8;--line:#2E363F;--bad:#F08A5D;
+  --axis:#5C6670;--grid:#252C33;--ref:#8E98A3;--pop:#1C2229;--pop-line:#2E363F;--shadow:0 6px 20px rgb(0 0 0 / .45);
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--pen:#B7A5FF;--hl:#4A3F12;--dot:#2C343D}}
 :root[data-theme="dark"]{color-scheme:dark;
-  --bg:#1a1a19;--fg:#f0efec;--muted:#c3c2b7;--line:#3a3935;--axis:#6b6a65;--grid:#2c2c2a;--ref:#9a9993;--pop:#262624;--pop-line:#3a3935;--shadow:0 4px 16px rgb(0 0 0 / .4);
-  --s1:#3987e5;--s2:#d95926;--s3:#199e70}
+  --bg:#14181D;--panel:#1C2229;--fg:#E6EBF0;--muted:#A3ADB8;--line:#2E363F;--bad:#F08A5D;
+  --axis:#5C6670;--grid:#252C33;--ref:#8E98A3;--pop:#1C2229;--pop-line:#2E363F;--shadow:0 6px 20px rgb(0 0 0 / .45);
+  --s1:#3987e5;--s2:#d95926;--s3:#199e70;--pen:#B7A5FF;--hl:#4A3F12;--dot:#2C343D}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:var(--fs);line-height:1.45;-webkit-text-size-adjust:100%}
-a{color:inherit;text-underline-offset:.15em}
-.od{container:od/inline-size;max-width:72rem;margin-inline:auto;padding:40px 16px 56px;display:flex;flex-direction:column;gap:var(--gap-xl)}
+::selection{background:var(--hl);color:var(--fg)}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:var(--fs);line-height:1.55;
+  font-variant-numeric:tabular-nums lining-nums;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px;border-radius:2px}
+.od{container:od/inline-size;max-width:76rem;margin-inline:auto;padding:56px 16px 72px;display:flex;flex-direction:column;gap:var(--gap-xl)}
 .od p,.od h1,.od h2,.od h3,.od figure,.od ol{margin:0}
-.od .od-b{font-weight:600}
-.od-fn{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.od-head{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--gap-lg) var(--gap-xl);align-items:end}
-.od-head-main{display:flex;flex-direction:column;gap:var(--gap-md)}
-.od-title{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,1.4rem + 3.4cqi,3.4rem);line-height:1.02;letter-spacing:-.015em}
-.od-lede{font-family:var(--serif);font-size:clamp(1.1rem,.95rem + .7cqi,1.3rem);line-height:1.45;max-width:58ch;font-variant-numeric:tabular-nums}
-.od-scope{font-size:var(--fs-cap);color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding-top:var(--gap-sm)}
-.od-tabs{display:flex;flex-wrap:wrap;gap:var(--gap-xs) var(--gap-xl);border-bottom:1px solid var(--line)}
-.od-tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:var(--gap-sm) 0;font:inherit;color:var(--muted);cursor:pointer;display:inline-flex;align-items:baseline;gap:var(--gap-sm)}
-.od-tab:hover,.od-tab[aria-selected="true"]{color:var(--fg)}
-.od-tab[aria-selected="true"]{border-bottom-color:var(--fg)}
-.od-tab:focus-visible,.od-seg button:focus-visible,.od-select:focus-visible,.od-range:focus-visible,.od a:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-.od-view{display:flex;flex-direction:column;gap:var(--gap-lg)}
-.od-q{font-family:var(--serif);font-weight:400;font-size:clamp(1.45rem,1.15rem + 1.3cqi,1.9rem);line-height:1.15;max-width:34ch;text-wrap:balance}
-.od-controls{display:flex;flex-wrap:wrap;gap:var(--gap-md) var(--gap-lg);align-items:flex-end}
-.od-field{display:flex;flex-direction:column;gap:var(--gap-xs);font-size:var(--fs-cap);color:var(--muted)}
-.od-seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.od-seg button{appearance:none;border:0;background:transparent;color:var(--muted);font:inherit;font-size:var(--fs-cap);padding:6px var(--gap-sm);min-height:32px;cursor:pointer}
-.od-seg button+button{border-left:1px solid var(--line)}
+.od .od-b{font-weight:700}
+
+/* opening: title, scope, and the three findings that open each chapter */
+.od-head{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-lg)}
+.od-kicker{font-size:var(--fs-sm);color:var(--muted)}
+.od-title{font-weight:300;font-size:clamp(2.5rem,1.6rem + 4cqi,4.25rem);line-height:1.04;letter-spacing:-.02em;max-width:16ch}
+.od-scope{font-size:var(--fs-sm);color:var(--muted);line-height:1.6;max-width:68ch}
+.od-hint{grid-column:1 / -1;justify-self:end;margin-bottom:calc(-1 * var(--gap-lg) + 2px);font-size:1.15rem;transform:rotate(-2deg)}
+.od-findings{list-style:none;padding:0;margin:var(--gap-sm) 0 0;border-top:1px solid var(--fg);counter-reset:od-f}
+.od-finding{counter-increment:od-f;display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr);gap:var(--gap-sm) var(--gap-xl);padding:var(--gap-lg) 0;border-bottom:1px solid var(--line);align-items:baseline}
+.od-finding a{font-weight:700;font-size:var(--fs);text-decoration:none;display:inline-flex;align-items:baseline;gap:.55em;min-height:44px;padding-top:2px}
+.od-finding a::before{content:counter(od-f,decimal-leading-zero);font-family:var(--hand);font-weight:700;font-size:1.35rem;line-height:1;color:var(--pen)}
+.od-finding a span{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;
+  background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 85%/0% 45%;transition:background-size .25s ease-out}
+.od-finding a:hover span{text-decoration-thickness:2px;background-size:100% 45%}
+.od-findings .od-b{padding-inline:.1em;background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 88%/100% 52%;animation:od-mark .9s .4s both cubic-bezier(.2,.7,.2,1)}
+.od-finding p{font-weight:300;font-size:clamp(1.15rem,1rem + .8cqi,1.45rem);line-height:1.45;max-width:46ch}
+
+/* chapter switcher */
+.od-tabs{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:0 var(--gap-lg);background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px}
+.od-tab{appearance:none;background:linear-gradient(var(--hl),var(--hl)) no-repeat 0 72%/0% 32%;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:12px 0 10px;min-height:48px;font:inherit;font-size:var(--fs-sm);font-weight:600;color:var(--muted);cursor:pointer;transition:background-size .3s ease-out,color .12s}
+.od-tab:hover{color:var(--fg)}
+.od-tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--fg);background-size:100% 32%}
+.od-view{display:flex;flex-direction:column;gap:var(--gap-lg);padding-top:var(--gap-sm)}
+.od-q{font-weight:300;font-size:clamp(1.6rem,1.25rem + 1.6cqi,2.3rem);line-height:1.15;letter-spacing:-.01em;max-width:30ch;text-wrap:balance}
+
+/* controls sit on one panel strip */
+.od-controls{display:flex;flex-wrap:wrap;gap:var(--gap-md) var(--gap-lg);align-items:flex-end;background:var(--panel);border-radius:var(--r-box);padding:var(--gap-md)}
+.od-fig .od-controls{background:none;padding:0}
+.od-field{display:flex;flex-direction:column;gap:6px;font-size:var(--fs-cap);font-weight:600;color:var(--muted)}
+.od-seg{display:inline-flex;flex-wrap:wrap;gap:2px;padding:2px;background:var(--bg);border:1px solid var(--line);border-radius:calc(var(--r-ctl) + 2px)}
+.od-seg button{appearance:none;border:0;border-radius:var(--r-ctl);background:transparent;color:var(--fg);font:inherit;font-size:var(--fs-cap);font-weight:500;padding:8px 12px;min-height:40px;cursor:pointer;transition:background-color .12s,color .12s}
+.od-seg button:hover{background:var(--panel)}
 .od-seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
-.od-select{font:inherit;font-size:var(--fs-cap);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:6px var(--gap-sm);min-height:32px}
-.od-range-row{display:flex;align-items:center;gap:var(--gap-sm)}
-.od-range{width:min(14rem,55vw);accent-color:var(--fg)}
-.od-range-val{font-family:var(--mono);color:var(--fg);min-width:4ch}
+.od-select{font:inherit;font-size:var(--fs-cap);font-weight:500;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:var(--r-ctl);padding:8px 10px;min-height:44px;cursor:pointer}
+.od-range-row{display:flex;align-items:center;gap:var(--gap-sm);min-height:44px}
+.od-range{width:min(15rem,60vw);height:44px;margin:0;accent-color:var(--pen);cursor:pointer}
+.od-range-val{color:var(--fg);font-weight:700;min-width:4ch;font-size:var(--fs-sm)}
+@media (pointer:coarse){.od-seg button{min-height:44px}}
+
+/* figures and reading notes */
 .od-split{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--gap-xl);align-items:start}
 .od-split.r57{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
 .od-split.r75{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
-.od-fig{display:flex;flex-direction:column;gap:var(--gap-sm);border-top:1px solid var(--fg);padding-top:var(--gap-sm);min-width:0}
-.od-fig h3,.od-aside h3{font-size:var(--fs);font-weight:500;text-wrap:balance}
-.od-aside{display:flex;flex-direction:column;gap:var(--gap-md);border-top:1px solid var(--line);padding-top:var(--gap-sm);line-height:1.55;font-variant-numeric:tabular-nums;min-width:0}
-.od-margin{border-top:0;padding-top:0;border-left:2px solid var(--fg);padding-left:var(--gap-md)}
-.od-big{font-family:var(--serif);font-size:clamp(3rem,2rem + 4cqi,4.6rem);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.od-note{font-size:var(--fs-cap);color:var(--muted);line-height:1.5;max-width:72ch;font-variant-numeric:tabular-nums}
-.od-list{list-style:decimal-leading-zero;padding-left:2rem;display:flex;flex-direction:column;gap:var(--gap-sm)}
-.od-list li::marker{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
-.od-chart{position:relative;min-height:300px}
+.od-fig{display:flex;flex-direction:column;gap:var(--gap-sm);min-width:0}
+.od-fig h3,.od-aside h3{font-size:var(--fs);font-weight:700;line-height:1.35;text-wrap:balance}
+.od-num{color:var(--muted);font-weight:600;margin-right:.35em}
+.od-aside{display:flex;flex-direction:column;gap:var(--gap-md);border-left:1px solid var(--line);padding-left:var(--gap-lg);line-height:1.6;min-width:0}
+.od-margin{border-left:3px solid var(--fg)}
+.od-label{font-family:var(--hand);font-size:1.15rem;line-height:1.2;color:var(--pen)}
+.od-big{font-weight:200;font-size:clamp(3.25rem,2.2rem + 4.5cqi,5.25rem);line-height:.95;letter-spacing:-.03em}
+.od-note{font-size:var(--fs-sm);color:var(--muted);line-height:1.6;max-width:72ch}
+.od-list{padding-left:1.4rem;display:flex;flex-direction:column;gap:var(--gap-sm)}
+.od-list li::marker{color:var(--muted);font-weight:600}
+.od-chart{position:relative;min-height:300px;margin-top:var(--gap-xs)}
 .od-chart svg{display:block;width:100%;height:auto;overflow:visible}
-.od-ax text{fill:var(--muted);font-size:var(--fs-cap);font-family:var(--mono)}
+.od-ax text{fill:var(--muted);font-size:var(--fs-cap);font-family:var(--sans);font-variant-numeric:tabular-nums}
 .od-ax .domain,.od-ax .tick line{stroke:var(--axis)}
 .od-grid-l line{stroke:var(--grid)}
 .od-grid-l .domain{display:none}
 .od-axlbl{fill:var(--muted);font-size:var(--fs-cap);font-family:var(--sans)}
-.od-dl{fill:var(--fg);font-size:var(--fs-cap);font-family:var(--sans);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
-.od-tip{position:absolute;z-index:2;pointer-events:none;background:var(--pop);border:1px solid var(--pop-line);border-radius:var(--radius);box-shadow:var(--shadow);padding:var(--gap-xs) var(--gap-sm);font-size:var(--fs-cap);color:var(--fg);font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;flex-direction:column;gap:2px}
-.od-tip .h{color:var(--muted)}
-.od-tip .r{display:flex;align-items:center;gap:var(--gap-xs)}
+.od-dl{fill:var(--fg);font-size:var(--fs-cap);font-weight:600;font-family:var(--sans);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.od-tip{position:absolute;z-index:6;pointer-events:none;background:var(--pop);border:1px solid var(--pop-line);border-radius:var(--r-ctl);box-shadow:var(--shadow);padding:8px 10px;font-size:var(--fs-cap);color:var(--fg);white-space:nowrap;display:flex;flex-direction:column;gap:3px}
+.od-tip .h{color:var(--muted);font-weight:600}
+.od-tip .r{display:flex;align-items:center;gap:6px}
 .od-legend{display:flex;flex-wrap:wrap;gap:var(--gap-xs) var(--gap-md);font-size:var(--fs-cap);color:var(--muted)}
-.od-legend>span{display:inline-flex;align-items:center;gap:var(--gap-xs)}
-.od-key{display:inline-block;width:.75rem;height:.75rem;flex:none;border-radius:2px}
-.od-key.line,.od-key.dash{height:0;width:1.1rem;border-radius:0;border-top:2px solid var(--muted)}
-.od-key.dash{border-top-style:dashed}
+.od-legend>span{display:inline-flex;align-items:center;gap:6px}
+.od-key{display:inline-block;width:.8rem;height:.8rem;flex:none;border-radius:2px}
+.od-key.line,.od-key.dash{height:0;width:1.2rem;border-radius:0;border-top:2.5px solid var(--muted)}
+.od-key.dash{border-top-style:dashed;border-top-width:2px}
 .od-key.ring{border-radius:50%;border:1.5px solid var(--muted);background:transparent}
-.od-key.ink{background:var(--fg);border-radius:50%;width:.55rem;height:.55rem}
+.od-key.ink{background:var(--fg);border-radius:50%;width:.6rem;height:.6rem}
+
+/* tables */
 .od-twrap{overflow-x:auto}
-.od-t{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:.78rem;font-variant-numeric:tabular-nums}
-.od-t th,.od-t td{text-align:right;padding:var(--gap-xs) var(--gap-sm);border-bottom:1px solid var(--line);white-space:nowrap}
+.od-t{border-collapse:collapse;width:100%;font-size:var(--fs-cap)}
+.od-t th,.od-t td{text-align:right;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 .od-t th:first-child,.od-t td:first-child{text-align:left;padding-left:0;white-space:normal}
-.od-t th{font-family:var(--sans);font-size:var(--fs-cap);color:var(--muted);font-weight:500;vertical-align:bottom;white-space:normal}
-.od-t tr.od-total td{font-weight:600}
-.od-sub{display:block;font-size:.7rem;color:var(--muted);font-weight:400}
-.od-foot{display:flex;flex-direction:column;gap:var(--gap-md);font-size:var(--fs-cap);color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:var(--gap-md)}
-.od-foot summary{cursor:pointer;color:var(--fg)}
+.od-t th{color:var(--muted);font-weight:600;vertical-align:bottom;white-space:normal;border-bottom:1px solid var(--fg)}
+.od-t tr.od-total td{font-weight:700;border-top:1px solid var(--fg)}
+.od-sub{display:block;font-size:.75rem;color:var(--muted);font-weight:400}
+
+/* footer and states */
+.od-foot{display:flex;flex-direction:column;gap:var(--gap-md);font-size:var(--fs-sm);color:var(--muted);line-height:1.6;background:var(--panel);border-radius:var(--r-box);padding:var(--gap-lg)}
+.od-foot summary{cursor:pointer;color:var(--fg);font-weight:600;min-height:44px;display:flex;align-items:center}
 .od-foot .od-t{max-width:56rem;margin-top:var(--gap-sm)}
 .od-foot .od-t th,.od-foot .od-t td{white-space:normal;text-align:left}
-.od-msg{display:flex;align-items:center;justify-content:center;gap:var(--gap-xs);min-height:300px;color:var(--muted);font-size:var(--fs-cap);text-align:center;padding:0 var(--gap-md)}
-.od-msg.fail::before{content:"";flex:none;width:.375rem;height:.375rem;border-radius:50%;background:var(--bad)}
-@container od (max-width:46rem){.od-head,.od-split,.od-split.r57,.od-split.r75{grid-template-columns:minmax(0,1fr)}.od-t th,.od-t td{padding-inline:var(--gap-xs)}}
+.od-msg{display:flex;align-items:center;justify-content:center;gap:6px;min-height:300px;color:var(--muted);font-size:var(--fs-cap);text-align:center;padding:0 var(--gap-md)}
+.od-msg.fail::before{content:"";flex:none;width:.4rem;height:.4rem;border-radius:50%;background:var(--bad)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (min-width:52rem){.od{padding-inline:32px}.od-tabs{margin-inline:-32px;padding-inline:32px}}
+@container od (min-width:48rem){.od-head{grid-template-columns:minmax(0,3fr) minmax(0,2fr);column-gap:var(--gap-2xl)}
+  .od-head>.od-findings{grid-column:1 / -1}.od-scope{align-self:end}}
+@container od (max-width:46rem){.od-split,.od-split.r57,.od-split.r75{grid-template-columns:minmax(0,1fr)}
+  .od-aside{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:var(--gap-md)}.od-margin{border-left:3px solid var(--fg);border-top:0;padding-left:var(--gap-md);padding-top:0}
+  .od-finding{grid-template-columns:minmax(0,1fr);gap:var(--gap-xs)}.od-t th,.od-t td{padding-inline:6px}
+  .od-tabs{gap:0 var(--gap-md)}.od-tab{min-height:44px;padding:9px 0 7px}}
+@media (max-width:46rem){html{scroll-padding-top:104px}}
+
+/* the author's contribution: an index card, titled in the author's hand */
+.od-contrib{display:flex;flex-direction:column;gap:var(--gap-md);background:var(--pop);border:1px solid var(--line);border-radius:var(--r-box);box-shadow:var(--shadow);padding:var(--gap-lg);max-width:72ch}
+.od-contrib-title{font-family:var(--hand);font-weight:700;color:var(--pen);font-size:clamp(1.8rem,1.4rem + 1.6cqi,2.4rem);line-height:1.1;padding-bottom:var(--gap-sm);border-bottom:1.5px solid var(--pen)}
+.od-contrib-body{display:flex;flex-direction:column;gap:var(--gap-sm);line-height:1.6}
+.od-contrib-body ul{margin:0;padding-left:1.4rem;display:flex;flex-direction:column;gap:var(--gap-xs)}
+.od .od-contrib-link{font-size:var(--fs-sm);margin-top:var(--gap-md)}
+
+/* view numbers on the switcher, written in pen; the chosen view is highlighted */
+.od-tabn{font-family:var(--hand);font-size:1.1em;color:var(--pen);margin-right:.4em}
+
+/* 04 The mathematics: steps of one argument, prose beside a demonstration on dotted paper */
+.od-prose{display:flex;flex-direction:column;gap:var(--gap-md);max-width:68ch;line-height:1.65;min-width:0}
+.od .od-prose p{margin:0}
+.od-prose ul{margin:0;padding-left:1.3rem;display:flex;flex-direction:column;gap:var(--gap-xs)}
+.od .od-prose h4{margin:var(--gap-sm) 0 0;font-size:var(--fs);font-weight:700;line-height:1.35}
+.od-mtoc{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-sm)}
+.od-mtoc a{display:flex;gap:var(--gap-md);align-items:center;height:100%;padding:12px 16px;min-height:44px;text-decoration:none;font-weight:600;font-size:var(--fs-sm);background:var(--pop);border:1px solid var(--line);border-radius:var(--r-box);transition:transform .18s ease-out,border-color .18s,box-shadow .18s}
+.od-mtoc a span:first-child{font-family:var(--hand);font-weight:700;font-size:1.9rem;line-height:1;color:var(--pen);min-width:1ch}
+.od-mtoc a:hover{transform:translateY(-2px);border-color:var(--fg);box-shadow:var(--shadow)}
+.od-step{display:flex;flex-direction:column;gap:var(--gap-lg);padding-top:var(--gap-xl);border-top:1px solid var(--line)}
+.od .od-step>h3{display:flex;align-items:center;gap:.55em;font-weight:300;font-size:clamp(1.35rem,1.15rem + 1cqi,1.8rem);line-height:1.2;max-width:38ch;text-wrap:balance}
+.od-stepn{flex:none;display:grid;place-items:center;width:2.1em;height:2.1em;font-family:var(--hand);font-weight:700;font-size:.95em;color:var(--pen);border:2px solid var(--pen);border-radius:52% 46% 55% 44% / 46% 54% 44% 56%;transform:rotate(-6deg)}
+.od-vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.od-block{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gap-lg) var(--gap-xl);align-items:start}
+.od-demo{display:flex;flex-direction:column;gap:var(--gap-sm);background:var(--panel) radial-gradient(var(--dot) 1px,transparent 1.3px) 0 0/16px 16px;border-radius:var(--r-box);padding:var(--gap-md);min-width:0}
+.od .od-demo p{margin:0}
+.od-demo .od-controls{background:none;padding:0}
+.od-dt{margin:0;font-size:var(--fs);font-weight:700;line-height:1.35}
+.od-chart.od-chart-sm{min-height:200px}
+.od-chart.od-chart-xs{min-height:80px}
+.od-read{font-size:var(--fs-sm);line-height:1.6}
+.od-btn{appearance:none;font:inherit;font-size:var(--fs-cap);font-weight:600;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:var(--r-ctl);padding:8px 12px;min-height:44px;cursor:pointer;transition:background-color .15s,border-color .15s,transform .1s}
+.od-btn:hover{border-color:var(--fg);background:var(--hl)}
+.od-btn:active{transform:translateY(1px)}
+/* the key result of each step, boxed like a textbook result, with a note in the margin */
+.od-result{position:relative;background:var(--pop);border:1px solid var(--line);border-radius:var(--r-box);padding:18px 16px 8px;margin-top:6px}
+.od-result-tag{position:absolute;top:-.8em;left:12px;background:var(--hl);padding:0 .45em;border-radius:3px;font-size:1.05rem;line-height:1.5}
+/* hand-written notes: suggestions beside the demonstrations, labels in the margin */
+.od-hand{font-family:var(--hand);color:var(--pen);font-weight:400;line-height:1.3}
+.od-try{display:flex;gap:.35em;align-items:baseline;font-size:1.1rem;transform:rotate(-.6deg);transform-origin:left}
+.od-try::before{content:"\2192" / "";font-family:var(--sans);color:var(--pen)}
+/* folds: the theory beyond exchangeability and the Beta supplement */
+.od-supp{border-top:1px solid var(--line);padding-top:var(--gap-sm)}
+.od-supp summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center;gap:var(--gap-sm);list-style:none}
+.od-supp summary::-webkit-details-marker{display:none}
+.od-supp summary::before{content:"+" / "";flex:none;display:grid;place-items:center;width:1.5rem;height:1.5rem;border:1.5px solid currentColor;border-radius:50%;font-weight:400;line-height:1;transition:transform .2s}
+.od-supp[open]>summary::before{transform:rotate(45deg)}
+.od-supp>.od-prose{padding:var(--gap-sm) 0 var(--gap-md)}
+.od-further{border-top:0;padding-top:0;display:flex;flex-direction:column;gap:var(--gap-lg)}
+.od-further>summary{flex-wrap:wrap;row-gap:2px;padding:12px 16px;border:1.5px dashed var(--pen);border-radius:var(--r-box);transition:background-color .15s}
+.od-further>summary:hover{background:var(--panel)}
+.od-further>summary .od-sub{flex-basis:100%;padding-left:calc(1.5rem + var(--gap-sm));font-size:var(--fs-cap)}
+.od-chain{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:var(--gap-sm)}
+.od-chain li{display:flex;align-items:center;gap:var(--gap-sm)}
+.od-chain li+li::before{content:"\2192" / "";color:var(--pen);font-weight:700}
+.od-chain b{background:var(--pop);border:1px solid var(--fg);border-radius:var(--r-ctl);padding:8px 12px;font-size:var(--fs-sm);font-weight:600}
+.od-refs{display:flex;flex-direction:column;gap:var(--gap-sm);max-width:72ch}
+.od .od-refs h4{margin:0;font-size:var(--fs-sm);font-weight:700}
+.od-refs ol{margin:0;padding-left:1.4rem;font-size:var(--fs-sm);color:var(--muted);line-height:1.6;display:flex;flex-direction:column;gap:var(--gap-xs)}
+.katex{font-size:1.05em}
+.katex-display{margin:.25em 0;overflow-x:auto;overflow-y:hidden;padding:4px 0}
+@container od (min-width:36rem){.od-mtoc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container od (min-width:60rem){.od-mtoc{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .od-block{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}.od-demo{position:sticky;top:64px}}
+.od-demo .od-range-row{flex-wrap:wrap;row-gap:0}
+.od-demo .od-range{width:min(13rem,100%)}
+.od-demo .od-range-val{white-space:nowrap}
+.od-demo .od-dl{stroke:var(--panel)}
+.od-demo .od-axlbl{paint-order:stroke;stroke:var(--panel);stroke-width:4px;stroke-linejoin:round}
+@container od (max-width:46rem){.od-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.od-tab{white-space:nowrap}
+  .katex-display{font-size:.95em}}
+@media (max-width:46rem){html{scroll-padding-top:64px}}
+
+/* motion: a view eases in when switched to (not on first load); the opening's two key numbers are highlighted once */
+@keyframes od-in{from{opacity:0;transform:translateY(6px)}}
+@keyframes od-mark{from{background-size:0% 100%}}
+.od-enter:not([hidden]){animation:od-in .28s cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
 <main class="od">
   <header class="od-head">
-    <div class="od-head-main">
-      <p class="od-fn">Olist orders, Brazil · purchases April to July 2018</p>
+    <div>
+      <p class="od-kicker">Olist orders, Brazil, purchases April to July 2018</p>
       <h1 class="od-title">Olist delivery diagnostics</h1>
-      <p class="od-lede">Replaying each week of saved predictions and picking the 10% of orders with the highest risk, the monthly-refit
+      <p class="od-contrib-link" hidden><a href="#contribution">My contribution</a></p>
+    </div>
+    <p class="od-scope">I connect delivery-risk prediction to two decisions: which orders to prioritise and how many days to promise.
+      This historical study uses eventually delivered, single-seller Olist orders. Late means arrival after Olist's estimated date;
+      monthly-refit results cover April to June 2018.</p>
+    <p class="od-hand od-hint">Pick any of the four <span aria-hidden="true">↓</span></p>
+    <ol class="od-findings" aria-label="Findings and the mathematics">
+      <li class="od-finding"><a href="#risk"><span>Who to check first</span></a>
+        <p>Replaying each week of saved predictions and picking the 10% of orders with the highest risk, the monthly-refit
         logistic model's picks included <span class="od-b" data-source="risk_budget" data-field="recall" data-key="refit|logistic|all|10" data-fmt="pct1">—</span>
         of the orders that turned out late, <span class="od-b" data-source="risk_budget" data-field="lift_vs_random" data-key="refit|logistic|all|10" data-fmt="f1">—</span>
-        times as many as a random pick with the same weekly budget. In every month the risk scores overstated the late rate. In the E1 promise study,
-        neither regression policy met the standard for replacing the retained state rule.</p>
-    </div>
-    <p class="od-scope">Single-seller orders that were eventually delivered. Late means delivered after Olist's own estimated date.
-      The monthly refit scores April to June only. A historical analysis of saved predictions, not a live system: no order was
-      followed up. Not affiliated with Olist.</p>
+        times as many as a random pick with the same weekly budget.</p></li>
+      <li class="od-finding"><a href="#reliability"><span>Are the risk scores right</span></a>
+        <p>In every month the risk scores overstated the late rate.</p></li>
+      <li class="od-finding"><a href="#promises"><span>Promised dates</span></a>
+        <p>The retained state rule remains the choice under E1's registered replacement standard.</p></li>
+      <li class="od-finding"><a href="#math"><span>The mathematics</span></a>
+        <p>Derive the promise from asymmetric loss, calibrate it through ranks, and trace how rounding and changing data affect coverage.</p></li>
+    </ol>
   </header>
 
   <div class="od-tabs" role="tablist" aria-label="Views">
-    <button class="od-tab" type="button" role="tab" id="tab-risk" aria-controls="risk" aria-selected="true"><span class="od-fn">01</span>Who to check first</button>
-    <button class="od-tab" type="button" role="tab" id="tab-reliability" aria-controls="reliability" aria-selected="false" tabindex="-1"><span class="od-fn">02</span>Are the risk scores right</button>
-    <button class="od-tab" type="button" role="tab" id="tab-promises" aria-controls="promises" aria-selected="false" tabindex="-1"><span class="od-fn">03</span>Promised dates</button>
+    <button class="od-tab" type="button" role="tab" id="tab-risk" aria-controls="risk" aria-selected="true"><span class="od-tabn">01</span>Who to check first</button>
+    <button class="od-tab" type="button" role="tab" id="tab-reliability" aria-controls="reliability" aria-selected="false" tabindex="-1"><span class="od-tabn">02</span>Are the risk scores right</button>
+    <button class="od-tab" type="button" role="tab" id="tab-promises" aria-controls="promises" aria-selected="false" tabindex="-1"><span class="od-tabn">03</span>Promised dates</button>
+    <button class="od-tab" type="button" role="tab" id="tab-math" aria-controls="math" aria-selected="false" tabindex="-1"><span class="od-tabn">04</span>The mathematics</button>
   </div>
 
   <section class="od-view" id="risk" role="tabpanel" aria-labelledby="tab-risk">
@@ -134,8 +269,7 @@ a{color:inherit;text-underline-offset:.15em}
     </div>
     <div class="od-split">
       <figure class="od-fig">
-        <span class="od-fn">Fig. 1</span>
-        <h3>Late orders among the picks as the weekly share grows</h3>
+        <h3><span class="od-num">Fig. 1</span>Late orders among the picks as the weekly share grows</h3>
         <p class="od-note">In every purchase week the orders with the highest risk scores are picked first, by the rule each model was
           scored with: the frozen model ranks each week of the whole test period (stage 3), the monthly refit ranks each week within
           its own month (stage 5). For the frozen model a week that spans two months is ranked once, so one month's picks can be
@@ -144,7 +278,7 @@ a{color:inherit;text-underline-offset:.15em}
         <div class="od-chart" id="ch-budget"></div>
       </figure>
       <aside class="od-aside">
-        <span class="od-fn">At the chosen share</span>
+        <span class="od-label">At the chosen share</span>
         <p class="od-big"><span class="od-dyn" data-source="risk_budget" data-field="recall" data-fmt="pct1">—</span></p>
         <p>of the <span class="od-dyn od-b" data-source="risk_budget" data-field="late_total" data-fmt="int">—</span>
           orders that turned out late were among the picks. The picks were <span class="od-dyn" data-source="risk_budget" data-field="selected" data-fmt="int">—</span>
@@ -152,11 +286,10 @@ a{color:inherit;text-underline-offset:.15em}
           <span class="od-dyn" data-source="risk_budget" data-field="late_in_selected" data-fmt="int">—</span> of them turned out late,
           where a random pick with the same weekly budgets would find about <span class="od-dyn" data-source="risk_budget" data-field="random_expected_late" data-fmt="f1">—</span>:
           <span class="od-dyn od-b" data-source="risk_budget" data-field="lift_vs_random" data-fmt="f1">—</span> times as many.</p>
-        <p class="od-note">This replays historical weeks with saved predictions: the risk-ranked picks included these eventually late orders.
-          No follow-up took place, and nothing here shows that a delay could have been prevented.
-          The picks use only the order of scores within each week. One strictly increasing transform of the probabilities, applied to
-          the whole batch, would pick the same orders; a recalibration that differs by group or by month could change them.
-          Canceled and never-delivered orders are not scored.</p>
+        <p class="od-note">The weekly ranking concentrates eventual late orders within a fixed follow-up budget.
+          Measuring prevented delays requires an intervention study. One strictly increasing transformation applied to
+          all scores in a weekly batch preserves the ranking; recalibration that differs by group or month can change it.
+          This evaluation covers eventually delivered orders, excluding canceled and never-delivered orders.</p>
       </aside>
     </div>
   </section>
@@ -173,35 +306,32 @@ a{color:inherit;text-underline-offset:.15em}
     </div>
     <div class="od-split">
       <figure class="od-fig">
-        <span class="od-fn">Fig. 2</span>
-        <h3>Late rate by purchase month</h3>
+        <h3><span class="od-num">Fig. 2</span>Late rate by purchase month</h3>
         <p class="od-note">Average predicted probability against the share of orders that were late. Whiskers: 95% Wilson interval for the observed rate, treating orders as independent.</p>
         <div class="od-legend" id="leg-monthly"></div>
         <div class="od-chart" id="ch-monthly"></div>
       </figure>
       <aside class="od-aside od-margin">
-        <span class="od-fn">Not tested here</span>
-        <h3>Recalibration was not evaluated</h3>
+        <span class="od-label">Next research question</span>
+        <h3>Audit label maturity before recalibrating</h3>
         <p class="od-note">Labels that arrive early come mostly from on-time orders. A fixed reporting lag, for example waiting 30 days after a
           month ends, would need an order-level audit of when labels became available: waiting alone does not show that a month's labels are
           complete or representative. Under such a lag, a model frozen on 1 April 2018 could be checked on June and July 2018 only, with
           <span data-source="prob_monthly" data-field="late" data-key="frozen|logistic|2018-06" data-fmt="int">—</span>
           and <span data-source="prob_monthly" data-field="late" data-key="frozen|logistic|2018-07" data-fmt="int">—</span> late orders.
-          Those months are small and have already been inspected, so any such test would be exploratory, not blind. Figure 2 shows that the
-          scores overpredict; it does not show whether a correction fitted later would help.</p>
+          Those months are small and have already been inspected, making a follow-up test exploratory. Figure 2 establishes
+          overprediction; evaluating a correction requires a separate recalibration experiment.</p>
       </aside>
     </div>
     <div class="od-split r57">
       <figure class="od-fig">
-        <span class="od-fn">Fig. 3</span>
-        <h3>Observed late rate by risk band</h3>
+        <h3><span class="od-num">Fig. 3</span>Observed late rate by risk band</h3>
         <div class="od-controls"><label class="od-field" for="sel-relmonth">Purchase month<select id="sel-relmonth" class="od-select"></select></label></div>
         <p class="od-note">Orders sorted by score and cut into equal-count bands: ten for all months together, five for one month. A well-calibrated score puts the points on the dashed diagonal.</p>
         <div class="od-chart" id="ch-bins"></div>
       </figure>
       <figure class="od-fig">
-        <span class="od-fn">Table 1</span>
-        <h3>Monthly figures</h3>
+        <h3><span class="od-num">Table 1</span>Monthly figures</h3>
         <p class="od-note">Observed over expected below 1 means the scores predicted more late orders than happened.</p>
         <div class="od-twrap">
           <table class="od-t" id="tb-monthly">
@@ -217,26 +347,25 @@ a{color:inherit;text-underline-offset:.15em}
     <h2 class="od-q">Is a more complex model worth switching to for promised delivery dates?</h2>
     <p class="od-note">From the E1 study: each policy was calibrated on October to December 2017 orders for 90% coverage, frozen, and scored once on
       April to July 2018 (<span data-source="e1_policies" data-field="orders" data-key="D*" data-fmt="int">—</span> orders). That period had been looked at
-      earlier in the project, so this is pre-registered exploratory work, not a blind test. How some conclusions of the sealed
-      E1 reports should be read is set out in the <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/docs/E1_WORDING_CORRECTIONS_2026-10-27.md">wording corrections</a>.</p>
+      earlier in the project: E1 is pre-registered exploratory work rather than a blind test. The
+      <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/docs/E1_WORDING_CORRECTIONS_2026-10-27.md">report corrections</a> specify the scope of the registered and post-hoc conclusions.</p>
     <div class="od-split">
       <figure class="od-fig">
-        <span class="od-fn">Fig. 4</span>
-        <h3>Promised days against coverage on April to July 2018</h3>
+        <h3><span class="od-num">Fig. 4</span>Promised days against coverage on April to July 2018</h3>
         <div class="od-legend" id="leg-days"></div>
         <div class="od-chart" id="ch-days"></div>
         <p class="od-note">Squares: registered policies, scored once. Hollow circles: the retained state rule B0 and Olist's own estimated date.
           Dashed lines: post-hoc curves that slide each model's shift over the evaluation orders' own outcomes. They are diagnostic, not deployable, and were not used to choose a model.</p>
       </figure>
       <aside class="od-aside">
-        <span class="od-fn">Reading Fig. 4</span>
+        <span class="od-label">Reading Fig. 4</span>
         <h3>What the comparison shows</h3>
         <ol class="od-list">
           <li>The same target does not give the same coverage. All three policies aimed at 90% and covered
             <span data-source="e1_policies" data-field="coverage" data-key="B1c" data-fmt="pct1">—</span> (state rule),
             <span data-source="e1_policies" data-field="coverage" data-key="C*" data-fmt="pct1">—</span> (linear) and
             <span data-source="e1_policies" data-field="coverage" data-key="D*" data-fmt="pct1">—</span> (HGB) of orders.</li>
-          <li>Shorter promises are not at the same reliability. Linear promised
+          <li>Compare promised days together with reliability. Linear promised
             <span data-source="e1_policies" data-field="mean_promised_days" data-key="C*" data-fmt="f2">—</span> days on average and HGB
             <span data-source="e1_policies" data-field="mean_promised_days" data-key="D*" data-fmt="f2">—</span>, at different coverage, so the two registered points do not rank the models.</li>
           <li>Every calibrated policy covered more than its target. That is consistent with changing delivery times, the cohort filter on Olist's estimated date and order mix; the study does not separate these.</li>
@@ -245,8 +374,7 @@ a{color:inherit;text-underline-offset:.15em}
     </div>
     <div class="od-split r75">
       <figure class="od-fig">
-        <span class="od-fn">Table 2</span>
-        <h3>Registered result and the rounding rule</h3>
+        <h3><span class="od-num">Table 2</span>Registered result and the rounding rule</h3>
         <p class="od-note">First policy minus second; negative days mean a sooner promise. Under the registered round-up rule HGB was
           <span data-source="e1_rounding" data-field="day_diff" data-key="ceil|D*|B1c" data-fmt="s2">—</span> days against the calibrated state rule, below the one-day bar.
           Rounding down is a post-hoc check: it gives <span data-source="e1_rounding" data-field="day_diff" data-key="floor|D*|B1c" data-fmt="s2">—</span> days and does not replace the registered result.
@@ -259,8 +387,7 @@ a{color:inherit;text-underline-offset:.15em}
         </div>
       </figure>
       <figure class="od-fig">
-        <span class="od-fn">Table 3</span>
-        <h3>Days at the first shift reaching each coverage level (post hoc)</h3>
+        <h3><span class="od-num">Table 3</span>Days at the first shift reaching each coverage level (post hoc)</h3>
         <p class="od-note">For each policy, the shift is set after the fact on the evaluation orders: among the evaluated shifts (every 0.01 day
           for the two models, every whole day for the state rule) whose coverage reaches the level, the one with the fewest promised days.
           Each cell gives the mean promised days and, below it, the coverage actually reached. Whole-day steps make a policy overshoot the
@@ -274,14 +401,354 @@ a{color:inherit;text-underline-offset:.15em}
         </div>
       </figure>
     </div>
+    <p class="od-note">The mathematics behind this comparison is set out step by step, with small demonstrations, in
+      <a href="#math">04 The mathematics</a>.</p>
+  </section>
+
+  <section class="od-view" id="math" role="tabpanel" aria-labelledby="tab-math" hidden>
+    <h2 class="od-q">From a predicted quantile to a delivery promise: loss, calibration and coverage</h2>
+    <div class="od-prose">
+      <p>I study how to set a delivery promise: a decision that trades spare days against late arrivals. The mean summarises
+        delivery times; an asymmetric loss identifies the quantile that answers this decision.</p>
+      <p>I work through standard quantile and conformal results, then apply them to the project's calibration and rounding rules.
+        The interactive examples use illustrative data; Table 4 reports Olist results. The proofs are in the
+        <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/documents/current/E1_math_note_en.pdf">mathematical note</a>, and the <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/notebooks/e1_by_hand.ipynb">notebook</a> works the examples by hand.</p>
+    </div>
+    <ol class="od-mtoc" aria-label="Steps">
+      <li><a href="#m1"><span>1</span><span>Why a promise is a quantile</span></a></li>
+      <li><a href="#m2"><span>2</span><span>Why a predicted quantile still needs calibrating</span></a></li>
+      <li><a href="#m3"><span>3</span><span>How whole days change the result</span></a></li>
+      <li><a href="#m4"><span>4</span><span>Assess coverage when the data change</span></a></li>
+    </ol>
+
+    <section class="od-step" id="m1" aria-labelledby="m1-h">
+      <h3 id="m1-h"><span class="od-stepn" aria-hidden="true">1</span><span class="od-vh">Step 1. </span>Why a delivery promise is a quantile</h3>
+      <div class="od-block">
+        <div class="od-prose">
+          <p>Let \(Y\) be the delivery time in days and \(d\) the promised number of days. I describe the two kinds of error
+            with the loss</p>
+          \[ L(d,Y)=c_{\mathrm{late}}\,(Y-d)_+ + c_{\mathrm{slack}}\,(d-Y)_+ , \]
+          <p>where \((z)_+=\max(z,0)\) and \(c_{\mathrm{late}},c_{\mathrm{slack}}>0\).</p>
+          <ul>
+            <li>When \(Y>d\), the order is late, and each late day costs \(c_{\mathrm{late}}\).</li>
+            <li>When \(Y\lt d\), the promise leaves days to spare, and each spare day costs \(c_{\mathrm{slack}}\).</li>
+          </ul>
+          <p>The coefficients are decision weights, not measured economic costs.</p>
+          <p>Because the project compares dates in whole days, I take \(Y\) to be a nonnegative integer and \(d\) an
+            integer, with \(\mathbb E[Y]\lt\infty\) so that the expected loss is finite. Extending a promise from \(d\) to \(d+1\) days can
+            only do one of two things:</p>
+          <ul>
+            <li>if \(Y\le d\), it adds a spare day, and the loss rises by \(c_{\mathrm{slack}}\);</li>
+            <li>if \(Y\ge d+1\), it removes a late day, and the loss falls by \(c_{\mathrm{late}}\).</li>
+          </ul>
+          <p>So, with \(F(d)=P(Y\le d)\), the difference in expected loss between neighbouring promises is</p>
+          \[ \begin{aligned} &amp;\mathbb E[L(d+1,Y)]-\mathbb E[L(d,Y)]\\ &amp;\quad= c_{\mathrm{slack}}F(d)-c_{\mathrm{late}}\{1-F(d)\}\\ &amp;\quad= (c_{\mathrm{late}}+c_{\mathrm{slack}})\{F(d)-q\}, \end{aligned} \]
+          <p>where</p>
+          \[ q=\frac{c_{\mathrm{late}}}{c_{\mathrm{late}}+c_{\mathrm{slack}}}. \]
+          <p>While \(F(d)\lt q\), one more day lowers the expected loss; once \(F(d)>q\), it raises it. One optimal
+            whole-day promise is</p>
+          <div class="od-result"><span class="od-hand od-result-tag">the answer: a quantile</span>
+          \[ d^*=\min\{d: F(d)\ge q\}, \]
+          </div>
+          <p>which is the \(q\)-quantile. Where \(F\) has a flat stretch the optimum need not be unique; in general a
+            whole-day promise \(d\) is optimal exactly when</p>
+          \[ F(d-1)\le q\le F(d). \]
+          <p>A shorter promise trades spare days for a higher risk of late arrival. I evaluate both outcomes together.</p>
+          <p>Under this loss a 90% quantile corresponds to \(c_{\mathrm{late}}:c_{\mathrm{slack}}=9:1\).
+            The project fixes 90% as its research target; Olist's economic cost ratio remains unestimated.</p>
+          <p>Given the information at checkout, \(X=x\), the same derivation gives the conditional quantile
+            \(Q_q(Y\mid X=x)\). That is the role of quantile regression in this project: it lets different orders receive
+            different promises.</p>
+        </div>
+        <figure class="od-demo">
+          <h4 class="od-dt"><span class="od-num">Fig. 5</span>Expected loss of each promise, ten illustrative orders</h4>
+          <div class="od-controls">
+            <label class="od-field">A late day costs as much as
+              <span class="od-range-row"><input class="od-range" id="mx-ratio" type="range" min="1" max="19" step="1" value="9">
+                <output class="od-range-val" id="mx-ratio-out" for="mx-ratio">9 spare days</output></span>
+            </label>
+          </div>
+          <div class="od-chart od-chart-sm" id="mx-loss"></div>
+          <p class="od-read" id="mx-loss-read" aria-live="polite"></p>
+          <p class="od-try"><span class="od-hand">Try 1 spare day: q = 0.50, and the best promise is the median, 5 days.</span></p>
+          <p class="od-note">Delivery times of 2, 3, 3, 4, 5, 5, 6, 8, 12 and 20 days (notebook, section 1); not Olist data.
+            Top: the average loss of each promise; filled points are optimal. Bottom: \(F(d)\), the share delivered within
+            \(d\) days, against \(q\).</p>
+        </figure>
+      </div>
+    </section>
+
+    <section class="od-step" id="m2" aria-labelledby="m2-h">
+      <h3 id="m2-h"><span class="od-stepn" aria-hidden="true">2</span><span class="od-vh">Step 2. </span>Why a predicted quantile still needs calibrating</h3>
+      <div class="od-block">
+        <div class="od-prose">
+          <p>A model trained to predict the 90% quantile need not cover 90% of new orders: its form may not fit, and a
+            finite sample adds error.</p>
+          <p>Fix the fitted predictor \(\widehat f\). For \(n\) calibration orders that were not used to fit it, define the
+            one-sided residuals</p>
+          \[ R_i=Y_i-\widehat f(X_i),\qquad i=1,\ldots,n, \]
+          <p>sort them as \(R_{(1)}\le\cdots\le R_{(n)}\), and take</p>
+          \[ k=\lceil (n+1)q\rceil,\quad s=R_{(k)},\quad U(x)=\widehat f(x)+s. \]
+          <p>This assumes \(k\le n\). For \(k=n+1\), the finite-sample construction sets the upper bound to infinity.</p>
+          <h4>Why \(n+1\) and not \(n\)?</h4>
+          <p>The guarantee concerns \(n\) calibration residuals and one new residual. With the fitted model fixed, if these
+            residuals are exchangeable and almost surely have no ties, the rank of the new residual among the \(n+1\) is
+            uniform. Hence</p>
+          <div class="od-result"><span class="od-hand od-result-tag">why n + 1</span>
+          \[ \begin{aligned} P\{Y_{\mathrm{new}}\le U(X_{\mathrm{new}})\} &amp;= P\{R_{\mathrm{new}}\le R_{(k)}\}\\ &amp;= \frac{k}{n+1}\ \ge\ q. \end{aligned} \]
+          </div>
+          <p>Without ties this construction covers exactly \(k/(n+1)\). With ties, the
+            coverage event, which includes equality, may be more conservative. The lower bound is the split conformal
+            guarantee, Theorem 1a in Barber et al. [1].</p>
+          <p>The probability averages over both the calibration set and the new order. It does not say that each order has a
+            90% chance of arriving on time, and it is not the same guarantee for one calibration set once that set is
+            fixed.</p>
+          <h4>Check the residual rank directly</h4>
+          <p>By the rule, at least \(k\) calibration residuals are no larger than \(R_{(k)}\), so</p>
+          \[ \widehat{\mathrm{Coverage}}_C\ge\frac{k}{n}. \]
+          <p>This follows from the construction itself. The converse fails: coverage above \(k/n\) does not show that the
+            code is right, since a bound wrongly raised by 1,000 days would pass too. The direct check is to recompute the
+            \(k\)-th residual independently and compare it, value by value, with the saved shift.</p>
+          <p>I check the implementation against the residual rank, then assess the assumptions separately on future data.</p>
+        </div>
+        <figure class="od-demo">
+          <h4 class="od-dt"><span class="od-num">Fig. 6</span>\(k/n\) and \(k/(n+1)\), by hand and by simulation</h4>
+          <div class="od-chart od-chart-xs" id="mx-rank"></div>
+          <p class="od-read" id="mx-rank-read"></p>
+          <div class="od-chart od-chart-sm" id="mx-run"></div>
+          <p class="od-read" id="mx-run-read" aria-live="polite"></p>
+          <p><button class="od-btn" type="button" id="mx-run-again">Draw new calibration sets</button></p>
+          <p class="od-try"><span class="od-hand">Press it a few times: each run wanders at first, then settles near k/(n + 1) = 0.8.</span></p>
+          <p class="od-note">Top: nine calibration orders and a fixed predictor (notebook, section 2), \(q=0.8\), so
+            \(k=\lceil 10\times0.8\rceil=8\). Bottom: 4,000 fresh sets of nine i.i.d. normal residuals, each with one new
+            residual; the line is the running share of new residuals covered.</p>
+        </figure>
+      </div>
+    </section>
+
+    <section class="od-step" id="m3" aria-labelledby="m3-h">
+      <h3 id="m3-h"><span class="od-stepn" aria-hidden="true">3</span><span class="od-vh">Step 3. </span>Why whole-day dates need separate treatment</h3>
+      <div class="od-block">
+        <div class="od-prose">
+          <p>The model can output a real-valued bound, but a delivery date is a whole number of days. If \(Y\) is an integer,
+            then for any real \(U\)</p>
+          <div class="od-result"><span class="od-hand od-result-tag">the key identity</span>
+          \[ Y\le U\iff Y\le\lfloor U\rfloor, \]
+          </div>
+          <p>because \(\lfloor U\rfloor\) is the largest integer not exceeding \(U\).</p>
+          <p>So, without further truncation or changes to the bound, rounding down keeps exactly the coverage event of the
+            real-valued bound. Rounding up can cover some extra orders, and lengthens the promise.</p>
+          <p>But rounding down is not always the same as rounding up and then subtracting a day:</p>
+          \[ \lfloor U\rfloor=\begin{cases} \lceil U\rceil-1, &amp; U\notin\mathbb Z,\\ \lceil U\rceil, &amp; U\in\mathbb Z. \end{cases} \]
+          <p>For example, with \(U=10\) and \(Y=10\), the real-valued bound and rounding down both cover the order;
+            rounding up and subtracting a day gives 9 and does not.</p>
+          <p>Policies produce whole-day bounds at different rates, so the same rounding step can affect them differently.
+            I compare the complete rule, from prediction to the final date.</p>
+        </div>
+        <figure class="od-demo">
+          <h4 class="od-dt"><span class="od-num">Fig. 7</span>Four ways to turn a bound into a date</h4>
+          <div class="od-controls">
+            <label class="od-field"><span>Real-valued bound \(U\)</span>
+              <span class="od-range-row"><input class="od-range" id="mx-u" type="range" min="80" max="110" step="1" value="100">
+                <output class="od-range-val" id="mx-u-out" for="mx-u">10.0</output></span>
+            </label>
+            <label class="od-field"><span>Delivery time \(Y\)</span>
+              <select class="od-select" id="mx-y"><option value="9">9 days</option><option value="10" selected>10 days</option><option value="11">11 days</option></select>
+            </label>
+          </div>
+          <div class="od-chart od-chart-xs" id="mx-round"></div>
+          <div class="od-twrap">
+            <table class="od-t" id="tb-round">
+              <thead><tr><th>Rule</th><th>Promise, days</th><th>Covers \(Y\)?</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="od-read" id="mx-round-read" aria-live="polite"></p>
+          <p class="od-try"><span class="od-hand">Now move U to 9.9: only rounding up still covers Y = 10.</span></p>
+        </figure>
+      </div>
+    </section>
+
+    <section class="od-step" id="m4" aria-labelledby="m4-h">
+      <h3 id="m4-h"><span class="od-stepn" aria-hidden="true">4</span><span class="od-vh">Step 4. </span>Assess coverage when the data change</h3>
+      <div class="od-block">
+        <div class="od-prose">
+          <p>In the project, the calibrated policies aimed at 90% covered about 96–97% of orders in the evaluation period.
+            The gap raises a specific question: which parts of the promise-setting procedure produced the extra coverage?</p>
+          <p>First, the rank argument of step 2 relies on the calibration residuals and future residuals being
+            exchangeable. Exchangeability between the calibration and evaluation periods remains unestablished;
+            historical order alone neither establishes nor refutes it. I therefore report the evaluation coverage as an
+            empirical result, with the theoretical guarantee conditional on its assumptions.</p>
+          <p>Second, the over-coverage could come from several places:</p>
+          <ul>
+            <li>delivery times differing between the calibration and evaluation periods;</li>
+            <li>a different order mix or sample selection;</li>
+            <li>ties in the residuals;</li>
+            <li>whole-day rounding and other post-processing.</li>
+          </ul>
+          <p>I use over-coverage to investigate these explanations. Identifying a cause requires evidence that separates them.</p>
+        </div>
+        <figure class="od-demo">
+          <h4 class="od-dt"><span class="od-num">Table 4</span>Coverage of the two frozen regression policies: bounds and observations</h4>
+          <div class="od-twrap">
+            <table class="od-t" id="tb-cov">
+              <thead><tr><th>Quantity</th><th>Linear (C*)</th><th>HGB (D*)</th></tr></thead>
+              <tbody>
+                <tr><td>Calibration set, lower bound from the rule: \(k/n\)<span class="od-sub">real-valued bound \(U\); holds for any data</span></td><td>≥ 90.009%</td><td>≥ 90.009%</td></tr>
+                <tr><td>New order, theoretical reference: \(k/(n+1)\)<span class="od-sub">real-valued \(U\), exchangeable data; equality holds when residuals are almost surely distinct; ties can make coverage conservative</span></td><td>≥ 90.004%</td><td>≥ 90.004%</td></tr>
+                <tr><td>Calibration set, observed<span class="od-sub">registered whole-day promise; at least \(k/n\), as it must be; not a check of the code</span></td><td>91.19%</td><td>91.14%</td></tr>
+                <tr><td>April to July 2018, observed<span class="od-sub">registered whole-day promise; these evaluation orders only; not a guarantee</span></td>
+                  <td><span data-source="e1_policies" data-field="coverage" data-key="C*" data-fmt="pct2">—</span></td>
+                  <td><span data-source="e1_policies" data-field="coverage" data-key="D*" data-fmt="pct2">—</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="od-note">\(n=17{,}056\) calibration orders and \(k=15{,}352\). The first two rows are bounds for the
+            real-valued bound \(U\); rounding it up to a whole day can only add coverage. The observed rows are of the
+            registered, rounded-up whole-day promise. Calibration-set values from the mathematical note and the notebook
+            (section 4 of each); April to July values from the saved policy table.</p>
+        </figure>
+      </div>
+
+      <details class="od-supp od-further" id="further">
+        <summary>Going further: what the theory still says when exchangeability fails <span class="od-sub">coverage bounds [1], weighted calibration [2] and Fig. 8</span></summary>
+      <div class="od-block">
+        <div class="od-prose">
+          <p>Two published results describe how coverage guarantees depend on the type of distribution shift.</p>
+          <p><b>Coverage bounds without exchangeability.</b> Barber, Candès, Ramdas and Tibshirani [1] bound the coverage
+            of split conformal calibration when the data are not exchangeable. Write \(Z\) for the calibration orders
+            followed by the new order, \(Z^i\) for the same sequence with the new order swapped with calibration order
+            \(i\), and \(R(Z)\) for the vector of the \(n+1\) residuals. For the rule used here, which weights every
+            calibration order equally, their Theorem 2a gives</p>
+          \[ \begin{aligned} &amp;P\{Y_{n+1}\le U(X_{n+1})\}\\ &amp;\quad\ge q-\frac{1}{n+1}\sum_{i=1}^{n} d_{\mathrm{TV}}\bigl(R(Z),R(Z^i)\bigr), \end{aligned} \]
+          <p>and, when the residuals are distinct with probability one, their Theorem 3 gives</p>
+          \[ \begin{aligned} &amp;P\{Y_{n+1}\le U(X_{n+1})\}\\ &amp;\quad\lt q+\frac{1}{n+1}\\ &amp;\qquad+\frac{1}{n+1}\sum_{i=1}^{n} d_{\mathrm{TV}}\bigl(R(Z),R(Z^i)\bigr). \end{aligned} \]
+          <p>Under exchangeability every distance is zero, and the bounds reduce to \(q\le P\lt q+1/(n+1)\), which contains
+            the exact \(k/(n+1)\) of step 2. If the orders are independent, each distance is at most twice the total
+            variation distance between calibration order \(i\) and the new order (their Lemma 1). Read the other way: with
+            no ties, coverage more than \(1/(n+1)\) above \(q\) is possible only if the average swap distance exceeds the
+            excess. In theory, then, over-coverage of that size signals non-exchangeability, but not which kind; the paper
+            notes that a spread of \(Y\) given \(X\) that shrinks over time leads to over-coverage.</p>
+          <p>These bounds provide a theoretical reference. Estimating their distances requires the joint distribution of
+            calibration and evaluation orders, which these data do not identify. The 96–97% is
+            an observed proportion of rounded-up promises, not the probability in the theorem, which concerns the
+            real-valued bound \(U\), and by step 3 equally \(\lfloor U\rfloor\). Ties void the upper bound, and the state
+            rule's whole-day residuals tie often. The paper extends the lower bound to general scores such as this
+            one-sided residual (its Appendix B); it states the upper bound for the absolute residual, and its proof
+            (Appendix E.4) uses only that the scores are distinct, which is why I apply it here.</p>
+          <p><b>Covariate weighting addresses changes in the order mix, not general changes in delivery behaviour.</b>
+            Tibshirani, Barber, Candès and Ramdas [2] treat covariate shift. The calibration orders are drawn i.i.d. from
+            \(P_X\times P_{Y\mid X}\); the new order is drawn independently from \(\tilde P_X\times P_{Y\mid X}\), so the
+            features of new orders follow a different distribution while the delivery time given the features stays the
+            same; and the predictor \(\widehat f\) is fixed, fitted on separate data. If \(\tilde P_X\) is absolutely
+            continuous with respect to \(P_X\) and \(w=d\tilde P_X/dP_X\), weighting each calibration residual
+            by this likelihood ratio restores the guarantee (their Corollary 1, in the split form of their Section 2.2):</p>
+          \[ \begin{aligned} U_w(x)&amp;=\widehat f(x)\\ &amp;\quad+Q_q\Bigl(\sum_{i=1}^{n}p_i^w(x)\,\delta_{R_i}+p_{n+1}^w(x)\,\delta_{+\infty}\Bigr), \end{aligned} \]
+          <p>where \(Q_q\) is the \(q\)-quantile of the weighted distribution and</p>
+          \[ p_i^w(x)=\frac{w(X_i)}{\sum_{j=1}^{n}w(X_j)+w(x)}, \]
+          \[ p_{n+1}^w(x)=\frac{w(x)}{\sum_{j=1}^{n}w(X_j)+w(x)}. \]
+          <p>Then \(P\{Y_{n+1}\le U_w(X_{n+1})\}\ge q\). With \(w\equiv1\) this is the rule of step 2.</p>
+          <p>This sorts the causes listed above. A change in the order mix is covariate shift and, with the right weights,
+            can be corrected. Faster or slower deliveries for the same kind of order change \(P_{Y\mid X}\): then this
+            guarantee does not apply, and weighting by \(X\) alone is not guaranteed to restore coverage (Fig. 8 shows a
+            case where it changes nothing). Selection that depends on the outcome is not covariate shift either.</p>
+          <p>In this project \(w\) is unknown. The paper estimates it with a classifier that tells calibration features from
+            new ones: the odds \(\hat p(x)/\{1-\hat p(x)\}\) estimate \(w(x)\) up to the ratio of the two sample sizes, a
+            constant that the normalisation in \(p_i^w\) cancels. The exact guarantee uses the true weights;
+            evaluating estimated weights is a separate extension beyond E1.</p>
+        </div>
+        <figure class="od-demo">
+          <h4 class="od-dt"><span class="od-num">Fig. 8</span>Standard and weighted calibration under two kinds of shift</h4>
+          <div class="od-legend" id="leg-shift"></div>
+          <div class="od-chart od-chart-sm" id="mx-shift"></div>
+          <p class="od-read" id="mx-shift-read" aria-live="polite"></p>
+          <p><button class="od-btn" type="button" id="mx-shift-again">Draw new calibration sets</button></p>
+          <p class="od-try"><span class="od-hand">Watch the orange squares: weighting moves only the order-mix row.</span></p>
+          <p class="od-note">A toy model, not Olist data. One feature \(X\); the residual spread grows with it,
+            \(R=e^{X/2}\varepsilon\) with \(\varepsilon\sim N(0,1)\). Calibration: 200 orders with \(X\sim N(0,1)\), \(q=0.9\).
+            Order-mix shift: new orders have \(X\sim N(-1,1)\), so \(w(x)=e^{-x-1/2}\), known here. Delivery-time shift: the
+            same \(X\), residual spread multiplied by 0.6. Each point: 600 calibration sets with 20 new orders each.</p>
+        </figure>
+      </div>
+      </details>
+
+      <details class="od-supp">
+        <summary>Supplement: an idealised reference, the Beta distribution</summary>
+        <div class="od-prose">
+          <p>Fix the fitted model and assume further that the calibration and future residuals are i.i.d. with a continuous
+            distribution function \(F_R\). For a given calibration set, the true future coverage probability is</p>
+          \[ p_C=P\{R_{\mathrm{new}}\le R_{(k)}\mid C\}=F_R\bigl(R_{(k)}\bigr). \]
+          <p>Because the \(F_R(R_i)\) are independent uniform variables, as the calibration set is drawn again and again,</p>
+          \[ p_C\sim\operatorname{Beta}(k,\,n+1-k), \]
+          <p>so</p>
+          \[ \mathbb E[p_C]=\frac{k}{n+1}, \]
+          \[ \operatorname{Var}(p_C)=\frac{k(n+1-k)}{(n+1)^2(n+2)}. \]
+          <p>The distinction matters: once the calibration set is fixed, \(p_C\) is a fixed but unknown probability; the Beta
+            distribution describes how \(p_C\) varies when the calibration set is redrawn [3].</p>
+          <p>With the project's \(n=17{,}056\) and \(q=0.9\), \(k=15{,}352\) and the standard deviation is about 0.230
+            percentage points.</p>
+          <p>This standard deviation describes repeated calibration sets under the i.i.d. continuous-score model.
+            Evaluation uncertainty also involves finite test samples, order dependence, ties and temporal change.
+            A drift test needs those sources of variation accounted for; dividing the observed coverage gap by 0.230%
+            would use the wrong reference.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="od-step" aria-labelledby="mc-h">
+      <h3 id="mc-h">What I take from this</h3>
+      <div class="od-prose">
+        <p>The quantile answers what to predict under an asymmetric loss. Conformal calibration answers how to build a
+          marginal coverage guarantee under stated assumptions. Rounding decides how a prediction becomes an actual date.
+          I evaluate the complete decision procedure:</p>
+        <ol class="od-chain" aria-label="The chain from model to promise">
+          <li><b>Prediction model</b></li>
+          <li><b>Calibration rule</b></li>
+          <li><b>Whole-day date</b></li>
+          <li><b>Evaluation population</b></li>
+        </ol>
+        <p>A lower model loss need not mean that this chain ends in better delivery promises. That is why the project
+          reports days and coverage together.</p>
+      </div>
+      <div class="od-refs">
+        <h4>References</h4>
+        <ol>
+          <li>R. F. Barber, E. J. Candès, A. Ramdas and R. J. Tibshirani (2023).
+            <a href="https://www.stat.cmu.edu/~ryantibs/papers/nexcp.pdf">Conformal prediction beyond exchangeability</a>.
+            Annals of Statistics 51(2). Theorems 1a, 2a and 3, Lemma 1, Appendices B and E.4.</li>
+          <li>R. J. Tibshirani, R. F. Barber, E. J. Candès and A. Ramdas (2019).
+            <a href="https://arxiv.org/abs/1904.06019">Conformal prediction under covariate shift</a>. NeurIPS 2019.
+            Corollary 1 and Sections 2.2–2.3.</li>
+          <li>R. J. Tibshirani, Advanced Topics in Statistical Learning, Spring 2023,
+            <a href="https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/homeworks/homework4.pdf">Homework 4</a>,
+            problem 2: calibration-conditional Beta coverage.</li>
+        </ol>
+      </div>
+    </section>
+  </section>
+
+  <!-- My contribution. Write it inside the div below, as paragraphs (<p>…</p>) or a list (<ul><li>…</li></ul>).
+       While the div is empty, this panel and the "My contribution" link at the top stay hidden.
+       Keep it consistent with AUTHORSHIP.md in the repository. -->
+  <section class="od-contrib" id="contribution" aria-labelledby="contrib-title" hidden>
+    <h2 class="od-contrib-title" id="contrib-title">My contribution</h2>
+    <div class="od-contrib-body">
+      <p>I designed this study, wrote the preregistration, and implemented the scoring code, tests and simulations.
+        I led each revision and decided how review findings changed the code, the comparison and the conclusions.</p>
+      <p>I also led the dashboard and verification workflow. Claude assisted with selected code refinements and initial
+        drafts of supporting documentation. <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/AUTHORSHIP.md">Full contribution statement</a>.</p>
+    </div>
   </section>
 
   <footer class="od-foot">
-    <p>Every figure is an aggregate of saved files in the <a href="https://github.com/Suzanneisgenius/olist-delivery-promises">olist-delivery-promises</a>
-      repository; no order-level rows are shown. <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/tree/main/docs/diagnostics_page">aggregate.py</a>
+    <p>The figures and tables in views 01 to 03 are aggregates of saved files in the
+      <a href="https://github.com/Suzanneisgenius/olist-delivery-promises">olist-delivery-promises</a> repository; no order-level rows are shown. View 04 contains
+      illustrative calculations and seeded simulations; its Table 4 cites saved project results. E1's sealed evaluation remains unchanged.
+      <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/tree/main/docs/diagnostics_page">aggregate.py</a>
       builds the seven data files below from the repository and checks them against the saved stage-3 and stage-5 metrics.
       Wording corrections to the E1 reports, audit notes and the corrections made to this page before publication:
       <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/docs/E1_WORDING_CORRECTIONS_2026-10-27.md">E1_WORDING_CORRECTIONS_2026-10-27.md</a>.</p>
+    <p>Independent public-data study, unaffiliated with Olist. The risk analysis replays historical predictions; no operational follow-up was performed.</p>
     <details>
       <summary>Sources</summary>
       <table class="od-t">
@@ -301,19 +768,26 @@ a{color:inherit;text-underline-offset:.15em}
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <script>
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  // The contribution panel and its link at the top appear only once the panel has text.
+  if ($('.od-contrib-body').textContent.trim()) $$('#contribution, .od-contrib-link').forEach((e) => { e.hidden = false; });
   const CHARTS = ['#ch-budget', '#ch-monthly', '#ch-bins', '#ch-days'];
   const message = (text, fail) => CHARTS.forEach((s) => {
     const m = document.createElement('div'); m.className = 'od-msg' + (fail ? ' fail' : ''); m.textContent = text; $(s).replaceChildren(m);
   });
+  // Formulas in view 04 are typeset with KaTeX; if it cannot load, the TeX source stays readable.
+  if (window.renderMathInElement) renderMathInElement($('#math'), { throwOnError: false,
+    delimiters: [{ left: '\\[', right: '\\]', display: true }, { left: '\\(', right: '\\)', display: false }] });
   if (!window.d3) { message('The chart library could not be loaded.', true); return; }
 
   const pct1 = d3.format('.1%'), pct2 = d3.format('.2%'), pct0 = d3.format('.0%'), int = d3.format(','), f1 = d3.format(',.1f'), f2 = d3.format('.2f'),
     f3 = d3.format('.3f'), f4 = d3.format('.4f'), s2 = d3.format('+.2f');
-  const FMT = { pct1, int, f1, f2, s2 };
+  const FMT = { pct1, pct2, int, f1, f2, s2 };
   const MODEL = { logistic: 'Logistic regression', gbm: 'Gradient boosting' };
   const modelColor = (m) => (m === 'logistic' ? 'var(--s1)' : 'var(--s2)');
   const e1Color = (k) => ({ state: 'var(--s1)', linear: 'var(--s2)', hgb: 'var(--s3)' })[k];
@@ -326,17 +800,29 @@ a{color:inherit;text-underline-offset:.15em}
   const D = {}, KEYED = {};
 
   // Filter state lives in the address, so a refresh or a shared link shows the same view.
-  const VIEWS = ['risk', 'reliability', 'promises'];
+  const VIEWS = ['risk', 'reliability', 'promises', 'math'];
   const DEFAULTS = { version: 'refit', model: 'logistic', month: 'all', share: '10', rel_month: 'all' };
   const ALLOWED = { version: ['refit', 'frozen'], model: ['logistic', 'gbm'] };
   const P = { ...DEFAULTS };
   for (const [k, v] of new URLSearchParams(location.search)) if (k in P && (!ALLOWED[k] || ALLOWED[k].includes(v))) P[k] = v;
-  let current = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'risk';
+  // A link to a heading inside a view (#m2) opens that view.
+  const viewOf = (h) => (VIEWS.includes(h) ? h : (h && document.getElementById(h)?.closest('.od-view')?.id) || null);
+  const startAt = location.hash.slice(1);
+  let current = viewOf(startAt) || 'risk';
+  // The address keeps a link to a step (#m3) until another view is chosen, so it can be reloaded and shared.
+  let anchor = viewOf(startAt) && !VIEWS.includes(startAt) ? startAt : null;
   function setParams(change) {
     Object.assign(P, change);
     const q = new URLSearchParams(Object.entries(P).filter(([k, v]) => v !== DEFAULTS[k])).toString();
-    history.replaceState(null, '', (q ? '?' + q : location.pathname) + (current === 'risk' ? '' : '#' + current));
+    const hash = anchor || (current === 'risk' ? '' : current);
+    history.replaceState(null, '', (q ? '?' + q : location.pathname) + (hash ? '#' + hash : ''));
     draw();
+  }
+  // Scrolls to a view or to a step inside one, opening the fold it sits in.
+  function goTo(id) {
+    const el = document.getElementById(id), fold = el.closest('details');
+    if (fold) fold.open = true;
+    el.scrollIntoView({ block: 'start' });
   }
 
   function fillMarks() {
@@ -367,14 +853,20 @@ a{color:inherit;text-underline-offset:.15em}
     return month;
   }
 
-  function show(id) {
+  function show(id, at = null) {
+    // A view eases in when switched to; the first view is drawn at rest.
+    if (id !== current) $('#' + id).classList.add('od-enter');
     current = id;
+    anchor = at;
     for (const v of VIEWS) {
       $('#' + v).hidden = v !== id;
       const t = $('#tab-' + v);
       t.setAttribute('aria-selected', String(v === id));
       t.tabIndex = v === id ? 0 : -1;
     }
+    // On a narrow screen the switcher scrolls sideways; keep the chosen view's tab in sight.
+    const bar = $('.od-tabs'), sel = $('#tab-' + id);
+    bar.scrollLeft = sel.offsetLeft - (bar.clientWidth - sel.offsetWidth) / 2;
     setParams({});
   }
   VIEWS.forEach((v, i) => {
@@ -387,8 +879,10 @@ a{color:inherit;text-underline-offset:.15em}
     });
   });
   addEventListener('hashchange', () => {
-    const h = location.hash.slice(1);
-    if (VIEWS.includes(h) && h !== current) show(h);
+    const h = location.hash.slice(1), view = viewOf(h), at = VIEWS.includes(h) ? null : h;
+    if (!view) return;
+    if (view !== current) show(view, at); else anchor = at;
+    goTo(h);
   });
 
   function textWidth(svg, strings, cls) {
@@ -660,8 +1154,218 @@ a{color:inherit;text-underline-offset:.15em}
     ]);
   }
 
+  // 04 The mathematics: demonstrations on small illustrative numbers, not Olist orders.
+  // Draws are seeded, so a visit always shows the same simulation until "Draw new calibration sets" is pressed.
+  const MX = { ratio: 9, u10: 100, y: 10, runSeed: 1, shiftSeed: 1, run: null, shift: null };
+  function rand(seed) {                              // mulberry32
+    let a = seed >>> 0;
+    return () => {
+      a = (a + 0x6D2B79F5) >>> 0;
+      let t = Math.imul(a ^ (a >>> 15), a | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const gauss = (u) => () => Math.sqrt(-2 * Math.log(1 - u())) * Math.cos(2 * Math.PI * u());
+  function frame(box, H, label, m) {
+    const W = Math.max(260, box.clientWidth);
+    box.replaceChildren();
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', label);
+    return { svg, W, H, m, tip: tooltip(box, W) };
+  }
+  const hline = (svg, x1, x2, y, dash) => svg.append('line').attr('x1', x1).attr('x2', x2).attr('y1', y).attr('y2', y)
+    .attr('stroke', 'var(--ref)').attr('stroke-width', 1.5).attr('stroke-dasharray', dash);
+
+  // Fig. 5: the expected loss of each whole-day promise, and F(d) against q
+  const LOSS_Y = [2, 3, 3, 4, 5, 5, 6, 8, 12, 20];
+  function drawLoss() {
+    const N = MX.ratio, n = LOSS_Y.length, q = N / (N + 1);
+    const rows = d3.range(1, 23).map((d) => {
+      const c = LOSS_Y.filter((y) => y <= d).length;
+      return { d, c, F: c / n, R: d3.sum(LOSS_Y, (y) => N * Math.max(y - d, 0) + Math.max(d - y, 0)) / n };
+    });
+    const best = d3.min(rows, (r) => r.R);
+    const opt = rows.filter((r) => Math.abs(r.R - best) < 1e-9).map((r) => r.d);
+    const star = rows.find((r) => r.c * (N + 1) >= N * n).d;           // F(d) >= q, compared in whole numbers
+    $('#mx-ratio-out').textContent = `${N} spare day${N > 1 ? 's' : ''} (q = ${f2(q)})`;
+
+    const { svg, W, H, m, tip } = frame($('#mx-loss'), 330, 'Average loss of each promise, and the share delivered within d days', { t: 18, r: 14, b: 38, l: 40 });
+    const gap = 34, h1 = (H - m.t - m.b - gap) * 0.6, top2 = m.t + h1 + gap;
+    const x = d3.scaleLinear([1, 22], [m.l, W - m.r]);
+    const yR = d3.scaleLinear([0, d3.max(rows, (r) => r.R)], [m.t + h1, m.t]).nice();
+    const yF = d3.scaleLinear([0, 1], [H - m.b, top2]);
+    svg.append('rect').attr('x', x(opt[0] - 0.5)).attr('width', x(opt[opt.length - 1] + 0.5) - x(opt[0] - 0.5))
+      .attr('y', m.t - 6).attr('height', H - m.b - m.t + 6).attr('fill', 'var(--s1)').attr('opacity', 0.1);
+    svg.append('g').attr('class', 'od-grid-l').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(yR).ticks(3).tickSize(-(W - m.l - m.r)).tickFormat(''));
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(yR).ticks(3).tickSize(0).tickPadding(6)).call(styleAxis).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(yF).tickValues([0, 0.5, 1]).tickFormat(d3.format('.1f')).tickSize(0).tickPadding(6)).call(styleAxis).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.min(11, Math.floor((W - m.l - m.r) / 36))).tickFormat(d3.format('d'))).call(styleAxis);
+    svg.append('text').attr('class', 'od-axlbl').attr('x', (m.l + W - m.r) / 2).attr('y', H - 4).attr('text-anchor', 'middle').text('Promised days d');
+    svg.append('text').attr('class', 'od-axlbl').attr('x', m.l).attr('y', m.t - 6).text('Average loss');
+    svg.append('text').attr('class', 'od-axlbl').attr('x', m.l).attr('y', top2 - 8).text('F(d)');
+    svg.append('path').attr('d', d3.line().x((r) => x(r.d)).y((r) => yR(r.R))(rows)).attr('fill', 'none').attr('stroke', 'var(--muted)').attr('stroke-width', 1.5);
+    svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(r.d)).attr('cy', (r) => yR(r.R))
+      .attr('r', (r) => (opt.includes(r.d) ? 4.5 : 3.5)).attr('fill', (r) => (opt.includes(r.d) ? 'var(--s1)' : 'var(--bg)'))
+      .attr('stroke', (r) => (opt.includes(r.d) ? 'var(--s1)' : 'var(--muted)')).attr('stroke-width', 1.5);
+    hline(svg, m.l, W - m.r, yF(q), '4 3');
+    svg.append('text').attr('class', 'od-dl').attr('x', W - m.r).attr('y', yF(q) + 15).attr('text-anchor', 'end').text(`q = ${f2(q)}`);
+    svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((r) => x(r.d)).y((r) => yF(r.F))(rows))
+      .attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2);
+    svg.append('circle').attr('cx', x(star)).attr('cy', yF(rows[star - 1].F)).attr('r', 4.5).attr('fill', 'var(--s1)');
+    hoverable(svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent'), (ev) => {
+      const [px] = d3.pointer(ev), r = rows[Math.max(0, Math.min(rows.length - 1, Math.round(x.invert(px)) - 1))];
+      tip.show([{ text: `Promise ${r.d} day${r.d > 1 ? 's' : ''}` }, { text: `Average loss ${f1(r.R)}` }, { text: `F(${r.d}) = ${f1(r.F)}` }], x(r.d), yR(r.R));
+    }, tip);
+
+    const prev = star > 1 ? rows[star - 2].F : 0, mean = d3.mean(LOSS_Y), meanDays = Math.ceil(mean);
+    $('#mx-loss-read').textContent = `With q = ${f2(q)}: F(${star - 1}) = ${f1(prev)} < q ≤ F(${star}) = ${f1(rows[star - 1].F)}, so d* = ${star} days. `
+      + (opt.length > 1
+        ? `Every promise from ${opt[0]} to ${opt[opt.length - 1]} days has the same average loss, ${f1(best)}, because F(d) equals q exactly from ${opt[0]} to ${opt[opt.length - 1] - 1} days. `
+        : `It is the only optimum, with average loss ${f1(best)}. `)
+      + `Promising the mean, ${f1(mean)} days, rounded up to ${meanDays}, costs ${f1(rows[meanDays - 1].R)}.`;
+  }
+
+  // Fig. 6, top: nine calibration residuals and the k-th one
+  const RANK_Y = [7, 9, 6, 12, 8, 10, 15, 7, 11], RANK_F = [8.0, 8.5, 6.2, 9.0, 8.1, 9.4, 10.0, 7.5, 9.9];
+  function drawRank() {
+    const r = RANK_Y.map((y, i) => Math.round((y - RANK_F[i]) * 100) / 100).sort((a, b) => a - b);
+    const n = r.length, k = Math.ceil((n + 1) * 0.8), s = r[k - 1], covered = r.filter((v) => v <= s).length;
+    const { svg, W, H, m } = frame($('#mx-rank'), 92, 'Nine sorted calibration residuals and the shift s', { t: 26, r: 16, b: 30, l: 16 });
+    const x = d3.scaleLinear([-1.5, 5.5], [m.l, W - m.r]), y = m.t + 14;
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(7)).call(styleAxis);
+    svg.append('line').attr('x1', x(s)).attr('x2', x(s)).attr('y1', m.t - 8).attr('y2', H - m.b).attr('stroke', 'var(--s1)').attr('stroke-width', 2);
+    svg.append('text').attr('class', 'od-dl').attr('x', x(s) - 6).attr('y', m.t - 12).attr('text-anchor', 'end').text(`s = R(${k}) = ${f1(s)}`);
+    svg.append('g').selectAll('circle').data(r).join('circle').attr('cx', (v) => x(v)).attr('cy', (v, i) => y - (i > 0 && r[i] - r[i - 1] < 0.25 ? 9 : 0))
+      .attr('r', 4.5).attr('fill', (v) => (v <= s ? 'var(--fg)' : 'var(--bg)')).attr('stroke', 'var(--fg)').attr('stroke-width', 1.5);
+    $('#mx-rank-read').textContent = `k = ⌈(9 + 1) × 0.8⌉ = ${k}, so s = R(${k}) = ${f1(s)}. ${covered} of the 9 calibration residuals are at most s: `
+      + `coverage ${f3(covered / n)} = k/n. For a new order the guarantee is k/(n + 1) = ${f3(k / (n + 1))}.`;
+  }
+
+  // Fig. 6, bottom: the running share of new residuals covered, over fresh exchangeable calibration sets
+  function simulateRun(seed) {
+    const g = gauss(rand(1000 + seed)), n = 9, k = 8, T = 4000, pts = [];
+    let hit = 0, minCal = 1;
+    for (let t = 1; t <= T; t++) {
+      const c = Array.from({ length: n }, () => g()).sort((a, b) => a - b), s = c[k - 1];
+      minCal = Math.min(minCal, c.filter((v) => v <= s).length / n);
+      hit += g() <= s;
+      if (t >= 10 && (t <= 100 || t % 10 === 0)) pts.push([t, hit / t]);
+    }
+    return { pts, share: hit / T, minCal, T, n, k };
+  }
+  function drawRun() {
+    if (!MX.run || MX.run.seed !== MX.runSeed) MX.run = { seed: MX.runSeed, ...simulateRun(MX.runSeed) };
+    const { pts, share, minCal, T, n, k } = MX.run;
+    const { svg, W, H, m } = frame($('#mx-run'), 210, 'Running share of new residuals covered', { t: 12, r: 16, b: 38, l: 40 });
+    const x = d3.scaleLog([10, T], [m.l, W - m.r]), y = d3.scaleLinear([0.6, 1], [H - m.b, m.t]);
+    svg.append('g').attr('class', 'od-grid-l').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.l - m.r)).tickFormat(''));
+    svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(d3.format('.1f')).tickSize(0).tickPadding(6)).call(styleAxis).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues([10, 100, 1000, T]).tickFormat(d3.format(','))).call(styleAxis);
+    svg.append('text').attr('class', 'od-axlbl').attr('x', (m.l + W - m.r) / 2).attr('y', H - 4).attr('text-anchor', 'middle').text('Calibration sets drawn (log scale)');
+    hline(svg, m.l, W - m.r, y(k / n), '1 3');
+    hline(svg, m.l, W - m.r, y(k / (n + 1)), '4 3');
+    svg.append('text').attr('class', 'od-dl').attr('x', W - m.r).attr('y', y(k / n) - 6).attr('text-anchor', 'end').text(`k/n = ${f3(k / n)}`);
+    svg.append('text').attr('class', 'od-dl').attr('x', W - m.r).attr('y', y(k / (n + 1)) + 16).attr('text-anchor', 'end').text(`k/(n + 1) = ${f3(k / (n + 1))}`);
+    svg.append('path').attr('d', d3.line().x((p) => x(p[0])).y((p) => y(Math.max(0.6, Math.min(1, p[1]))))(pts)).attr('fill', 'none').attr('stroke', 'var(--s1)').attr('stroke-width', 2);
+    $('#mx-run-read').textContent = `After ${int(T)} calibration sets, ${f3(share)} of the new residuals were covered, close to k/(n + 1) = ${f3(k / (n + 1))}. `
+      + `Every calibration set covered at least ${f3(minCal)} of its own nine orders, the k/n of the rule.`;
+  }
+
+  // Fig. 7: four ways to turn a real-valued bound into a whole-day date
+  function drawRound() {
+    const u10 = MX.u10, Y = MX.y, U = u10 / 10, lo = Math.floor(u10 / 10), hi = Math.ceil(u10 / 10), whole = u10 % 10 === 0;
+    $('#mx-u-out').textContent = f1(U);
+    const rules = [
+      ['Real-valued bound U', f1(U), 10 * Y <= u10],
+      ['Round down, ⌊U⌋', String(lo), Y <= lo],
+      ['Round up, ⌈U⌉', String(hi), Y <= hi],
+      ['Round up, minus a day, ⌈U⌉ − 1', String(hi - 1), Y <= hi - 1],
+    ];
+    fillRows('#tb-round', rules, (r) => [r[0], r[1], r[2] ? 'Yes' : 'No']);
+    const { svg, W, H, m } = frame($('#mx-round'), 86, `Bound U = ${f1(U)} and delivery time Y = ${Y} on a day scale`, { t: 22, r: 16, b: 30, l: 16 });
+    const x = d3.scaleLinear([7.5, 11.5], [m.l, W - m.r]), y0 = H - m.b;
+    svg.append('rect').attr('x', m.l).attr('width', Math.max(0, x(U) - m.l)).attr('y', m.t).attr('height', y0 - m.t).attr('fill', 'var(--s1)').attr('opacity', 0.12);
+    svg.append('g').attr('transform', `translate(0,${y0})`).call(d3.axisBottom(x).tickValues([8, 9, 10, 11]).tickFormat(d3.format('d'))).call(styleAxis);
+    svg.append('line').attr('x1', x(U)).attr('x2', x(U)).attr('y1', m.t - 4).attr('y2', y0).attr('stroke', 'var(--s1)').attr('stroke-width', 2);
+    svg.append('text').attr('class', 'od-dl').attr('x', x(U)).attr('y', m.t - 8).attr('text-anchor', 'middle').text(`U = ${f1(U)}`);
+    svg.append('circle').attr('cx', x(Y)).attr('cy', (m.t + y0) / 2 + 4).attr('r', 5).attr('fill', 'var(--fg)');
+    svg.append('text').attr('class', 'od-dl').attr('x', x(Y) + 9).attr('y', (m.t + y0) / 2 + 8).text(`Y = ${Y}`);
+    $('#mx-round-read').textContent = whole
+      ? `U is a whole number, so ⌈U⌉ − 1 = ${hi - 1} is a day shorter than ⌊U⌋ = ${lo}.`
+        + (Y === lo ? ` That day is this order's: U and rounding down cover Y = ${Y}, subtracting a day does not.` : '')
+      : `U is not a whole number, so ⌊U⌋ = ⌈U⌉ − 1 = ${lo}: rounding down and subtracting a day agree.`
+        + (Y === hi ? ` Rounding up to ${hi} covers Y = ${Y}, which U itself does not: the extra coverage of rounding up.` : '');
+  }
+
+  // Fig. 8: standard and likelihood-ratio-weighted calibration in a toy model with a known ratio
+  function simulateShift(seed) {
+    const g = gauss(rand(5000 + seed)), n = 200, q = 0.9, k = Math.ceil((n + 1) * q), reps = 600, m = 20;
+    const cases = [
+      { name: 'No change', mu: 0, scale: 1 },
+      { name: 'Order mix shifts (X)', mu: -1, scale: 1 },
+      { name: 'Delivery times shift (Y | X)', mu: 0, scale: 0.6 },
+    ];
+    for (const c of cases) {
+      const w = (x) => Math.exp(c.mu * x - c.mu * c.mu / 2);         // dN(mu,1)/dN(0,1): the ratio is known in this toy model
+      let std = 0, wtd = 0;
+      for (let rep = 0; rep < reps; rep++) {
+        const cal = Array.from({ length: n }, () => { const x = g(); return { r: Math.exp(x / 2) * g(), w: w(x) }; }).sort((a, b) => a.r - b.r);
+        const s = cal[k - 1].r, cum = [];
+        let S = 0;
+        for (const p of cal) cum.push(S += p.w);
+        for (let j = 0; j < m; j++) {
+          const x = c.mu + g(), r = c.scale * Math.exp(x / 2) * g(), wx = w(x);
+          std += r <= s;
+          const i = d3.bisectLeft(cum, q * (S + wx) - 1e-12);         // first residual whose weight, with w(x) on +infinity, reaches q
+          wtd += i >= n || r <= cal[i].r;
+        }
+      }
+      c.std = std / (reps * m); c.wtd = wtd / (reps * m);
+    }
+    return cases;
+  }
+  function drawShift() {
+    if (!MX.shift || MX.shift.seed !== MX.shiftSeed) MX.shift = { seed: MX.shiftSeed, cases: simulateShift(MX.shiftSeed) };
+    const cases = MX.shift.cases, row = 62;
+    legend($('#leg-shift'), [{ text: 'Standard (equal weights)', color: 'var(--s1)', kind: 'ink' }, { text: 'Weighted by the likelihood ratio of X', color: 'var(--s2)' }]);
+    const { svg, W, H, m } = frame($('#mx-shift'), 34 + row * cases.length, 'Coverage of standard and weighted calibration in three cases', { t: 8, r: 18, b: 30, l: 16 });
+    const x = d3.scaleLinear([0.8, 1], [m.l, W - m.r]);
+    svg.append('g').attr('class', 'od-grid-l').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(4).tickSize(-(H - m.t - m.b)).tickFormat(''));
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(4).tickFormat(d3.format('.0%'))).call(styleAxis);
+    svg.append('line').attr('x1', x(0.9)).attr('x2', x(0.9)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--ref)').attr('stroke-width', 1.5).attr('stroke-dasharray', '4 3');
+    cases.forEach((c, i) => {
+      const y = m.t + i * row;
+      svg.append('text').attr('class', 'od-axlbl').attr('x', m.l).attr('y', y + 12).text(c.name);
+      for (const [v, yy, color, shape] of [[c.std, y + 26, 'var(--s1)', 'circle'], [c.wtd, y + 44, 'var(--s2)', 'square']]) {
+        const cx = x(Math.max(0.8, Math.min(1, v)));
+        if (shape === 'circle') svg.append('circle').attr('cx', cx).attr('cy', yy).attr('r', 5).attr('fill', color);
+        else svg.append('rect').attr('x', cx - 5).attr('y', yy - 5).attr('width', 10).attr('height', 10).attr('fill', color);
+        svg.append('text').attr('class', 'od-dl').attr('x', cx + (cx > W - 70 ? -10 : 10)).attr('y', yy + 4).attr('text-anchor', cx > W - 70 ? 'end' : 'start').text(pct1(v));
+      }
+    });
+    const [a, b, c] = cases;
+    $('#mx-shift-read').textContent = `With standard calibration, coverage is ${pct1(a.std)} with no change, ${pct1(b.std)} when the order mix shifts and `
+      + `${pct1(c.std)} when delivery times shift. Weighting by the likelihood ratio brings the order-mix case to ${pct1(b.wtd)}. `
+      + `When delivery times shift the ratio is 1, so weighting changes nothing (${pct1(c.wtd)}).`
+      + (Math.abs(b.std - c.std) < 0.02 ? ' The two shifts give almost the same coverage, so coverage alone cannot tell them apart.' : '');
+  }
+
+  // Fig. 8 sits in the "Going further" fold: it is simulated and drawn only while the fold is open.
+  function drawMath(vis) {
+    if (!vis) return;
+    drawLoss(); drawRank(); drawRun(); drawRound();
+    if ($('#further').open) drawShift();
+  }
+  $('#mx-ratio').addEventListener('input', (e) => { MX.ratio = +e.target.value; drawLoss(); });
+  $('#mx-u').addEventListener('input', (e) => { MX.u10 = +e.target.value; drawRound(); });
+  $('#mx-y').addEventListener('change', (e) => { MX.y = +e.target.value; drawRound(); });
+  $('#mx-run-again').addEventListener('click', () => { MX.runSeed += 1; drawRun(); });
+  $('#mx-shift-again').addEventListener('click', () => { MX.shiftSeed += 1; drawShift(); });
+  $('#further').addEventListener('toggle', (e) => { if (e.target.open) drawShift(); });
+
   function draw() {
     syncSegs();
+    drawMath(current === 'math');
     if (!D.risk_budget) return;
     drawRisk(current === 'risk');
     drawReliability(current === 'reliability');
@@ -674,7 +1378,16 @@ a{color:inherit;text-underline-offset:.15em}
     if (w !== lastWidth) { lastWidth = w; draw(); }
   }).observe($('.od'));
 
-  show(current);
+  show(current, anchor);
+  if (anchor) {
+    // Fonts and formulas can still move the step after the first frame: scroll again once they are in, unless the reader has scrolled.
+    let moved = false;
+    for (const e of ['wheel', 'touchmove', 'keydown', 'mousedown']) addEventListener(e, () => { moved = true; }, { once: true, passive: true });
+    const settle = () => { if (!moved) goTo(anchor); };
+    requestAnimationFrame(settle);
+    document.fonts?.ready.then(settle);
+    addEventListener('load', settle, { once: true });
+  }
   message('Loading data…');
   Promise.all(FILES.map((f) => fetch(`data/${f}.json`).then((r) => { if (!r.ok) throw new Error(f); return r.json(); })))
     .then((all) => {

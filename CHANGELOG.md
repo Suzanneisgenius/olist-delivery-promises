@@ -2,6 +2,45 @@
 
 Versions before 0.6.0 are described in `docs/manager_handoff.md`, the stage handoffs and `docs/REPRODUCIBILITY.md`.
 
+## Dashboard publication copy — 2026-10-28
+- Lead the dashboard, mathematical explanation and repository introduction with the research decisions and findings.
+- Consolidate repeated disclaimers while retaining cohort definitions, exploratory status, post-hoc labels and theorem assumptions.
+- Correct the table 4 equality condition: distinct residuals ensure equality; ties can make coverage conservative.
+- Populate the dashboard contribution panel from the author-confirmed statement and streamline that statement's revision history.
+- Preserve all saved data, model code, sealed documents and E1 results.
+
+## Diagnostics page: review corrections and notebook styling — 2026-10-28 (no result changed)
+- Table 4 now labels its first two rows as bounds for the real-valued bound (at least k/n on the calibration set; at
+  least k/(n+1) for a new order, with equality for almost surely distinct residuals) and its observed rows as the registered rounded-up
+  promise.
+- The weighted-calibration passage states the covariate-shift assumptions and no longer reads as an impossibility
+  result: if P(Y|X) changes, the guarantee does not apply and weighting by X is not guaranteed to restore coverage. It
+  notes that classifier odds estimate the likelihood ratio up to a constant that the weights' normalisation cancels.
+  This passage and the coverage bounds without exchangeability move into a fold, "Going further", with Fig. 8.
+- Links to a step (#m1 to #m4) keep their address after the page opens, on reload and when shared.
+- The footer and page README say that views 01 to 03 use saved outputs and view 04 adds illustrative calculations and
+  seeded simulations. Step 1 states that the costs are positive and that Y is a nonnegative integer.
+- Notebook styling: a hand-written face (Kalam) and a violet pen with a highlighter for view numbers, margin labels,
+  one boxed key result per step and short suggestions beside the demonstrations; demonstrations on dotted paper; a
+  short fade between views, off under reduced motion. Chart colours are unchanged.
+
+## Diagnostics page: view 04, the mathematics — 2026-10-27 (no result changed)
+- New view 04 sets out the argument behind the promised-dates comparison in four steps (quantile, calibration, whole
+  days, why calibrating well is not future reliability), each with a small demonstration on illustrative numbers.
+- Step 4 applies coverage bounds without exchangeability (Barber et al., 2023, Theorems 2a and 3) and weighted
+  calibration under covariate shift (Tibshirani et al., 2019, Corollary 1), with a toy simulation; the Beta
+  distribution of calibration-conditional coverage is a collapsed supplement. No new analysis of E1.
+- The view switcher is numbered 01 to 04 and the opening lists the new view; the promised-dates view points to it in
+  place of its short mathematics band. Formulas use KaTeX 0.16.11 from jsDelivr.
+
+## Diagnostics page: layout, mathematics, contribution panel — 2026-10-27 (no result changed)
+- New layout: one typeface (Atkinson Hyperlegible Next), ink on paper with colour kept for the data. The opening lists
+  the three findings, each opening its view; the view switcher stays at the top. Every number, label and sentence of
+  the previous page is kept: the opening's three sentences become the three findings.
+- The promised-dates view ends with the three results it rests on, linked to the mathematical note and the notebook.
+- An empty "My contribution" panel, hidden until the author writes it.
+- The data files, `aggregate.py` and the Pages workflow are unchanged.
+
 ## Diagnostics page and wording, after the v5 review — 2026-10-27 (no result changed)
 - Table 3 shows the coverage each policy actually reached beside its mean days and is labelled as days at the first
   shift reaching each coverage level; whole-day steps make policies overshoot (state rule 90.75% at the 90% level).

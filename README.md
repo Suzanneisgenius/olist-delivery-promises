@@ -4,12 +4,14 @@ A pre-registered study on public Olist e-commerce orders (Brazil, 2017–2018). 
 linear quantile regression and a shallow gradient-boosted model (HGB) as ways to set a whole-day promised delivery date
 with 90% target coverage.
 
-> Public-data portfolio project. Not affiliated with Olist. The evaluation orders had been examined earlier in the
-> project, so this is pre-registered exploratory work, not a blind test.
+I trace how prediction, calibration and rounding combine to set a delivery promise, and test whether added model
+complexity earns its place. E1 is pre-registered exploratory research: its evaluation period had already been examined
+in an earlier project stage.
 
 **Interactive page: [suzanneisgenius.github.io/olist-delivery-promises](https://suzanneisgenius.github.io/olist-delivery-promises/)**.
-Which orders a late-delivery risk score would put first, whether its probabilities can be taken at face value, and the
-promised-date comparison below, all from saved outputs ([source and checks](docs/diagnostics_page/)).
+Explore risk prioritisation, probability calibration and promised-date comparisons, then work through the mathematics
+with interactive examples ([source and checks](docs/diagnostics_page/)). Views 01–03 use saved project outputs;
+view 04 connects them to illustrative calculations and seeded simulations.
 
 ![Frozen policies and diagnostic curves on the evaluation period](documents/current/fig_days_vs_coverage_E.png)
 
@@ -37,9 +39,9 @@ See [AUTHORSHIP.md](AUTHORSHIP.md) for details.
 | What did the comparison show? | Matching the comparison reversed the regression-versus-rule result (+2.57 → −1.54 days). Also, HGB had lower loss, yet its frozen policy promised 1.22 more days: it reached 97.1% coverage against 96.2%, so the two points were not at the same reliability. |
 | What remains unresolved? | Why every calibrated policy over-covers the evaluation period (96–97% for a 90% target): changing delivery times, the cohort filter on Olist's estimated date, or order mix. Whether rounding down or recalibration would hold up in a new period, and whether the results extend beyond single-seller delivered orders, remain untested. |
 
-**Wording corrections (2026-10-27).** The sealed reports are unchanged. How some of their conclusions should be read,
-for example that H3 ("HGB did not clear the 1-day bar") holds under the registered round-up rule, and audit findings
-they do not cover are in [`docs/E1_WORDING_CORRECTIONS_2026-10-27.md`](docs/E1_WORDING_CORRECTIONS_2026-10-27.md).
+**Result interpretation.** H3's one-day threshold result applies to the registered round-up rule.
+[`docs/E1_WORDING_CORRECTIONS_2026-10-27.md`](docs/E1_WORDING_CORRECTIONS_2026-10-27.md) records this distinction and
+subsequent audit findings alongside the unchanged sealed reports.
 
 ## Start here
 
@@ -67,7 +69,7 @@ end-to-end rerun (`docs/REPRODUCE_E1.md`, `outputs/e1/recipeB_acceptance/`).
 
 ## Process and integrity
 
-These records show how the work was checked. They are not research results.
+The research results are backed by the following reproducibility records.
 
 - **Registered state.** Config v3 SHA-256 `ae6a4a46…20152`; freeze record `outputs/e1/freeze/FREEZE.json`, SHA-256
   `3b62af1a…328dd`, unchanged since it was written; scoring-time code in `snapshots/src_at_e1_scoring/`.
@@ -78,8 +80,9 @@ These records show how the work was checked. They are not research results.
 - **Records.** Plan changes: `docs/E1_DECISIONS.md`. Post-hoc analyses: `docs/E1_POSTHOC_METHODS_REVIEW.md`. Final
   fixes: `docs/E1_FINAL_FIXES_2026-10-21.md`. Wording corrections after sealing:
   `docs/E1_WORDING_CORRECTIONS_2026-10-27.md`. Earlier review rounds: `AGENT_REVIEW/PRIOR_REVIEWS.md`.
-- **Not done.** A second evaluation period. A cohort that does not depend on Olist's estimated date. The E2a methods
-  study (`docs/E2A_PROTOCOL_DRAFT.md`) and the E2b feature study (`docs/E2B_PROTOCOL_DRAFT.md`) are drafted, not
-  registered and not run.
+- **Next research questions.** Test a new evaluation period and a cohort selected independently of Olist's estimated
+  date. E2a (`docs/E2A_PROTOCOL_DRAFT.md`) and E2b (`docs/E2B_PROTOCOL_DRAFT.md`) remain unregistered, unrun drafts.
 - **Archive.** Earlier report versions: `documents/archive/`. The pipeline README for stages 1–7 (v0.6.3,
   byte-identical to the copy listed in `release/MANIFEST.sha256`): `docs/archive/README_pipeline_v0.6.3.md`.
+
+Independent public-data portfolio project, unaffiliated with Olist.

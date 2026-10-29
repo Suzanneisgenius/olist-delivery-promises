@@ -10,12 +10,8 @@ diagnostic page, and release preparation. The E2b protocol remains a draft for f
 
 Claude assisted with selected code refinements and initial drafts of supporting documentation.
 
-## Scope of this statement
+## Contribution record
 
-This is the author's confirmed description of the project-level division of work. It is not a claim that every line
-of code or every written explanation was produced without assistance. The repository also preserves AI-assisted
-review records; those checks are not formal peer review.
-
-Earlier contribution tables were drafts with unconfirmed, overly broad allocations of work. This statement supersedes
-those descriptions. Historical review copies remain unchanged so the revision record can still be inspected.
-Research results, the frozen models, and the recorded evaluation are unchanged.
+This author-confirmed statement supersedes earlier draft contribution tables. The archive retains those drafts and
+AI-assisted review records as a revision history. The reviews document technical checks rather than formal peer review.
+Research results, frozen models and the recorded evaluation remain unchanged.

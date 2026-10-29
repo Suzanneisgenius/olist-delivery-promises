@@ -1,13 +1,15 @@
 # Diagnostics page (reading aid)
 
-A three-view web page built only from saved outputs. It fits no model, adds no prediction and changes no registered
-result. It is not part of E1's registered analysis: E1 numbers are copied from `outputs/e1/`, not recomputed.
+A four-view web page. Views 01 to 03 are built only from saved outputs; view 04 adds illustrative calculations and
+seeded simulations, and its one table of project numbers is copied from saved results. This presentation layer uses
+E1 numbers from `outputs/e1/` and preserves the registered analysis, fitted models and predictions.
 
 | View | Question | Built from |
 |---|---|---|
 | Risk prioritization | With limited staff, which orders should be checked first? | `outputs/stage3/test_predictions.csv`, `outputs/stage5/fold_predictions.csv` |
 | Probability reliability | When a score says 10% risk, is the late rate really near 10%? | the same two files |
 | Delivery promises | Is a more complex model worth switching to for promised dates? | `outputs/e1/score/policy_table.csv`, `outputs/e1/posthoc_m4/` |
+| The mathematics | Why is a promise a quantile, and where does its guarantee stop? | no data file: illustrative numbers, a toy simulation, and one table copied from the mathematical note, the notebook and `e1_policies.json` |
 
 Two versions of the risk scores are shown. "Frozen" is the stage-3 model scored once on E1's evaluation orders
 (April to July 2018; the script checks that the order sets are equal). "Refit" is the stage-5 monthly refit, each
@@ -70,7 +72,26 @@ It ends with `BUDGET CHECK OK` (exit 0).
 ## The page
 
 `index.html` is a standalone page: it reads the seven files from `data/` and draws the charts with d3 (loaded from
-jsDelivr). The filters are kept in the address, so a refresh or a shared link shows the same view. Browsers do not
+jsDelivr); its typefaces come from Google Fonts: Atkinson Hyperlegible Next for the text and Kalam for hand-written
+notes. The filters are kept in the address, so a refresh or a shared link shows the same view.
+
+The page is styled as a study notebook. Colour in the charts is kept for data; the author's own marks (view numbers,
+margin labels, a boxed key result in each step of view 04 and short suggestions beside its demonstrations) are in a
+violet pen with a highlighter. Motion is limited to a short fade when the reader switches views and one highlighter
+stroke on the opening's two headline numbers, and is switched off when the reader's system asks for reduced motion.
+
+View 04, the mathematics, sets out the argument behind the promised-dates comparison in four steps: why a promise is a
+quantile, why a predicted quantile still needs calibrating, how whole days change the result, and why calibrating well
+relates to future coverage. Each step has a small demonstration on illustrative numbers. Step 4 separates the bounds for a
+real-valued bound from the observed coverage of the rounded-up promises, and a fold, "Going further", applies two
+published results: coverage bounds without exchangeability (Barber, Candès, Ramdas and Tibshirani, 2023) and weighted
+calibration under covariate shift (Tibshirani, Barber, Candès and Ramdas, 2019), with a toy simulation whose likelihood
+ratio is known. The view adds no analysis of E1. Its formulas are typeset with KaTeX, loaded from jsDelivr; without it
+the TeX source stays readable. A link to a step (`#m1` to `#m4`) opens the view at that step and stays in the address
+until another view is chosen, so it can be reloaded and shared; a link to anything inside a fold opens the fold.
+
+A "My contribution" panel before the footer summarises the author's confirmed roles from `AUTHORSHIP.md` and links to
+that statement. The panel and its top link are hidden automatically if its body is emptied. Browsers do not
 let a page opened from disk read its data files, so view it over HTTP:
 
     python3 -m http.server 8000 --directory docs/diagnostics_page      # then open http://localhost:8000

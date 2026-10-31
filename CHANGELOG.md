@@ -2,35 +2,12 @@
 
 Versions before 0.6.0 are described in `docs/manager_handoff.md`, the stage handoffs and `docs/REPRODUCIBILITY.md`.
 
-## Diagnostics page: mathematical exposition in view 04 — 2026-10-31 (no result changed)
-- Step 4 asks how the evaluation period differed from the calibration period, not which part of the procedure
-  produced the extra coverage. It writes the observed over-coverage exactly as three terms (the calibration rule with
-  ties, the difference between the two sets' residual distributions at the shift, and rounding), drops the claim that
-  the over-coverage was used to investigate its explanations, and restores the warning against reading it as evidence
-  that the models worked. A paragraph quotes the three terms for C*, D* and B1c, post hoc, from the saved rounding
-  comparison (`outputs/e1/posthoc_m4/rounding_rules.csv`).
-- Table 4 says that equality with k/(n+1) needs no tie at the k-th position among the n+1 residuals and that ties can
-  only raise coverage, and notes from the same file that on the calibration set exactly k residuals of each
-  regression policy are at most the shift.
-- Step 2 no longer says the assumptions were assessed on future data. It defines the calibration-set coverage, says
-  why k uses n+1, states that an order is covered exactly when its residual is at most the shift, proves the case
-  with ties by breaking them at random, gives q one meaning (the target level, equal to step 1's cost ratio when read
-  as a decision), indexes the new order n+1 throughout, cites the lower bound precisely and notes that the state
-  rule's whole-day residuals tie often.
-- Step 1 names the asymmetric linear (pinball) loss, restores "simplified" and says the optimum is non-unique exactly
-  when F(d) = q for some d. Step 3 writes out the coverage of rounding down and rounding up and names the registered
-  promise max{1, ceil(U)}.
-- "Going further" states the conditions of Barber et al. Theorem 2a, bounds each residual distance by the distance
-  between the data vectors (their Section 5.1) before applying Lemma 1, writes out the inequality behind
-  "over-coverage signals non-exchangeability", says a decreasing conditional variance "can" produce over-coverage,
-  and says Tibshirani et al. prove no guarantee for estimated weights. The Beta supplement states its narrow use
-  (orders from the calibration period), reads "0.230 percentage points" and also cites Vovk (2012), Appendix A of
-  the arXiv version.
-- The introduction contrasts the mean under squared loss with the quantile under asymmetric linear loss and says what
-  the mathematical note proves and what is cited; the step list matches the step headings; the calibration and
-  evaluation sets are written as calligraphic C and E, so they no longer share a letter with the policies C* and D*.
-- No number, data file, model, saved output or sealed document changed, and no new analysis was run: the post-hoc
-  readings in step 4 and Table 4 are differences and shares already in the saved rounding comparison.
+## Diagnostics page and READMEs — 2026-10-31 (no result changed)
+- View 04: step 4 writes the over-coverage exactly as three terms and quotes them post hoc for C*, D* and B1c from the
+  saved rounding comparison; step 2 proves the case with ties; Table 4 states when k/(n+1) is exact; "Going further"
+  bounds residual distances by data distances before Lemma 1; the Beta supplement also cites Vovk (2012).
+- Shorter wording on the page and in both READMEs: restatements and repeated caveats removed; numbers, assumptions,
+  cohort definitions and post-hoc labels kept.
 
 ## Dashboard publication copy — 2026-10-28
 - Lead the dashboard, mathematical explanation and repository introduction with the research decisions and findings.

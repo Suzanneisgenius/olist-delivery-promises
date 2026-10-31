@@ -69,13 +69,10 @@ end-to-end rerun (`docs/REPRODUCE_E1.md`, `outputs/e1/recipeB_acceptance/`).
 
 ## Process and integrity
 
-The research results are backed by the following reproducibility records.
-
 - **Registered state.** Config v3 SHA-256 `ae6a4a46…20152`; freeze record `outputs/e1/freeze/FREEZE.json`, SHA-256
   `3b62af1a…328dd`, unchanged since it was written; scoring-time code in `snapshots/src_at_e1_scoring/`.
 - **Checks.** 362 automated tests pass. The verifier checks 26 numerical claims against saved evidence, recomputing
-  metrics from saved per-order files where available; some checks compare saved aggregates rather than rebuilding them
-  from raw data, and test-count and qualitative provenance statements are handled separately. Reproduction recipes B
+  metrics from saved per-order files where available and otherwise comparing saved aggregates. Reproduction recipes B
   (historical code) and C (current code) were run end to end from raw CSVs and matched the saved results.
 - **Records.** Plan changes: `docs/E1_DECISIONS.md`. Post-hoc analyses: `docs/E1_POSTHOC_METHODS_REVIEW.md`. Final
   fixes: `docs/E1_FINAL_FIXES_2026-10-21.md`. Wording corrections after sealing:

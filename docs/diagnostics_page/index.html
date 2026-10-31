@@ -270,10 +270,9 @@ a:hover{text-decoration-thickness:2px}
     <div class="od-split">
       <figure class="od-fig">
         <h3><span class="od-num">Fig. 1</span>Late orders among the picks as the weekly share grows</h3>
-        <p class="od-note">In every purchase week the orders with the highest risk scores are picked first, by the rule each model was
-          scored with: the frozen model ranks each week of the whole test period (stage 3), the monthly refit ranks each week within
-          its own month (stage 5). For the frozen model a week that spans two months is ranked once, so one month's picks can be
-          slightly above or below the chosen share. The dashed line is a random pick with the same weekly budgets, on average.</p>
+        <p class="od-note">In every purchase week the orders with the highest risk scores are picked first: the frozen model ranks each week
+          of the whole test period, the monthly refit each week within its own month. The dashed line is a random pick with
+          the same weekly budgets, on average.</p>
         <div class="od-legend" id="leg-budget"></div>
         <div class="od-chart" id="ch-budget"></div>
       </figure>
@@ -286,10 +285,7 @@ a:hover{text-decoration-thickness:2px}
           <span class="od-dyn" data-source="risk_budget" data-field="late_in_selected" data-fmt="int">—</span> of them turned out late,
           where a random pick with the same weekly budgets would find about <span class="od-dyn" data-source="risk_budget" data-field="random_expected_late" data-fmt="f1">—</span>:
           <span class="od-dyn od-b" data-source="risk_budget" data-field="lift_vs_random" data-fmt="f1">—</span> times as many.</p>
-        <p class="od-note">The weekly ranking concentrates eventual late orders within a fixed follow-up budget.
-          Measuring prevented delays requires an intervention study. One strictly increasing transformation applied to
-          all scores in a weekly batch preserves the ranking; recalibration that differs by group or month can change it.
-          This evaluation covers eventually delivered orders, excluding canceled and never-delivered orders.</p>
+        <p class="od-note">Measuring prevented delays requires an intervention study.</p>
       </aside>
     </div>
   </section>
@@ -314,13 +310,9 @@ a:hover{text-decoration-thickness:2px}
       <aside class="od-aside od-margin">
         <span class="od-label">Next research question</span>
         <h3>Audit label maturity before recalibrating</h3>
-        <p class="od-note">Labels that arrive early come mostly from on-time orders. A fixed reporting lag, for example waiting 30 days after a
-          month ends, would need an order-level audit of when labels became available: waiting alone does not show that a month's labels are
-          complete or representative. Under such a lag, a model frozen on 1 April 2018 could be checked on June and July 2018 only, with
-          <span data-source="prob_monthly" data-field="late" data-key="frozen|logistic|2018-06" data-fmt="int">—</span>
-          and <span data-source="prob_monthly" data-field="late" data-key="frozen|logistic|2018-07" data-fmt="int">—</span> late orders.
-          Those months are small and have already been inspected, making a follow-up test exploratory. Figure 2 establishes
-          overprediction; evaluating a correction requires a separate recalibration experiment.</p>
+        <p class="od-note">Labels that arrive early come mostly from on-time orders, so a month's labels may be incomplete when first
+          read; an order-level audit of when labels became available should come before any recalibration. Figure 2
+          establishes overprediction; evaluating a correction requires a separate recalibration experiment.</p>
       </aside>
     </div>
     <div class="od-split r57">
@@ -347,8 +339,7 @@ a:hover{text-decoration-thickness:2px}
     <h2 class="od-q">Is a more complex model worth switching to for promised delivery dates?</h2>
     <p class="od-note">From the E1 study: each policy was calibrated on October to December 2017 orders for 90% coverage, frozen, and scored once on
       April to July 2018 (<span data-source="e1_policies" data-field="orders" data-key="D*" data-fmt="int">—</span> orders). That period had been looked at
-      earlier in the project: E1 is pre-registered exploratory work rather than a blind test. The
-      <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/docs/E1_WORDING_CORRECTIONS_2026-10-27.md">report corrections</a> specify the scope of the registered and post-hoc conclusions.</p>
+      earlier in the project: E1 is pre-registered exploratory work rather than a blind test.</p>
     <div class="od-split">
       <figure class="od-fig">
         <h3><span class="od-num">Fig. 4</span>Promised days against coverage on April to July 2018</h3>
@@ -388,11 +379,10 @@ a:hover{text-decoration-thickness:2px}
       </figure>
       <figure class="od-fig">
         <h3><span class="od-num">Table 3</span>Days at the first shift reaching each coverage level (post hoc)</h3>
-        <p class="od-note">For each policy, the shift is set after the fact on the evaluation orders: among the evaluated shifts (every 0.01 day
-          for the two models, every whole day for the state rule) whose coverage reaches the level, the one with the fewest promised days.
-          Each cell gives the mean promised days and, below it, the coverage actually reached. Whole-day steps make a policy overshoot the
-          level, the state rule most of all, so a row does not compare policies at exactly equal coverage. A diagnostic, not a deployable
-          policy.</p>
+        <p class="od-note">For each policy, the shift is set after the fact on the evaluation orders: the one with the fewest promised days
+          whose coverage reaches the level. Each cell gives the mean promised days and, below it, the coverage reached;
+          whole-day promises make every policy overshoot the level, the state rule most, so a row does not compare policies
+          at exactly equal coverage. A diagnostic, not a deployable policy.</p>
         <div class="od-twrap">
           <table class="od-t" id="tb-matched">
             <thead><tr><th>Coverage level</th><th>State rule<span class="od-sub">days, reached</span></th><th>Linear<span class="od-sub">days, reached</span></th><th>HGB<span class="od-sub">days, reached</span></th><th>HGB minus linear<span class="od-sub">days</span></th></tr></thead>
@@ -458,12 +448,8 @@ a:hover{text-decoration-thickness:2px}
             \(q\)-quantile: the smallest value at which the distribution function reaches \(q\). The optimum is unique unless
             \(F(d)=q\) for some \(d\); in general, a whole-day promise \(d\) is optimal exactly when</p>
           \[ F(d-1)\le q\le F(d). \]
-          <p>In Fig. 5 at its default ratio, \(F(d)=0.9=q\) for \(d=12,\ldots,19\), so every promise from 12 to 20 days is
-            optimal.</p>
-          <p>A shorter promise trades spare days for a higher risk of late arrival. I evaluate both outcomes together.</p>
           <p>Under this simplified loss, a 90% quantile corresponds to \(c_{\mathrm{late}}:c_{\mathrm{slack}}=9:1\): a late
-            day costs as much as nine spare days. The project fixes 90% as its research target; Olist's economic cost ratio
-            remains unestimated.</p>
+            day costs as much as nine spare days. The project fixes 90% as its research target.</p>
           <p>Given the information at checkout, \(X=x\), the same derivation with \(F(d\mid x)=P(Y\le d\mid X=x)\) in place
             of \(F\) gives the conditional quantile \(Q_q(Y\mid X=x)\). That is the role of quantile regression in this
             project: it lets different orders receive different promises.</p>
@@ -492,16 +478,14 @@ a:hover{text-decoration-thickness:2px}
         <div class="od-prose">
           <p>A model trained to predict the 90% quantile need not cover 90% of new orders: its form may not fit, and a
             finite sample adds error.</p>
-          <p>From here on, \(q\) is the target coverage level, 0.9 in the project. Read as a decision, it is the
-            \(q=c_{\mathrm{late}}/(c_{\mathrm{late}}+c_{\mathrm{slack}})\) of step 1, at which the \(q\)-quantile is the best
-            promise.</p>
+          <p>From here on, \(q\) is the target coverage level, 0.9 in the project; read as a decision, it is the \(q\) of
+            step 1.</p>
           <p>Fix the fitted predictor \(\widehat f\). For a calibration set \(\mathcal C\) of \(n\) orders that were not used
             to fit it, define the one-sided residuals</p>
           \[ R_i=Y_i-\widehat f(X_i),\qquad i=1,\ldots,n, \]
           <p>sort them as \(R_{(1)}\le\cdots\le R_{(n)}\), and take</p>
           \[ k=\lceil (n+1)q\rceil,\quad s=R_{(k)},\quad U(x)=\widehat f(x)+s. \]
-          <p>Here \(k\) is the smallest integer with \(k/(n+1)\ge q\); that is where \(n+1\) enters, and the inequality in
-            the box below is its definition rather than a coincidence. This assumes \(k\le n\), that is,
+          <p>Here \(k\) is the smallest integer with \(k/(n+1)\ge q\). This assumes \(k\le n\), that is,
             \(q\le n/(n+1)\); for \(k=n+1\) the finite-sample construction sets the bound to \(+\infty\). Because \(U(x)=\widehat f(x)+s\), an order is covered exactly when its residual
             \(R=Y-\widehat f(X)\) is at most the shift:</p>
           \[ Y\le U(X)\iff R\le s. \]
@@ -521,9 +505,8 @@ a:hover{text-decoration-thickness:2px}
             residual (Theorem 1a).</p>
           <p>Ties are not a corner case in this project. The state rule's prediction and shift are whole numbers of days, so
             its residuals are whole numbers and tie often; for it, \(k/(n+1)\) is only a lower bound.</p>
-          <p>The probability averages over both the calibration set and the new order. It does not say that each order has a
-            90% chance of arriving on time, and it is not the same guarantee for one calibration set once that set is
-            fixed.</p>
+          <p>The probability averages over the calibration set and the new order: it is not a 90% chance for each order,
+            nor a guarantee for one fixed calibration set.</p>
           <h4>Check the residual rank directly</h4>
           <p>Write \(\widehat F_{\mathcal C}\) for the empirical distribution function of the calibration residuals. At least
             \(k\) of them are no larger than \(R_{(k)}\), more if some tie with it, so the share of calibration orders that
@@ -532,8 +515,6 @@ a:hover{text-decoration-thickness:2px}
           <p>This holds for any data (Proposition 2 of the note). The converse fails: coverage of at least \(k/n\) does not
             show that the code is right, since a bound wrongly raised by 1,000 days would pass too. The direct check is to
             recompute the \(k\)-th residual independently and compare it with the frozen shift.</p>
-          <p>I check the implementation against the residual rank; whether future data meet the assumptions is a separate
-            question, taken up in step 4.</p>
         </div>
         <figure class="od-demo">
           <h4 class="od-dt"><span class="od-num">Fig. 6</span>\(k/n\) and \(k/(n+1)\), by hand and by simulation</h4>
@@ -570,8 +551,7 @@ a:hover{text-decoration-thickness:2px}
           \[ \lfloor U\rfloor=\begin{cases} \lceil U\rceil-1, &amp; U\notin\mathbb Z,\\ \lceil U\rceil, &amp; U\in\mathbb Z. \end{cases} \]
           <p>For example, with \(U=10\) and \(Y=10\), the real-valued bound and rounding down both cover the order;
             rounding up and subtracting a day gives 9 and does not.</p>
-          <p>Policies differ in how often \(U\) is a whole number, so the same rounding step can affect them differently.
-            I compare the complete rule, from prediction to the final date.</p>
+          <p>Policies differ in how often \(U\) is a whole number, so the same rounding step can affect them differently.</p>
         </div>
         <figure class="od-demo">
           <h4 class="od-dt"><span class="od-num">Fig. 7</span>Four ways to turn a bound into a date</h4>
@@ -604,10 +584,9 @@ a:hover{text-decoration-thickness:2px}
           <p>In the project, the calibrated policies aimed at 90% covered about 96–97% of orders in the evaluation period.
             The gap raises a question the study cannot yet answer: how did the evaluation period differ from the
             calibration period?</p>
-          <p>First, the rank argument of step 2 relies on the calibration residuals and future residuals being
-            exchangeable. Exchangeability between the calibration and evaluation periods remains unestablished; that the
-            evaluation orders came later neither establishes nor refutes it. I therefore report the evaluation coverage as
-            an empirical result, with the theoretical guarantee conditional on its assumptions.</p>
+          <p>First, the rank argument of step 2 needs the calibration and future residuals to be exchangeable, which is
+            not established for these two periods. The evaluation coverage is therefore an empirical result, not a
+            guarantee.</p>
           <p>Second, the question can be made exact. Write \(\widehat F_{\mathcal E}\) for the empirical distribution
             function of the residuals in the evaluation set \(\mathcal E\), computed with the same \(\widehat f\), and
             \(\widehat{\mathrm{Cov}}_{\mathcal C}\), \(\widehat{\mathrm{Cov}}_{\mathcal E}\) for the observed coverage of the
@@ -629,8 +608,7 @@ a:hover{text-decoration-thickness:2px}
             <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/outputs/e1/posthoc_m4/rounding_rules.csv">saved rounding comparison</a>, in percentage points, each term rounded on its own.
             Linear (C*): 0.01, 5.50 and 0.66, total 6.18. HGB (D*): 0.01, 6.65 and 0.44, total 7.10. For comparison, the
             calibrated state rule B1c, whose bound is a whole number for every order: 0.30, 6.19 and 0, total 6.49. In
-            all three the second term carries almost all of the gap. These are readings of saved numbers made after the
-            study was sealed, not registered results.</p>
+            all three the second term carries most of the gap. These readings are not registered results.</p>
         </div>
         <figure class="od-demo">
           <h4 class="od-dt"><span class="od-num">Table 4</span>Coverage of the two frozen regression policies: bounds and observations</h4>
@@ -639,18 +617,16 @@ a:hover{text-decoration-thickness:2px}
               <thead><tr><th>Quantity</th><th>Linear (C*)</th><th>HGB (D*)</th></tr></thead>
               <tbody>
                 <tr><td>Calibration set, lower bound from the rule: \(\widehat F_{\mathcal C}(s)\ge k/n\)<span class="od-sub">real-valued bound \(U\); holds for any data</span></td><td>≥ 90.009%</td><td>≥ 90.009%</td></tr>
-                <tr><td>New order, theoretical reference: \(k/(n+1)\)<span class="od-sub">real-valued \(U\), exchangeable data; equality needs no tie at the \(k\)-th position among the \(n+1\) residuals, and ties can only raise coverage. On \(\mathcal C\) exactly \(k\) residuals of each policy are at most \(s\) (saved rounding file), so the \(k\)-th and \((k+1)\)-th residuals differ there; a tie with a future order's residual cannot be checked in advance</span></td><td>≥ 90.004%</td><td>≥ 90.004%</td></tr>
-                <tr><td>Calibration set, observed: \(\widehat{\mathrm{Cov}}_{\mathcal C}\)<span class="od-sub">registered whole-day promise; at least \(k/n\), as it must be; not a check of the code</span></td><td>91.19%</td><td>91.14%</td></tr>
+                <tr><td>New order, theoretical reference: \(k/(n+1)\)<span class="od-sub">real-valued \(U\), exchangeable data; equal to \(k/(n+1)\) unless the \(k\)-th and \((k+1)\)-th of the \(n+1\) residuals can tie, which only raises it; on \(\mathcal C\) the \(k\)-th and \((k+1)\)-th residuals differ for both policies</span></td><td>≥ 90.004%</td><td>≥ 90.004%</td></tr>
+                <tr><td>Calibration set, observed: \(\widehat{\mathrm{Cov}}_{\mathcal C}\)<span class="od-sub">registered whole-day promise; at least \(k/n\), as it must be</span></td><td>91.19%</td><td>91.14%</td></tr>
                 <tr><td>April to July 2018, observed: \(\widehat{\mathrm{Cov}}_{\mathcal E}\)<span class="od-sub">registered whole-day promise; these evaluation orders only; not a guarantee</span></td>
                   <td><span data-source="e1_policies" data-field="coverage" data-key="C*" data-fmt="pct2">—</span></td>
                   <td><span data-source="e1_policies" data-field="coverage" data-key="D*" data-fmt="pct2">—</span></td></tr>
               </tbody>
             </table>
           </div>
-          <p class="od-note">\(n=17{,}056\) calibration orders and \(k=15{,}352\). The first two rows are bounds for the
-            real-valued bound \(U\); rounding it up to a whole day can only add coverage. The observed rows are of the
-            registered, rounded-up whole-day promise. Calibration-set values from the mathematical note and the notebook
-            (section 4 of each); April to July values from the saved policy table.</p>
+          <p class="od-note">\(n=17{,}056\) calibration orders and \(k=15{,}352\). Calibration-set values from the mathematical
+            note and the notebook (section 4 of each); April to July values from the saved policy table.</p>
         </figure>
       </div>
 
@@ -658,7 +634,6 @@ a:hover{text-decoration-thickness:2px}
         <summary>Going further: what the theory still says when exchangeability fails <span class="od-sub">coverage bounds [1], weighted calibration [2] and Fig. 8</span></summary>
       <div class="od-block">
         <div class="od-prose">
-          <p>Two published results describe how coverage guarantees depend on the type of distribution shift.</p>
           <p><b>Coverage bounds without exchangeability.</b> Barber, Candès, Ramdas and Tibshirani [1] bound the coverage
             of split conformal calibration when the data are not exchangeable. Write \(Z\) for the calibration orders
             followed by the new order, \(Z^i\) for the same sequence with the new order swapped with calibration order
@@ -678,14 +653,12 @@ a:hover{text-decoration-thickness:2px}
             then, over-coverage of that size signals non-exchangeability, but not which kind; the paper notes, for example,
             that a conditional variance of \(Y\) given \(X\) that decreases over time can produce over-coverage (its
             Section 5.2).</p>
-          <p>These bounds provide a theoretical reference. Estimating their distances requires the joint distribution of
-            calibration and evaluation orders, which these data do not identify. The 96–97% is
-            an observed proportion of rounded-up promises, not the probability in the theorem, which concerns the
-            real-valued bound \(U\), and by step 3 equally \(\lfloor U\rfloor\). The upper bound needs distinct residuals,
-            so it does not apply to the state rule, whose whole-day residuals tie often. The paper extends the lower bound
-            to general scores such as this one-sided residual (its Appendix B); it states the upper bound for the absolute
-            residual, and its proof (Appendix E.4) uses no property of that residual beyond the scores being distinct,
-            which is why I apply it here.</p>
+          <p>Estimating these distances requires the joint distribution of calibration and evaluation orders, which
+            these data do not identify. The 96–97% is an observed share of rounded-up promises, not the theorem's
+            probability for the real-valued bound \(U\). The upper bound needs distinct residuals, so it does not apply to
+            the state rule. The paper extends the lower bound to general scores such as this one-sided residual (its
+            Appendix B); it states the upper bound for the absolute residual, but its proof (Appendix E.4) uses only that
+            the scores are distinct, so it applies here too.</p>
           <p><b>Covariate weighting addresses changes in the order mix, not general changes in delivery behaviour.</b>
             Tibshirani, Barber, Candès and Ramdas [2] treat covariate shift. The calibration orders are drawn i.i.d. from
             \(P_X\times P_{Y\mid X}\); the new order is drawn independently from \(\tilde P_X\times P_{Y\mid X}\), so the
@@ -698,7 +671,7 @@ a:hover{text-decoration-thickness:2px}
           \[ p_i^w(x)=\frac{w(X_i)}{\sum_{j=1}^{n}w(X_j)+w(x)}, \]
           \[ p_{n+1}^w(x)=\frac{w(x)}{\sum_{j=1}^{n}w(X_j)+w(x)}. \]
           <p>Then \(P\{Y_{n+1}\le U_w(X_{n+1})\}\ge q\). With \(w\equiv1\) this is the rule of step 2.</p>
-          <p>This separates the data changes listed in step 4. A change in the order mix alone, with \(P_{Y\mid X}\)
+          <p>A change in the order mix alone, with \(P_{Y\mid X}\)
             unchanged, is covariate shift, and weighting with the true likelihood ratio restores the guarantee. Faster or
             slower deliveries for the same kind of order change \(P_{Y\mid X}\): then this
             guarantee does not apply, and weighting by \(X\) alone is not guaranteed to restore coverage (Fig. 8 shows a
@@ -738,18 +711,15 @@ a:hover{text-decoration-thickness:2px}
           <p>so</p>
           \[ \mathbb E[p_{\mathcal C}]=\frac{k}{n+1}, \]
           \[ \operatorname{Var}(p_{\mathcal C})=\frac{k(n+1-k)}{(n+1)^2(n+2)}. \]
-          <p>The distinction matters: once the calibration set is fixed, \(p_{\mathcal C}\) is a fixed but unknown
-            probability; the Beta distribution describes how \(p_{\mathcal C}\) varies when the calibration set is
-            redrawn [3].</p>
+          <p>Once the calibration set is fixed, \(p_{\mathcal C}\) is a fixed but unknown probability; the Beta
+            distribution describes how it varies when the calibration set is redrawn [3].</p>
           <p>With the project's \(n=17{,}056\) and \(q=0.9\), \(k=15{,}352\) and the standard deviation is about 0.230
             percentage points.</p>
-          <p>Its use here is narrow. The same calculation needs only the calibration residuals to be i.i.d.: the luck of
-            drawing this calibration set, rather than another from the same period, then moves the coverage on orders
-            from that same period by a few tenths of a point, far less than the gap of six to seven points in step 4. An unlucky calibration set is
-            therefore not a plausible explanation of that gap. It is not a test of whether \(\mathcal C\) and
-            \(\mathcal E\) are exchangeable: coverage observed on \(\mathcal E\) also carries its own sampling noise,
-            dependence between orders, selection and change over time, none of which this model includes. Dividing the
-            observed gap by 0.230 percentage points would therefore not give a drift test.</p>
+          <p>Its use here is narrow. It needs only the calibration residuals to be i.i.d.: the luck of drawing this
+            calibration set then moves the coverage on orders from the same period by a few tenths of a point, far less
+            than the gap of six to seven points in step 4, so an unlucky calibration set does not explain that gap. It is
+            not a test of whether \(\mathcal C\) and \(\mathcal E\) are exchangeable: coverage on \(\mathcal E\) also
+            carries its own sampling noise, dependence between orders, selection and change over time.</p>
         </div>
       </details>
     </section>
@@ -805,13 +775,12 @@ a:hover{text-decoration-thickness:2px}
 
   <footer class="od-foot">
     <p>The figures and tables in views 01 to 03 are aggregates of saved files in the
-      <a href="https://github.com/Suzanneisgenius/olist-delivery-promises">olist-delivery-promises</a> repository; no order-level rows are shown. View 04 contains
-      illustrative calculations and seeded simulations; its Table 4 cites saved project results. E1's sealed evaluation remains unchanged.
+      <a href="https://github.com/Suzanneisgenius/olist-delivery-promises">olist-delivery-promises</a> repository; no order-level rows are shown. E1's sealed evaluation remains unchanged.
       <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/tree/main/docs/diagnostics_page">aggregate.py</a>
       builds the seven data files below from the repository and checks them against the saved stage-3 and stage-5 metrics.
       Wording corrections to the E1 reports, audit notes and the corrections made to this page before publication:
       <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/docs/E1_WORDING_CORRECTIONS_2026-10-27.md">E1_WORDING_CORRECTIONS_2026-10-27.md</a>.</p>
-    <p>Independent public-data study, unaffiliated with Olist. The risk analysis replays historical predictions; no operational follow-up was performed.</p>
+    <p>Independent public-data study, unaffiliated with Olist.</p>
     <details>
       <summary>Sources</summary>
       <table class="od-t">

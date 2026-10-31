@@ -408,16 +408,18 @@ a:hover{text-decoration-thickness:2px}
   <section class="od-view" id="math" role="tabpanel" aria-labelledby="tab-math" hidden>
     <h2 class="od-q">From a predicted quantile to a delivery promise: loss, calibration and coverage</h2>
     <div class="od-prose">
-      <p>I study how to set a delivery promise: a decision that trades spare days against late arrivals. The mean summarises
-        delivery times; an asymmetric loss identifies the quantile that answers this decision.</p>
+      <p>I study how to set a delivery promise: a decision that trades spare days against late arrivals. Under squared
+        loss the best single summary of delivery times is the mean; under an asymmetric linear loss it is a quantile.</p>
       <p>I work through standard quantile and conformal results, then apply them to the project's calibration and rounding rules.
-        The interactive examples use illustrative data; Table 4 reports Olist results. The proofs are in the
-        <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/documents/current/E1_math_note_en.pdf">mathematical note</a>, and the <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/notebooks/e1_by_hand.ipynb">notebook</a> works the examples by hand.</p>
+        The interactive examples use illustrative data; Table 4 reports Olist results. The
+        <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/documents/current/E1_math_note_en.pdf">mathematical note</a> proves the main results of steps 1–3 (its Propositions 1–3 and Section 3); the results in
+        "Going further" and the Beta supplement are cited from the papers listed at the end. The
+        <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/notebooks/e1_by_hand.ipynb">notebook</a> works the examples by hand.</p>
     </div>
     <ol class="od-mtoc" aria-label="Steps">
-      <li><a href="#m1"><span>1</span><span>Why a promise is a quantile</span></a></li>
+      <li><a href="#m1"><span>1</span><span>Why a delivery promise is a quantile</span></a></li>
       <li><a href="#m2"><span>2</span><span>Why a predicted quantile still needs calibrating</span></a></li>
-      <li><a href="#m3"><span>3</span><span>How whole days change the result</span></a></li>
+      <li><a href="#m3"><span>3</span><span>Why whole-day dates need separate treatment</span></a></li>
       <li><a href="#m4"><span>4</span><span>Assess coverage when the data change</span></a></li>
     </ol>
 
@@ -433,7 +435,8 @@ a:hover{text-decoration-thickness:2px}
             <li>When \(Y>d\), the order is late, and each late day costs \(c_{\mathrm{late}}\).</li>
             <li>When \(Y\lt d\), the promise leaves days to spare, and each spare day costs \(c_{\mathrm{slack}}\).</li>
           </ul>
-          <p>The coefficients are decision weights, not measured economic costs.</p>
+          <p>The coefficients are decision weights, not measured economic costs, and a cost that grows linearly in days is
+            a simplifying assumption.</p>
           <p>Because the project compares dates in whole days, I take \(Y\) to be a nonnegative integer and \(d\) an
             integer, with \(\mathbb E[Y]\lt\infty\) so that the expected loss is finite. Extending a promise from \(d\) to \(d+1\) days can
             only do one of two things:</p>
@@ -445,20 +448,25 @@ a:hover{text-decoration-thickness:2px}
           \[ \begin{aligned} &amp;\mathbb E[L(d+1,Y)]-\mathbb E[L(d,Y)]\\ &amp;\quad= c_{\mathrm{slack}}F(d)-c_{\mathrm{late}}\{1-F(d)\}\\ &amp;\quad= (c_{\mathrm{late}}+c_{\mathrm{slack}})\{F(d)-q\}, \end{aligned} \]
           <p>where</p>
           \[ q=\frac{c_{\mathrm{late}}}{c_{\mathrm{late}}+c_{\mathrm{slack}}}. \]
-          <p>While \(F(d)\lt q\), one more day lowers the expected loss; once \(F(d)>q\), it raises it. One optimal
-            whole-day promise is</p>
+          <p>Up to the positive factor \(c_{\mathrm{late}}+c_{\mathrm{slack}}\), \(L\) is the pinball loss at level \(q\).
+            While \(F(d)\lt q\), one more day lowers the expected loss; once \(F(d)>q\), it raises it; when \(F(d)=q\), it
+            leaves it unchanged. One optimal whole-day promise is</p>
           <div class="od-result"><span class="od-hand od-result-tag">the answer: a quantile</span>
           \[ d^*=\min\{d: F(d)\ge q\}, \]
           </div>
-          <p>which is the \(q\)-quantile. Where \(F\) has a flat stretch the optimum need not be unique; in general a
-            whole-day promise \(d\) is optimal exactly when</p>
+          <p>which is the \(q\)-quantile of \(Y\) (Proposition 1 of the note). Throughout, \(Q_q\) denotes this
+            \(q\)-quantile: the smallest value at which the distribution function reaches \(q\). The optimum is unique unless
+            \(F(d)=q\) for some \(d\); in general, a whole-day promise \(d\) is optimal exactly when</p>
           \[ F(d-1)\le q\le F(d). \]
+          <p>In Fig. 5 at its default ratio, \(F(d)=0.9=q\) for \(d=12,\ldots,19\), so every promise from 12 to 20 days is
+            optimal.</p>
           <p>A shorter promise trades spare days for a higher risk of late arrival. I evaluate both outcomes together.</p>
-          <p>Under this loss a 90% quantile corresponds to \(c_{\mathrm{late}}:c_{\mathrm{slack}}=9:1\).
-            The project fixes 90% as its research target; Olist's economic cost ratio remains unestimated.</p>
-          <p>Given the information at checkout, \(X=x\), the same derivation gives the conditional quantile
-            \(Q_q(Y\mid X=x)\). That is the role of quantile regression in this project: it lets different orders receive
-            different promises.</p>
+          <p>Under this simplified loss, a 90% quantile corresponds to \(c_{\mathrm{late}}:c_{\mathrm{slack}}=9:1\): a late
+            day costs as much as nine spare days. The project fixes 90% as its research target; Olist's economic cost ratio
+            remains unestimated.</p>
+          <p>Given the information at checkout, \(X=x\), the same derivation with \(F(d\mid x)=P(Y\le d\mid X=x)\) in place
+            of \(F\) gives the conditional quantile \(Q_q(Y\mid X=x)\). That is the role of quantile regression in this
+            project: it lets different orders receive different promises.</p>
         </div>
         <figure class="od-demo">
           <h4 class="od-dt"><span class="od-num">Fig. 5</span>Expected loss of each promise, ten illustrative orders</h4>
@@ -484,32 +492,48 @@ a:hover{text-decoration-thickness:2px}
         <div class="od-prose">
           <p>A model trained to predict the 90% quantile need not cover 90% of new orders: its form may not fit, and a
             finite sample adds error.</p>
-          <p>Fix the fitted predictor \(\widehat f\). For \(n\) calibration orders that were not used to fit it, define the
-            one-sided residuals</p>
+          <p>From here on, \(q\) is the target coverage level, 0.9 in the project. Read as a decision, it is the
+            \(q=c_{\mathrm{late}}/(c_{\mathrm{late}}+c_{\mathrm{slack}})\) of step 1, at which the \(q\)-quantile is the best
+            promise.</p>
+          <p>Fix the fitted predictor \(\widehat f\). For a calibration set \(\mathcal C\) of \(n\) orders that were not used
+            to fit it, define the one-sided residuals</p>
           \[ R_i=Y_i-\widehat f(X_i),\qquad i=1,\ldots,n, \]
           <p>sort them as \(R_{(1)}\le\cdots\le R_{(n)}\), and take</p>
           \[ k=\lceil (n+1)q\rceil,\quad s=R_{(k)},\quad U(x)=\widehat f(x)+s. \]
-          <p>This assumes \(k\le n\). For \(k=n+1\), the finite-sample construction sets the upper bound to infinity.</p>
+          <p>Here \(k\) is the smallest integer with \(k/(n+1)\ge q\); that is where \(n+1\) enters, and the inequality in
+            the box below is its definition rather than a coincidence. This assumes \(k\le n\), that is,
+            \(q\le n/(n+1)\); for \(k=n+1\) the finite-sample construction sets the bound to \(+\infty\). Because \(U(x)=\widehat f(x)+s\), an order is covered exactly when its residual
+            \(R=Y-\widehat f(X)\) is at most the shift:</p>
+          \[ Y\le U(X)\iff R\le s. \]
           <h4>Why \(n+1\) and not \(n\)?</h4>
-          <p>The guarantee concerns \(n\) calibration residuals and one new residual. With the fitted model fixed, if these
-            residuals are exchangeable and almost surely have no ties, the rank of the new residual among the \(n+1\) is
-            uniform. Hence</p>
+          <p>The guarantee concerns the \(n\) calibration residuals and the residual \(R_{n+1}=Y_{n+1}-\widehat f(X_{n+1})\)
+            of one new order \((X_{n+1},Y_{n+1})\). With the fitted model fixed, suppose these \(n+1\) residuals are
+            exchangeable and almost surely have no ties. Then the rank of \(R_{n+1}\) among all \(n+1\) is uniform on
+            \(\{1,\ldots,n+1\}\), and the new order is covered exactly when that rank is at most \(k\). Hence</p>
           <div class="od-result"><span class="od-hand od-result-tag">why n + 1</span>
-          \[ \begin{aligned} P\{Y_{\mathrm{new}}\le U(X_{\mathrm{new}})\} &amp;= P\{R_{\mathrm{new}}\le R_{(k)}\}\\ &amp;= \frac{k}{n+1}\ \ge\ q. \end{aligned} \]
+          \[ \begin{aligned} P\{Y_{n+1}\le U(X_{n+1})\} &amp;= P\{R_{n+1}\le R_{(k)}\}\\ &amp;= \frac{k}{n+1}\ \ge\ q. \end{aligned} \]
           </div>
-          <p>Without ties this construction covers exactly \(k/(n+1)\). With ties, the
-            coverage event, which includes equality, may be more conservative. The lower bound is the split conformal
-            guarantee, Theorem 1a in Barber et al. [1].</p>
+          <p>With ties the rank of \(R_{n+1}\) is no longer uniform as it stands. Break ties in a random order drawn
+            independently of the data; the rank is then uniform again. The event \(R_{n+1}\le R_{(k)}\) holds whenever at
+            most \(k-1\) calibration residuals lie strictly below \(R_{n+1}\), which includes every outcome in which that
+            rank is at most \(k\). So the coverage is still at least \(k/(n+1)\), and can be higher. This lower bound is the split conformal guarantee: the note proves it
+            (Proposition 3), Tibshirani et al. [2] state it for any score (Theorem 1), and Barber et al. [1] for the absolute
+            residual (Theorem 1a).</p>
+          <p>Ties are not a corner case in this project. The state rule's prediction and shift are whole numbers of days, so
+            its residuals are whole numbers and tie often; for it, \(k/(n+1)\) is only a lower bound.</p>
           <p>The probability averages over both the calibration set and the new order. It does not say that each order has a
             90% chance of arriving on time, and it is not the same guarantee for one calibration set once that set is
             fixed.</p>
           <h4>Check the residual rank directly</h4>
-          <p>By the rule, at least \(k\) calibration residuals are no larger than \(R_{(k)}\), so</p>
-          \[ \widehat{\mathrm{Coverage}}_C\ge\frac{k}{n}. \]
-          <p>This follows from the construction itself. The converse fails: coverage above \(k/n\) does not show that the
-            code is right, since a bound wrongly raised by 1,000 days would pass too. The direct check is to recompute the
-            \(k\)-th residual independently and compare it, value by value, with the saved shift.</p>
-          <p>I check the implementation against the residual rank, then assess the assumptions separately on future data.</p>
+          <p>Write \(\widehat F_{\mathcal C}\) for the empirical distribution function of the calibration residuals. At least
+            \(k\) of them are no larger than \(R_{(k)}\), more if some tie with it, so the share of calibration orders that
+            \(U\) covers satisfies</p>
+          \[ \begin{aligned} \widehat F_{\mathcal C}(s)&amp;=\frac1n\sum_{i=1}^{n}\mathbf 1\{R_i\le R_{(k)}\}\\ &amp;\ge\frac{k}{n}. \end{aligned} \]
+          <p>This holds for any data (Proposition 2 of the note). The converse fails: coverage of at least \(k/n\) does not
+            show that the code is right, since a bound wrongly raised by 1,000 days would pass too. The direct check is to
+            recompute the \(k\)-th residual independently and compare it with the frozen shift.</p>
+          <p>I check the implementation against the residual rank; whether future data meet the assumptions is a separate
+            question, taken up in step 4.</p>
         </div>
         <figure class="od-demo">
           <h4 class="od-dt"><span class="od-num">Fig. 6</span>\(k/n\) and \(k/(n+1)\), by hand and by simulation</h4>
@@ -535,14 +559,18 @@ a:hover{text-decoration-thickness:2px}
           <div class="od-result"><span class="od-hand od-result-tag">the key identity</span>
           \[ Y\le U\iff Y\le\lfloor U\rfloor, \]
           </div>
-          <p>because \(\lfloor U\rfloor\) is the largest integer not exceeding \(U\).</p>
-          <p>So, without further truncation or changes to the bound, rounding down keeps exactly the coverage event of the
-            real-valued bound. Rounding up can cover some extra orders, and lengthens the promise.</p>
+          <p>because \(\lfloor U\rfloor\) is the largest integer not exceeding \(U\). For a new order, write \(U\) for
+            \(U(X_{n+1})\). Under the assumptions of step 2, it follows that</p>
+          \[ \begin{aligned} P\{Y_{n+1}\le\lfloor U\rfloor\}&amp;=P\{Y_{n+1}\le U\}\ \ge\ q,\\ P\{Y_{n+1}\le\lceil U\rceil\}&amp;\ge P\{Y_{n+1}\le U\}. \end{aligned} \]
+          <p>Rounding down covers exactly the orders that \(U\) covers, so it keeps the guarantee of step 2 unchanged; any
+            shorter whole-day promise does not cover an order with \(Y=\lfloor U\rfloor\), which \(U\) covers. Rounding up adds less than a day to
+            \(U\) and can only raise coverage. The registered promise, \(\max\{1,\lceil U\rceil\}\), covers every order that
+            \(U\) covers, so the lower bounds of step 2 hold for it too (Section 3 of the note).</p>
           <p>But rounding down is not always the same as rounding up and then subtracting a day:</p>
           \[ \lfloor U\rfloor=\begin{cases} \lceil U\rceil-1, &amp; U\notin\mathbb Z,\\ \lceil U\rceil, &amp; U\in\mathbb Z. \end{cases} \]
           <p>For example, with \(U=10\) and \(Y=10\), the real-valued bound and rounding down both cover the order;
             rounding up and subtracting a day gives 9 and does not.</p>
-          <p>Policies produce whole-day bounds at different rates, so the same rounding step can affect them differently.
+          <p>Policies differ in how often \(U\) is a whole number, so the same rounding step can affect them differently.
             I compare the complete rule, from prediction to the final date.</p>
         </div>
         <figure class="od-demo">
@@ -574,19 +602,35 @@ a:hover{text-decoration-thickness:2px}
       <div class="od-block">
         <div class="od-prose">
           <p>In the project, the calibrated policies aimed at 90% covered about 96–97% of orders in the evaluation period.
-            The gap raises a specific question: which parts of the promise-setting procedure produced the extra coverage?</p>
+            The gap raises a question the study cannot yet answer: how did the evaluation period differ from the
+            calibration period?</p>
           <p>First, the rank argument of step 2 relies on the calibration residuals and future residuals being
-            exchangeable. Exchangeability between the calibration and evaluation periods remains unestablished;
-            historical order alone neither establishes nor refutes it. I therefore report the evaluation coverage as an
-            empirical result, with the theoretical guarantee conditional on its assumptions.</p>
-          <p>Second, the over-coverage could come from several places:</p>
+            exchangeable. Exchangeability between the calibration and evaluation periods remains unestablished; that the
+            evaluation orders came later neither establishes nor refutes it. I therefore report the evaluation coverage as
+            an empirical result, with the theoretical guarantee conditional on its assumptions.</p>
+          <p>Second, the question can be made exact. Write \(\widehat F_{\mathcal E}\) for the empirical distribution
+            function of the residuals in the evaluation set \(\mathcal E\), computed with the same \(\widehat f\), and
+            \(\widehat{\mathrm{Cov}}_{\mathcal C}\), \(\widehat{\mathrm{Cov}}_{\mathcal E}\) for the observed coverage of the
+            registered promise on each set. By step 2, \(\widehat F_{\mathcal C}(s)\) and \(\widehat F_{\mathcal E}(s)\) are
+            the coverage of the real-valued bound \(U\) on the two sets, and</p>
+          \[ \begin{aligned} \widehat{\mathrm{Cov}}_{\mathcal E}-q&amp;=\{\widehat F_{\mathcal C}(s)-q\}\\ &amp;\quad+\{\widehat F_{\mathcal E}(s)-\widehat F_{\mathcal C}(s)\}\\ &amp;\quad+\{\widehat{\mathrm{Cov}}_{\mathcal E}-\widehat F_{\mathcal E}(s)\}. \end{aligned} \]
+          <p>Each candidate source of the over-coverage enters one term:</p>
           <ul>
-            <li>delivery times differing between the calibration and evaluation periods;</li>
-            <li>a different order mix or sample selection;</li>
-            <li>ties in the residuals;</li>
-            <li>whole-day rounding and other post-processing.</li>
+            <li>the calibration rule and ties at \(s\): the first term, at least \(k/n-q\) by step 2;</li>
+            <li>a change in the order mix or a selection on the features, which changes \(P_X\), or faster or slower
+              deliveries for the same kind of order, or a selection on the outcome, which changes \(P_{Y\mid X}\): the
+              second term, through the residual distribution at \(s\);</li>
+            <li>whole-day rounding and the one-day minimum: the third term, never negative by step 3.</li>
           </ul>
-          <p>I use over-coverage to investigate these explanations. Identifying a cause requires evidence that separates them.</p>
+          <p>Sampling noise also enters the second term; the supplement below gives the size of its calibration-set part.
+            I treat the over-coverage as a signal to explain, not as evidence that the models worked; the registered
+            analysis does not separate these sources.</p>
+          <p>Post hoc, the three terms can be read from the
+            <a href="https://github.com/Suzanneisgenius/olist-delivery-promises/blob/main/outputs/e1/posthoc_m4/rounding_rules.csv">saved rounding comparison</a>, in percentage points, each term rounded on its own.
+            Linear (C*): 0.01, 5.50 and 0.66, total 6.18. HGB (D*): 0.01, 6.65 and 0.44, total 7.10. For comparison, the
+            calibrated state rule B1c, whose bound is a whole number for every order: 0.30, 6.19 and 0, total 6.49. In
+            all three the second term carries almost all of the gap. These are readings of saved numbers made after the
+            study was sealed, not registered results.</p>
         </div>
         <figure class="od-demo">
           <h4 class="od-dt"><span class="od-num">Table 4</span>Coverage of the two frozen regression policies: bounds and observations</h4>
@@ -594,10 +638,10 @@ a:hover{text-decoration-thickness:2px}
             <table class="od-t" id="tb-cov">
               <thead><tr><th>Quantity</th><th>Linear (C*)</th><th>HGB (D*)</th></tr></thead>
               <tbody>
-                <tr><td>Calibration set, lower bound from the rule: \(k/n\)<span class="od-sub">real-valued bound \(U\); holds for any data</span></td><td>≥ 90.009%</td><td>≥ 90.009%</td></tr>
-                <tr><td>New order, theoretical reference: \(k/(n+1)\)<span class="od-sub">real-valued \(U\), exchangeable data; equality holds when residuals are almost surely distinct; ties can make coverage conservative</span></td><td>≥ 90.004%</td><td>≥ 90.004%</td></tr>
-                <tr><td>Calibration set, observed<span class="od-sub">registered whole-day promise; at least \(k/n\), as it must be; not a check of the code</span></td><td>91.19%</td><td>91.14%</td></tr>
-                <tr><td>April to July 2018, observed<span class="od-sub">registered whole-day promise; these evaluation orders only; not a guarantee</span></td>
+                <tr><td>Calibration set, lower bound from the rule: \(\widehat F_{\mathcal C}(s)\ge k/n\)<span class="od-sub">real-valued bound \(U\); holds for any data</span></td><td>≥ 90.009%</td><td>≥ 90.009%</td></tr>
+                <tr><td>New order, theoretical reference: \(k/(n+1)\)<span class="od-sub">real-valued \(U\), exchangeable data; equality needs no tie at the \(k\)-th position among the \(n+1\) residuals, and ties can only raise coverage. On \(\mathcal C\) exactly \(k\) residuals of each policy are at most \(s\) (saved rounding file), so the \(k\)-th and \((k+1)\)-th residuals differ there; a tie with a future order's residual cannot be checked in advance</span></td><td>≥ 90.004%</td><td>≥ 90.004%</td></tr>
+                <tr><td>Calibration set, observed: \(\widehat{\mathrm{Cov}}_{\mathcal C}\)<span class="od-sub">registered whole-day promise; at least \(k/n\), as it must be; not a check of the code</span></td><td>91.19%</td><td>91.14%</td></tr>
+                <tr><td>April to July 2018, observed: \(\widehat{\mathrm{Cov}}_{\mathcal E}\)<span class="od-sub">registered whole-day promise; these evaluation orders only; not a guarantee</span></td>
                   <td><span data-source="e1_policies" data-field="coverage" data-key="C*" data-fmt="pct2">—</span></td>
                   <td><span data-source="e1_policies" data-field="coverage" data-key="D*" data-fmt="pct2">—</span></td></tr>
               </tbody>
@@ -618,24 +662,30 @@ a:hover{text-decoration-thickness:2px}
           <p><b>Coverage bounds without exchangeability.</b> Barber, Candès, Ramdas and Tibshirani [1] bound the coverage
             of split conformal calibration when the data are not exchangeable. Write \(Z\) for the calibration orders
             followed by the new order, \(Z^i\) for the same sequence with the new order swapped with calibration order
-            \(i\), and \(R(Z)\) for the vector of the \(n+1\) residuals. For the rule used here, which weights every
-            calibration order equally, their Theorem 2a gives</p>
+            \(i\), and \(R(Z)\) for the vector of the \(n+1\) residuals. For the rule used here, with \(\widehat f\) fitted
+            beforehand and independent of these \(n+1\) orders, and every calibration order weighted equally, their
+            Theorem 2a gives</p>
           \[ \begin{aligned} &amp;P\{Y_{n+1}\le U(X_{n+1})\}\\ &amp;\quad\ge q-\frac{1}{n+1}\sum_{i=1}^{n} d_{\mathrm{TV}}\bigl(R(Z),R(Z^i)\bigr), \end{aligned} \]
-          <p>and, when the residuals are distinct with probability one, their Theorem 3 gives</p>
+          <p>and, when the \(n+1\) residuals are distinct with probability one, their Theorem 3 gives</p>
           \[ \begin{aligned} &amp;P\{Y_{n+1}\le U(X_{n+1})\}\\ &amp;\quad\lt q+\frac{1}{n+1}\\ &amp;\qquad+\frac{1}{n+1}\sum_{i=1}^{n} d_{\mathrm{TV}}\bigl(R(Z),R(Z^i)\bigr). \end{aligned} \]
-          <p>Under exchangeability every distance is zero, and the bounds reduce to \(q\le P\lt q+1/(n+1)\), which contains
-            the exact \(k/(n+1)\) of step 2. If the orders are independent, each distance is at most twice the total
-            variation distance between calibration order \(i\) and the new order (their Lemma 1). Read the other way: with
-            no ties, coverage more than \(1/(n+1)\) above \(q\) is possible only if the average swap distance exceeds the
-            excess. In theory, then, over-coverage of that size signals non-exchangeability, but not which kind; the paper
-            notes that a spread of \(Y\) given \(X\) that shrinks over time leads to over-coverage.</p>
+          <p>Under exchangeability every distance is zero: the coverage is then at least \(q\) and, for distinct residuals,
+            below \(q+1/(n+1)\), a range that contains the exact \(k/(n+1)\) of step 2. If the orders are independent, each residual
+            distance is at most \(d_{\mathrm{TV}}(Z,Z^i)\), which in turn is at most twice the total variation distance
+            between the distributions of calibration order \(i\) and the new order (their Section 5.1 and Lemma 1). Read
+            the other way, with no ties Theorem 3 gives</p>
+          \[ \begin{aligned} &amp;\frac{1}{n+1}\sum_{i=1}^{n} d_{\mathrm{TV}}\bigl(R(Z),R(Z^i)\bigr)\\ &amp;\quad>P\{Y_{n+1}\le U(X_{n+1})\}-q-\frac{1}{n+1}, \end{aligned} \]
+          <p>so coverage of \(q+1/(n+1)\) or more requires some swap to change the distribution of the residuals. In theory,
+            then, over-coverage of that size signals non-exchangeability, but not which kind; the paper notes, for example,
+            that a conditional variance of \(Y\) given \(X\) that decreases over time can produce over-coverage (its
+            Section 5.2).</p>
           <p>These bounds provide a theoretical reference. Estimating their distances requires the joint distribution of
             calibration and evaluation orders, which these data do not identify. The 96–97% is
             an observed proportion of rounded-up promises, not the probability in the theorem, which concerns the
-            real-valued bound \(U\), and by step 3 equally \(\lfloor U\rfloor\). Ties void the upper bound, and the state
-            rule's whole-day residuals tie often. The paper extends the lower bound to general scores such as this
-            one-sided residual (its Appendix B); it states the upper bound for the absolute residual, and its proof
-            (Appendix E.4) uses only that the scores are distinct, which is why I apply it here.</p>
+            real-valued bound \(U\), and by step 3 equally \(\lfloor U\rfloor\). The upper bound needs distinct residuals,
+            so it does not apply to the state rule, whose whole-day residuals tie often. The paper extends the lower bound
+            to general scores such as this one-sided residual (its Appendix B); it states the upper bound for the absolute
+            residual, and its proof (Appendix E.4) uses no property of that residual beyond the scores being distinct,
+            which is why I apply it here.</p>
           <p><b>Covariate weighting addresses changes in the order mix, not general changes in delivery behaviour.</b>
             Tibshirani, Barber, Candès and Ramdas [2] treat covariate shift. The calibration orders are drawn i.i.d. from
             \(P_X\times P_{Y\mid X}\); the new order is drawn independently from \(\tilde P_X\times P_{Y\mid X}\), so the
@@ -644,18 +694,21 @@ a:hover{text-decoration-thickness:2px}
             continuous with respect to \(P_X\) and \(w=d\tilde P_X/dP_X\), weighting each calibration residual
             by this likelihood ratio restores the guarantee (their Corollary 1, in the split form of their Section 2.2):</p>
           \[ \begin{aligned} U_w(x)&amp;=\widehat f(x)\\ &amp;\quad+Q_q\Bigl(\sum_{i=1}^{n}p_i^w(x)\,\delta_{R_i}+p_{n+1}^w(x)\,\delta_{+\infty}\Bigr), \end{aligned} \]
-          <p>where \(Q_q\) is the \(q\)-quantile of the weighted distribution and</p>
+          <p>where \(Q_q\) is the \(q\)-quantile of the weighted distribution, in the convention of step 1, and</p>
           \[ p_i^w(x)=\frac{w(X_i)}{\sum_{j=1}^{n}w(X_j)+w(x)}, \]
           \[ p_{n+1}^w(x)=\frac{w(x)}{\sum_{j=1}^{n}w(X_j)+w(x)}. \]
           <p>Then \(P\{Y_{n+1}\le U_w(X_{n+1})\}\ge q\). With \(w\equiv1\) this is the rule of step 2.</p>
-          <p>This sorts the causes listed above. A change in the order mix is covariate shift and, with the right weights,
-            can be corrected. Faster or slower deliveries for the same kind of order change \(P_{Y\mid X}\): then this
+          <p>This separates the data changes listed in step 4. A change in the order mix alone, with \(P_{Y\mid X}\)
+            unchanged, is covariate shift, and weighting with the true likelihood ratio restores the guarantee. Faster or
+            slower deliveries for the same kind of order change \(P_{Y\mid X}\): then this
             guarantee does not apply, and weighting by \(X\) alone is not guaranteed to restore coverage (Fig. 8 shows a
             case where it changes nothing). Selection that depends on the outcome is not covariate shift either.</p>
           <p>In this project \(w\) is unknown. The paper estimates it with a classifier that tells calibration features from
-            new ones: the odds \(\hat p(x)/\{1-\hat p(x)\}\) estimate \(w(x)\) up to the ratio of the two sample sizes, a
-            constant that the normalisation in \(p_i^w\) cancels. The exact guarantee uses the true weights;
-            evaluating estimated weights is a separate extension beyond E1.</p>
+            new ones: if \(\hat p(x)\) is the estimated probability that an order with features \(x\) is new, the odds
+            \(\hat p(x)/\{1-\hat p(x)\}\) estimate \(w(x)\) up to the ratio of the two sample sizes, a constant that the
+            normalisation in \(p_i^w\) cancels. The guarantee assumes the true weights; the paper proves none for estimated
+            weights and shows only, in one low-dimensional example, that they can still reach the target. Evaluating
+            estimated weights is a separate extension beyond E1.</p>
         </div>
         <figure class="od-demo">
           <h4 class="od-dt"><span class="od-num">Fig. 8</span>Standard and weighted calibration under two kinds of shift</h4>
@@ -676,21 +729,27 @@ a:hover{text-decoration-thickness:2px}
         <summary>Supplement: an idealised reference, the Beta distribution</summary>
         <div class="od-prose">
           <p>Fix the fitted model and assume further that the calibration and future residuals are i.i.d. with a continuous
-            distribution function \(F_R\). For a given calibration set, the true future coverage probability is</p>
-          \[ p_C=P\{R_{\mathrm{new}}\le R_{(k)}\mid C\}=F_R\bigl(R_{(k)}\bigr). \]
-          <p>Because the \(F_R(R_i)\) are independent uniform variables, as the calibration set is drawn again and again,</p>
-          \[ p_C\sim\operatorname{Beta}(k,\,n+1-k), \]
+            distribution function \(F_R\). For a given calibration set \(\mathcal C\), the coverage probability for a new
+            order is</p>
+          \[ p_{\mathcal C}=P\{R_{n+1}\le R_{(k)}\mid\mathcal C\}=F_R\bigl(R_{(k)}\bigr). \]
+          <p>The \(F_R(R_i)\) are independent and uniform on \((0,1)\), and \(F_R\) keeps their order, so \(p_{\mathcal C}\)
+            is the \(k\)-th smallest of \(n\) independent uniforms. As the calibration set is drawn again and again,</p>
+          \[ p_{\mathcal C}\sim\operatorname{Beta}(k,\,n+1-k), \]
           <p>so</p>
-          \[ \mathbb E[p_C]=\frac{k}{n+1}, \]
-          \[ \operatorname{Var}(p_C)=\frac{k(n+1-k)}{(n+1)^2(n+2)}. \]
-          <p>The distinction matters: once the calibration set is fixed, \(p_C\) is a fixed but unknown probability; the Beta
-            distribution describes how \(p_C\) varies when the calibration set is redrawn [3].</p>
+          \[ \mathbb E[p_{\mathcal C}]=\frac{k}{n+1}, \]
+          \[ \operatorname{Var}(p_{\mathcal C})=\frac{k(n+1-k)}{(n+1)^2(n+2)}. \]
+          <p>The distinction matters: once the calibration set is fixed, \(p_{\mathcal C}\) is a fixed but unknown
+            probability; the Beta distribution describes how \(p_{\mathcal C}\) varies when the calibration set is
+            redrawn [3].</p>
           <p>With the project's \(n=17{,}056\) and \(q=0.9\), \(k=15{,}352\) and the standard deviation is about 0.230
             percentage points.</p>
-          <p>This standard deviation describes repeated calibration sets under the i.i.d. continuous-score model.
-            Evaluation uncertainty also involves finite test samples, order dependence, ties and temporal change.
-            A drift test needs those sources of variation accounted for; dividing the observed coverage gap by 0.230%
-            would use the wrong reference.</p>
+          <p>Its use here is narrow. The same calculation needs only the calibration residuals to be i.i.d.: the luck of
+            drawing this calibration set, rather than another from the same period, then moves the coverage on orders
+            from that same period by a few tenths of a point, far less than the gap of six to seven points in step 4. An unlucky calibration set is
+            therefore not a plausible explanation of that gap. It is not a test of whether \(\mathcal C\) and
+            \(\mathcal E\) are exchangeable: coverage observed on \(\mathcal E\) also carries its own sampling noise,
+            dependence between orders, selection and change over time, none of which this model includes. Dividing the
+            observed gap by 0.230 percentage points would therefore not give a drift test.</p>
         </div>
       </details>
     </section>
@@ -698,8 +757,9 @@ a:hover{text-decoration-thickness:2px}
     <section class="od-step" aria-labelledby="mc-h">
       <h3 id="mc-h">What I take from this</h3>
       <div class="od-prose">
-        <p>The quantile answers what to predict under an asymmetric loss. Conformal calibration answers how to build a
-          marginal coverage guarantee under stated assumptions. Rounding decides how a prediction becomes an actual date.
+        <p>The quantile answers what to predict under an asymmetric linear loss. Conformal calibration answers how to build
+          a marginal coverage guarantee under stated assumptions. Rounding decides how a real-valued bound becomes a
+          whole-day date.
           I evaluate the complete decision procedure:</p>
         <ol class="od-chain" aria-label="The chain from model to promise">
           <li><b>Prediction model</b></li>
@@ -715,13 +775,16 @@ a:hover{text-decoration-thickness:2px}
         <ol>
           <li>R. F. Barber, E. J. Candès, A. Ramdas and R. J. Tibshirani (2023).
             <a href="https://www.stat.cmu.edu/~ryantibs/papers/nexcp.pdf">Conformal prediction beyond exchangeability</a>.
-            Annals of Statistics 51(2). Theorems 1a, 2a and 3, Lemma 1, Appendices B and E.4.</li>
+            Annals of Statistics 51(2). Theorems 1a, 2a and 3, Lemma 1, Sections 5.1 and 5.2, Appendices B and E.4 (numbered as in
+            the linked version).</li>
           <li>R. J. Tibshirani, R. F. Barber, E. J. Candès and A. Ramdas (2019).
             <a href="https://arxiv.org/abs/1904.06019">Conformal prediction under covariate shift</a>. NeurIPS 2019.
-            Corollary 1 and Sections 2.2–2.3.</li>
+            Theorem 1, Corollary 1 and Sections 2.2–2.3 (numbered as in the linked arXiv version).</li>
           <li>R. J. Tibshirani, Advanced Topics in Statistical Learning, Spring 2023,
             <a href="https://www.stat.berkeley.edu/~ryantibs/statlearn-s23/homeworks/homework4.pdf">Homework 4</a>,
-            problem 2: calibration-conditional Beta coverage.</li>
+            problem 2: calibration-conditional Beta coverage. The result is the classical tolerance-region one; see also
+            V. Vovk (2012), <a href="https://arxiv.org/abs/1209.2673">Conditional validity of inductive conformal
+            predictors</a>, ACML 2012; Appendix A of the linked arXiv version.</li>
         </ol>
       </div>
     </section>

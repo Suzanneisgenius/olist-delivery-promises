@@ -80,15 +80,19 @@ margin labels, a boxed key result in each step of view 04 and short suggestions 
 violet pen with a highlighter. Motion is limited to a short fade when the reader switches views and one highlighter
 stroke on the opening's two headline numbers, and is switched off when the reader's system asks for reduced motion.
 
-View 04, the mathematics, sets out the argument behind the promised-dates comparison in four steps: why a promise is a
-quantile, why a predicted quantile still needs calibrating, how whole days change the result, and why calibrating well
-relates to future coverage. Each step has a small demonstration on illustrative numbers. Step 4 separates the bounds for a
-real-valued bound from the observed coverage of the rounded-up promises, and a fold, "Going further", applies two
-published results: coverage bounds without exchangeability (Barber, Candès, Ramdas and Tibshirani, 2023) and weighted
-calibration under covariate shift (Tibshirani, Barber, Candès and Ramdas, 2019), with a toy simulation whose likelihood
-ratio is known. The view adds no analysis of E1. Its formulas are typeset with KaTeX, loaded from jsDelivr; without it
-the TeX source stays readable. A link to a step (`#m1` to `#m4`) opens the view at that step and stays in the address
-until another view is chosen, so it can be reloaded and shared; a link to anything inside a fold opens the fold.
+View 04, the mathematics, sets out the argument behind the promised-dates comparison in four steps: why a delivery
+promise is a quantile, why a predicted quantile still needs calibrating, why whole-day dates need separate treatment,
+and how to assess coverage when the data change. Steps 1 to 3 each have a small demonstration on illustrative numbers,
+and the mathematical note proves their main results. Step 4 separates the bounds for a real-valued bound from the
+observed coverage of the rounded-up promises, and writes the observed over-coverage exactly as the sum of three terms:
+the calibration rule, the difference between the calibration and evaluation residual distributions at the shift, and
+rounding. A fold, "Going further", summarises two published results: coverage bounds without exchangeability (Barber,
+Candès, Ramdas and Tibshirani, 2023) and weighted calibration under covariate shift (Tibshirani, Barber, Candès and
+Ramdas, 2019), with a toy simulation whose likelihood ratio is known. The view adds no new analysis of E1: its post-hoc
+readings, in step 4 and in a note to Table 4, come from the saved rounding comparison. Its formulas are typeset with
+KaTeX, loaded from jsDelivr; without it the TeX source stays readable. A link to a step (`#m1` to `#m4`) opens the view
+at that step and stays in the address until another view is chosen, so it can be reloaded and shared; a link to
+anything inside a fold opens the fold.
 
 A "My contribution" panel before the footer summarises the author's confirmed roles from `AUTHORSHIP.md` and links to
 that statement. The panel and its top link are hidden automatically if its body is emptied. Browsers do not

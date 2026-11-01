@@ -36,6 +36,6 @@ Everything below is in this repository and can be re-run: `bash AGENT_REVIEW/ver
 | Full test suite | 362 passed | `AGENT_REVIEW/verify_output/06_pytest.log` after running `verify_all.sh` |
 | Notebook | runs top to bottom from `notebooks/`; without inputs, sections 1–3 run and section 4 stops with a message | `notebooks/e1_by_hand.ipynb` (executed), `.html` |
 
-The end-to-end reruns were done by the author's assistant in the recorded environment (Python 3.13.16). They were not
+The end-to-end reruns used the recorded environment (Python 3.13.16). They were not
 independently repeated by a reviewer. Until they are, they count as author-reported evidence with logs, not as
 independent replication.

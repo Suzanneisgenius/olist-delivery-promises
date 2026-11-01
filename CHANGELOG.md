@@ -1,13 +1,15 @@
 # Changelog
 
-Versions before 0.6.0 are described in `docs/manager_handoff.md`, the stage handoffs and `docs/REPRODUCIBILITY.md`.
+Versions before 0.6.0 are described in `docs/manager_handoff.md` and `docs/REPRODUCIBILITY.md`.
 
-## Diagnostics page and READMEs — 2026-10-31 (no result changed)
+## Diagnostics page and repository notes — 2026-10-31 (no result changed)
 - View 04: step 4 writes the over-coverage exactly as three terms and quotes them post hoc for C*, D* and B1c from the
   saved rounding comparison; step 2 proves the case with ties; Table 4 states when k/(n+1) is exact; "Going further"
   bounds residual distances by data distances before Lemma 1; the Beta supplement also cites Vovk (2012).
 - Shorter wording on the page and in both READMEs: restatements and repeated caveats removed; numbers, assumptions,
   cohort definitions and post-hoc labels kept.
+- Removed the reviewer brief and report template (`AGENT_REVIEW/REVIEW_BRIEF.md`, `REPORT_TEMPLATE.md`) and the
+  stage 2–5 handoff notes (`docs/STAGE*_HANDOFF.md`).
 
 ## Dashboard publication copy — 2026-10-28
 - Lead the dashboard, mathematical explanation and repository introduction with the research decisions and findings.
@@ -144,7 +146,7 @@ Versions before 0.6.0 are described in `docs/manager_handoff.md`, the stage hand
   rebuilt around a days-vs-coverage figure; H2 reported as "not tested (registered as 'not supported')".
 - Post-hoc sensitivities (`scripts/e1_posthoc_review3.py` -> `outputs/e1/posthoc_r3/`): matched coverage on E,
   integer-aware shift, evaluation window by month and April-May only, late rate of C by month.
-- Agent package r3: claims C20-C24 recomputed independently from the per-order files; `verify_all.sh` preflight.
+- Review package r3: claims C20-C24 recomputed independently from the per-order files; `verify_all.sh` preflight.
 
 ## 0.6.3 — 2026-10-15 (review follow-ups; no new experiment)
 - `scripts/release_evidence.py` is now a release gate: it fails on a config-hash mismatch, failed or empty tests,

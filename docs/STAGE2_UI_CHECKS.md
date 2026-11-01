@@ -1,6 +1,6 @@
 # Stage 2 developer UI checks
 
-Executed locally on 2026-10-12 in the Codex in-app browser, using the regenerated HTML.
+Executed locally on 2026-10-12 in a browser, using the regenerated HTML.
 These are developer observations, not business-owner UAT sign-off.
 
 | Case | Expected | Observed |

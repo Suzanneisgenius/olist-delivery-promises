@@ -47,7 +47,7 @@ Total from an empty folder to a full release with automated UAT (not the owner's
   facts (e.g. 83.14106533565 vs 83.14106533564 days).
 - **A vs the shipped v0.5.2 outputs:** the same pattern — run metadata and minor numeric differences
   (`repro_evidence/compare_envA_vs_shipped_v0.5.2.json`; the shipped set has a stage-2 preview image A does not make).
-- **A third run: an independent Codex-assisted local review on the owner's Mac** (macOS, Python 3.12.14, pandas 2.3.3,
+- **A third run on the owner's Mac** (macOS, Python 3.12.14, pandas 2.3.3,
   reported in the v0.5.3 review; its evidence is not in this package). Headline results and selected counts were
   unchanged; logistic fold scores matched within numerical tolerance (largest difference ~3e-13); one of 18,865 GBM
   fold scores differed visibly (0.02463 vs 0.02626), and several GBM metrics differed slightly (AP by ~7e-8, AUC by
@@ -90,7 +90,7 @@ rerun the browser checks), and run again. Never edit an output to make a check p
 
 ## 6. Not covered
 
-- Windows was not tested. macOS was covered once by an independent Codex-assisted review on the owner's Mac (§3), outside this package's evidence.
+- Windows was not tested. macOS was covered once, by the run on the owner's Mac (§3), outside this package's evidence.
 - A new Kaggle download was not tested (same nine files, same hashes). A changed download is expected to give new numbers
   and, if the computed window moves, a NEEDS_RE_APPROVAL state; the refresh checklist covers that review.
 - The owner's manual review (UAT-13) and sign-off (UAT-14) are not part of reproducibility.

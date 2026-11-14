@@ -43,6 +43,11 @@ See [AUTHORSHIP.md](AUTHORSHIP.md) for details.
 [`docs/E1_WORDING_CORRECTIONS_2026-10-27.md`](docs/E1_WORDING_CORRECTIONS_2026-10-27.md) records this distinction and
 subsequent audit findings alongside the unchanged sealed reports.
 
+**A shorter standalone version.** A two-page script outside this repository applies the same per-state quantile idea to
+all delivered orders bought from January to August 2018 (52,777 orders), learning only from delivery times known on
+1 January 2018. Its figures (21.3 days at 90.2% coverage, against Olist's 23.4 days at 92.3%) differ from E1's because
+the period, the cohort and the calibration differ.
+
 ## Start here
 
 | File | What it is |

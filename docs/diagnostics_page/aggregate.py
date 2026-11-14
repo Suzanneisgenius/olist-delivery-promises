@@ -148,9 +148,19 @@ pick = [("B1c@0.90 (shifted)", "B1c", "State rule, calibrated", "registered"),
         ("Dstar@0.90 (shifted)", "D*", "Shallow gradient boosting (HGB)", "registered"),
         ("replacement reference: stage-7 B0 (F + C, no shift)", "B0", "Retained state rule", "reference"),
         ("Olist promise", "Olist", "Olist's estimated date", "reference")]
-write("e1_policies", [{"key": code, "code": code, "label": label, "kind": kind, "q": float(pt[key]["q"]), "orders": int(pt[key]["orders"]),
-                       "coverage": float(pt[key]["coverage"]), "mean_promised_days": float(pt[key]["mean_promised_days"]),
-                       "n_missed": int(pt[key]["n_missed"]), "source_policy": key} for key, code, label, kind in pick])
+e1_pol = [{"key": code, "code": code, "label": label, "kind": kind, "q": float(pt[key]["q"]), "orders": int(pt[key]["orders"]),
+           "coverage": float(pt[key]["coverage"]), "mean_promised_days": float(pt[key]["mean_promised_days"]),
+           "n_missed": int(pt[key]["n_missed"]), "source_policy": key} for key, code, label, kind in pick]
+# the retained rule set to Olist's own level: stage 7, scored on the same April to July 2018 orders
+s7 = {(r["target"], r["policy"]): r for r in read_csv("outputs/stage7/policy_results.csv")}
+m = s7[("olist_matched", "B0_state_quantile")]
+e1_pol.append({"key": "B0@Olist", "code": "B0@Olist", "label": "Retained state rule at Olist's level", "kind": "olist_level",
+               "q": float(m["level"]), "orders": int(m["orders"]), "coverage": float(m["coverage"]),
+               "mean_promised_days": float(m["mean_promised_days"]), "n_missed": round(int(m["orders"]) * (1 - float(m["coverage"]))),
+               "days_vs_olist": float(m["mean_promised_days"]) - float(pt["Olist promise"]["mean_promised_days"]),
+               "coverage_pts_vs_olist": (float(m["coverage"]) - float(pt["Olist promise"]["coverage"])) * 100,
+               "source_policy": "stage-7 B0_state_quantile, target olist_matched"})
+write("e1_policies", e1_pol)
 
 write("e1_curves", [{"model": r["model"], "shift": float(r["shift"]), "coverage": float(r["coverage"]), "mean_days": float(r["mean_days"])}
                     for r in read_csv("outputs/e1/posthoc_m4/diagnostic_curves_E.csv")
@@ -194,6 +204,16 @@ for m in read_csv("outputs/stage3/test_metrics.csv"):
         ok3 &= same
         print("check stage3", m["model"], "top10%", b["selected"], b["late_in_selected"], "match:", same)
 print("stage-3 calibration bins and top-10% picks reproduced:", ok3)
+# the stage-7 file describes the same orders as E1: its 0.90 state rule and Olist rows equal E1's reference rows
+oks7 = True
+for s7key, e1key in ((("0.90", "B0_state_quantile"), "replacement reference: stage-7 B0 (F + C, no shift)"),
+                     (("olist_matched", "Olist_promise"), "Olist promise")):
+    a, b = s7[s7key], pt[e1key]
+    same = a["orders"] == b["orders"] and all(abs(float(a[f]) - float(b[f])) < 1e-12 for f in ("coverage", "mean_promised_days"))
+    oks7 &= same
+    print("check stage7", s7key[1], "equals E1", e1key.split(":")[0], ":", same)
+print("stage-7 rows match E1 on the same orders:", oks7)
+ok3 &= oks7
 # every share: the months add up to all months (orders, picks and the random baseline)
 okadd = True
 for src in SOURCES:

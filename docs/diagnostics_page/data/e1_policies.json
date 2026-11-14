@@ -58,5 +58,19 @@
   "mean_promised_days": 24.440350877192984,
   "n_missed": 850,
   "source_policy": "Olist promise"
+ },
+ {
+  "key": "B0@Olist",
+  "code": "B0@Olist",
+  "label": "Retained state rule at Olist's level",
+  "kind": "olist_level",
+  "q": 0.9126,
+  "orders": 19950,
+  "coverage": 0.9489724310776942,
+  "mean_promised_days": 21.39779448621554,
+  "n_missed": 1018,
+  "days_vs_olist": -3.0425563909774453,
+  "coverage_pts_vs_olist": -0.8421052631578885,
+  "source_policy": "stage-7 B0_state_quantile, target olist_matched"
  }
 ]

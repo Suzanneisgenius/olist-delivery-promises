@@ -8,7 +8,7 @@ registered analysis, fitted model or prediction.
 |---|---|---|
 | Risk prioritization | With limited staff, which orders should be checked first? | `outputs/stage3/test_predictions.csv`, `outputs/stage5/fold_predictions.csv` |
 | Probability reliability | When a score says 10% risk, is the late rate really near 10%? | the same two files |
-| Delivery promises | Is a more complex model worth switching to for promised dates? | `outputs/e1/score/policy_table.csv`, `outputs/e1/posthoc_m4/` |
+| Delivery promises | Is a more complex model worth switching to for promised dates? | `outputs/e1/score/policy_table.csv`, `outputs/e1/posthoc_m4/`; the retained rule at Olist's level from `outputs/stage7/policy_results.csv` |
 | The mathematics | Why is a promise a quantile, and where does its guarantee stop? | no data file: illustrative numbers, a toy simulation, and one table copied from the mathematical note, the notebook and `e1_policies.json` |
 
 Two versions of the risk scores are shown. "Frozen" is the stage-3 model scored once on E1's evaluation orders
@@ -48,7 +48,7 @@ Standard library only, read-only with respect to the repository:
 It writes the seven files in `data/` and checks them against the saved metrics: for each stage-5 fold and model, the
 top-10% weekly picks (selected and late counts), Brier score, log loss and mean predicted probability; for the stage-3
 test set, the top-10% picks and the calibration bins (ten per model); and, at every share from 1% to 30%, that the
-months add up to all months. It ends with `ALL CHECKS OK` (exit 0) or `ALL CHECKS FAILED` (exit 1). It also reports
+months add up to all months; and that the stage-7 state-rule and Olist rows it uses equal E1's on the same orders. It ends with `ALL CHECKS OK` (exit 0) or `ALL CHECKS FAILED` (exit 1). It also reports
 whether the mean predicted risk exceeds the observed late rate in every version, model and month; in the saved outputs
 it does.
 

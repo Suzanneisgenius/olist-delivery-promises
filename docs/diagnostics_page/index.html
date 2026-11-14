@@ -241,7 +241,9 @@ a:hover{text-decoration-thickness:2px}
       <li class="od-finding"><a href="#reliability"><span>Are the risk scores right</span></a>
         <p>In every month the risk scores overstated the late rate.</p></li>
       <li class="od-finding"><a href="#promises"><span>Promised dates</span></a>
-        <p>The retained state rule remains the choice under E1's registered replacement standard.</p></li>
+        <p>Keep the simple state rule. Against a state rule calibrated the same way, gradient boosting promised only
+        <span class="od-b" data-source="e1_rounding" data-field="day_diff" data-key="ceil|D*|B1c" data-fmt="abs2">—</span>
+        days less, short of the one-day bar set in advance; against the rule already in use, both models promised more days.</p></li>
       <li class="od-finding"><a href="#math"><span>The mathematics</span></a>
         <p>Derive the promise from asymmetric loss, calibrate it through ranks, and trace how rounding and changing data affect coverage.</p></li>
     </ol>
@@ -338,15 +340,14 @@ a:hover{text-decoration-thickness:2px}
   <section class="od-view" id="promises" role="tabpanel" aria-labelledby="tab-promises" hidden>
     <h2 class="od-q">Is a more complex model worth switching to for promised delivery dates?</h2>
     <p class="od-note">From the E1 study: each policy was calibrated on October to December 2017 orders for 90% coverage, frozen, and scored once on
-      April to July 2018 (<span data-source="e1_policies" data-field="orders" data-key="D*" data-fmt="int">—</span> orders). That period had been looked at
-      earlier in the project: E1 is pre-registered exploratory work rather than a blind test.</p>
+      April to July 2018 (<span data-source="e1_policies" data-field="orders" data-key="D*" data-fmt="int">—</span> orders).</p>
     <div class="od-split">
       <figure class="od-fig">
         <h3><span class="od-num">Fig. 4</span>Promised days against coverage on April to July 2018</h3>
         <div class="od-legend" id="leg-days"></div>
         <div class="od-chart" id="ch-days"></div>
-        <p class="od-note">Squares: registered policies, scored once. Hollow circles: the retained state rule B0 and Olist's own estimated date.
-          Dashed lines: post-hoc curves that slide each model's shift over the evaluation orders' own outcomes. They are diagnostic, not deployable, and were not used to choose a model.</p>
+        <p class="od-note">Squares: registered policies, scored once. Hollow circles: the retained state rule and Olist's own estimated date.
+          Dashed lines: post-hoc curves that slide each model's shift over the evaluation orders' own outcomes; they were not used to choose a model.</p>
       </figure>
       <aside class="od-aside">
         <span class="od-label">Reading Fig. 4</span>
@@ -359,17 +360,32 @@ a:hover{text-decoration-thickness:2px}
           <li>Compare promised days together with reliability. Linear promised
             <span data-source="e1_policies" data-field="mean_promised_days" data-key="C*" data-fmt="f2">—</span> days on average and HGB
             <span data-source="e1_policies" data-field="mean_promised_days" data-key="D*" data-fmt="f2">—</span>, at different coverage, so the two registered points do not rank the models.</li>
-          <li>Every calibrated policy covered more than its target. That is consistent with changing delivery times, the cohort filter on Olist's estimated date and order mix; the study does not separate these.</li>
+          <li>Every calibrated policy covered more than its target; Limits below lists the possible causes.</li>
         </ol>
       </aside>
     </div>
+    <section class="od-step" aria-labelledby="pt-h">
+      <h3 id="pt-h">What I take from this</h3>
+      <div class="od-prose">
+        <p>The rounding rule moved the result more than the choice of model. Under the registered round-up rule, HGB promised
+          <span data-source="e1_rounding" data-field="day_diff" data-key="ceil|D*|B1c" data-fmt="abs2">—</span> days less than the calibrated state rule; rounding the same bound down instead
+          (post hoc) widens the gap to <span data-source="e1_rounding" data-field="day_diff" data-key="floor|D*|B1c" data-fmt="abs2">—</span> days. How a real-valued bound becomes a whole-day date
+          has to be chosen and reported together with the model.</p>
+        <p>Against Olist's own date, the simple rule is shorter. Set to Olist's own coverage level
+          (<span data-source="e1_policies" data-field="q" data-key="B0@Olist" data-fmt="pct2">—</span>), the retained state rule promised <span data-source="e1_policies" data-field="mean_promised_days" data-key="B0@Olist" data-fmt="f2">—</span> days on average
+          against Olist's <span data-source="e1_policies" data-field="mean_promised_days" data-key="Olist" data-fmt="f2">—</span>: <span data-source="e1_policies" data-field="days_vs_olist" data-key="B0@Olist" data-fmt="abs1">—</span> days sooner, at
+          <span data-source="e1_policies" data-field="coverage_pts_vs_olist" data-key="B0@Olist" data-fmt="abs1">—</span> points lower coverage (<span data-source="e1_policies" data-field="coverage" data-key="B0@Olist" data-fmt="pct2">—</span> against
+          <span data-source="e1_policies" data-field="coverage" data-key="Olist" data-fmt="pct2">—</span>), on the same <span data-source="e1_policies" data-field="orders" data-key="B0@Olist" data-fmt="int">—</span> orders.</p>
+      </div>
+    </section>
     <div class="od-split r75">
       <figure class="od-fig">
         <h3><span class="od-num">Table 2</span>Registered result and the rounding rule</h3>
-        <p class="od-note">First policy minus second; negative days mean a sooner promise. Under the registered round-up rule HGB was
-          <span data-source="e1_rounding" data-field="day_diff" data-key="ceil|D*|B1c" data-fmt="s2">—</span> days against the calibrated state rule, below the one-day bar.
-          Rounding down is a post-hoc check: it gives <span data-source="e1_rounding" data-field="day_diff" data-key="floor|D*|B1c" data-fmt="s2">—</span> days and does not replace the registered result.
-          Neither model met the standard for replacing B0.</p>
+        <p class="od-note">First policy minus second; negative days mean a sooner promise. To replace the rule in use, a model had to
+          promise at least one day less at no more than one coverage point lower, against both state rules. Under the registered
+          round-up rule HGB was <span data-source="e1_rounding" data-field="day_diff" data-key="ceil|D*|B1c" data-fmt="s2">—</span> days against the calibrated state rule;
+          rounding down (post hoc) gives <span data-source="e1_rounding" data-field="day_diff" data-key="floor|D*|B1c" data-fmt="s2">—</span>.
+          Against the retained state rule both models promised more days, so neither met the standard.</p>
         <div class="od-twrap">
           <table class="od-t" id="tb-rounding">
             <thead><tr><th>Comparison</th><th>Days, round up (registered)</th><th>Coverage pts, round up</th><th>Days, round down (post hoc)</th><th>Coverage pts, round down</th></tr></thead>
@@ -380,9 +396,7 @@ a:hover{text-decoration-thickness:2px}
       <figure class="od-fig">
         <h3><span class="od-num">Table 3</span>Days at the first shift reaching each coverage level (post hoc)</h3>
         <p class="od-note">For each policy, the shift is set after the fact on the evaluation orders: the one with the fewest promised days
-          whose coverage reaches the level. Each cell gives the mean promised days and, below it, the coverage reached;
-          whole-day promises make every policy overshoot the level, the state rule most, so a row does not compare policies
-          at exactly equal coverage. A diagnostic, not a deployable policy.</p>
+          whose coverage reaches the level. Each cell gives the mean promised days and, below it, the coverage reached.</p>
         <div class="od-twrap">
           <table class="od-t" id="tb-matched">
             <thead><tr><th>Coverage level</th><th>State rule<span class="od-sub">days, reached</span></th><th>Linear<span class="od-sub">days, reached</span></th><th>HGB<span class="od-sub">days, reached</span></th><th>HGB minus linear<span class="od-sub">days</span></th></tr></thead>
@@ -391,6 +405,22 @@ a:hover{text-decoration-thickness:2px}
         </div>
       </figure>
     </div>
+    <section class="od-step" aria-labelledby="pl-h">
+      <h3 id="pl-h">Limits</h3>
+      <div class="od-prose">
+        <ul>
+          <li>E1 is pre-registered exploratory work: April to July 2018 had been looked at earlier in the project, so it is not a blind test.</li>
+          <li>Every calibrated policy covered more than its 90% target. Changing delivery times, the cohort filter on Olist's
+            estimated date and order mix are all consistent with this; the study does not separate them.</li>
+          <li>The dashed curves in Fig. 4 and Table 3 set each shift after the fact on the evaluation orders, so they are
+            diagnostics, not deployable policies. Whole-day promises overshoot each level, the state rule most, so a row of
+            Table 3 does not compare policies at exactly equal coverage.</li>
+          <li>Rounding down is a post-hoc check; the registered result uses rounding up.</li>
+          <li>The comparison with Olist uses the retained rule from the earlier stage-7 study, scored on the same orders; it is
+            not part of E1's registered comparison.</li>
+        </ul>
+      </div>
+    </section>
     <p class="od-note">The mathematics behind this comparison is set out step by step, with small demonstrations, in
       <a href="#math">04 The mathematics</a>.</p>
   </section>
@@ -789,7 +819,7 @@ a:hover{text-decoration-thickness:2px}
           <tr><td><a href="data/risk_budget.json">risk_budget.json</a></td><td>outputs/stage3/test_predictions.csv, outputs/stage5/fold_predictions.csv: weekly picks at 1–30%, by version, model and month</td></tr>
           <tr><td><a href="data/prob_monthly.json">prob_monthly.json</a></td><td>the same two files: observed and predicted late rate, Brier score and log loss by month</td></tr>
           <tr><td><a href="data/prob_bins.json">prob_bins.json</a></td><td>the same two files: equal-count score bands</td></tr>
-          <tr><td><a href="data/e1_policies.json">e1_policies.json</a></td><td>outputs/e1/score/policy_table.csv, copied</td></tr>
+          <tr><td><a href="data/e1_policies.json">e1_policies.json</a></td><td>outputs/e1/score/policy_table.csv, copied; the row at Olist's level from outputs/stage7/policy_results.csv</td></tr>
           <tr><td><a href="data/e1_curves.json">e1_curves.json</a></td><td>outputs/e1/posthoc_m4/diagnostic_curves_E.csv, copied (post hoc)</td></tr>
           <tr><td><a href="data/e1_matched.json">e1_matched.json</a></td><td>outputs/e1/posthoc_m4/matched_coverage_E.csv, copied (post hoc)</td></tr>
           <tr><td><a href="data/e1_rounding.json">e1_rounding.json</a></td><td>outputs/e1/posthoc_m4/rounding_comparisons.csv, copied</td></tr>
@@ -819,13 +849,16 @@ a:hover{text-decoration-thickness:2px}
 
   const pct1 = d3.format('.1%'), pct2 = d3.format('.2%'), pct0 = d3.format('.0%'), int = d3.format(','), f1 = d3.format(',.1f'), f2 = d3.format('.2f'),
     f3 = d3.format('.3f'), f4 = d3.format('.4f'), s2 = d3.format('+.2f');
-  const FMT = { pct1, pct2, int, f1, f2, s2 };
+  const FMT = { pct1, pct2, int, f1, f2, s2, abs1: (v) => f1(Math.abs(v)), abs2: (v) => f2(Math.abs(v)) };
   const MODEL = { logistic: 'Logistic regression', gbm: 'Gradient boosting' };
   const modelColor = (m) => (m === 'logistic' ? 'var(--s1)' : 'var(--s2)');
   const e1Color = (k) => ({ state: 'var(--s1)', linear: 'var(--s2)', hgb: 'var(--s3)' })[k];
   const CURVE_CODE = { 'state rule': 'state', 'linear C*': 'linear', 'HGB D*': 'hgb' };
   const POLICY_CODE = { B1c: 'state', 'C*': 'linear', 'D*': 'hgb' };
-  const E1_NAME = { state: 'State rule (B1c)', linear: 'Linear quantile regression (C*)', hgb: 'HGB (D*)' };
+  const E1_NAME = { state: 'State rule, calibrated', linear: 'Linear quantile regression', hgb: 'Gradient boosting (HGB)' };
+  const POINT_NAME = { B1c: 'State rule', 'C*': 'Linear', 'D*': 'HGB', B0: 'Retained rule', Olist: 'Olist' };
+  const CMP_NAME = { B1c: 'calibrated state rule', B0: 'retained state rule', 'C*': 'Linear', 'D*': 'HGB' };
+  const LEVEL_NAME = { 'B0 coverage': 'Retained rule coverage', 'C* registered coverage': 'Linear registered coverage', 'D* registered coverage': 'HGB registered coverage' };
   const monthShort = (m) => d3.utcFormat('%b %Y')(new Date(m + '-01T00:00:00Z'));
   const monthLabel = (m) => (m === 'all' ? 'All months' : monthShort(m));
   const FILES = ['risk_budget', 'prob_monthly', 'prob_bins', 'e1_policies', 'e1_curves', 'e1_matched', 'e1_rounding'];
@@ -1125,10 +1158,10 @@ a:hover{text-decoration-thickness:2px}
   }
 
   function drawPromises(vis) {
-    if (vis) chartDays($('#ch-days'), D.e1_policies, D.e1_curves);
+    if (vis) chartDays($('#ch-days'), D.e1_policies.filter((r) => r.kind !== 'olist_level'), D.e1_curves);
     const piv = new Map();
     for (const r of D.e1_rounding) {
-      const k = r.policy_code + ' vs ' + r.ref_code;
+      const k = CMP_NAME[r.policy_code] + ' vs ' + CMP_NAME[r.ref_code];
       if (!piv.has(k)) piv.set(k, { comparison: k });
       piv.get(k)[r.rule + '_days'] = r.day_diff;
       piv.get(k)[r.rule + '_cov_pts'] = r.coverage_diff_pts;
@@ -1141,7 +1174,7 @@ a:hover{text-decoration-thickness:2px}
     }
     const cell = ([days, cov]) => [f2(days), pct2(cov)];
     fillRows('#tb-matched', [...wide.values()],
-      (r) => [`${r.target} (${pct2(r.target_coverage)})`, cell(r.state), cell(r.linear), cell(r.hgb), s2(r.hgb[0] - r.linear[0])]);
+      (r) => [`${LEVEL_NAME[r.target] || r.target} (${pct2(r.target_coverage)})`, cell(r.state), cell(r.linear), cell(r.hgb), s2(r.hgb[0] - r.linear[0])]);
   }
 
   function chartDays(box, pol, curves) {
@@ -1171,9 +1204,9 @@ a:hover{text-decoration-thickness:2px}
         svg.append('circle').attr('cx', px).attr('cy', py).attr('r', 5.5).attr('stroke-width', 1.75).style('fill', 'var(--bg)').style('stroke', 'var(--muted)');
       }
       const [dx, dy, anchor] = LABEL[r.code] || [10, 4, 'start'];
-      svg.append('text').attr('class', 'od-dl').attr('x', px + dx).attr('y', py + dy).attr('text-anchor', anchor).attr('dy', '0.32em').text(r.code);
+      svg.append('text').attr('class', 'od-dl').attr('x', px + dx).attr('y', py + dy).attr('text-anchor', anchor).attr('dy', '0.32em').text(POINT_NAME[r.code] || r.label);
       hoverable(svg.append('circle').attr('cx', px).attr('cy', py).attr('r', 13).attr('fill', 'transparent'), () => tip.show([
-        { text: `${r.label} (${r.code})` },
+        { text: r.label },
         { text: `${f2(r.mean_promised_days)} days on average`, color: POLICY_CODE[r.code] ? e1Color(POLICY_CODE[r.code]) : null },
         { text: `Coverage ${pct1(r.coverage)}, ${int(r.n_missed)} orders late against the promise` },
         { text: r.kind === 'registered' ? 'Registered, scored once' : 'Reference' },
@@ -1182,7 +1215,7 @@ a:hover{text-decoration-thickness:2px}
     legend($('#leg-days'), [
       ...Object.keys(E1_NAME).map((k) => ({ text: E1_NAME[k], color: e1Color(k) })),
       { text: 'Post-hoc curve', kind: 'dash' },
-      { text: 'Reference: B0, Olist', kind: 'ring' },
+      { text: 'Reference: retained state rule, Olist', kind: 'ring' },
     ]);
   }
 

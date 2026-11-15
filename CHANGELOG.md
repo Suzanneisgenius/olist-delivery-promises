@@ -6,7 +6,8 @@ Versions before 0.6.0 are described in `docs/manager_handoff.md` and `docs/REPRO
 - The view-03 summary states the decision and the HGB gap against the one-day bar. Fig. 4, its tooltips and Table 2
   name the policies instead of B0, B1c, C* and D*, and Table 2 states the replacement standard.
 - View 03 adds "What I take from this" (the rounding rule moved the result more than the model; the retained rule at
-  Olist's level against Olist's date) and gathers its caveats into one Limits list.
+  Olist's level against Olist's date) and gathers its caveats into one Limits list, in small print at the end of the
+  view.
 - `e1_policies.json` gains one row, the retained rule at Olist's level from `outputs/stage7/policy_results.csv`;
   `aggregate.py` checks that stage 7's 0.90 state-rule and Olist rows equal E1's on the same orders.
 - README: a note on the standalone two-page version and why its numbers differ.

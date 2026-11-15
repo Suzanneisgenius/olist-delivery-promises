@@ -93,6 +93,9 @@ a:hover{text-decoration-thickness:2px}
 .od-label{font-family:var(--hand);font-size:1.15rem;line-height:1.2;color:var(--pen)}
 .od-big{font-weight:200;font-size:clamp(3.25rem,2.2rem + 4.5cqi,5.25rem);line-height:.95;letter-spacing:-.03em}
 .od-note{font-size:var(--fs-sm);color:var(--muted);line-height:1.6;max-width:72ch}
+.od-limits{border-top:1px solid var(--line);padding-top:var(--gap-md)}
+.od .od-limits h3{margin:0;font-size:inherit;font-weight:700;line-height:1.4}
+.od-limits ul{margin:.35em 0 0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.25em}
 .od-list{padding-left:1.4rem;display:flex;flex-direction:column;gap:var(--gap-sm)}
 .od-list li::marker{color:var(--muted);font-weight:600}
 .od-chart{position:relative;min-height:300px;margin-top:var(--gap-xs)}
@@ -405,24 +408,22 @@ a:hover{text-decoration-thickness:2px}
         </div>
       </figure>
     </div>
-    <section class="od-step" aria-labelledby="pl-h">
-      <h3 id="pl-h">Limits</h3>
-      <div class="od-prose">
-        <ul>
-          <li>E1 is pre-registered exploratory work: April to July 2018 had been looked at earlier in the project, so it is not a blind test.</li>
-          <li>Every calibrated policy covered more than its 90% target. Changing delivery times, the cohort filter on Olist's
-            estimated date and order mix are all consistent with this; the study does not separate them.</li>
-          <li>The dashed curves in Fig. 4 and Table 3 set each shift after the fact on the evaluation orders, so they are
-            diagnostics, not deployable policies. Whole-day promises overshoot each level, the state rule most, so a row of
-            Table 3 does not compare policies at exactly equal coverage.</li>
-          <li>Rounding down is a post-hoc check; the registered result uses rounding up.</li>
-          <li>The comparison with Olist uses the retained rule from the earlier stage-7 study, scored on the same orders; it is
-            not part of E1's registered comparison.</li>
-        </ul>
-      </div>
-    </section>
     <p class="od-note">The mathematics behind this comparison is set out step by step, with small demonstrations, in
       <a href="#math">04 The mathematics</a>.</p>
+    <aside class="od-note od-limits" aria-labelledby="pl-h">
+      <h3 id="pl-h">Limits</h3>
+      <ul>
+        <li>E1 is pre-registered exploratory work: April to July 2018 had been looked at earlier in the project, so it is not a blind test.</li>
+        <li>Every calibrated policy covered more than its 90% target. Changing delivery times, the cohort filter on Olist's
+          estimated date and order mix are all consistent with this; the study does not separate them.</li>
+        <li>The dashed curves in Fig. 4 and Table 3 set each shift after the fact on the evaluation orders, so they are
+          diagnostics, not deployable policies. Whole-day promises overshoot each level, the state rule most, so a row of
+          Table 3 does not compare policies at exactly equal coverage.</li>
+        <li>Rounding down is a post-hoc check; the registered result uses rounding up.</li>
+        <li>The comparison with Olist uses the retained rule from the earlier stage-7 study, scored on the same orders; it is
+          not part of E1's registered comparison.</li>
+      </ul>
+    </aside>
   </section>
 
   <section class="od-view" id="math" role="tabpanel" aria-labelledby="tab-math" hidden>
